@@ -15,7 +15,7 @@ namespace Tardigrades\SectionField\Service;
 
 use Assert\Assertion;
 use Assert\InvalidArgumentException;
-use Tardigrades\FieldType\Slug\ValueObject\Slug;
+use Tardigrades\SectionField\ValueObject\Slug;
 use Tardigrades\SectionField\ValueObject\After;
 use Tardigrades\SectionField\ValueObject\Before;
 use Tardigrades\SectionField\ValueObject\FullyQualifiedClassName;

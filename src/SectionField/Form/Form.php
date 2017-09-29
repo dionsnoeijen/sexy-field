@@ -28,7 +28,6 @@ use Symfony\Component\Form\Forms;
 use Tardigrades\Entity\FieldInterface;
 use Tardigrades\Entity\SectionInterface;
 use Tardigrades\FieldType\FieldTypeInterface;
-use Tardigrades\FieldType\Slug\ValueObject\Slug;
 use Tardigrades\Helper\FullyQualifiedClassNameConverter;
 use Tardigrades\SectionField\Form\FormInterface as SectionFormInterface;
 use Tardigrades\SectionField\Service\ReadSectionInterface;
@@ -39,6 +38,7 @@ use Tardigrades\SectionField\ValueObject\JitRelationship;
 use Tardigrades\SectionField\Service\ReadOptions;
 use Tardigrades\SectionField\ValueObject\SectionConfig;
 use Tardigrades\SectionField\ValueObject\SectionFormOptions;
+use Tardigrades\SectionField\ValueObject\Slug;
 
 class Form implements SectionFormInterface
 {
