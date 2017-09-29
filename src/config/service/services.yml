@@ -1,0 +1,69 @@
+services:
+  section_field.manager.doctrine.application_manager:
+    class: Tardigrades\SectionField\Service\DoctrineApplicationManager
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@section_field.manager.doctrine.language_manager'
+
+  section_field.manager.doctrine.language_manager:
+    class: Tardigrades\SectionField\Service\DoctrineLanguageManager
+    arguments:
+      - '@doctrine.orm.entity_manager'
+
+  section_field.manager.doctrine.section_manager:
+    class: Tardigrades\SectionField\Service\DoctrineSectionManager
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@section_field.manager.doctrine.field_manager'
+      - '@section_field.manager.doctrine.section_history_manager'
+
+  section_field.manager.doctrine.section_history_manager:
+    class: Tardigrades\SectionField\Service\DoctrineSectionHistoryManager
+    arguments:
+      - '@doctrine.orm.entity_manager'
+
+  section_field.manager.doctrine.field_type_manager:
+    class: Tardigrades\SectionField\Service\DoctrineFieldTypeManager
+    arguments:
+      - '@doctrine.orm.entity_manager'
+
+  section_field.manager.doctrine.field_manager:
+    class: Tardigrades\SectionField\Service\DoctrineFieldManager
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@section_field.manager.doctrine.field_type_manager'
+      - '@section_field.manager.doctrine.language_manager'
+
+  section_field.form:
+    class: Tardigrades\SectionField\Form\Form
+    arguments:
+      - '@section_field.manager.doctrine.section_manager'
+      - '@section_field.read.section'
+
+# Example configuration
+#
+#  section_field.generator:
+#    class: Tardigrades\SectionField\Generator\Generators
+#    arguments:
+#      -
+#        - '@section_field.generator.entity_generator'
+#        - '@section_field.generator.doctrine_config_generator'
+#
+#  section_field.create.section:
+#    class: Tardigrades\SectionField\Service\CreateSection
+#    arguments:
+#      -
+#        - '@section_field.doctrine.create.section'
+#
+#  section_field.read.section:
+#    class: Tardigrades\SectionField\Service\ReadSection
+#    arguments:
+#      -
+#        - '@section_field.doctrine.read.section'
+#      - '@section_field.manager.doctrine.section_manager'
+#
+#  section_field.delete.section:
+#    class: Tardigrades\SectionField\Service\DeleteSection
+#    arguments:
+#      -
+#        - '@section_field.doctrine.delete.section'
