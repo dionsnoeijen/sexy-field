@@ -2,7 +2,7 @@
   "name": "tardigrades/sexy-field",
   "description": "SexyField helps you build application structure and accompanying forms.",
   "minimum-stability": "stable",
-  "license": "proprietary",
+  "license": "MIT",
   "authors": [
     {
       "name": "Dion Snoeijen",
