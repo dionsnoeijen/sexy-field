@@ -1,7 +1,7 @@
 {
   "name": "tardigrades/sexy-field",
   "description": "SexyField helps you build application structure and accompanying forms.",
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "license": "MIT",
   "authors": [
     {
