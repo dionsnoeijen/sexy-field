@@ -34,13 +34,13 @@ services:
       - '@section_field.manager.doctrine.field_type_manager'
       - '@section_field.manager.doctrine.language_manager'
 
-  section_field.form:
-    class: Tardigrades\SectionField\Form\Form
+  section_field.twig.section:
+    class: Tardigrades\Twig\SectionTwigExtension
     arguments:
-      - '@section_field.manager.doctrine.section_manager'
       - '@section_field.read.section'
+    tags: [twig.extension]
 
-# Example configuration
+# Example configuration (depends on your chosen generators, readers and writers)
 #
 #  section_field.generator:
 #    class: Tardigrades\SectionField\Generator\Generators
