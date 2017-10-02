@@ -2,7 +2,7 @@
 <phpunit
     backupGlobals="false"
     colors="true"
-    bootstrap="example/bootstrap.php"
+    bootstrap="vendor/autoload.php"
 >
 
     <testsuites>

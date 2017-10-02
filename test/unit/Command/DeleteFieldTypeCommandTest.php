@@ -7,6 +7,7 @@ use Mockery;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
+use Tardigrades\Entity\Field;
 use Tardigrades\Entity\FieldType;
 use Tardigrades\SectionField\Service\FieldTypeManagerInterface;
 
@@ -32,24 +33,6 @@ final class DeleteFieldTypeCommandTest extends TestCase
         $this->deleteFieldTypeCommand = new DeleteFieldTypeCommand($this->fieldTypeManager);
         $this->application = new Application();
         $this->application->add($this->deleteFieldTypeCommand);
-    }
-
-    private function givenAnArrayOfFieldTypes(): array
-    {
-        return [
-            (new FieldType())
-                ->setId(1)
-                ->setType('TextArea')
-                ->setFullyQualifiedClassName('Super\\Qualified')
-                ->setCreated(new \DateTime())
-                ->setUpdated(new \DateTime()),
-            (new FieldType())
-                ->setId(2)
-                ->setType('TextInput')
-                ->setFullyQualifiedClassName('Amazing\\Input')
-                ->setCreated(new \DateTime())
-                ->setUpdated(new \DateTime())
-        ];
     }
 
     /**
@@ -120,5 +103,83 @@ final class DeleteFieldTypeCommandTest extends TestCase
             '/Cancelled, nothing deleted./',
             $commandTester->getDisplay()
         );
+    }
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_ask_to_delete_fields_first()
+    {
+        $command = $this->application->find('sf:delete-field');
+        $commandTester = new CommandTester($command);
+
+        $fields = $this->givenAnArrayOfFieldTypesWithFields();
+
+        $this->fieldTypeManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andReturn($fields);
+
+        $this->fieldTypeManager
+            ->shouldReceive('read')
+            ->once()
+            ->andReturn($fields[0]);
+
+        $this->fieldTypeManager
+            ->shouldReceive('delete')
+            ->never();
+
+        $commandTester->setInputs([1, 'n']);
+        $commandTester->execute(['command' => $command->getName()]);
+
+        $this->assertRegExp(
+            '/This FieldType has fields that use this type, delete them first./',
+            $commandTester->getDisplay()
+        );
+    }
+
+    private function givenAnArrayOfFieldTypes(): array
+    {
+        return [
+            (new FieldType())
+                ->setId(1)
+                ->setType('TextArea')
+                ->setFullyQualifiedClassName('Super\\Qualified')
+                ->setCreated(new \DateTime())
+                ->setUpdated(new \DateTime()),
+            (new FieldType())
+                ->setId(2)
+                ->setType('TextInput')
+                ->setFullyQualifiedClassName('Amazing\\Input')
+                ->setCreated(new \DateTime())
+                ->setUpdated(new \DateTime())
+        ];
+    }
+
+    private function givenAnArrayOfFieldTypesWithFields(): array
+    {
+        $fieldOne = new Field();
+        $fieldOne->setHandle('fieldOne');
+        $fieldTwo = new Field();
+        $fieldTwo->setHandle('fieldTwo');
+
+        return [
+            (new FieldType())
+                ->setId(1)
+                ->setType('TextArea')
+                ->setFullyQualifiedClassName('Super\\Qualified')
+                ->setCreated(new \DateTime())
+                ->setUpdated(new \DateTime())
+                ->addField($fieldOne)
+                ->addField($fieldTwo),
+            (new FieldType())
+                ->setId(2)
+                ->setType('TextInput')
+                ->setFullyQualifiedClassName('Amazing\\Input')
+                ->setCreated(new \DateTime())
+                ->setUpdated(new \DateTime())
+        ];
     }
 }

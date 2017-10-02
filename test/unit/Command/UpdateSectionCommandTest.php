@@ -158,7 +158,8 @@ YML;
                     )
                 )
                 ->setCreated(new \DateTime())
-                ->setUpdated(new \DateTime()),
+                ->setUpdated(new \DateTime())
+                ->setVersion(1),
             (new Section())
                 ->setName('Some other name')
                 ->setHandle('someOtherHandle')
@@ -168,7 +169,8 @@ YML;
                     )
                 )
                 ->setCreated(new \DateTime())
-                ->setUpdated(new \DateTime()),
+                ->setUpdated(new \DateTime())
+                ->setVersion(1),
         ];
     }
 }
