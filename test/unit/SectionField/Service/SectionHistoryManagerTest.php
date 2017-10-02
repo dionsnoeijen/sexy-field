@@ -10,8 +10,11 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
 use Tardigrades\Entity\Language;
 use Tardigrades\Entity\SectionHistory;
+use Tardigrades\SectionField\ValueObject\Handle;
 use Tardigrades\SectionField\ValueObject\I18n;
 use Tardigrades\SectionField\ValueObject\Id;
+use Tardigrades\SectionField\ValueObject\SectionConfig;
+use Tardigrades\SectionField\ValueObject\Version;
 
 /**
  * @coversDefaultClass Tardigrades\SectionField\Service\DoctrineSectionHistoryManager
@@ -66,27 +69,27 @@ final class SectionHistoryManagerTest extends TestCase
      * @test
      * @covers ::read
      */
-    public function it_should_read_and_return_a_language()
+    public function it_should_read_and_return_a_section_history()
     {
-        $entity = new Language();
+        $entity = new SectionHistory();
         $id = Id::fromInt(1);
-        $languageRepository = Mockery::mock(ObjectRepository::class);
+        $sectionHistoryRepository = Mockery::mock(ObjectRepository::class);
 
         $this->entityManager
             ->shouldReceive('getRepository')
             ->once()
-            ->with(Language::class)
-            ->andReturn($languageRepository);
+            ->with(SectionHistory::class)
+            ->andReturn($sectionHistoryRepository);
 
-        $languageRepository
+        $sectionHistoryRepository
             ->shouldReceive('find')
             ->once()
             ->with($id->toInt())
             ->andReturn($entity);
 
-        $language = $this->languageManager->read($id);
+        $sectionHistory = $this->sectionHistoryManager->read($id);
 
-        $this->assertEquals($language, $entity);
+        $this->assertEquals($sectionHistory, $entity);
     }
 
     /**
@@ -96,55 +99,55 @@ final class SectionHistoryManagerTest extends TestCase
     public function it_should_read_and_throw_an_exception()
     {
         $id = Id::fromInt(20);
-        $applicationRepository = Mockery::mock(ObjectRepository::class);
+        $sectionHistoryRepository = Mockery::mock(ObjectRepository::class);
 
         $this->entityManager
             ->shouldReceive('getRepository')
             ->once()
-            ->with(Language::class)
-            ->andReturn($applicationRepository);
+            ->with(SectionHistory::class)
+            ->andReturn($sectionHistoryRepository);
 
-        $applicationRepository
+        $sectionHistoryRepository
             ->shouldReceive('find')
             ->once()
             ->with($id->toInt())
             ->andReturn(null);
 
-        $this->expectException(LanguageNotFoundException::class);
+        $this->expectException(SectionHistoryNotFoundException::class);
 
-        $this->languageManager->read($id);
+        $this->sectionHistoryManager->read($id);
     }
 
     /**
      * @test
      * @covers ::readAll
      */
-    public function it_should_read_all_languages()
+    public function it_should_read_all_section_histories()
     {
-        $languageOne = new Language();
-        $languageTwo = new Language();
+        $sectionHistoryOne = new SectionHistory();
+        $sectionHistoryTwo = new SectionHistory();
 
-        $languageRepository = Mockery::mock(ObjectRepository::class);
+        $sectionHistoryRepository = Mockery::mock(ObjectRepository::class);
 
         $this->entityManager
             ->shouldReceive('getRepository')
             ->once()
-            ->with(Language::class)
-            ->andReturn($languageRepository);
+            ->with(SectionHistory::class)
+            ->andReturn($sectionHistoryRepository);
 
-        $languageRepository
+        $sectionHistoryRepository
             ->shouldReceive('findAll')
             ->once()
             ->andReturn([
-                $languageOne,
-                $languageTwo
+                $sectionHistoryOne,
+                $sectionHistoryTwo
             ]);
 
         $this->assertEquals(
-            $this->languageManager->readAll(),
+            $this->sectionHistoryManager->readAll(),
             [
-                $languageOne,
-                $languageTwo
+                $sectionHistoryOne,
+                $sectionHistoryTwo
             ]
         );
     }
@@ -153,76 +156,113 @@ final class SectionHistoryManagerTest extends TestCase
      * @test
      * @covers ::readAll
      */
-    public function it_should_read_all_languages_and_throw_an_exception()
+    public function it_should_read_all_section_histories_and_throw_an_exception()
     {
-        $languageRepository = Mockery::mock(ObjectRepository::class);
+        $sectionHistoryRepository = Mockery::mock(ObjectRepository::class);
 
         $this->entityManager
             ->shouldReceive('getRepository')
             ->once()
-            ->with(Language::class)
-            ->andReturn($languageRepository);
+            ->with(SectionHistory::class)
+            ->andReturn($sectionHistoryRepository);
 
-        $languageRepository
+        $sectionHistoryRepository
             ->shouldReceive('findAll')
             ->once()
             ->andReturn(null);
 
-        $this->expectException(LanguageNotFoundException::class);
+        $this->expectException(SectionHistoryNotFoundException::class);
 
-        $this->languageManager->readAll();
+        $this->sectionHistoryManager->readAll();
     }
 
     /**
      * @test
      * @covers ::update
      */
-    public function it_should_update_language()
+    public function it_should_update_section_history()
     {
+        $entity = new SectionHistory();
+        $this->entityManager->shouldReceive('persist')->once()->with($entity);
         $this->entityManager->shouldReceive('flush')->once();
 
-        $this->languageManager->update();
+        $this->sectionHistoryManager->update($entity);
     }
 
     /**
      * @test
      * @covers ::delete
      */
-    public function it_should_delete_a_language()
+    public function it_should_delete_a_section_history()
     {
-        $language = new Language();
-        $this->entityManager->shouldReceive('remove')->once()->with($language);
+        $entity = new SectionHistory();
+        $this->entityManager->shouldReceive('remove')->once()->with($entity);
         $this->entityManager->shouldReceive('flush')->once();
 
-        $this->languageManager->delete($language);
+        $this->sectionHistoryManager->delete($entity);
     }
 
     /**
      * @test
-     * @covers ::readByI18n
+     * @covers ::readByHandleAndVersion
      */
-    public function it_should_read_by_i18n()
+    public function it_should_read_by_handle_and_version()
     {
-        $i18n = I18n::fromString('nl_NL');
+        $handle = Handle::fromString('handle');
+        $version = Version::fromInt(1);
 
-        $languageRepository = Mockery::mock(ObjectRepository::class);
+        $sectionHistoryRepository = Mockery::mock(ObjectRepository::class);
 
-        $language = (new Language())->setI18n((string) $i18n);
+        $entity = new SectionHistory();
+        $entity->setHandle('handle');
+        $entity->setVersion(1);
 
         $this->entityManager
             ->shouldReceive('getRepository')
             ->once()
-            ->with(Language::class)
-            ->andReturn($languageRepository);
+            ->with(SectionHistory::class)
+            ->andReturn($sectionHistoryRepository);
 
-        $languageRepository
-            ->shouldReceive('findOneBy')
+        $sectionHistoryRepository
+            ->shouldReceive('findBy')
             ->once()
-            ->with(['i18n' => (string) $i18n])
-            ->andReturn($language);
+            ->with(['handle' => 'handle', 'version' => 1])
+            ->andReturn([$entity]);
 
-        $returnedLanguage = $this->languageManager->readByI18n($i18n);
+        $returnedSectionHistory = $this->sectionHistoryManager->readByHandleAndVersion($handle, $version);
 
-        $this->assertEquals($language->getI18n(), $returnedLanguage->getI18n());
+        $this->assertEquals($entity->getHandle(), $returnedSectionHistory->getHandle());
+        $this->assertEquals($entity->getVersion(), $returnedSectionHistory->getVersion());
+    }
+
+    /**
+     * @test
+     * @covers ::readByHandleAndVersion
+     */
+    public function it_should_throw_exception_if_no_section_is_found_when_read_by_handle_and_version()
+    {
+        $this->expectException(SectionNotFoundException::class);
+        $handle = Handle::fromString('handle');
+        $version = Version::fromInt(1);
+
+        $sectionHistoryRepository = Mockery::mock(ObjectRepository::class);
+
+        $entity = new SectionHistory();
+        $entity->setHandle('handle');
+        $entity->setVersion(1);
+
+        $this->entityManager
+            ->shouldReceive('getRepository')
+            ->once()
+            ->with(SectionHistory::class)
+            ->andReturn($sectionHistoryRepository);
+
+        $sectionHistoryRepository
+            ->shouldReceive('findBy')
+            ->once()
+            ->with(['handle' => 'handle', 'version' => 1])
+            ->andReturn(null);
+
+        $this->sectionHistoryManager->readByHandleAndVersion($handle, $version);
     }
 }

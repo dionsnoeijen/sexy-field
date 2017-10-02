@@ -140,13 +140,15 @@ YML;
                 ->setHandle('someHandle')
                 ->setConfig(Yaml::parse(file_get_contents($this->file)))
                 ->setCreated(new \DateTime())
-                ->setUpdated(new \DateTime()),
+                ->setUpdated(new \DateTime())
+                ->setVersion(1),
             (new Section())
                 ->setName('Some other name')
                 ->setHandle('someOtherHandle')
                 ->setConfig(Yaml::parse(file_get_contents($this->file)))
                 ->setCreated(new \DateTime())
-                ->setUpdated(new \DateTime()),
+                ->setUpdated(new \DateTime())
+                ->setVersion(1),
         ];
     }
 }
