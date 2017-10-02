@@ -27,20 +27,16 @@
             mapped-by="field"
         >
             <cascade>
-                <cascade-persist/>
-                <cascade-remove/>
+                <cascade-persist />
+                <cascade-remove />
             </cascade>
         </one-to-many>
         <many-to-many field="sections" target-entity="Tardigrades\Entity\Section">
-            <cascade>
-                <cascade-all />
-            </cascade>
             <join-table name="section_field">
                 <join-columns>
                     <join-column
                         name="field_id"
                         referenced-column-name="id"
-                        on-delete="CASCADE"
                     />
                 </join-columns>
                 <inverse-join-columns>
@@ -48,7 +44,6 @@
                         name="section_id"
                         referenced-column-name="id"
                         unique="false"
-                        on-delete="CASCADE"
                     />
                 </inverse-join-columns>
             </join-table>
