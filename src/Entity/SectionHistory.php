@@ -26,7 +26,7 @@ use Tardigrades\SectionField\ValueObject\Versioned;
 
 class SectionHistory implements SectionInterface, SectionHistoryInterface
 {
-    /** @var SectionInterface */
+    /** @var SectionInterface|null */
     private $section;
 
     /** @var int */
@@ -131,6 +131,11 @@ class SectionHistory implements SectionInterface, SectionHistoryInterface
 
     public function removeFields(): SectionInterface
     {
+        /** @var FieldInterface $field */
+        foreach ($this->fields as $field) {
+            $field->removeSection($this);
+        }
+
         $this->fields->clear();
 
         return $this;
@@ -244,12 +249,12 @@ class SectionHistory implements SectionInterface, SectionHistoryInterface
         return $this;
     }
 
-    public function getSection(): SectionInterface
+    public function getSection(): ?SectionInterface
     {
         return $this->section;
     }
 
-    public function removeSection(SectionInterface $section): SectionHistoryInterface
+    public function removeSection(): SectionHistoryInterface
     {
         $this->section = null;
 

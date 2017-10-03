@@ -97,7 +97,7 @@ class Field implements FieldInterface
 
     public function removeSection(SectionInterface $section): FieldInterface
     {
-        if ($this->sections->contains($section)) {
+        if (!$this->sections->contains($section)) {
             return $this;
         }
         $this->sections->remove($section);

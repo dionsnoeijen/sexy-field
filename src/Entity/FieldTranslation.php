@@ -30,7 +30,7 @@ class FieldTranslation implements FieldTranslationInterface
     /** @var string */
     protected $label;
 
-    /** @var Field */
+    /** @var Field|null */
     protected $field;
 
     /** @var Language */
@@ -83,7 +83,7 @@ class FieldTranslation implements FieldTranslationInterface
         return $this;
     }
 
-    public function getField(): FieldInterface
+    public function getField(): ?FieldInterface
     {
         return $this->field;
     }

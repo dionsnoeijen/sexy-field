@@ -12,6 +12,7 @@ use Tardigrades\SectionField\ValueObject\Updated;
 /**
  * @coversDefaultClass Tardigrades\Entity\Language
  * @covers ::<private>
+ * @covers ::__construct
  */
 final class LanguageTest extends TestCase
 {
@@ -58,7 +59,8 @@ final class LanguageTest extends TestCase
 
     /**
      * @test
-     * @covers ::setI18n ::getI18n
+     * @covers ::setI18n
+     * @covers ::getI18n
      */
     public function it_should_set_and_get_i18n()
     {
@@ -84,6 +86,38 @@ final class LanguageTest extends TestCase
         $this->language->removeApplication($application);
 
         $this->assertEquals($this->language->getApplications()->count(), 0);
+    }
+
+    /**
+     * @test
+     * @covers ::addApplication
+     * @covers ::getApplications
+     */
+    public function it_should_not_add_application_if_it_already_exists()
+    {
+        $application = (new Application())->addLanguage($this->language);
+
+        $this->language->addApplication($application);
+        $this->language->addApplication($application);
+
+        $this->assertEquals($this->language->getApplications()->count(), 1);
+    }
+
+    /**
+     * @test
+     * @covers ::addApplication
+     * @covers ::getApplications
+     * @covers ::removeApplication
+     */
+    public function it_should_do_nothing_when_removing_non_existing_application()
+    {
+        $applicationOne = (new Application())->addLanguage($this->language);
+        $applicationTwo = (new Application())->addLanguage($this->language);
+
+        $this->language->addApplication($applicationOne);
+        $this->language->removeApplication($applicationTwo);
+
+        $this->assertEquals($this->language->getApplications()->count(), 1);
     }
 
     /**

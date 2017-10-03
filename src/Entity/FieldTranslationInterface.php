@@ -28,7 +28,7 @@ interface FieldTranslationInterface
     public function setName(string $name): FieldTranslationInterface;
     public function getLabel(): Label;
     public function setLabel(string $label): FieldTranslationInterface;
-    public function getField(): FieldInterface;
+    public function getField(): ?FieldInterface;
     public function setField(FieldInterface $field): FieldTranslationInterface;
     public function removeField(FieldInterface $field): FieldTranslationInterface;
     public function setLanguage(LanguageInterface $language): FieldTranslationInterface;

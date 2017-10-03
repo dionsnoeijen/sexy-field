@@ -15,13 +15,14 @@ use Tardigrades\SectionField\ValueObject\Name;
 use Tardigrades\SectionField\ValueObject\SectionConfig;
 use Tardigrades\SectionField\ValueObject\Updated;
 use Tardigrades\SectionField\ValueObject\Version;
+use Tardigrades\SectionField\ValueObject\Versioned;
 
 /**
- * @coversDefaultClass \Tardigrades\Entity\Section
+ * @coversDefaultClass \Tardigrades\Entity\SectionHistory
  * @covers ::__construct
  * @covers ::<private>
  */
-final class SectionTest extends TestCase
+final class SectionHistoryTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
@@ -35,14 +36,14 @@ final class SectionTest extends TestCase
     private $history;
 
     /** @var Section */
-    private $section;
+    private $sectionHistory;
 
     public function setUp()
     {
         $this->fields = Mockery::mock(Collection::class);
         $this->applications = Mockery::mock(Collection::class);
         $this->history = Mockery::mock(Collection::class);
-        $this->section = new Section($this->fields, $this->applications, $this->history);
+        $this->sectionHistory = new SectionHistory($this->fields, $this->applications, $this->history);
     }
 
     /**
@@ -50,11 +51,12 @@ final class SectionTest extends TestCase
      * @covers ::setId
      */
     public function it_should_set_and_get_an_id()
-    {
-        $field = $this->section->setId(5);
 
-        $this->assertSame($this->section, $field);
-        $this->assertEquals(5, $this->section->getId());
+    {
+        $field = $this->sectionHistory->setId(5);
+
+        $this->assertSame($this->sectionHistory, $field);
+        $this->assertEquals(5, $this->sectionHistory->getId());
     }
 
     /**
@@ -63,9 +65,9 @@ final class SectionTest extends TestCase
      */
     public function it_should_get_an_id_value_object()
     {
-        $this->section->setId(10);
+        $this->sectionHistory->setId(10);
 
-        $this->assertEquals(Id::fromInt(10), $this->section->getIdValueObject());
+        $this->assertEquals(Id::fromInt(10), $this->sectionHistory->getIdValueObject());
     }
 
     /**
@@ -74,7 +76,7 @@ final class SectionTest extends TestCase
      */
     public function it_should_get_a_null_asking_for_unset_id()
     {
-        $this->assertEquals(null, $this->section->getId());
+        $this->assertEquals(null, $this->sectionHistory->getId());
     }
 
     /**
@@ -85,10 +87,10 @@ final class SectionTest extends TestCase
     public function it_should_set_and_get_name()
     {
         $name = Name::fromString('I have a name');
-        $section = $this->section->setName((string) $name);
+        $section = $this->sectionHistory->setName((string) $name);
 
-        $this->assertSame($this->section, $section);
-        $this->assertEquals($this->section->getName(), $name);
+        $this->assertSame($this->sectionHistory, $section);
+        $this->assertEquals($this->sectionHistory->getName(), $name);
     }
 
     /**
@@ -99,10 +101,10 @@ final class SectionTest extends TestCase
     public function it_should_set_and_get_handle()
     {
         $handle = Handle::fromString('someHandleINeed');
-        $section = $this->section->setHandle((string) $handle);
+        $section = $this->sectionHistory->setHandle((string) $handle);
 
-        $this->assertSame($this->section, $section);
-        $this->assertEquals($this->section->getHandle(), $handle);
+        $this->assertSame($this->sectionHistory, $section);
+        $this->assertEquals($this->sectionHistory->getHandle(), $handle);
     }
 
     /**
@@ -113,13 +115,13 @@ final class SectionTest extends TestCase
     {
         $field = Mockery::mock(FieldInterface::class);
 
-        $field->shouldReceive('addSection')->once()->with($this->section);
+        $field->shouldReceive('addSection')->once()->with($this->sectionHistory);
         $this->fields->shouldReceive('contains')->once()->with($field)->andReturn(false);
         $this->fields->shouldReceive('add')->once()->with($field);
 
-        $section = $this->section->addField($field);
+        $section = $this->sectionHistory->addField($field);
 
-        $this->assertSame($this->section, $section);
+        $this->assertSame($this->sectionHistory, $section);
     }
 
     /**
@@ -130,13 +132,13 @@ final class SectionTest extends TestCase
     {
         $field = Mockery::mock(FieldInterface::class);
 
-        $field->shouldReceive('addSection')->once()->with($this->section);
+        $field->shouldReceive('addSection')->once()->with($this->sectionHistory);
         $this->fields->shouldReceive('contains')->once()->with($field)->andReturn(false);
         $this->fields->shouldReceive('contains')->once()->with($field)->andReturn(true);
         $this->fields->shouldReceive('add')->once()->with($field);
 
-        $this->section->addField($field);
-        $this->section->addField($field);
+        $this->sectionHistory->addField($field);
+        $this->sectionHistory->addField($field);
     }
 
     /**
@@ -155,9 +157,9 @@ final class SectionTest extends TestCase
 
         $this->fields->shouldReceive('remove')->once()->with($field);
 
-        $fieldType = $this->section->removeField($field);
+        $fieldType = $this->sectionHistory->removeField($field);
 
-        $this->assertEquals($this->section, $fieldType);
+        $this->assertEquals($this->sectionHistory, $fieldType);
     }
 
     /**
@@ -176,7 +178,7 @@ final class SectionTest extends TestCase
 
         $this->fields->shouldReceive('remove')->never();
 
-        $this->section->removeField($field);
+        $this->sectionHistory->removeField($field);
     }
 
     /**
@@ -188,12 +190,12 @@ final class SectionTest extends TestCase
         $fieldOne = new Field();
         $fieldTwo = new Field();
 
-        $section = new Section(new ArrayCollection());
+        $sectionHistory = new SectionHistory(new ArrayCollection());
 
-        $section->addField($fieldOne);
-        $section->addField($fieldTwo);
+        $sectionHistory->addField($fieldOne);
+        $sectionHistory->addField($fieldTwo);
 
-        $fields = $section->getFields();
+        $fields = $sectionHistory->getFields();
 
         $this->assertSame($fields->get(0), $fieldOne);
         $this->assertSame($fields->get(1), $fieldTwo);
@@ -211,8 +213,8 @@ final class SectionTest extends TestCase
         $this->fields->shouldReceive('getIterator')->once()->andReturn(new \ArrayIterator([$field]));
         $this->fields->shouldReceive('clear')->once();
 
-        $this->section->addField($field);
-        $this->section->removeFields();
+        $this->sectionHistory->addField($field);
+        $this->sectionHistory->removeFields();
     }
 
     /**
@@ -232,9 +234,9 @@ final class SectionTest extends TestCase
             ]
         ];
 
-        $section = $this->section->setConfig($config);
+        $section = $this->sectionHistory->setConfig($config);
 
-        $this->assertSame($this->section, $section);
+        $this->assertSame($this->sectionHistory, $section);
     }
 
     /**
@@ -254,10 +256,10 @@ final class SectionTest extends TestCase
             ]
         ];
 
-        $section = $this->section->setConfig($config);
+        $section = $this->sectionHistory->setConfig($config);
 
-        $this->assertEquals($this->section->getConfig(), SectionConfig::fromArray($config));
-        $this->assertSame($this->section, $section);
+        $this->assertEquals($this->sectionHistory->getConfig(), SectionConfig::fromArray($config));
+        $this->assertSame($this->sectionHistory, $section);
     }
 
     /**
@@ -268,11 +270,11 @@ final class SectionTest extends TestCase
     {
         $application = Mockery::mock(Application::class);
 
-        $application->shouldReceive('addSection')->once()->with($this->section);
+        $application->shouldReceive('addSection')->once()->with($this->sectionHistory);
         $this->applications->shouldReceive('contains')->once()->with($application)->andReturn(false);
         $this->applications->shouldReceive('add')->once()->with($application);
 
-        $this->section->addApplication($application);
+        $this->sectionHistory->addApplication($application);
     }
 
     /**
@@ -283,13 +285,13 @@ final class SectionTest extends TestCase
     {
         $application = Mockery::mock(Application::class);
 
-        $application->shouldReceive('addSection')->once()->with($this->section);
+        $application->shouldReceive('addSection')->once()->with($this->sectionHistory);
         $this->applications->shouldReceive('contains')->once()->with($application)->andReturn(false);
         $this->applications->shouldReceive('contains')->once()->with($application)->andReturn(true);
         $this->applications->shouldReceive('add')->once()->with($application);
 
-        $this->section->addApplication($application);
-        $this->section->addApplication($application);
+        $this->sectionHistory->addApplication($application);
+        $this->sectionHistory->addApplication($application);
     }
 
     /**
@@ -300,12 +302,12 @@ final class SectionTest extends TestCase
     {
         $application = Mockery::mock(Application::class);
 
-        $application->shouldReceive('addSection')->once()->with($this->section);
+        $application->shouldReceive('addSection')->once()->with($this->sectionHistory);
         $this->applications->shouldReceive('contains')->once()->with($application)->andReturn(false);
         $this->applications->shouldReceive('add')->once()->with($application);
 
-        $this->section->addApplication($application);
-        $result = $this->section->getApplications();
+        $this->sectionHistory->addApplication($application);
+        $result = $this->sectionHistory->getApplications();
 
         $this->assertSame($this->applications, $result);
     }
@@ -318,14 +320,14 @@ final class SectionTest extends TestCase
     {
         $application = Mockery::mock(Application::class);
 
-        $application->shouldReceive('addSection')->once()->with($this->section);
+        $application->shouldReceive('addSection')->once()->with($this->sectionHistory);
         $this->applications->shouldReceive('contains')->once()->with($application)->andReturn(false);
         $this->applications->shouldReceive('contains')->once()->with($application)->andReturn(true);
         $this->applications->shouldReceive('add')->once()->with($application);
         $this->applications->shouldReceive('remove')->once()->with($application);
 
-        $this->section->addApplication($application);
-        $this->section->removeApplication($application);
+        $this->sectionHistory->addApplication($application);
+        $this->sectionHistory->removeApplication($application);
     }
 
     /**
@@ -339,7 +341,7 @@ final class SectionTest extends TestCase
         $this->applications->shouldReceive('contains')->once()->with($application)->andReturn(false);
         $this->applications->shouldReceive('remove')->never();
 
-        $this->section->removeApplication($application);
+        $this->sectionHistory->removeApplication($application);
     }
 
     /**
@@ -349,69 +351,9 @@ final class SectionTest extends TestCase
      */
     public function it_should_set_and_get_the_version()
     {
-        $this->section->setVersion(1);
+        $this->sectionHistory->setVersion(1);
 
-        $this->assertEquals(Version::fromInt(1), $this->section->getVersion());
-    }
-
-    /**
-     * @test
-     * @covers ::addHistory
-     */
-    public function it_should_add_section_to_history_only_once()
-    {
-        $section = new SectionHistory();
-
-        $this->history->shouldReceive('contains')->once()->with($section)->andReturn(false);
-        $this->history->shouldReceive('contains')->once()->with($section)->andReturn(true);
-        $this->history->shouldReceive('add')->once()->with($section);
-        $this->section->addHistory($section);
-        $this->section->addHistory($section);
-    }
-
-    /**
-     * @test
-     * @covers ::getHistory
-     */
-    public function it_should_get_the_history()
-    {
-        $sectionHistory = new SectionHistory();
-        $section = new Section();
-        $section->addHistory($sectionHistory);
-        $history = $section->getHistory();
-        $this->assertTrue($history->contains($sectionHistory));
-
-    }
-
-    /**
-     * @test
-     * @covers ::addHistory
-     * @covers ::removeHistory
-     */
-    public function it_should_remove_the_history()
-    {
-        $sectionHistory = new SectionHistory();
-        $this->history->shouldReceive('contains')->once()->with($sectionHistory)->andReturn(false);
-        $this->history->shouldReceive('contains')->once()->with($sectionHistory)->andReturn(true);
-        $this->history->shouldReceive('add')->once()->with($sectionHistory);
-        $this->history->shouldReceive('remove')->once()->with($sectionHistory);
-
-        $this->section->addHistory($sectionHistory);
-        $this->section->removeHistory($sectionHistory);
-    }
-
-    /**
-     * @test
-     * @covers ::addHistory
-     * @covers ::removeHistory
-     */
-    public function it_should_do_nothing_when_removing_non_existing_section_from_history()
-    {
-        $sectionHistory = new SectionHistory();
-        $this->history->shouldReceive('contains')->once()->with($sectionHistory)->andReturn(false);
-        $this->history->shouldReceive('remove')->never();
-
-        $this->section->removeHistory($sectionHistory);
+        $this->assertEquals(Version::fromInt(1), $this->sectionHistory->getVersion());
     }
 
     /**
@@ -422,9 +364,9 @@ final class SectionTest extends TestCase
     {
         $created = new \DateTime('2017-07-02');
 
-        $section = $this->section->setCreated($created);
+        $section = $this->sectionHistory->setCreated($created);
 
-        $this->assertSame($this->section, $section);
+        $this->assertSame($this->sectionHistory, $section);
     }
 
     /**
@@ -435,9 +377,9 @@ final class SectionTest extends TestCase
     {
         $dateTime = new \DateTime('2017-07-02');
 
-        $this->section->setCreated($dateTime);
+        $this->sectionHistory->setCreated($dateTime);
 
-        $this->assertEquals($this->section->getCreated(), $dateTime);
+        $this->assertEquals($this->sectionHistory->getCreated(), $dateTime);
     }
 
     /**
@@ -448,9 +390,9 @@ final class SectionTest extends TestCase
     {
         $updated = new \DateTime('2017-07-02');
 
-        $section = $this->section->setUpdated($updated);
+        $section = $this->sectionHistory->setUpdated($updated);
 
-        $this->assertSame($this->section, $section);
+        $this->assertSame($this->sectionHistory, $section);
     }
 
     /**
@@ -461,55 +403,9 @@ final class SectionTest extends TestCase
     {
         $dateTime = new \DateTime('2017-07-02');
 
-        $this->section->setUpdated($dateTime);
+        $this->sectionHistory->setUpdated($dateTime);
 
-        $this->assertEquals($this->section->getUpdated(), $dateTime);
-    }
-
-    /**
-     * @test
-     * @covers ::onPrePersist
-     */
-    public function it_should_update_dates_on_pre_persist()
-    {
-        $this->section->onPrePersist();
-
-        $created = new \DateTime("now");
-        $updated = new \DateTime("now");
-
-        $this->assertEquals(
-            $this->section
-                ->getCreated()
-                ->format('Y-m-d H:i'),
-            $created
-                ->format('Y-m-d H:i')
-        );
-        $this->assertEquals(
-            $this->section
-                ->getUpdated()
-                ->format('Y-m-d H:i'),
-            $updated
-                ->format('Y-m-d H:i')
-        );
-    }
-
-    /**
-     * @test
-     * @covers ::onPreUpdate
-     */
-    public function it_should_update_update_date_on_pre_update()
-    {
-        $this->section->onPreUpdate();
-
-        $updated = new \DateTime("now");
-
-        $this->assertEquals(
-            $this->section
-                ->getUpdated()
-                ->format('Y-m-d H:i'),
-            $updated
-                ->format('Y-m-d H:i')
-        );
+        $this->assertEquals($this->sectionHistory->getUpdated(), $dateTime);
     }
 
     /**
@@ -518,11 +414,11 @@ final class SectionTest extends TestCase
      */
     public function it_should_get_a_created_value_object()
     {
-        $this->section->setCreated(new \DateTime());
+        $this->sectionHistory->setCreated(new \DateTime());
 
-        $this->assertInstanceOf(Created::class, $this->section->getCreatedValueObject());
+        $this->assertInstanceOf(Created::class, $this->sectionHistory->getCreatedValueObject());
         $this->assertEquals(
-            $this->section->getCreatedValueObject()->getDateTime()->format('Y-m-d H:i'),
+            $this->sectionHistory->getCreatedValueObject()->getDateTime()->format('Y-m-d H:i'),
             (new \DateTime())->format('Y-m-d H:i')
         );
     }
@@ -533,12 +429,52 @@ final class SectionTest extends TestCase
      */
     public function it_should_get_a_updated_value_object()
     {
-        $this->section->setUpdated(new \DateTime());
+        $this->sectionHistory->setUpdated(new \DateTime());
 
-        $this->assertInstanceOf(Updated::class, $this->section->getUpdatedValueObject());
+        $this->assertInstanceOf(Updated::class, $this->sectionHistory->getUpdatedValueObject());
         $this->assertEquals(
-            $this->section->getUpdatedValueObject()->getDateTime()->format('Y-m-d H:i'),
+            $this->sectionHistory->getUpdatedValueObject()->getDateTime()->format('Y-m-d H:i'),
             (new \DateTime())->format('Y-m-d H:i')
         );
+    }
+
+    /**
+     * @test
+     * @covers ::setVersioned
+     * @covers ::getVersioned
+     */
+    public function it_should_get_and_set_the_time_when_versioned()
+    {
+        $time = new \DateTime();
+        $this->sectionHistory->setVersioned($time);
+
+        $this->assertInstanceOf(Versioned::class, $this->sectionHistory->getVersioned());
+        $this->assertEquals($time, $this->sectionHistory->getVersioned()->getDateTime());
+    }
+
+    /**
+     * @test
+     * @covers ::setSection
+     * @covers ::getSection
+     */
+    public function it_should_get_and_set_a_section()
+    {
+        $section = new Section();
+        $this->sectionHistory->setSection($section);
+
+        $this->assertEquals($section, $this->sectionHistory->getSection());
+    }
+
+    /**
+     * @test
+     * @covers ::removeSection
+     */
+    public function it_should_remove_a_section()
+    {
+        $section = new Section();
+        $this->sectionHistory->setSection($section);
+        $this->sectionHistory->removeSection();
+
+        $this->assertEquals(null, $this->sectionHistory->getSection());
     }
 }

@@ -198,7 +198,7 @@ class Section implements SectionInterface, SectionEntityInterface
         return $this->history;
     }
 
-    public function addHistory(SectionInterface $section): SectionEntityInterface
+    public function addHistory(SectionHistoryInterface $section): SectionEntityInterface
     {
         if ($this->history->contains($section)) {
             return $this;

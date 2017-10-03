@@ -7,6 +7,7 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
 use Tardigrades\SectionField\ValueObject\Created;
 use Tardigrades\SectionField\ValueObject\Id;
+use Tardigrades\SectionField\ValueObject\Label;
 use Tardigrades\SectionField\ValueObject\Name;
 
 /**
@@ -70,6 +71,51 @@ final class FieldTranslationTest extends TestCase
 
         $this->assertEquals($this->fieldTranslation, $fieldTranslation);
         $this->assertEquals($this->fieldTranslation->getName(), $name);
+    }
+
+    /**
+     * @test
+     * @covers ::setLabel
+     * @covers ::getLabel
+     */
+    public function it_should_set_and_get_label()
+    {
+        $label = Label::fromString('someLabel');
+        $this->fieldTranslation->setLabel((string) $label);
+
+        $this->assertEquals($this->fieldTranslation->getLabel(), $label);
+    }
+
+    /**
+     * @test
+     * @covers ::setField
+     * @covers ::getField
+     * @covers ::removeField
+     */
+    public function it_should_set_get_and_remove_a_field()
+    {
+        $field = new Field();
+        $this->fieldTranslation->setField($field);
+
+        $this->assertEquals($field, $this->fieldTranslation->getField());
+
+        $this->fieldTranslation->removeField($field);
+
+        $this->assertEquals(null, $this->fieldTranslation->getField());
+    }
+
+    /**
+     * @test
+     * @covers ::setLanguage
+     * @covers ::getLanguage
+     */
+    public function it_should_set_and_get_language()
+    {
+        $language = new Language();
+        $language->setI18n('nl_NL');
+        $this->fieldTranslation->setLanguage($language);
+
+        $this->assertSame('nl_NL', (string) $this->fieldTranslation->getLanguage()->getI18n());
     }
 
     /**

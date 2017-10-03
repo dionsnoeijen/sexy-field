@@ -28,11 +28,15 @@ final class FieldTest extends TestCase
     /** @var Collection|Mockery\MockInterface */
     private $sections;
 
+    /** @var Collection|Mockery\MockInterface */
+    private $fieldTranslations;
+
     public function setUp()
     {
         $this->sections = Mockery::mock(Collection::class);
+        $this->fieldTranslations = Mockery::mock(Collection::class);
 
-        $this->field = new Field($this->sections);
+        $this->field = new Field($this->sections, $this->fieldTranslations);
     }
 
     /**
@@ -54,7 +58,7 @@ final class FieldTest extends TestCase
      */
     public function it_should_get_an_id_value_object()
     {
-        $field = $this->field->setId(10);
+        $this->field->setId(10);
 
         $this->assertEquals(Id::fromInt(10), $this->field->getIdValueObject());
     }
@@ -124,6 +128,23 @@ final class FieldTest extends TestCase
 
     /**
      * @test
+     * @covers ::addSection
+     */
+    public function it_should_do_nothing_when_adding_an_existing_section()
+    {
+        $section = Mockery::mock(SectionInterface::class);
+
+        $section->shouldReceive('addField')->once()->with($this->field);
+        $this->sections->shouldReceive('contains')->once()->with($section)->andReturn(false);
+        $this->sections->shouldReceive('contains')->once()->with($section)->andReturn(true);
+        $this->sections->shouldReceive('add')->once()->with($section);
+
+        $this->field->addSection($section);
+        $this->field->addSection($section);
+    }
+
+    /**
+     * @test
      * @covers ::removeSection
      */
     public function it_should_remove_a_section()
@@ -133,7 +154,8 @@ final class FieldTest extends TestCase
         $section->shouldReceive('removeField')->once()->with($this->field);
         $section->shouldReceive('addField')->once()->with($this->field);
 
-        $this->sections->shouldReceive('contains')->twice()->with($section)->andReturn(false);
+        $this->sections->shouldReceive('contains')->once()->with($section)->andReturn(false);
+        $this->sections->shouldReceive('contains')->once()->with($section)->andReturn(true);
         $this->sections->shouldReceive('add')->once()->with($section);
         $this->sections->shouldReceive('remove')->once()->with($section);
 
@@ -142,6 +164,86 @@ final class FieldTest extends TestCase
         $field = $this->field->removeSection($section);
 
         $this->assertEquals($this->field, $field);
+    }
+
+    /**
+     * @test
+     * @covers ::removeSection
+     */
+    public function it_should_do_nothing_when_removing_non_existing_section()
+    {
+        $section = Mockery::mock(Section::class);
+
+        $this->sections->shouldReceive('contains')->once()->with($section)->andReturn(false);
+        $this->sections->shouldReceive('remove')->never();
+
+        $this->field->removeSection($section);
+    }
+
+    /**
+     * @test
+     * @covers ::addFieldTranslation
+     */
+    public function it_should_add_a_field_translation()
+    {
+        $translation = Mockery::mock(FieldTranslationInterface::class);
+
+        $translation->shouldReceive('setField')->once()->with($this->field);
+        $this->fieldTranslations->shouldReceive('contains')->once()->with($translation)->andReturn(false);
+        $this->fieldTranslations->shouldReceive('add')->once()->with($translation);
+
+        $this->field->addFieldTranslation($translation);
+    }
+
+    /**
+     * @test
+     * @covers ::addFieldTranslation
+     */
+    public function it_should_do_nothing_when_adding_an_existing_translation()
+    {
+        $translation = Mockery::mock(FieldTranslationInterface::class);
+
+        $translation->shouldReceive('setField')->once()->with($this->field);
+        $this->fieldTranslations->shouldReceive('contains')->once()->with($translation)->andReturn(false);
+        $this->fieldTranslations->shouldReceive('contains')->once()->with($translation)->andReturn(true);
+        $this->fieldTranslations->shouldReceive('add')->once()->with($translation);
+
+        $this->field->addFieldTranslation($translation);
+        $this->field->addFieldTranslation($translation);
+    }
+
+    /**
+     * @test
+     * @covers ::removeFieldTranslation
+     */
+    public function it_should_remove_a_field_translation()
+    {
+        $translation = Mockery::mock(FieldTranslationInterface::class);
+
+        $translation->shouldReceive('setField')->once()->with($this->field);
+        $translation->shouldReceive('removeField')->once()->with($this->field);
+        $this->fieldTranslations->shouldReceive('contains')->once()->with($translation)->andReturn(false);
+        $this->fieldTranslations->shouldReceive('contains')->once()->with($translation)->andReturn(true);
+        $this->fieldTranslations->shouldReceive('add')->once()->with($translation);
+        $this->fieldTranslations->shouldReceive('removeElement')->once()->with($translation);
+
+        $this->field->addFieldTranslation($translation);
+        $this->field->removeFieldTranslation($translation);
+    }
+
+
+    /**
+     * @test
+     * @covers ::removeFieldTranslation
+     */
+    public function it_should_do_nothing_when_removing_non_existing_field_translation()
+    {
+        $translation = Mockery::mock(FieldTranslationInterface::class);
+
+        $this->fieldTranslations->shouldReceive('contains')->once()->with($translation)->andReturn(false);
+        $this->fieldTranslations->shouldReceive('removeElement')->never();
+
+        $this->field->removeFieldTranslation($translation);
     }
 
     /**
