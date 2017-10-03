@@ -295,7 +295,7 @@ class DoctrineSectionManager implements SectionManagerInterface
                     ];
 
                     $fieldConfig = $field->getConfig()->toArray();
-                    
+
                     if (!empty($fieldConfig['field']['relationship-type'])) {
                         $relationships[$sectionHandle][$fieldHandle]['relationship-type'] =
                             $fieldConfig['field']['relationship-type'];
