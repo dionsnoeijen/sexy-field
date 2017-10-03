@@ -136,7 +136,7 @@ class DoctrineFieldManager implements FieldManagerInterface
             $existing[(string) $existingFieldTranslation->getLanguage()->getI18n()] = $existingFieldTranslation;
         }
 
-        foreach ($translations as $lang=>$translation) {
+        foreach ($translations as $lang => $translation) {
             if (isset($languages[$lang])) {
                 if (isset($existing[$lang])) {
                     $fieldTranslation = $existing[$lang];

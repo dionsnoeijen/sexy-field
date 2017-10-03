@@ -27,7 +27,8 @@ class GeneratorFileWriter
         try {
             if (\file_exists($store)) {
                 $segments = explode(
-                    '/', $store
+                    '/',
+                    $store
                 );
                 $filename = end($segments);
                 $backupFilename = '~' . $filename . '.bak';
@@ -47,8 +48,12 @@ class GeneratorFileWriter
     {
         $find = explode('\\', $namespace)[0];
         $reflector = new \ReflectionClass(ClassLoader::class);
-        $vendorPath = preg_replace('/^(.*)\/composer\/ClassLoader\.php$/', '$1', $reflector->getFileName() );
-        if($vendorPath && is_dir($vendorPath)) {
+        $vendorPath = preg_replace(
+            '/^(.*)\/composer\/ClassLoader\.php$/',
+            '$1',
+            $reflector->getFileName()
+        );
+        if ($vendorPath && is_dir($vendorPath)) {
             $namespaces = include $vendorPath . '/composer/autoload_psr4.php';
             $found = array();
             if (is_array($namespaces)) {

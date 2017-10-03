@@ -23,7 +23,7 @@ final class GeneratorConfig
 
     private function __construct(array $sectionGeneratorConfig)
     {
-        Assertion::keyExists($sectionGeneratorConfig,'generator', 'Config is not a section config');
+        Assertion::keyExists($sectionGeneratorConfig, 'generator', 'Config is not a section config');
 
         $this->sectionGeneratorConfig = $sectionGeneratorConfig['generator'];
     }

@@ -93,16 +93,20 @@ class DoctrineApplicationManager implements ApplicationManagerInterface
         return $application;
     }
 
-    public function updateByConfig(ApplicationConfig $applicationConfig, ApplicationInterface $application): ApplicationInterface
-    {
+    public function updateByConfig(
+        ApplicationConfig $applicationConfig,
+        ApplicationInterface $application
+    ): ApplicationInterface {
         $this->setUpByConfig($applicationConfig, $application);
         $this->entityManager->flush();
 
         return $application;
     }
 
-    private function setUpByConfig(ApplicationConfig $applicationConfig, ApplicationInterface $application): ApplicationInterface
-    {
+    private function setUpByConfig(
+        ApplicationConfig $applicationConfig,
+        ApplicationInterface $application
+    ): ApplicationInterface {
         $applicationConfig = $applicationConfig->toArray();
 
         $installedLanguages = $this->languageManager->readByI18ns($applicationConfig['application']['languages']);

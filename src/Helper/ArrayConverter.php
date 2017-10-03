@@ -23,8 +23,8 @@ class ArrayConverter
             self::$value = '';
         }
 
-        foreach($array as $key => $value) {
-            if(is_array($value)) {
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
                 self::$value .=
                     str_repeat('-', $level - 1) .
                     (($level-1 > 0 ) ? ' ' : '') .

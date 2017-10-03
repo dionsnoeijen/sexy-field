@@ -227,9 +227,14 @@ class DoctrineSectionManager implements SectionManagerInterface
     {
         $version = Version::fromInt(1);
         $handle = (string) $handle;
+        // @codingStandardsIgnoreStart
+
         $query = $this->entityManager->createQuery(
             "SELECT MAX(section.version) FROM Tardigrades\Entity\SectionHistory section WHERE section.handle = '{$handle}'"
         );
+
+        // @codingStandardsIgnoreEnd
+
         $results = $query->getResult();
         if (empty($results)) {
             return $version;
@@ -304,7 +309,8 @@ class DoctrineSectionManager implements SectionManagerInterface
                     if (!empty($fieldConfig['field']['from'])) {
                         $relationships[$sectionHandle][$fieldHandle]['from'] = $fieldConfig['field']['from'];
                     }
-                } catch (\Exception $exception) {}
+                } catch (\Exception $exception) {
+                }
             }
         }
 
@@ -345,7 +351,7 @@ class DoctrineSectionManager implements SectionManagerInterface
 
     private function fillOpposingRelationshipSides(array $relationships): array
     {
-        foreach ($relationships as $sectionHandle=>$relationshipFields) {
+        foreach ($relationships as $sectionHandle => $relationshipFields) {
             if (count($relationshipFields)) {
                 foreach ($relationshipFields as $fieldHandle => $kindToFieldType) {
                     // At this point, use two fields for the many to many relationship, one on each side.

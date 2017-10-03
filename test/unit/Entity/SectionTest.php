@@ -380,7 +380,6 @@ final class SectionTest extends TestCase
         $section->addHistory($sectionHistory);
         $history = $section->getHistory();
         $this->assertTrue($history->contains($sectionHistory));
-
     }
 
     /**

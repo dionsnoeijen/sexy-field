@@ -44,4 +44,3 @@ class ListSectionCommand extends SectionCommand
         }
     }
 }
-
