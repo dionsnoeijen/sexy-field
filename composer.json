@@ -10,7 +10,6 @@
     }
   ],
   "require": {
-    "tardigrades/sexy-field-entity": "dev-master",
     "doctrine/orm": "^2.5.6",
     "symfony/console": "^3.3.2",
     "symfony/form": "^3.3.2",
