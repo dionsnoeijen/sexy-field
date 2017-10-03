@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types=1);
+declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\Service;
 
@@ -236,7 +236,7 @@ class ReadOptions implements ReadOptionsInterface
         return Search::fromString($this->options[ReadOptions::SEARCH]);
     }
 
-    public function getField(): ?array
+    public function getField(): ? array
     {
         try {
             Assertion::isArray(

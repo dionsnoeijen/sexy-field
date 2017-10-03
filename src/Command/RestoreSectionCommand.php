@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types=1);
+declare (strict_types = 1);
 
 namespace Tardigrades\Command;
 
@@ -81,7 +81,7 @@ class RestoreSectionCommand extends SectionCommand
     {
         $question = new Question('<question>Choose record.</question> (#id): ');
 
-        $question->setValidator(function ($id) use ($output) {
+        $question->setValidator(function($id) use ($output) {
             try {
                 return $this->sectionHistoryManager->read(Id::fromInt((int) $id));
             } catch (SectionNotFoundException $exception) {
