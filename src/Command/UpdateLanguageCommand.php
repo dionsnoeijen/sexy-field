@@ -13,7 +13,6 @@ declare (strict_types=1);
 
 namespace Tardigrades\Command;
 
-use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -23,9 +22,6 @@ use Tardigrades\SectionField\ValueObject\LanguageConfig;
 
 class UpdateLanguageCommand extends LanguageCommand
 {
-    /** @var QuestionHelper */
-    private $questionHelper;
-
     /** @var LanguageManagerInterface */
     private $languageManager;
 
@@ -48,8 +44,6 @@ class UpdateLanguageCommand extends LanguageCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $this->questionHelper = $this->getHelper('question');
-
         try {
             $languageConfig = LanguageConfig::fromArray(
                 Yaml::parse(

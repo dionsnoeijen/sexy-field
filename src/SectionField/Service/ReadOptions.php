@@ -25,6 +25,7 @@ use Tardigrades\SectionField\ValueObject\Limit;
 use Tardigrades\SectionField\ValueObject\Offset;
 use Tardigrades\SectionField\ValueObject\OrderBy;
 use Tardigrades\SectionField\ValueObject\Search;
+use Tardigrades\SectionField\ValueObject\Sort;
 
 class ReadOptions implements ReadOptionsInterface
 {

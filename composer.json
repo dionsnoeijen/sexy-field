@@ -1,7 +1,8 @@
 {
   "name": "tardigrades/sexy-field",
   "description": "SexyField helps you build application structure and accompanying forms.",
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "license": "MIT",
   "authors": [
     {
@@ -10,7 +11,7 @@
     }
   ],
   "require": {
-    "tardigrades/sexy-field-entity": "dev-master",
+    "php": "^7.1",
     "doctrine/orm": "^2.5.6",
     "symfony/console": "^3.3.2",
     "symfony/form": "^3.3.2",

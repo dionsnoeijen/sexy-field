@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5fec26a4d43c03af9eea9b5b828f4727",
+    "content-hash": "e49983e2864cb5eb4d184d191ff01c67",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -2213,52 +2213,6 @@
             "time": "2017-07-29T21:54:42+00:00"
         },
         {
-            "name": "tardigrades/sexy-field-entity",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dionsnoeijen/sexy-field-entity.git",
-                "reference": "a3668b1628da077e16b5c5ca748c317f4bfa5a44"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dionsnoeijen/sexy-field-entity/zipball/a3668b1628da077e16b5c5ca748c317f4bfa5a44",
-                "reference": "a3668b1628da077e16b5c5ca748c317f4bfa5a44",
-                "shasum": ""
-            },
-            "require": {
-                "beberlei/assert": "2.6.5",
-                "symfony/config": "^3.3.2",
-                "symfony/dependency-injection": "^3.3.2",
-                "symfony/yaml": "^3.3.2",
-                "tardigrades/sexy-field": "dev-master"
-            },
-            "require-dev": {
-                "mikey179/vfsstream": "^1.6",
-                "mockery/mockery": "^0.9.9",
-                "phpunit/phpunit": "^6.1",
-                "squizlabs/php_codesniffer": "^2.8"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Tardigrades\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "proprietary"
-            ],
-            "authors": [
-                {
-                    "name": "Dion Snoeijen",
-                    "email": "hallo@dionsnoeijen.nl"
-                }
-            ],
-            "description": "Section field entity generator",
-            "time": "2017-09-30 09:54:56"
-        },
-        {
             "name": "twig/extensions",
             "version": "v1.5.1",
             "source": {
@@ -4013,12 +3967,12 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": {
-        "tardigrades/sexy-field-entity": 20
-    },
-    "prefer-stable": false,
+    "minimum-stability": "dev",
+    "stability-flags": [],
+    "prefer-stable": true,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": "^7.1"
+    },
     "platform-dev": []
 }
