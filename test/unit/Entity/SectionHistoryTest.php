@@ -51,7 +51,6 @@ final class SectionHistoryTest extends TestCase
      * @covers ::setId
      */
     public function it_should_set_and_get_an_id()
-
     {
         $field = $this->sectionHistory->setId(5);
 

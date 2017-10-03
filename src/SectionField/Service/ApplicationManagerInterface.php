@@ -25,5 +25,8 @@ interface ApplicationManagerInterface
     public function update(): void;
     public function delete(ApplicationInterface $entity): void;
     public function createByConfig(ApplicationConfig $applicationConfig): ApplicationInterface;
-    public function updateByConfig(ApplicationConfig $applicationConfig, ApplicationInterface $application): ApplicationInterface;
+    public function updateByConfig(
+        ApplicationConfig $applicationConfig,
+        ApplicationInterface $application
+    ): ApplicationInterface;
 }

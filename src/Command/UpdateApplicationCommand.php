@@ -43,11 +43,13 @@ class UpdateApplicationCommand extends ApplicationCommand
 
     protected function configure(): void
     {
+        // @codingStandardsIgnoreStart
         $this
             ->setDescription('Updates an existing application.')
             ->setHelp('This command allows you to update an application based on a yml application configuration. Pass along the path to a application configuration yml. Something like: application/application.yml')
             ->addArgument('config', InputArgument::REQUIRED, 'The application configuration yml')
         ;
+        // @codingStandardsIgnoreEnd
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void
@@ -98,4 +100,3 @@ class UpdateApplicationCommand extends ApplicationCommand
         $output->writeln('<info>Application updated!</info>');
     }
 }
-

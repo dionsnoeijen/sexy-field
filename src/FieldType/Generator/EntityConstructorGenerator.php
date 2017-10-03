@@ -20,6 +20,5 @@ class EntityConstructorGenerator implements GeneratorInterface
 {
     public static function generate(FieldInterface $field): Template
     {
-
     }
 }

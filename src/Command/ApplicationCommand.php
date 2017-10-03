@@ -31,7 +31,6 @@ abstract class ApplicationCommand extends Command
         $rows = [];
         /** @var Application $application */
         foreach ($applications as $application) {
-
             $sections = $application->getSections();
             $sectionsText = '';
             /** @var Section $section */

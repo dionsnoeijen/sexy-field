@@ -30,7 +30,6 @@ abstract class LanguageCommand extends Command
         $rows = [];
         /** @var Language $language */
         foreach ($languages as $language) {
-
             $applications = $language->getApplications();
             $applicationText = '';
             /** @var Application $application */

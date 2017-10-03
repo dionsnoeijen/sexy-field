@@ -65,7 +65,12 @@ class ReadOptions implements ReadOptionsInterface
         }
 
         if (!$valid) {
-            throw new InvalidArgumentException('The section is not of a valid type', 400, null, $options[ReadOptions::SECTION]);
+            throw new InvalidArgumentException(
+                'The section is not of a valid type',
+                400,
+                null,
+                $options[ReadOptions::SECTION]
+            );
         }
 
         $this->options = $options;
@@ -95,10 +100,13 @@ class ReadOptions implements ReadOptionsInterface
     public function getSectionId(): ?Id
     {
         try {
-            Assertion::keyIsset($this->options, ReadOptions::SECTION_ID,
+            Assertion::keyIsset(
+                $this->options,
+                ReadOptions::SECTION_ID,
                 'The sectionId is not set'
             );
-            Assertion::integerish($this->options[ReadOptions::SECTION_ID],
+            Assertion::integerish(
+                $this->options[ReadOptions::SECTION_ID],
                 'The sectionId needs to be an integer'
             );
         } catch (InvalidArgumentException $exception) {
@@ -111,10 +119,13 @@ class ReadOptions implements ReadOptionsInterface
     public function getOffset(): ?Offset
     {
         try {
-            Assertion::keyIsset($this->options, ReadOptions::OFFSET,
+            Assertion::keyIsset(
+                $this->options,
+                ReadOptions::OFFSET,
                 'The offset is not set'
             );
-            Assertion::integerish($this->options[ReadOptions::OFFSET],
+            Assertion::integerish(
+                $this->options[ReadOptions::OFFSET],
                 'The offset needs to be an integer.'
             );
         } catch (InvalidArgumentException $exception) {
@@ -127,10 +138,13 @@ class ReadOptions implements ReadOptionsInterface
     public function getLimit(): ?Limit
     {
         try {
-            Assertion::keyIsset($this->options, ReadOptions::LIMIT,
+            Assertion::keyIsset(
+                $this->options,
+                ReadOptions::LIMIT,
                 'The limit is not set'
             );
-            Assertion::integerish($this->options[ReadOptions::LIMIT],
+            Assertion::integerish(
+                $this->options[ReadOptions::LIMIT],
                 'The limit needs to be an integer.'
             );
         } catch (InvalidArgumentException $exception) {
@@ -143,10 +157,13 @@ class ReadOptions implements ReadOptionsInterface
     public function getOrderBy(): ?OrderBy
     {
         try {
-            Assertion::keyIsset($this->options, ReadOptions::ORDER_BY,
+            Assertion::keyIsset(
+                $this->options,
+                ReadOptions::ORDER_BY,
                 'orderBy is not set'
             );
-            Assertion::isArray($this->options[ReadOptions::ORDER_BY],
+            Assertion::isArray(
+                $this->options[ReadOptions::ORDER_BY],
                 'Order by needs to be an array. Example: (["some" => "ASC"])'
             );
             $handle = Handle::fromString(key($this->options[ReadOptions::ORDER_BY]));

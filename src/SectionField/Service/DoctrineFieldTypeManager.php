@@ -70,8 +70,9 @@ class DoctrineFieldTypeManager implements FieldTypeManagerInterface
         $this->entityManager->flush();
     }
 
-    public function createWithFullyQualifiedClassName(FullyQualifiedClassName $fullyQualifiedClassName): FieldTypeInterface
-    {
+    public function createWithFullyQualifiedClassName(
+        FullyQualifiedClassName $fullyQualifiedClassName
+    ): FieldTypeInterface {
         $fieldType = new FieldType();
         $fieldType->setType($fullyQualifiedClassName->getClassName());
         $fieldType->setFullyQualifiedClassName((string) $fullyQualifiedClassName);

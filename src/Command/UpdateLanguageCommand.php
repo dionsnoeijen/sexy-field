@@ -35,11 +35,13 @@ class UpdateLanguageCommand extends LanguageCommand
 
     protected function configure(): void
     {
+        // @codingStandardsIgnoreStart
         $this
             ->setDescription('Updates languages.')
             ->setHelp('With this command you can update installed languages based on a yml file, it will only add entries not yet in existence.')
             ->addArgument('config', InputArgument::REQUIRED, 'The language configuration yml')
         ;
+        // @codingStandardsIgnoreEnd
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void
@@ -59,4 +61,3 @@ class UpdateLanguageCommand extends LanguageCommand
         $this->renderTable($output, $this->languageManager->readAll(), 'Languages updated!');
     }
 }
-

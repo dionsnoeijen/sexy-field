@@ -157,6 +157,5 @@ class DoctrineLanguageManager implements LanguageManagerInterface
                 );
             }
         }
-
     }
 }

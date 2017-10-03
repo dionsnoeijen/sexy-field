@@ -33,7 +33,6 @@ abstract class FieldCommand extends Command
         $rows = [];
         /** @var Field $field */
         foreach ($fields as $field) {
-
             $translations = $field->getFieldTranslations();
             /** @var FieldTranslation $translation */
             $names = '';
