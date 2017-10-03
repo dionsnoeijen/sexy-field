@@ -11,6 +11,7 @@ use PHPUnit\Framework\TestCase;
 use Tardigrades\SectionField\ValueObject\Created;
 use Tardigrades\SectionField\ValueObject\FullyQualifiedClassName;
 use Tardigrades\SectionField\ValueObject\Id;
+use Tardigrades\SectionField\ValueObject\Name;
 use Tardigrades\SectionField\ValueObject\Type;
 use Tardigrades\SectionField\ValueObject\Updated;
 
@@ -54,7 +55,7 @@ final class FieldTypeTest extends TestCase
      */
     public function it_should_get_an_id_value_object()
     {
-        $field = $this->fieldType->setId(10);
+        $this->fieldType->setId(10);
 
         $this->assertEquals(Id::fromInt(10), $this->fieldType->getIdValueObject());
     }
@@ -70,7 +71,8 @@ final class FieldTypeTest extends TestCase
 
     /**
      * @test
-     * @covers ::setType ::getType
+     * @covers ::setType
+     * @covers ::getType
      */
     public function it_should_set_and_get_type()
     {
@@ -83,7 +85,8 @@ final class FieldTypeTest extends TestCase
 
     /**
      * @test
-     * @covers ::setFullyQualifiedClassName ::getFullyQualifiedClassName
+     * @covers ::setFullyQualifiedClassName
+     * @covers ::getFullyQualifiedClassName
      */
     public function it_should_set_and_get_fully_qualified_class_name()
     {
@@ -99,7 +102,21 @@ final class FieldTypeTest extends TestCase
 
     /**
      * @test
+     * @covers ::setName
+     * @covers ::getName
+     */
+    public function it_should_set_and_get_name()
+    {
+        $name = Name::fromString('An interesting name');
+        $this->fieldType->setName((string)$name);
+
+        $this->assertEquals($name, $this->fieldType->getName());
+    }
+
+    /**
+     * @test
      * @covers ::addField
+     * @covers ::hasFields
      */
     public function it_should_add_a_field()
     {
@@ -107,11 +124,29 @@ final class FieldTypeTest extends TestCase
 
         $field->shouldReceive('setFieldType')->once()->with($this->fieldType);
         $this->fields->shouldReceive('contains')->once()->with($field)->andReturn(false);
+        $this->fields->shouldReceive('isEmpty')->once()->andReturn(false);
         $this->fields->shouldReceive('add')->once()->with($field);
 
-        $fieldType = $this->fieldType->addField($field);
+        $this->fieldType->addField($field);
 
-        $this->assertEquals($this->fieldType, $fieldType);
+        $this->assertTrue($this->fieldType->hasFields());
+    }
+
+    /**
+     * @test
+     * @covers ::addField
+     */
+    public function it_should_not_add_existing_field()
+    {
+        $field = Mockery::mock(FieldInterface::class);
+
+        $field->shouldReceive('setFieldType')->once()->with($this->fieldType);
+        $this->fields->shouldReceive('contains')->once()->with($field)->andReturn(false);
+        $this->fields->shouldReceive('contains')->once()->with($field)->andReturn(true);
+        $this->fields->shouldReceive('add')->once()->with($field);
+
+        $this->fieldType->addField($field);
+        $this->fieldType->addField($field);
     }
 
     /**
@@ -133,6 +168,25 @@ final class FieldTypeTest extends TestCase
         $fieldType = $this->fieldType->removeField($field);
 
         $this->assertEquals($this->fieldType, $fieldType);
+    }
+
+    /**
+     * @test
+     * @covers ::removeField
+     */
+    public function it_should_do_nothing_when_removing_non_existing_field()
+    {
+        $field = new Field();
+
+        $this->fields
+            ->shouldReceive('contains')
+            ->once()
+            ->with($field)
+            ->andReturn(false);
+
+        $this->fields->shouldReceive('remove')->never();
+
+        $this->fieldType->removeField($field);
     }
 
     /**

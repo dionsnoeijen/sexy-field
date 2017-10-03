@@ -105,6 +105,45 @@ final class ApplicationTest extends TestCase
 
     /**
      * @test
+     * @covers ::addLanguage
+     * @covers ::getLanguages
+     */
+    public function it_should_not_add_language_if_it_already_exists()
+    {
+        $application = new Application();
+
+        $nl = (new Language())->setI18n('nl_NL');
+
+        $application->addLanguage($nl);
+        $application->addLanguage($nl);
+
+        $this->assertEquals($application->getLanguages()->count(), 1);
+    }
+
+    /**
+     * @test
+     * @covers ::addLanguage
+     * @covers ::removeLanguage
+     * @covers ::getLanguages
+     */
+    public function it_should_do_nothing_when_removing_non_existing_language()
+    {
+        $application = new Application();
+
+        $nl = (new Language())->setI18n('nl_NL');
+
+        $application->addLanguage((new Language())->setI18n('en_EN'));
+
+        $this->assertEquals($application->getLanguages()->count(), 1);
+
+        $application->removeLanguage($nl);
+
+        $this->assertEquals($application->getLanguages()->count(), 1);
+        $this->assertEquals((string) $application->getLanguages()->get(0)->getI18n(), 'en_EN');
+    }
+
+    /**
+     * @test
      * @covers ::addSection
      * @covers ::removeSection
      * @covers ::getSections
@@ -125,6 +164,47 @@ final class ApplicationTest extends TestCase
 
         $this->assertEquals($application->getSections()->count(), 1);
         $this->assertEquals((string) $application->getSections()->get(1)->getName(), 'Discoveries');
+    }
+
+    /**
+     * @test
+     * @covers ::addSection
+     * @covers ::getSections
+     */
+    public function it_should_not_add_section_if_it_already_exists()
+    {
+        $application = new Application();
+
+        $section = (new Section())->setName('Amazing');
+
+        $application
+            ->addSection($section)
+            ->addSection($section);
+
+        $this->assertEquals($application->getSections()->count(), 1);
+    }
+
+    /**
+     * @test
+     * @covers ::addSection
+     * @covers ::removeSection
+     * @covers ::getSections
+     */
+    public function it_should_do_nothing_when_removing_non_existing_section()
+    {
+        $application = new Application();
+
+        $section = (new Section())->setName('Amazing');
+
+        $application
+            ->addSection((new Section())->setName('Discoveries'));
+
+        $this->assertEquals($application->getSections()->count(), 1);
+
+        $application->removeSection($section);
+
+        $this->assertEquals($application->getSections()->count(), 1);
+        $this->assertEquals((string) $application->getSections()->get(0)->getName(), 'Discoveries');
     }
 
     /**
@@ -251,6 +331,21 @@ final class ApplicationTest extends TestCase
         $this->assertEquals(
             $this->application->getUpdatedValueObject()->getDateTime()->format('Y-m-d H:i'),
             (new \DateTime())->format('Y-m-d H:i')
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::setName
+     * @covers ::getName
+     */
+    public function it_should_set_and_get_name()
+    {
+        $this->application->setName('My application');
+
+        $this->assertEquals(
+            'My application',
+            $this->application->getName()
         );
     }
 }
