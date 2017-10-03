@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types=1);
+declare (strict_types = 1);
 
 namespace Tardigrades\Command;
 
@@ -66,7 +66,7 @@ class UpdateFieldTypeCommand extends FieldTypeCommand
     private function getFieldType(InputInterface $input, OutputInterface $output): FieldType
     {
         $question = new Question('<question>What record do you want to update?</question> (#id): ');
-        $question->setValidator(function ($id) use ($output) {
+        $question->setValidator(function($id) use ($output) {
             try {
                 return $this->fieldTypeManager->read(Id::fromInt((int) $id));
             } catch (FieldTypeNotFoundException $exception) {
@@ -88,7 +88,7 @@ class UpdateFieldTypeCommand extends FieldTypeCommand
             $fieldType->getFullyQualifiedClassName() .
             '): '
         );
-        $updateQuestion->setValidator(function ($fullyQualifiedClassName) use ($output) {
+        $updateQuestion->setValidator(function($fullyQualifiedClassName) use ($output) {
             try {
                 return FullyQualifiedClassName::fromString($fullyQualifiedClassName);
             } catch (\Exception $exception) {

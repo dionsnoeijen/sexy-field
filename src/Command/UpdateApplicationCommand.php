@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types=1);
+declare (strict_types = 1);
 
 namespace Tardigrades\Command;
 
@@ -69,7 +69,7 @@ class UpdateApplicationCommand extends ApplicationCommand
     private function getApplicationRecord(InputInterface $input, OutputInterface $output): ApplicationInterface
     {
         $question = new Question('<question>What record do you want to update?</question> (#id): ');
-        $question->setValidator(function ($id) use ($output) {
+        $question->setValidator(function($id) use ($output) {
             try {
                 return $this->applicationManager->read(Id::fromInt((int) $id));
             } catch (SectionNotFoundException $exception) {

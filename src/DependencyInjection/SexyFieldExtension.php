@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types=1);
+declare (strict_types = 1);
 
 namespace Tardigrades\DependencyInjection;
 
@@ -25,7 +25,7 @@ class SexyFieldExtension extends Extension
         $loader = new YamlFileLoader(
             $container,
             new FileLocator([
-                __DIR__.'/../config/service'
+                __DIR__ . '/../config/service'
             ])
         );
 
