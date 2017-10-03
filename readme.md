@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/dionsnoeijen/sexy-field.svg?branch=master)](https://travis-ci.org/dionsnoeijen/sexy-field)
+[![Build Status](https://travis-ci.org/dionsnoeijen/sexy-field.svg?branch=master)](https://travis-ci.org/dionsnoeijen/sexy-field) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/7f0a1082-0e72-4764-b1d2-d7de23ef8e73/mini.png)](https://insight.sensiolabs.com/projects/7f0a1082-0e72-4764-b1d2-d7de23ef8e73) [![Coverage Status](https://coveralls.io/repos/github/dionsnoeijen/sexy-field/badge.svg?branch=master)](https://coveralls.io/github/dionsnoeijen/sexy-field?branch=master)
 
 # SexyField
 
