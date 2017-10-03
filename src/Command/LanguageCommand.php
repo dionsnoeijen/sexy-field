@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types=1);
+declare (strict_types = 1);
 
 namespace Tardigrades\Command;
 
@@ -30,7 +30,6 @@ abstract class LanguageCommand extends Command
         $rows = [];
         /** @var Language $language */
         foreach ($languages as $language) {
-
             $applications = $language->getApplications();
             $applicationText = '';
             /** @var Application $application */

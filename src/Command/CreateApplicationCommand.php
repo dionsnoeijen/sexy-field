@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types=1);
+declare (strict_types = 1);
 
 namespace Tardigrades\Command;
 
@@ -35,10 +35,12 @@ class CreateApplicationCommand extends ApplicationCommand
 
     protected function configure()
     {
+        // @codingStandardsIgnoreStart
         $this
             ->setDescription('Create application')
             ->setHelp('Create a new application, an application is related to sections, you can group sections and isolate them when necessary. You need at least one application, and only one application counts as default.')
             ->addArgument('config', InputArgument::REQUIRED, 'The language configuration yml');
+        // @codingStandardsIgnoreEnd
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

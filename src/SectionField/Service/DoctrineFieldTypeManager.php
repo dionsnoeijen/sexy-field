@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types=1);
+declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\Service;
 
@@ -70,8 +70,9 @@ class DoctrineFieldTypeManager implements FieldTypeManagerInterface
         $this->entityManager->flush();
     }
 
-    public function createWithFullyQualifiedClassName(FullyQualifiedClassName $fullyQualifiedClassName): FieldTypeInterface
-    {
+    public function createWithFullyQualifiedClassName(
+        FullyQualifiedClassName $fullyQualifiedClassName
+    ): FieldTypeInterface {
         $fieldType = new FieldType();
         $fieldType->setType($fullyQualifiedClassName->getClassName());
         $fieldType->setFullyQualifiedClassName((string) $fullyQualifiedClassName);

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types=1);
+declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\Generator;
 
@@ -27,7 +27,7 @@ class PhpFormatter
                 $tabs--;
             }
             $indent = '';
-            for ($i = 0 ; $i < $tabs ; $i++) {
+            for ($i = 0; $i < $tabs; $i++) {
                 $indent .= '    ';
             }
             if ($line !== '') {
@@ -43,7 +43,7 @@ class PhpFormatter
                     $use = false;
                 }
 
-                if (substr($line,0,6 ) === 'public' ||
+                if (substr($line, 0, 6) === 'public' ||
                     substr($line, 0, 9) === 'namespace' ||
                     substr($line, 0, 5) === 'class'
                 ) {

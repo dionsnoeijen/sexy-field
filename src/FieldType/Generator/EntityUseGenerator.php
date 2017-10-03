@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types=1);
+declare (strict_types = 1);
 
 namespace Tardigrades\FieldType\Generator;
 
@@ -23,7 +23,7 @@ class EntityUseGenerator implements GeneratorInterface
     {
         return Template::create(
             (string) TemplateLoader::load(
-               $field->getFieldType()->getInstance()->directory() .
+                $field->getFieldType()->getInstance()->directory() .
                 '/GeneratorTemplate/entity.use.php.template'
             )
         );

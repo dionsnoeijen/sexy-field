@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types=1);
+declare (strict_types = 1);
 
 namespace Tardigrades\Command;
 
@@ -37,10 +37,12 @@ class GenerateSectionCommand extends SectionCommand
 
     protected function configure(): void
     {
+        // @codingStandardsIgnoreStart
         $this
             ->setDescription('Generate a section.')
             ->setHelp('After creating a section, you can generate the accompanying files and tables (when using doctrine settings).')
         ;
+        // @codingStandardsIgnoreEnd
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void

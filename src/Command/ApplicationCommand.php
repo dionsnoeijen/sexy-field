@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types=1);
+declare (strict_types = 1);
 
 namespace Tardigrades\Command;
 
@@ -31,7 +31,6 @@ abstract class ApplicationCommand extends Command
         $rows = [];
         /** @var Application $application */
         foreach ($applications as $application) {
-
             $sections = $application->getSections();
             $sectionsText = '';
             /** @var Section $section */

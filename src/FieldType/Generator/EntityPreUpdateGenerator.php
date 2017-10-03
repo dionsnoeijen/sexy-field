@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types=1);
+declare (strict_types = 1);
 
 namespace Tardigrades\FieldType\Generator;
 
@@ -22,7 +22,6 @@ class EntityPreUpdateGenerator implements GeneratorInterface
     public static function generate(FieldInterface $field): Template
     {
         if (in_array('preUpdate', $field->getConfig()->getEntityEvents())) {
-
             $asString = (string) TemplateLoader::load(
                 $field->getFieldType()->getInstance()->directory() .
                 '/GeneratorTemplate/entity.preupdate.php.template'

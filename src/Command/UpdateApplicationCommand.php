@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types=1);
+declare (strict_types = 1);
 
 namespace Tardigrades\Command;
 
@@ -43,11 +43,13 @@ class UpdateApplicationCommand extends ApplicationCommand
 
     protected function configure(): void
     {
+        // @codingStandardsIgnoreStart
         $this
             ->setDescription('Updates an existing application.')
             ->setHelp('This command allows you to update an application based on a yml application configuration. Pass along the path to a application configuration yml. Something like: application/application.yml')
             ->addArgument('config', InputArgument::REQUIRED, 'The application configuration yml')
         ;
+        // @codingStandardsIgnoreEnd
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void
@@ -67,7 +69,7 @@ class UpdateApplicationCommand extends ApplicationCommand
     private function getApplicationRecord(InputInterface $input, OutputInterface $output): ApplicationInterface
     {
         $question = new Question('<question>What record do you want to update?</question> (#id): ');
-        $question->setValidator(function ($id) use ($output) {
+        $question->setValidator(function($id) use ($output) {
             try {
                 return $this->applicationManager->read(Id::fromInt((int) $id));
             } catch (SectionNotFoundException $exception) {
@@ -98,4 +100,3 @@ class UpdateApplicationCommand extends ApplicationCommand
         $output->writeln('<info>Application updated!</info>');
     }
 }
-

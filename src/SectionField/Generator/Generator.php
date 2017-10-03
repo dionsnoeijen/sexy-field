@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types=1);
+declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\Generator;
 
@@ -52,9 +52,8 @@ abstract class Generator implements GeneratorInterface
     protected function addOpposingRelationships(SectionInterface $section, array $fields): array
     {
         $this->relationships = $this->sectionManager->getRelationshipsOfAll();
-        foreach ($this->relationships[(string) $section->getHandle()] as $fieldHandle=>$relationship) {
+        foreach ($this->relationships[(string) $section->getHandle()] as $fieldHandle => $relationship) {
             if (false !== strpos($fieldHandle, '-opposite')) {
-
                 $fieldHandle = str_replace('-opposite', '', $fieldHandle);
 
                 $oppositeRelationshipField = new FieldEntity();

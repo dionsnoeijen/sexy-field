@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types=1);
+declare (strict_types = 1);
 
 namespace Tardigrades\Helper;
 
@@ -23,17 +23,17 @@ class ArrayConverter
             self::$value = '';
         }
 
-        foreach($array as $key => $value) {
-            if(is_array($value)) {
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
                 self::$value .=
                     str_repeat('-', $level - 1) .
-                    (($level-1 > 0 ) ? ' ' : '') .
+                    (($level - 1 > 0) ? ' ' : '') .
                     $key . ':' . PHP_EOL;
                 self::recursive($value, $level + 1);
             } else {
                 self::$value .=
                     str_repeat('-', $level - 1) .
-                    (($level-1 > 0 ) ? ' ' : '') .
+                    (($level - 1 > 0) ? ' ' : '') .
                     $key . ':' . $value . PHP_EOL;
             }
         }

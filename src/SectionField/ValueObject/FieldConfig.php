@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types=1);
+declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\ValueObject;
 
@@ -80,7 +80,10 @@ final class FieldConfig
     public function getEntityEvents(): array
     {
         Assertion::keyExists($this->fieldConfig['field'], 'entityEvents', 'Entity events not defined');
-        Assertion::isArray($this->fieldConfig['field']['entityEvents'], 'Entity events should be an array of events you want a generator to run for.');
+        Assertion::isArray(
+            $this->fieldConfig['field']['entityEvents'],
+            'Entity events should be an array of events you want a generator to run for.'
+        );
 
         return $this->fieldConfig['field']['entityEvents'];
     }
@@ -106,7 +109,10 @@ final class FieldConfig
     public function getLabels(): array
     {
         Assertion::keyIsset($this->fieldConfig['field'], 'label', 'Field needs at least one label');
-        Assertion::isArray($this->fieldConfig['field']['label'], 'Labels are to be defined in an array of available languages');
+        Assertion::isArray(
+            $this->fieldConfig['field']['label'],
+            'Labels are to be defined in an array of available languages'
+        );
 
         return $this->fieldConfig['field']['label'];
     }

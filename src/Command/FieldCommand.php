@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types=1);
+declare (strict_types = 1);
 
 namespace Tardigrades\Command;
 
@@ -33,7 +33,6 @@ abstract class FieldCommand extends Command
         $rows = [];
         /** @var Field $field */
         foreach ($fields as $field) {
-
             $translations = $field->getFieldTranslations();
             /** @var FieldTranslation $translation */
             $names = '';

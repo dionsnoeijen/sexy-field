@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types=1);
+declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\ValueObject;
 
@@ -24,7 +24,7 @@ final class SectionConfig
 
     private function __construct(array $sectionConfig)
     {
-        Assertion::keyExists($sectionConfig,'section', 'Config is not a section config');
+        Assertion::keyExists($sectionConfig, 'section', 'Config is not a section config');
         Assertion::keyExists($sectionConfig['section'], 'name', 'The config contains no section name');
         Assertion::keyExists($sectionConfig['section'], 'handle', 'The config contains no section handle');
         Assertion::notEmpty($sectionConfig['section']['name'], 'The name is not defined');

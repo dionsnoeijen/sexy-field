@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types=1);
+declare (strict_types = 1);
 
 namespace Tardigrades\Command;
 
@@ -30,11 +30,13 @@ class CreateSectionCommand extends SectionCommand
 
     protected function configure(): void
     {
+        // @codingStandardsIgnoreStart
         $this
             ->setDescription('Creates a new section.')
             ->setHelp('This command allows you to create a section based on a yml section configuration. Pass along the path to a section configuration yml. Something like: section/blog.yml')
             ->addArgument('config', InputArgument::REQUIRED, 'The section configuration yml')
         ;
+        // @codingStandardsIgnoreEnd
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void

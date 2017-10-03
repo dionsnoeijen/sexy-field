@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types=1);
+declare (strict_types = 1);
 
 namespace Tardigrades\Command;
 
@@ -31,11 +31,13 @@ class UpdateSectionCommand extends SectionCommand
 
     protected function configure(): void
     {
+        // @codingStandardsIgnoreStart
         $this
             ->setDescription('Updates an existing section.')
             ->setHelp('This command allows you to update a section based on a yml section configuration. Pass along the path to a section configuration yml. Something like: section/blog.yml')
             ->addArgument('config', InputArgument::REQUIRED, 'The section configuration yml')
         ;
+        // @codingStandardsIgnoreEnd
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void
@@ -58,7 +60,14 @@ class UpdateSectionCommand extends SectionCommand
                 )
             );
 
-            $inHistory = $this->getHelper('question')->ask($input, $output, new ConfirmationQuestion('<comment>Do you want to store the current version in history?</comment> (y/n) ', false));
+            $inHistory = $this->getHelper('question')->ask(
+                $input,
+                $output,
+                new ConfirmationQuestion(
+                    '<comment>Do you want to store the current version in history?</comment> (y/n) ',
+                    false
+                )
+            );
 
             $this->sectionManager->updateByConfig($sectionConfig, $section, $inHistory);
         } catch (\Exception $exception) {
@@ -70,4 +79,3 @@ class UpdateSectionCommand extends SectionCommand
         $this->renderTable($output, $sections, 'Section updated!');
     }
 }
-
