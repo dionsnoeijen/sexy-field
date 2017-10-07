@@ -14,7 +14,6 @@ declare (strict_types = 1);
 namespace Tardigrades\SectionField\ValueObject;
 
 use Assert\Assertion;
-use Tardigrades\FieldType\Slug\ValueObject\Slug;
 
 final class SectionFormOptions
 {
