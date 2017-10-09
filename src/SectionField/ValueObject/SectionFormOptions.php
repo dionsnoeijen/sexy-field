@@ -37,6 +37,7 @@ final class SectionFormOptions
     {
         Assertion::keyIsset($this->options, 'slug', 'The slug is not set');
         Assertion::string($this->options['slug'], 'The slug must be a string');
+        Assertion::notEmpty($this->options['slug'], 'The slug is empty');
 
         return Slug::fromString($this->options['slug']);
     }
