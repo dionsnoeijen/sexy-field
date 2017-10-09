@@ -29,9 +29,13 @@ class DeleteSection implements DeleteSectionInterface
 
     public function delete($sectionEntryEntity): bool
     {
+        $success = true;
         /** @var DeleteSectionInterface $deleter */
         foreach ($this->deleters as $deleter) {
-            $deleter->delete($sectionEntryEntity);
+            if (!$deleter->delete($sectionEntryEntity) && $success) {
+                $success = false;
+            }
         }
+        return $success;
     }
 }
