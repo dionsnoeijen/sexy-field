@@ -18,9 +18,7 @@ use Tardigrades\Helper\ArrayConverter;
 
 final class FieldConfig
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $fieldConfig;
 
     private function __construct(array $fieldConfig)

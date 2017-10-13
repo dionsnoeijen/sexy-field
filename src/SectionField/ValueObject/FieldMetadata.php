@@ -18,9 +18,7 @@ use Tardigrades\Helper\ArrayConverter;
 
 final class FieldMetadata
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $metadata;
 
     private function __construct(array $metadata)
