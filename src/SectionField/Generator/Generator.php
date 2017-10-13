@@ -18,6 +18,7 @@ use Psr\Container\ContainerInterface;
 use Tardigrades\Entity\Field as FieldEntity;
 use Tardigrades\Entity\FieldInterface;
 use Tardigrades\Entity\SectionInterface;
+use Tardigrades\FieldType\FieldTypeInterface;
 use Tardigrades\SectionField\Generator\Writer\Writable;
 use Tardigrades\SectionField\Service\FieldManagerInterface;
 use Tardigrades\SectionField\Service\FieldTypeManagerInterface;
@@ -112,6 +113,34 @@ abstract class Generator implements GeneratorInterface
         }
 
         return $fieldTypeGeneratorConfig;
+    }
+
+    /**
+     * The field type generator templates are to be defined in the packages
+     * that provide the specific support for what is to be generated
+     *
+     * The field's field type, is in a base package, the default package is: 'sexy-field-field-types-base'
+     * The supporting directory, is where the generator is to find it's templates
+     * For example: 'sexy-field-entity' or 'sexy-field-doctrine'
+     *
+     * @param FieldInterface $field
+     * @param string $fieldTypeDirectory
+     * @param string $supportingDirectory
+     * @return mixed
+     */
+    protected function getFieldTypeTemplateDirectory(
+        FieldInterface $field,
+        string $fieldTypeDirectory,
+        string $supportingDirectory
+    ) {
+        /** @var FieldTypeInterface $fieldType */
+        $fieldType = $this->container->get((string) $field->getFieldType()->getFullyQualifiedClassName());
+
+        return str_replace(
+            $fieldTypeDirectory,
+            $supportingDirectory,
+            $fieldType->directory()
+        );
     }
 
     public function getBuildMessages(): array
