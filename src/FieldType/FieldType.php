@@ -19,17 +19,31 @@ use Tardigrades\Entity\SectionInterface;
 use Tardigrades\SectionField\Service\ReadSectionInterface;
 use Tardigrades\SectionField\Service\SectionManagerInterface;
 use Tardigrades\SectionField\ValueObject\FieldConfig;
+use Tardigrades\SectionField\ValueObject\FieldTypeGeneratorConfig;
 
 abstract class FieldType implements FieldTypeInterface
 {
     /** @var FieldConfig */
     private $fieldConfig;
 
+    /** @var FieldTypeGeneratorConfig */
+    private $fieldTypeGeneratorConfig;
+
+    public function __construct(array $fieldTypeGeneratorConfig = [])
+    {
+        $this->fieldTypeGeneratorConfig = FieldTypeGeneratorConfig::fromArray($fieldTypeGeneratorConfig);
+    }
+
     public function setConfig(FieldConfig $fieldConfig): FieldTypeInterface
     {
         $this->fieldConfig = $fieldConfig;
 
         return $this;
+    }
+
+    public function getFieldTypeGeneratorConfig(): FieldTypeGeneratorConfig
+    {
+        return $this->fieldTypeGeneratorConfig;
     }
 
     public function getConfig(): FieldConfig
