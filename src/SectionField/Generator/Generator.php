@@ -13,8 +13,10 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\Generator;
 
+use Assert\Assertion;
 use Psr\Container\ContainerInterface;
 use Tardigrades\Entity\Field as FieldEntity;
+use Tardigrades\Entity\FieldInterface;
 use Tardigrades\Entity\SectionInterface;
 use Tardigrades\SectionField\Generator\Writer\Writable;
 use Tardigrades\SectionField\Service\FieldManagerInterface;
@@ -86,6 +88,30 @@ abstract class Generator implements GeneratorInterface
         }
 
         return $fields;
+    }
+
+    protected function getFieldTypeGeneratorConfig(FieldInterface $field, string $generateFor): array
+    {
+        $fieldType = $this->container->get((string) $field->getFieldType()->getFullyQualifiedClassName());
+        $fieldTypeGeneratorConfig = $fieldType->getFieldTypeGeneratorConfig()->toArray();
+
+        try {
+            Assertion::notEmpty(
+                $fieldTypeGeneratorConfig,
+                'No generator defined for ' .
+                $field->getName() . 'type: ' . $field->getFieldType()->getType()
+            );
+
+            Assertion::keyExists(
+                $fieldTypeGeneratorConfig,
+                $generateFor,
+                'Nothing to do for this generator: ' . $generateFor
+            );
+        } catch (\Exception $exception) {
+            $this->buildMessages[] = $exception->getMessage();
+        }
+
+        return $fieldTypeGeneratorConfig;
     }
 
     public function getBuildMessages(): array
