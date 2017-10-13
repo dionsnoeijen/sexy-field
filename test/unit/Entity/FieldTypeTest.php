@@ -163,7 +163,7 @@ final class FieldTypeTest extends TestCase
             ->with($field)
             ->andReturn(true);
 
-        $this->fields->shouldReceive('remove')->once()->with($field);
+        $this->fields->shouldReceive('removeElement')->once()->with($field);
 
         $fieldType = $this->fieldType->removeField($field);
 
@@ -184,7 +184,7 @@ final class FieldTypeTest extends TestCase
             ->with($field)
             ->andReturn(false);
 
-        $this->fields->shouldReceive('remove')->never();
+        $this->fields->shouldReceive('removeElement')->never();
 
         $this->fieldType->removeField($field);
     }

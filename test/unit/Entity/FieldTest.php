@@ -157,7 +157,7 @@ final class FieldTest extends TestCase
         $this->sections->shouldReceive('contains')->once()->with($section)->andReturn(false);
         $this->sections->shouldReceive('contains')->once()->with($section)->andReturn(true);
         $this->sections->shouldReceive('add')->once()->with($section);
-        $this->sections->shouldReceive('remove')->once()->with($section);
+        $this->sections->shouldReceive('removeElement')->once()->with($section);
 
         $this->field->addSection($section);
 
@@ -175,7 +175,7 @@ final class FieldTest extends TestCase
         $section = Mockery::mock(Section::class);
 
         $this->sections->shouldReceive('contains')->once()->with($section)->andReturn(false);
-        $this->sections->shouldReceive('remove')->never();
+        $this->sections->shouldReceive('removeElement')->never();
 
         $this->field->removeSection($section);
     }

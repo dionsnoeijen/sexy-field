@@ -100,7 +100,7 @@ class Field implements FieldInterface
         if (!$this->sections->contains($section)) {
             return $this;
         }
-        $this->sections->remove($section);
+        $this->sections->removeElement($section);
         $section->removeField($this);
 
         return $this;

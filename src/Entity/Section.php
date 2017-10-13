@@ -62,7 +62,7 @@ class Section extends SectionBase implements SectionInterface, SectionEntityInte
         if (!$this->history->contains($section)) {
             return $this;
         }
-        $this->history->remove($section);
+        $this->history->removeElement($section);
 
         return $this;
     }

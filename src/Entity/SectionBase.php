@@ -117,7 +117,7 @@ abstract class SectionBase implements SectionInterface
         if (!$this->fields->contains($field)) {
             return $this;
         }
-        $this->fields->remove($field);
+        $this->fields->removeElement($field);
 
         return $this;
     }
@@ -171,7 +171,7 @@ abstract class SectionBase implements SectionInterface
         if (!$this->applications->contains($application)) {
             return $this;
         }
-        $this->applications->remove($application);
+        $this->applications->removeElement($application);
 
         return $this;
     }

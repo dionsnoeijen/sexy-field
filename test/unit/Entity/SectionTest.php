@@ -153,7 +153,7 @@ final class SectionTest extends TestCase
             ->with($field)
             ->andReturn(true);
 
-        $this->fields->shouldReceive('remove')->once()->with($field);
+        $this->fields->shouldReceive('removeElement')->once()->with($field);
 
         $fieldType = $this->section->removeField($field);
 
@@ -174,7 +174,7 @@ final class SectionTest extends TestCase
             ->with($field)
             ->andReturn(false);
 
-        $this->fields->shouldReceive('remove')->never();
+        $this->fields->shouldReceive('removeElement')->never();
 
         $this->section->removeField($field);
     }
@@ -314,7 +314,7 @@ final class SectionTest extends TestCase
      * @test
      * @covers ::removeApplication
      */
-    public function it_should_remove_an_applications()
+    public function it_should_remove_an_application()
     {
         $application = Mockery::mock(Application::class);
 
@@ -322,7 +322,7 @@ final class SectionTest extends TestCase
         $this->applications->shouldReceive('contains')->once()->with($application)->andReturn(false);
         $this->applications->shouldReceive('contains')->once()->with($application)->andReturn(true);
         $this->applications->shouldReceive('add')->once()->with($application);
-        $this->applications->shouldReceive('remove')->once()->with($application);
+        $this->applications->shouldReceive('removeElement')->once()->with($application);
 
         $this->section->addApplication($application);
         $this->section->removeApplication($application);
@@ -337,7 +337,7 @@ final class SectionTest extends TestCase
         $application = Mockery::mock(Application::class);
 
         $this->applications->shouldReceive('contains')->once()->with($application)->andReturn(false);
-        $this->applications->shouldReceive('remove')->never();
+        $this->applications->shouldReceive('removeElement')->never();
 
         $this->section->removeApplication($application);
     }
@@ -393,7 +393,7 @@ final class SectionTest extends TestCase
         $this->history->shouldReceive('contains')->once()->with($sectionHistory)->andReturn(false);
         $this->history->shouldReceive('contains')->once()->with($sectionHistory)->andReturn(true);
         $this->history->shouldReceive('add')->once()->with($sectionHistory);
-        $this->history->shouldReceive('remove')->once()->with($sectionHistory);
+        $this->history->shouldReceive('removeElement')->once()->with($sectionHistory);
 
         $this->section->addHistory($sectionHistory);
         $this->section->removeHistory($sectionHistory);
@@ -408,7 +408,7 @@ final class SectionTest extends TestCase
     {
         $sectionHistory = new SectionHistory();
         $this->history->shouldReceive('contains')->once()->with($sectionHistory)->andReturn(false);
-        $this->history->shouldReceive('remove')->never();
+        $this->history->shouldReceive('removeElement')->never();
 
         $this->section->removeHistory($sectionHistory);
     }

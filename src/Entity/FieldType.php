@@ -94,7 +94,7 @@ class FieldType implements FieldTypeInterface
         if (!$this->fields->contains($field)) {
             return $this;
         }
-        $this->fields->remove($field);
+        $this->fields->removeElement($field);
 
         return $this;
     }
