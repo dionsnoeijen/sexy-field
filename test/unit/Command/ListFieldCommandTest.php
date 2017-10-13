@@ -11,9 +11,7 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Yaml\Yaml;
 use Tardigrades\Entity\Field;
-use Tardigrades\Entity\FieldTranslation;
 use Tardigrades\Entity\FieldType;
-use Tardigrades\Entity\Language;
 use Tardigrades\SectionField\Service\FieldManagerInterface;
 
 /**
