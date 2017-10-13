@@ -29,17 +29,12 @@ class DoctrineFieldManager implements FieldManagerInterface
     /** @var FieldTypeManagerInterface */
     private $fieldTypeManager;
 
-    /** @var LanguageManagerInterface */
-    private $languageManager;
-
     public function __construct(
         EntityManagerInterface $entityManager,
-        FieldTypeManagerInterface $fieldTypeManager,
-        LanguageManagerInterface $languageManager
+        FieldTypeManagerInterface $fieldTypeManager
     ) {
         $this->entityManager = $entityManager;
         $this->fieldTypeManager = $fieldTypeManager;
-        $this->languageManager = $languageManager;
     }
 
     public function create(FieldInterface$entity): FieldInterface

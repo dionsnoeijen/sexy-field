@@ -32,7 +32,6 @@ services:
     arguments:
       - '@doctrine.orm.entity_manager'
       - '@section_field.manager.doctrine.field_type_manager'
-      - '@section_field.manager.doctrine.language_manager'
 
   section_field.twig.section:
     class: Tardigrades\Twig\SectionTwigExtension
