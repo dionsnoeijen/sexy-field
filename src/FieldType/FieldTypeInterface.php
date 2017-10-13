@@ -18,11 +18,13 @@ use Tardigrades\Entity\SectionInterface;
 use Tardigrades\SectionField\Service\ReadSectionInterface;
 use Tardigrades\SectionField\Service\SectionManagerInterface;
 use Tardigrades\SectionField\ValueObject\FieldConfig;
+use Tardigrades\SectionField\ValueObject\FieldTypeGeneratorConfig;
 
 interface FieldTypeInterface
 {
     public function setConfig(FieldConfig $fieldConfig): FieldTypeInterface;
     public function getConfig(): FieldConfig;
+    public function getFieldTypeGeneratorConfig(): FieldTypeGeneratorConfig;
 
     /**
      * @param FormBuilderInterface $formBuilder
