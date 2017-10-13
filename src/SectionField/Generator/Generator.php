@@ -124,23 +124,26 @@ abstract class Generator implements GeneratorInterface
      * For example: 'sexy-field-entity' or 'sexy-field-doctrine'
      *
      * @param FieldInterface $field
-     * @param string $fieldTypeDirectory
      * @param string $supportingDirectory
      * @return mixed
      */
     protected function getFieldTypeTemplateDirectory(
         FieldInterface $field,
-        string $fieldTypeDirectory,
         string $supportingDirectory
     ) {
         /** @var FieldTypeInterface $fieldType */
         $fieldType = $this->container->get((string) $field->getFieldType()->getFullyQualifiedClassName());
 
-        return str_replace(
-            $fieldTypeDirectory,
-            $supportingDirectory,
-            $fieldType->directory()
-        );
+        $fieldTypeDirectory = explode('/', $fieldType->directory());
+        foreach($fieldTypeDirectory as $key=>$segment) {
+            if ($segment === 'vendor') {
+                $selector = $key + 1;
+                $fieldTypeDirectory[$selector] = $supportingDirectory;
+                break;
+            }
+        }
+
+        return implode('/', $fieldTypeDirectory);
     }
 
     public function getBuildMessages(): array
