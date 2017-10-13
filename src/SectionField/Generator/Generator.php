@@ -13,6 +13,7 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\Generator;
 
+use Psr\Container\ContainerInterface;
 use Tardigrades\Entity\Field as FieldEntity;
 use Tardigrades\Entity\SectionInterface;
 use Tardigrades\SectionField\Generator\Writer\Writable;
@@ -37,14 +38,19 @@ abstract class Generator implements GeneratorInterface
     /** @var array */
     protected $buildMessages = [];
 
+    /** @var ContainerInterface */
+    protected $container;
+
     public function __construct(
         FieldManagerInterface $fieldManager,
         FieldTypeManagerInterface $fieldTypeManager,
-        SectionManagerInterface $sectionManager
+        SectionManagerInterface $sectionManager,
+        ContainerInterface $container
     ) {
         $this->fieldManager = $fieldManager;
         $this->fieldTypeManager = $fieldTypeManager;
         $this->sectionManager = $sectionManager;
+        $this->container = $container;
 
         $this->relationships = [];
     }

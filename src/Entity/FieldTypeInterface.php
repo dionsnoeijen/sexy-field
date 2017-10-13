@@ -42,5 +42,4 @@ interface FieldTypeInterface
     public function getUpdatedValueObject(): Updated;
     public function onPrePersist(): void;
     public function onPreUpdate(): void;
-    public function getInstance(): FieldTypeInstance;
 }
