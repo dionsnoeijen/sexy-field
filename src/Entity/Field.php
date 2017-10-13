@@ -32,9 +32,6 @@ class Field implements FieldInterface
     protected $name;
 
     /** @var string */
-    protected $label;
-
-    /** @var string */
     protected $handle;
 
     /** @var ArrayCollection */
@@ -85,18 +82,6 @@ class Field implements FieldInterface
     public function setName(string $name): FieldInterface
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getLabel(): Label
-    {
-        return Label::fromString($this->label);
-    }
-
-    public function setLabel(string $label): FieldInterface
-    {
-        $this->label = $label;
 
         return $this;
     }

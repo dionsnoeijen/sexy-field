@@ -54,7 +54,6 @@ final class CreateFieldCommandTest extends TestCase
 field:
     name: foo
     handle: bar
-    label: [ label ]
 YML;
 
         file_put_contents($this->file, $yml);

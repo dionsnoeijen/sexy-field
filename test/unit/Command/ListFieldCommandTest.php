@@ -59,7 +59,6 @@ final class ListFieldCommandTest extends TestCase
 field:
     name: foo
     handle: bar
-    label: [ label ]
 YML;
 
         file_put_contents($this->file, $yml);
@@ -92,21 +91,6 @@ YML;
         );
 
         $this->assertRegExp(
-            '/Dit is een label/',
-            $commandTester->getDisplay()
-        );
-
-        $this->assertRegExp(
-            '/Dit is nog een label/',
-            $commandTester->getDisplay()
-        );
-
-        $this->assertRegExp(
-            '/En nog een label/',
-            $commandTester->getDisplay()
-        );
-
-        $this->assertRegExp(
             '/andAnotherName/',
             $commandTester->getDisplay()
         );
@@ -132,16 +116,6 @@ YML;
         );
 
         $this->assertRegExp(
-            '/label:/',
-            $commandTester->getDisplay()
-        );
-
-        $this->assertRegExp(
-            '/- 0:label/',
-            $commandTester->getDisplay()
-        );
-
-        $this->assertRegExp(
             '/All installed Fields/',
             $commandTester->getDisplay()
         );
@@ -159,7 +133,6 @@ YML;
                 )
                 ->setConfig(Yaml::parse(file_get_contents($this->file)))
                 ->setName('Some field name')
-                ->setLabel('Dit is een label')
                 ->setCreated(new \DateTime())
                 ->setUpdated(new \DateTime()),
             (new Field())
@@ -171,7 +144,6 @@ YML;
                 )
                 ->setConfig(Yaml::parse(file_get_contents($this->file)))
                 ->setName('Some other field name')
-                ->setLabel('Dit is nog een label')
                 ->setCreated(new \DateTime())
                 ->setUpdated(new \DateTime()),
             (new Field())
@@ -183,7 +155,6 @@ YML;
                 )
                 ->setConfig(Yaml::parse(file_get_contents($this->file)))
                 ->setName('And another field name')
-                ->setLabel('En nog een label')
                 ->setCreated(new \DateTime())
                 ->setUpdated(new \DateTime()),
         ];

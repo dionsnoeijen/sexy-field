@@ -112,7 +112,6 @@ class DoctrineFieldManager implements FieldManagerInterface
         $fieldType = $this->fieldTypeManager->readByType(Type::fromString($fieldConfig['field']['type']));
 
         $field->setName($fieldConfig['field']['name']);
-        $field->setLabel($fieldConfig['field']['label']);
         $field->setHandle($fieldConfig['field']['handle']);
         $field->setFieldType($fieldType);
         $field->setConfig($fieldConfig);

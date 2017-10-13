@@ -203,7 +203,6 @@ final class FieldManagerTest extends TestCase
             'field' => [
                 'name' => 'This is my name',
                 'handle' => 'thisIsMyName',
-                'label' => 'I also have a label',
                 'type' => 'TextArea'
             ]
         ]);
@@ -241,7 +240,6 @@ final class FieldManagerTest extends TestCase
             'field' => [
                 'name' => 'This is my other name',
                 'handle' => 'thisIsMyOtherName',
-                'label' => 'I also have a label',
                 'type' => 'TextArea'
             ]
         ]);
@@ -326,7 +324,6 @@ final class FieldManagerTest extends TestCase
         $field->setFieldType($fieldType);
         $field->setHandle('thisIsMyName');
         $field->setName('I have a name');
-        $field->setLabel('I also have a label');
 
         return $field;
     }

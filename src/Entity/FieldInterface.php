@@ -18,7 +18,6 @@ use Tardigrades\SectionField\ValueObject\Created;
 use Tardigrades\SectionField\ValueObject\FieldConfig;
 use Tardigrades\SectionField\ValueObject\Handle;
 use Tardigrades\SectionField\ValueObject\Id;
-use Tardigrades\SectionField\ValueObject\Label;
 use Tardigrades\SectionField\ValueObject\Name;
 use Tardigrades\SectionField\ValueObject\Updated;
 
@@ -29,8 +28,6 @@ interface FieldInterface
     public function getIdValueObject(): Id;
     public function getName(): Name;
     public function setName(string $name): FieldInterface;
-    public function getLabel(): Label;
-    public function setLabel(string $label): FieldInterface;
     public function setHandle(string $handle): FieldInterface;
     public function getHandle(): Handle;
     public function addSection(SectionInterface $section): FieldInterface;

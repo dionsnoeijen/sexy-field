@@ -156,7 +156,6 @@ YML;
                         ->setName('TextInput')
                 )
                 ->setName('Some field name')
-                ->setLabel('A field label')
                 ->setConfig(Yaml::parse(file_get_contents($this->file)))
                 ->setCreated(new \DateTime())
                 ->setUpdated(new \DateTime()),
@@ -168,7 +167,6 @@ YML;
                         ->setName('TextArea')
                 )
                 ->setName('Some other field name')
-                ->setLabel('A field label')
                 ->setConfig(Yaml::parse(file_get_contents($this->file)))
                 ->setCreated(new \DateTime())
                 ->setUpdated(new \DateTime()),
@@ -180,7 +178,6 @@ YML;
                         ->setName('TextArea')
                 )
                 ->setName('And another field name')
-                ->setLabel('A field label')
                 ->setConfig(Yaml::parse(file_get_contents($this->file)))
                 ->setCreated(new \DateTime())
                 ->setUpdated(new \DateTime()),

@@ -98,7 +98,6 @@ YML;
                 ->setId(1)
                 ->setHandle('someName')
                 ->setName('Some name')
-                ->setLabel('Some label')
                 ->setFieldType(
                     (new FieldType())
                         ->setName('TextInput')
@@ -110,7 +109,6 @@ YML;
                 ->setId(2)
                 ->setHandle('someOtherName')
                 ->setName('Some other name')
-                ->setLabel('Some other label')
                 ->setFieldType(
                     (new FieldType())
                         ->setName('TextArea')
@@ -128,7 +126,6 @@ YML;
                 ->setId(3)
                 ->setHandle('andAnotherName')
                 ->setName('And another name')
-                ->setLabel('And another label')
                 ->setFieldType(
                     (new FieldType())
                         ->setName('TextArea')

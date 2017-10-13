@@ -35,7 +35,6 @@ abstract class FieldCommand extends Command
             $rows[] = [
                 $field->getId(),
                 $field->getName(),
-                $field->getLabel(),
                 $field->getHandle(),
                 $field->getFieldType()->getType(),
                 (string) $field->getConfig(),
@@ -50,9 +49,8 @@ abstract class FieldCommand extends Command
 
         $table
             ->setHeaders([
-                '#id', 'name', 'label',
-                'handle', 'type', 'config',
-                'updated'
+                '#id', 'name', 'handle',
+                'type', 'config', 'updated'
             ])
             ->setRows($rows)
         ;

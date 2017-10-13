@@ -106,17 +106,6 @@ final class FieldConfig
         return FieldMetadata::fromArray($this->fieldConfig['metadata']);
     }
 
-    public function getLabels(): array
-    {
-        Assertion::keyIsset($this->fieldConfig['field'], 'label', 'Field needs at least one label');
-        Assertion::isArray(
-            $this->fieldConfig['field']['label'],
-            'Labels are to be defined in an array of available languages'
-        );
-
-        return $this->fieldConfig['field']['label'];
-    }
-
     public function __toString(): string
     {
         return ArrayConverter::recursive($this->fieldConfig['field']);

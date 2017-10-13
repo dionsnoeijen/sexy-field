@@ -13,7 +13,6 @@
             <generator strategy="AUTO" />
         </id>
         <field name="name" type="string" />
-        <field name="label" type="string" />
         <field name="handle" type="string" unique="true" />
         <field name="config" type="json_array" />
         <field name="created" type="datetime" />
