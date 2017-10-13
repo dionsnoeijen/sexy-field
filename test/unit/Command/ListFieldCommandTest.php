@@ -77,42 +77,32 @@ YML;
         $commandTester->execute(['command' => $command->getName()]);
 
         $this->assertRegExp(
-            '/en_EN Some field name/',
+            '/Some field name/',
             $commandTester->getDisplay()
         );
 
         $this->assertRegExp(
-            '/nl_NL Een veldnaam/',
+            '/Some other field name/',
             $commandTester->getDisplay()
         );
 
         $this->assertRegExp(
-            '/en_EN Some other field name/',
+            '/And another field name/',
             $commandTester->getDisplay()
         );
 
         $this->assertRegExp(
-            '/nl_NL Een andere veldnaam/',
+            '/Dit is een label/',
             $commandTester->getDisplay()
         );
 
         $this->assertRegExp(
-            '/en_EN And another field name/',
+            '/Dit is nog een label/',
             $commandTester->getDisplay()
         );
 
         $this->assertRegExp(
-            '/nl_NL En nog een veldnaam/',
-            $commandTester->getDisplay()
-        );
-
-        $this->assertRegExp(
-            '/en_EN Dit is een label/',
-            $commandTester->getDisplay()
-        );
-
-        $this->assertRegExp(
-            '/nl_NL Dit is een label/',
+            '/En nog een label/',
             $commandTester->getDisplay()
         );
 
@@ -168,28 +158,8 @@ YML;
                         ->setName('TextInput')
                 )
                 ->setConfig(Yaml::parse(file_get_contents($this->file)))
-                ->addFieldTranslation(
-                    (new FieldTranslation())
-                        ->setName('Some field name')
-                        ->setLabel('Dit is een label')
-                        ->setLanguage(
-                            (new Language())
-                                ->setI18n('en_EN')
-                        )
-                        ->setCreated(new \DateTime())
-                        ->setUpdated(new \DateTime())
-                )
-                ->addFieldTranslation(
-                    (new FieldTranslation())
-                        ->setName('Een veldnaam')
-                        ->setLabel('Dit is een label')
-                        ->setLanguage(
-                            (new Language())
-                                ->setI18n('nl_NL')
-                        )
-                        ->setCreated(new \DateTime())
-                        ->setUpdated(new \DateTime())
-                )
+                ->setName('Some field name')
+                ->setLabel('Dit is een label')
                 ->setCreated(new \DateTime())
                 ->setUpdated(new \DateTime()),
             (new Field())
@@ -200,28 +170,8 @@ YML;
                         ->setName('TextArea')
                 )
                 ->setConfig(Yaml::parse(file_get_contents($this->file)))
-                ->addFieldTranslation(
-                    (new FieldTranslation())
-                        ->setName('Some other field name')
-                        ->setLabel('Dit is een label')
-                        ->setLanguage(
-                            (new Language())
-                                ->setI18n('en_EN')
-                        )
-                        ->setCreated(new \DateTime())
-                        ->setUpdated(new \DateTime())
-                )
-                ->addFieldTranslation(
-                    (new FieldTranslation())
-                        ->setName('Een andere veldnaam')
-                        ->setLabel('Dit is een label')
-                        ->setLanguage(
-                            (new Language())
-                                ->setI18n('nl_NL')
-                        )
-                        ->setCreated(new \DateTime())
-                        ->setUpdated(new \DateTime())
-                )
+                ->setName('Some other field name')
+                ->setLabel('Dit is nog een label')
                 ->setCreated(new \DateTime())
                 ->setUpdated(new \DateTime()),
             (new Field())
@@ -232,28 +182,8 @@ YML;
                         ->setName('TextArea')
                 )
                 ->setConfig(Yaml::parse(file_get_contents($this->file)))
-                ->addFieldTranslation(
-                    (new FieldTranslation())
-                        ->setName('And another field name')
-                        ->setLabel('Dit is een label')
-                        ->setLanguage(
-                            (new Language())
-                                ->setI18n('en_EN')
-                        )
-                        ->setCreated(new \DateTime())
-                        ->setUpdated(new \DateTime())
-                )
-                ->addFieldTranslation(
-                    (new FieldTranslation())
-                        ->setName('En nog een veldnaam')
-                        ->setLabel('Dit is een label')
-                        ->setLanguage(
-                            (new Language())
-                                ->setI18n('nl_NL')
-                        )
-                        ->setCreated(new \DateTime())
-                        ->setUpdated(new \DateTime())
-                )
+                ->setName('And another field name')
+                ->setLabel('En nog een label')
                 ->setCreated(new \DateTime())
                 ->setUpdated(new \DateTime()),
         ];

@@ -28,15 +28,11 @@ final class FieldTest extends TestCase
     /** @var Collection|Mockery\MockInterface */
     private $sections;
 
-    /** @var Collection|Mockery\MockInterface */
-    private $fieldTranslations;
-
     public function setUp()
     {
         $this->sections = Mockery::mock(Collection::class);
-        $this->fieldTranslations = Mockery::mock(Collection::class);
 
-        $this->field = new Field($this->sections, $this->fieldTranslations);
+        $this->field = new Field($this->sections);
     }
 
     /**
@@ -84,29 +80,6 @@ final class FieldTest extends TestCase
 
         $this->assertEquals($this->field, $field);
         $this->assertEquals($this->field->getHandle(), $handle);
-    }
-
-    /**
-     * @test
-     * @covers ::addFieldTranslation
-     * @covers ::getFieldTranslations
-     * @covers ::removeFieldTranslation
-     */
-    public function it_should_add_get_and_remove_a_field_translation()
-    {
-        $translation = (new FieldTranslation())
-            ->setName('No name is to blame')
-            ->setLanguage((new Language())->setI18n('nl_NL'));
-
-        $field = new Field();
-        $field->setHandle('noNameIsToBlame');
-        $field->addFieldTranslation($translation);
-
-        $this->assertSame($translation, $field->getFieldTranslations()->get(0));
-
-        $field->removeFieldTranslation($translation);
-
-        $this->assertNull($field->getFieldTranslations()->get(0));
     }
 
     /**
@@ -178,72 +151,6 @@ final class FieldTest extends TestCase
         $this->sections->shouldReceive('removeElement')->never();
 
         $this->field->removeSection($section);
-    }
-
-    /**
-     * @test
-     * @covers ::addFieldTranslation
-     */
-    public function it_should_add_a_field_translation()
-    {
-        $translation = Mockery::mock(FieldTranslationInterface::class);
-
-        $translation->shouldReceive('setField')->once()->with($this->field);
-        $this->fieldTranslations->shouldReceive('contains')->once()->with($translation)->andReturn(false);
-        $this->fieldTranslations->shouldReceive('add')->once()->with($translation);
-
-        $this->field->addFieldTranslation($translation);
-    }
-
-    /**
-     * @test
-     * @covers ::addFieldTranslation
-     */
-    public function it_should_do_nothing_when_adding_an_existing_translation()
-    {
-        $translation = Mockery::mock(FieldTranslationInterface::class);
-
-        $translation->shouldReceive('setField')->once()->with($this->field);
-        $this->fieldTranslations->shouldReceive('contains')->once()->with($translation)->andReturn(false);
-        $this->fieldTranslations->shouldReceive('contains')->once()->with($translation)->andReturn(true);
-        $this->fieldTranslations->shouldReceive('add')->once()->with($translation);
-
-        $this->field->addFieldTranslation($translation);
-        $this->field->addFieldTranslation($translation);
-    }
-
-    /**
-     * @test
-     * @covers ::removeFieldTranslation
-     */
-    public function it_should_remove_a_field_translation()
-    {
-        $translation = Mockery::mock(FieldTranslationInterface::class);
-
-        $translation->shouldReceive('setField')->once()->with($this->field);
-        $translation->shouldReceive('removeField')->once()->with($this->field);
-        $this->fieldTranslations->shouldReceive('contains')->once()->with($translation)->andReturn(false);
-        $this->fieldTranslations->shouldReceive('contains')->once()->with($translation)->andReturn(true);
-        $this->fieldTranslations->shouldReceive('add')->once()->with($translation);
-        $this->fieldTranslations->shouldReceive('removeElement')->once()->with($translation);
-
-        $this->field->addFieldTranslation($translation);
-        $this->field->removeFieldTranslation($translation);
-    }
-
-
-    /**
-     * @test
-     * @covers ::removeFieldTranslation
-     */
-    public function it_should_do_nothing_when_removing_non_existing_field_translation()
-    {
-        $translation = Mockery::mock(FieldTranslationInterface::class);
-
-        $this->fieldTranslations->shouldReceive('contains')->once()->with($translation)->andReturn(false);
-        $this->fieldTranslations->shouldReceive('removeElement')->never();
-
-        $this->field->removeFieldTranslation($translation);
     }
 
     /**

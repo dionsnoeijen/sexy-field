@@ -11,9 +11,7 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Yaml\Yaml;
 use Tardigrades\Entity\Field;
-use Tardigrades\Entity\FieldTranslation;
 use Tardigrades\Entity\FieldType;
-use Tardigrades\Entity\Language;
 use Tardigrades\SectionField\Service\FieldManagerInterface;
 
 /**
@@ -99,31 +97,11 @@ YML;
             (new Field())
                 ->setId(1)
                 ->setHandle('someName')
+                ->setName('Some name')
+                ->setLabel('Some label')
                 ->setFieldType(
                     (new FieldType())
                         ->setName('TextInput')
-                )
-                ->addFieldTranslation(
-                    (new FieldTranslation())
-                        ->setName('Some field name')
-                        ->setLabel('Dit is een label')
-                        ->setLanguage(
-                            (new Language())
-                                ->setI18n('en_EN')
-                        )
-                        ->setCreated(new \DateTime())
-                        ->setUpdated(new \DateTime())
-                )
-                ->addFieldTranslation(
-                    (new FieldTranslation())
-                        ->setName('Een veldnaam')
-                        ->setLabel('Dit is een label')
-                        ->setLanguage(
-                            (new Language())
-                                ->setI18n('nl_NL')
-                        )
-                        ->setCreated(new \DateTime())
-                        ->setUpdated(new \DateTime())
                 )
                 ->setConfig(Yaml::parse(file_get_contents($this->file)))
                 ->setCreated(new \DateTime())
@@ -131,31 +109,11 @@ YML;
             (new Field())
                 ->setId(2)
                 ->setHandle('someOtherName')
+                ->setName('Some other name')
+                ->setLabel('Some other label')
                 ->setFieldType(
                     (new FieldType())
                         ->setName('TextArea')
-                )
-                ->addFieldTranslation(
-                    (new FieldTranslation())
-                        ->setName('Some other field name')
-                        ->setLabel('Dit is een label')
-                        ->setLanguage(
-                            (new Language())
-                                ->setI18n('en_EN')
-                        )
-                        ->setCreated(new \DateTime())
-                        ->setUpdated(new \DateTime())
-                )
-                ->addFieldTranslation(
-                    (new FieldTranslation())
-                        ->setName('Een andere veldnaam')
-                        ->setLabel('Dit is een label')
-                        ->setLanguage(
-                            (new Language())
-                                ->setI18n('nl_NL')
-                        )
-                        ->setCreated(new \DateTime())
-                        ->setUpdated(new \DateTime())
                 )
                 ->setConfig([
                     'field' => [
@@ -169,31 +127,11 @@ YML;
             (new Field())
                 ->setId(3)
                 ->setHandle('andAnotherName')
+                ->setName('And another name')
+                ->setLabel('And another label')
                 ->setFieldType(
                     (new FieldType())
                         ->setName('TextArea')
-                )
-                ->addFieldTranslation(
-                    (new FieldTranslation())
-                        ->setName('And another field name')
-                        ->setLabel('Dit is een label')
-                        ->setLanguage(
-                            (new Language())
-                                ->setI18n('en_EN')
-                        )
-                        ->setCreated(new \DateTime())
-                        ->setUpdated(new \DateTime())
-                )
-                ->addFieldTranslation(
-                    (new FieldTranslation())
-                        ->setName('En nog een veldnaam')
-                        ->setLabel('Dit is een label')
-                        ->setLanguage(
-                            (new Language())
-                                ->setI18n('nl_NL')
-                        )
-                        ->setCreated(new \DateTime())
-                        ->setUpdated(new \DateTime())
                 )
                 ->setConfig(Yaml::parse(file_get_contents($this->file)))
                 ->setCreated(new \DateTime())

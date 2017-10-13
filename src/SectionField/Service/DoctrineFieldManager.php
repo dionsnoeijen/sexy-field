@@ -16,7 +16,6 @@ namespace Tardigrades\SectionField\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use Tardigrades\Entity\Field;
 use Tardigrades\Entity\FieldInterface;
-use Tardigrades\Entity\FieldTranslation;
 use Tardigrades\SectionField\ValueObject\FieldConfig;
 use Tardigrades\SectionField\ValueObject\Handle;
 use Tardigrades\SectionField\ValueObject\Id;
@@ -107,64 +106,13 @@ class DoctrineFieldManager implements FieldManagerInterface
         return $field;
     }
 
-    private function getTranslations(FieldConfig $fieldConfig, Field $field): array
-    {
-        $fieldConfig = $fieldConfig->toArray();
-
-        $translations = [];
-        foreach ($fieldConfig['field']['name'] as $name) {
-            $translations[key($name)] = [
-                'name' => array_shift($name)
-            ];
-        }
-        foreach ($fieldConfig['field']['label'] as $label) {
-            $lang = key($label);
-            if (is_array($translations[$lang])) {
-                $translations[$lang]['label'] = array_shift($label);
-            } else {
-                $translations[$lang] = [
-                    'label' => array_shift($label)
-                ];
-            }
-        }
-
-        $languages = $this->languageManager->readByI18ns(array_keys($translations));
-        $fieldTranslations = [];
-        $existingFieldTranslations = $field->getFieldTranslations();
-        /** @var FieldTranslation $existingFieldTranslation */
-        foreach ($existingFieldTranslations as $existingFieldTranslation) {
-            $existing[(string) $existingFieldTranslation->getLanguage()->getI18n()] = $existingFieldTranslation;
-        }
-
-        foreach ($translations as $lang => $translation) {
-            if (isset($languages[$lang])) {
-                if (isset($existing[$lang])) {
-                    $fieldTranslation = $existing[$lang];
-                } else {
-                    $fieldTranslation = new FieldTranslation();
-                }
-                $fieldTranslation->setName($translation['name']);
-                $fieldTranslation->setLabel($translation['label']);
-                $fieldTranslation->setLanguage($languages[$lang]);
-                $fieldTranslations[] = $fieldTranslation;
-            }
-        }
-
-        return $fieldTranslations;
-    }
-
     private function setUpFieldByConfig(FieldConfig $fieldConfig, FieldInterface $field): FieldInterface
     {
-        $translations = $this->getTranslations($fieldConfig, $field);
-
         $fieldConfig = $fieldConfig->toArray();
         $fieldType = $this->fieldTypeManager->readByType(Type::fromString($fieldConfig['field']['type']));
 
-        foreach ($translations as $translation) {
-            $field->removeFieldTranslation($translation);
-            $field->addFieldTranslation($translation);
-        }
-
+        $field->setName($fieldConfig['field']['name']);
+        $field->setLabel($fieldConfig['field']['label']);
         $field->setHandle($fieldConfig['field']['handle']);
         $field->setFieldType($fieldType);
         $field->setConfig($fieldConfig);

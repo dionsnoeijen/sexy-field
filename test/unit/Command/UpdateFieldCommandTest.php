@@ -155,28 +155,8 @@ YML;
                     (new FieldType())
                         ->setName('TextInput')
                 )
-                ->addFieldTranslation(
-                    (new FieldTranslation())
-                        ->setName('Some field name')
-                        ->setLabel('A field label')
-                        ->setLanguage(
-                            (new Language())
-                                ->setI18n('en_EN')
-                        )
-                        ->setCreated(new \DateTime())
-                        ->setUpdated(new \DateTime())
-                )
-                ->addFieldTranslation(
-                    (new FieldTranslation())
-                        ->setName('Een veldnaam')
-                        ->setLabel('A field label')
-                        ->setLanguage(
-                            (new Language())
-                                ->setI18n('nl_NL')
-                        )
-                        ->setCreated(new \DateTime())
-                        ->setUpdated(new \DateTime())
-                )
+                ->setName('Some field name')
+                ->setLabel('A field label')
                 ->setConfig(Yaml::parse(file_get_contents($this->file)))
                 ->setCreated(new \DateTime())
                 ->setUpdated(new \DateTime()),
@@ -187,28 +167,8 @@ YML;
                     (new FieldType())
                         ->setName('TextArea')
                 )
-                ->addFieldTranslation(
-                    (new FieldTranslation())
-                        ->setName('Some other field name')
-                        ->setLabel('A field label')
-                        ->setLanguage(
-                            (new Language())
-                                ->setI18n('en_EN')
-                        )
-                        ->setCreated(new \DateTime())
-                        ->setUpdated(new \DateTime())
-                )
-                ->addFieldTranslation(
-                    (new FieldTranslation())
-                        ->setName('Een andere veldnaam')
-                        ->setLabel('A field label')
-                        ->setLanguage(
-                            (new Language())
-                                ->setI18n('nl_NL')
-                        )
-                        ->setCreated(new \DateTime())
-                        ->setUpdated(new \DateTime())
-                )
+                ->setName('Some other field name')
+                ->setLabel('A field label')
                 ->setConfig(Yaml::parse(file_get_contents($this->file)))
                 ->setCreated(new \DateTime())
                 ->setUpdated(new \DateTime()),
@@ -219,28 +179,8 @@ YML;
                     (new FieldType())
                         ->setName('TextArea')
                 )
-                ->addFieldTranslation(
-                    (new FieldTranslation())
-                        ->setName('And another field name')
-                        ->setLabel('A field label')
-                        ->setLanguage(
-                            (new Language())
-                                ->setI18n('en_EN')
-                        )
-                        ->setCreated(new \DateTime())
-                        ->setUpdated(new \DateTime())
-                )
-                ->addFieldTranslation(
-                    (new FieldTranslation())
-                        ->setName('En nog een veldnaam')
-                        ->setLabel('A field label')
-                        ->setLanguage(
-                            (new Language())
-                                ->setI18n('nl_NL')
-                        )
-                        ->setCreated(new \DateTime())
-                        ->setUpdated(new \DateTime())
-                )
+                ->setName('And another field name')
+                ->setLabel('A field label')
                 ->setConfig(Yaml::parse(file_get_contents($this->file)))
                 ->setCreated(new \DateTime())
                 ->setUpdated(new \DateTime()),

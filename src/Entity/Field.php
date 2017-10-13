@@ -19,12 +19,20 @@ use Tardigrades\SectionField\ValueObject\Created;
 use Tardigrades\SectionField\ValueObject\FieldConfig;
 use Tardigrades\SectionField\ValueObject\Handle;
 use Tardigrades\SectionField\ValueObject\Id;
+use Tardigrades\SectionField\ValueObject\Label;
+use Tardigrades\SectionField\ValueObject\Name;
 use Tardigrades\SectionField\ValueObject\Updated;
 
 class Field implements FieldInterface
 {
     /** @var int */
     protected $id;
+
+    /** @var string */
+    protected $name;
+
+    /** @var string */
+    protected $label;
 
     /** @var string */
     protected $handle;
@@ -34,9 +42,6 @@ class Field implements FieldInterface
 
     /** @var FieldType */
     protected $fieldType;
-
-    /** @var Collection */
-    protected $fieldTranslations;
 
     /** @var array */
     protected $config;
@@ -48,11 +53,9 @@ class Field implements FieldInterface
     protected $updated;
 
     public function __construct(
-        Collection $sections = null,
-        Collection $translations = null
+        Collection $sections = null
     ) {
         $this->sections = is_null($sections) ? new ArrayCollection() : $sections;
-        $this->fieldTranslations = is_null($translations) ? new ArrayCollection() : $translations;
     }
 
     public function setId(int $id): FieldInterface
@@ -70,6 +73,30 @@ class Field implements FieldInterface
     public function setHandle(string $handle): FieldInterface
     {
         $this->handle = $handle;
+
+        return $this;
+    }
+
+    public function getName(): Name
+    {
+        return Name::fromString($this->name);
+    }
+
+    public function setName(string $name): FieldInterface
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getLabel(): Label
+    {
+        return Label::fromString($this->label);
+    }
+
+    public function setLabel(string $label): FieldInterface
+    {
+        $this->label = $label;
 
         return $this;
     }
@@ -109,33 +136,6 @@ class Field implements FieldInterface
     public function getSections(): Collection
     {
         return $this->sections;
-    }
-
-    public function getFieldTranslations(): Collection
-    {
-        return $this->fieldTranslations;
-    }
-
-    public function addFieldTranslation(FieldTranslationInterface $fieldTranslation): FieldInterface
-    {
-        if ($this->fieldTranslations->contains($fieldTranslation)) {
-            return $this;
-        }
-        $this->fieldTranslations->add($fieldTranslation);
-        $fieldTranslation->setField($this);
-
-        return $this;
-    }
-
-    public function removeFieldTranslation(FieldTranslationInterface $fieldTranslation): FieldInterface
-    {
-        if (!$this->fieldTranslations->contains($fieldTranslation)) {
-            return $this;
-        }
-        $this->fieldTranslations->removeElement($fieldTranslation);
-        $fieldTranslation->removeField($this);
-
-        return $this;
     }
 
     public function setFieldType(FieldTypeInterface $fieldType): FieldInterface

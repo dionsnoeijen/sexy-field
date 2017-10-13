@@ -10,9 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
 use Tardigrades\Entity\Field;
-use Tardigrades\Entity\FieldTranslation;
 use Tardigrades\Entity\FieldType;
-use Tardigrades\Entity\Language;
 use Tardigrades\SectionField\ValueObject\FieldConfig;
 use Tardigrades\SectionField\ValueObject\Id;
 
@@ -203,15 +201,9 @@ final class FieldManagerTest extends TestCase
     {
         $fieldConfig = FieldConfig::fromArray([
             'field' => [
-                'name' => [
-                    ['en_EN' => 'This is my name'],
-                    ['nl_NL' => 'Dit is mijn naam']
-                ],
+                'name' => 'This is my name',
                 'handle' => 'thisIsMyName',
-                'label' => [
-                    ['en_EN' => 'I also have a label'],
-                    ['nl_NL' => 'Ik heb ook een label']
-                ],
+                'label' => 'I also have a label',
                 'type' => 'TextArea'
             ]
         ]);
@@ -220,10 +212,6 @@ final class FieldManagerTest extends TestCase
 
         $this->fieldTypeManager
             ->shouldReceive('readByType')
-            ->once();
-
-        $this->languageManager
-            ->shouldReceive('readByI18ns')
             ->once();
 
         $this->entityManager
@@ -251,15 +239,9 @@ final class FieldManagerTest extends TestCase
     {
         $fieldConfig = FieldConfig::fromArray([
             'field' => [
-                'name' => [
-                    ['en_EN' => 'This is my other name'],
-                    ['nl_NL' => 'Dit is mijn andere naam']
-                ],
+                'name' => 'This is my other name',
                 'handle' => 'thisIsMyOtherName',
-                'label' => [
-                    ['en_EN' => 'I also have al label'],
-                    ['nl_NL' => 'Ik heb ook een label']
-                ],
+                'label' => 'I also have a label',
                 'type' => 'TextArea'
             ]
         ]);
@@ -268,10 +250,6 @@ final class FieldManagerTest extends TestCase
 
         $this->fieldTypeManager
             ->shouldReceive('readByType')
-            ->once();
-
-        $this->languageManager
-            ->shouldReceive('readByI18ns')
             ->once();
 
         $this->entityManager
@@ -347,14 +325,8 @@ final class FieldManagerTest extends TestCase
 
         $field->setFieldType($fieldType);
         $field->setHandle('thisIsMyName');
-        $field->addFieldTranslation(
-            (new FieldTranslation())
-                ->setName('I have a name')
-                ->setLanguage(
-                    (new Language())
-                        ->setI18n('en_EN')
-                )
-        );
+        $field->setName('I have a name');
+        $field->setLabel('I also have a label');
 
         return $field;
     }

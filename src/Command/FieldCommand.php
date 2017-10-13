@@ -19,7 +19,6 @@ use Symfony\Component\Console\Helper\TableCell;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Output\OutputInterface;
 use Tardigrades\Entity\Field;
-use Tardigrades\Entity\FieldTranslation;
 
 abstract class FieldCommand extends Command
 {
@@ -33,24 +32,10 @@ abstract class FieldCommand extends Command
         $rows = [];
         /** @var Field $field */
         foreach ($fields as $field) {
-            $translations = $field->getFieldTranslations();
-            /** @var FieldTranslation $translation */
-            $names = '';
-            $labels = '';
-            foreach ($translations as $translation) {
-                $names .=
-                    $translation->getLanguage()->getI18n() . ' ' .
-                    $translation->getName() . "\n";
-
-                $labels .=
-                    $translation->getLanguage()->getI18n() . ' ' .
-                    $translation->getLabel() . "\n";
-            }
-
             $rows[] = [
                 $field->getId(),
-                $names,
-                $labels,
+                $field->getName(),
+                $field->getLabel(),
                 $field->getHandle(),
                 $field->getFieldType()->getType(),
                 (string) $field->getConfig(),
