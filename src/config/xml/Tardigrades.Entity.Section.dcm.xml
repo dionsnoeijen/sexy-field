@@ -26,11 +26,13 @@
             target-entity="Tardigrades\Entity\Application"
             field="applications"
             mapped-by="sections"
+            inversed-by="applications"
         />
         <many-to-many
             field="fields"
             target-entity="Tardigrades\Entity\Field"
             mapped-by="sections"
+            inversed-by="fields"
         />
 
     </entity>
