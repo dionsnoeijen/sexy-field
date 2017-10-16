@@ -18,18 +18,18 @@ use Tardigrades\SectionField\Service\ReadOptionsInterface;
 use Tardigrades\SectionField\ValueObject\SectionConfig;
 
 /**
- * Class SectionDataRead
+ * Class SectionBeforeRead
  *
- * After reading data from the readers, this event gives the opportunity to:
+ * Before the readers are called this event gives the opportunity to:
  * - prefill the data array iterator
  * - use / manipulate read options
  * - use / manipulate section config
  *
  * @package Tardigrades\SectionField\Event
  */
-class SectionDataRead extends Event
+class SectionBeforeRead extends Event
 {
-    const NAME = 'section.data.read';
+    const NAME = 'section.before.read';
 
     /** @var \ArrayIterator */
     private $data;
@@ -40,12 +40,6 @@ class SectionDataRead extends Event
     /** @var SectionConfig */
     private $sectionConfig;
 
-    /**
-     * SectionDataRead constructor.
-     * @param \ArrayIterator $data
-     * @param ReadOptionsInterface $readOptions
-     * @param SectionConfig $sectionConfig
-     */
     public function __construct(\ArrayIterator $data, ReadOptionsInterface $readOptions, SectionConfig $sectionConfig)
     {
         $this->data = $data;
@@ -54,30 +48,18 @@ class SectionDataRead extends Event
     }
 
     /**
-     * The array containing data from the readers
-     *
      * @return \ArrayIterator
      */
-    public function getData(): \ArrayIterator
+    public function getData()
     {
         return $this->data;
     }
 
-    /**
-     * Get read options for manipulation or other actions
-     *
-     * @return ReadOptionsInterface
-     */
     public function getReadOptions(): ReadOptionsInterface
     {
         return $this->readOptions;
     }
 
-    /**
-     * Get section config for manipulation or other actions
-     *
-     * @return SectionConfig
-     */
     public function getSectionConfig(): SectionConfig
     {
         return $this->sectionConfig;
