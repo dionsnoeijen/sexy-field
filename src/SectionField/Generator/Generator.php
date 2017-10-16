@@ -137,7 +137,7 @@ abstract class Generator implements GeneratorInterface
         $fieldTypeDirectory = explode('/', $fieldType->directory());
         foreach($fieldTypeDirectory as $key=>$segment) {
             if ($segment === 'vendor') {
-                $selector = $key + 1;
+                $selector = $key + 2;
                 $fieldTypeDirectory[$selector] = $supportingDirectory;
                 break;
             }
