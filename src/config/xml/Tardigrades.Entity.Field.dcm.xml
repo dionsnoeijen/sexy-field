@@ -1,7 +1,7 @@
 <doctrine-mapping
-    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+        xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                     http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd"
 >
     <entity name="Tardigrades\Entity\Field" table="field">
@@ -22,19 +22,23 @@
             field="fieldType"
             inversed-by="fields"
         />
-        <many-to-many field="sections" target-entity="Tardigrades\Entity\Section">
+        <many-to-many
+            field="sections"
+            target-entity="Tardigrades\Entity\Section"
+            inversed-by="fields"
+        >
             <join-table name="section_field">
                 <join-columns>
                     <join-column
-                        name="field_id"
-                        referenced-column-name="id"
+                            name="field_id"
+                            referenced-column-name="id"
                     />
                 </join-columns>
                 <inverse-join-columns>
                     <join-column
-                        name="section_id"
-                        referenced-column-name="id"
-                        unique="false"
+                            name="section_id"
+                            referenced-column-name="id"
+                            unique="false"
                     />
                 </inverse-join-columns>
             </join-table>

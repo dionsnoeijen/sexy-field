@@ -18,7 +18,11 @@
         <field name="handle" type="string" unique="true" />
         <field name="created" type="datetime" />
         <field name="updated" type="datetime" />
-        <many-to-many field="languages" target-entity="Tardigrades\Entity\Language">
+        <many-to-many
+            field="languages"
+            target-entity="Tardigrades\Entity\Language"
+            inversed-by="applications"
+        >
             <join-table name="language_application">
                 <join-columns>
                     <join-column
@@ -35,7 +39,11 @@
                 </inverse-join-columns>
             </join-table>
         </many-to-many>
-        <many-to-many field="sections" target-entity="Tardigrades\Entity\Section">
+        <many-to-many
+            field="sections"
+            target-entity="Tardigrades\Entity\Section"
+            inversed-by="applications"
+        >
             <join-table name="section_application">
                 <join-columns>
                     <join-column
