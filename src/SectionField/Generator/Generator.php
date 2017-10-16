@@ -75,6 +75,9 @@ abstract class Generator implements GeneratorInterface
                     ]
                 ];
 
+                $oppositeRelationshipField->setName($fieldHandle);
+                $oppositeRelationshipField->setHandle($fieldHandle);
+
                 if (!empty($relationship['relationship-type'])) {
                     $config['field']['relationship-type'] = $relationship['relationship-type'];
                 }

@@ -19,7 +19,6 @@ use Tardigrades\SectionField\ValueObject\Created;
 use Tardigrades\SectionField\ValueObject\FieldConfig;
 use Tardigrades\SectionField\ValueObject\Handle;
 use Tardigrades\SectionField\ValueObject\Id;
-use Tardigrades\SectionField\ValueObject\Label;
 use Tardigrades\SectionField\ValueObject\Name;
 use Tardigrades\SectionField\ValueObject\Updated;
 
@@ -55,21 +54,14 @@ class Field implements FieldInterface
         $this->sections = is_null($sections) ? new ArrayCollection() : $sections;
     }
 
-    public function setId(int $id): FieldInterface
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setHandle(string $handle): FieldInterface
+    public function setId(int $id): FieldInterface
     {
-        $this->handle = $handle;
+        $this->id = $id;
 
         return $this;
     }
@@ -82,6 +74,13 @@ class Field implements FieldInterface
     public function setName(string $name): FieldInterface
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function setHandle(string $handle): FieldInterface
+    {
+        $this->handle = $handle;
 
         return $this;
     }
