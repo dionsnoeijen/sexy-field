@@ -13,7 +13,9 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\Service;
 
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Tardigrades\Helper\FullyQualifiedClassNameConverter;
+use Tardigrades\SectionField\Event\SectionDataRead;
 use Tardigrades\SectionField\ValueObject\SectionConfig;
 
 class ReadSection implements ReadSectionInterface
@@ -24,12 +26,17 @@ class ReadSection implements ReadSectionInterface
     /** @var SectionManagerInterface */
     private $sectionManager;
 
+    /** @var EventDispatcherInterface */
+    private $dispatcher;
+
     public function __construct(
         array $readers,
-        SectionManagerInterface $sectionManager
+        SectionManagerInterface $sectionManager,
+        EventDispatcherInterface $dispatcher
     ) {
         $this->readers = $readers;
         $this->sectionManager = $sectionManager;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -65,6 +72,11 @@ class ReadSection implements ReadSectionInterface
                 $sectionData->append($entry);
             }
         }
+
+        $this->dispatcher->dispatch(
+            SectionDataRead::NAME,
+            new SectionDataRead($sectionData)
+        );
 
         return $sectionData;
     }

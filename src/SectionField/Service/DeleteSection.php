@@ -13,18 +13,25 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\Service;
 
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Tardigrades\SectionField\Event\SectionEntryDeleted;
+
 class DeleteSection implements DeleteSectionInterface
 {
     /** @var array */
     private $deleters;
 
+    /** @var EventDispatcherInterface */
+    private $dispatcher;
+
     /**
      * DeleteSection constructor.
      * @param array $deleters
      */
-    public function __construct(array $deleters)
+    public function __construct(array $deleters, EventDispatcherInterface $dispatcher)
     {
         $this->deleters = $deleters;
+        $this->dispatcher = $dispatcher;
     }
 
     public function delete($sectionEntryEntity): bool
@@ -36,6 +43,12 @@ class DeleteSection implements DeleteSectionInterface
                 $success = false;
             }
         }
+
+        $this->dispatcher->dispatch(
+            SectionEntryDeleted::NAME,
+            new SectionEntryDeleted($sectionEntryEntity, $success)
+        );
+
         return $success;
     }
 }

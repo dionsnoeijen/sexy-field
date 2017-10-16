@@ -21,6 +21,7 @@
     "symfony/inflector": "^3.3.2",
     "symfony/yaml": "^3.3.2",
     "symfony/config": "^3.3.2",
+    "symfony/event-dispatcher": "^3.3.2",
     "beberlei/assert": "2.6.5",
     "twig/twig": "^2.0",
     "twig/extensions": "^1.5.1",
