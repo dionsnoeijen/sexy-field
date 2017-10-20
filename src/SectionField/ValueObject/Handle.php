@@ -22,8 +22,6 @@ final class Handle
 
     private function __construct(string $handle)
     {
-        Assertion::string($handle, 'The handle must be a strijg');
-
         $this->handle = $handle;
     }
 
