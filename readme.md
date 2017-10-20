@@ -5,4 +5,4 @@ Many web applications share the common trait that it collects input from users. 
 
 > This tool aims to operate on a very high level, but simplicity should never prevail over flexibility.
 
-[Doccumentation: Getting started](http://sexy-field.tardigrades.nl/documentation/2017/10/12/getting-started.html)
+[Documentation: Getting started](http://sexy-field.tardigrades.nl/documentation/2017/10/12/getting-started.html)
