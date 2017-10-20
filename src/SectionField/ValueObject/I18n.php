@@ -22,8 +22,6 @@ final class I18n
 
     private function __construct(string $i18n)
     {
-        Assertion::string($i18n, 'The i18n must be a string');
-
         $this->i18n = $i18n;
     }
 
