@@ -3,6 +3,6 @@
 
 Many web applications share the common trait that it collects input from users. This input is transformed to output in various ways. The section field system aims to simplify and speed up the process of creating basic application functionality so focus can be on the awesome stuff.
 
-> This tool aims to be very high level, but simplicity should never prevail over flexibility.
+> This tool aims to operate on a very high level, but simplicity should never prevail over flexibility.
 
 [Doccumentation: Getting started](http://sexy-field.tardigrades.nl/documentation/2017/10/12/getting-started.html)
