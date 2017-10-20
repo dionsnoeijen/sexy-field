@@ -64,9 +64,9 @@ class Application implements ApplicationInterface
         return $this->id;
     }
 
-    public function getIdValueObject(): Id
+    public function getIdValueObject(): ?Id
     {
-        return Id::fromInt($this->id);
+        return $this->id ? Id::fromInt($this->id) : null;
     }
 
     public function setName(string $name): ApplicationInterface
@@ -150,14 +150,14 @@ class Application implements ApplicationInterface
         return $this;
     }
 
-    public function getCreated(): \DateTime
+    public function getCreated(): ?\DateTime
     {
-        return $this->created;
+        return $this->created ?: null;
     }
 
-    public function getCreatedValueObject(): Created
+    public function getCreatedValueObject(): ?Created
     {
-        return Created::fromDateTime($this->created);
+        return $this->created ? Created::fromDateTime($this->created) : null;
     }
 
     public function setUpdated(\DateTime $updated): ApplicationInterface
@@ -167,14 +167,14 @@ class Application implements ApplicationInterface
         return $this;
     }
 
-    public function getUpdated(): \DateTime
+    public function getUpdated(): ?\DateTime
     {
-        return $this->updated;
+        return $this->updated ?: null;
     }
 
-    public function getUpdatedValueObject(): Updated
+    public function getUpdatedValueObject(): ?Updated
     {
-        return Updated::fromDateTime($this->updated);
+        return $this->updated ? Updated::fromDateTime($this->updated) : null;
     }
 
     public function onPrePersist(): void

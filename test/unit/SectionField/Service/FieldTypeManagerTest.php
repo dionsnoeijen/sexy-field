@@ -239,4 +239,82 @@ final class FieldTypeManagerTest extends TestCase
 
         $this->assertEquals($fieldType, $returnedFieldType);
     }
+
+    /**
+     * @test
+     * @covers ::readByType
+     */
+    public function it_should_throw_exception_when_nothing_is_found_when_reading_by_type()
+    {
+        $this->expectException(FieldTypeNotFoundException::class);
+
+        $fieldTypeRepository = Mockery::mock(ObjectRepository::class);
+
+        $type = Type::fromString('TextArea');
+
+        $this->entityManager
+            ->shouldReceive('getRepository')
+            ->once()
+            ->with(FieldType::class)
+            ->andReturn($fieldTypeRepository);
+
+        $fieldTypeRepository
+            ->shouldReceive('findOneBy')
+            ->with(['type' => (string) $type]);
+
+        $this->fieldTypeManager->readByType($type);
+    }
+
+    /**
+     * @test
+     * @covers ::readByFullyQualifiedClassName
+     */
+    public function it_should_read_by_fully_qualified_class_name()
+    {
+        $fieldTypeRepository = Mockery::mock(ObjectRepository::class);
+
+        $fqcn = FullyQualifiedClassName::fromString('My\\Namespace\\Classname');
+
+        $fieldType = new FieldType();
+
+        $this->entityManager
+            ->shouldReceive('getRepository')
+            ->once()
+            ->with(FieldType::class)
+            ->andReturn($fieldTypeRepository);
+
+        $fieldTypeRepository
+            ->shouldReceive('findOneBy')
+            ->with(['fullyQualifiedClassName' => (string) $fqcn])
+            ->andReturn($fieldType);
+
+        $returnedFieldType = $this->fieldTypeManager->readByFullyQualifiedClassName($fqcn);
+
+        $this->assertEquals($fieldType, $returnedFieldType);
+    }
+
+    /**
+     * @test
+     * @covers ::readByFullyQualifiedClassName
+     */
+    public function it_should_throw_exception_when_nothing_found_when_reading_by_fully_qualified_class_name()
+    {
+        $this->expectException(FieldTypeNotFoundException::class);
+
+        $fieldTypeRepository = Mockery::mock(ObjectRepository::class);
+
+        $fqcn = FullyQualifiedClassName::fromString('My\\Namespace\\Classname');
+
+        $this->entityManager
+            ->shouldReceive('getRepository')
+            ->once()
+            ->with(FieldType::class)
+            ->andReturn($fieldTypeRepository);
+
+        $fieldTypeRepository
+            ->shouldReceive('findOneBy')
+            ->with(['fullyQualifiedClassName' => (string) $fqcn]);
+
+        $this->fieldTypeManager->readByFullyQualifiedClassName($fqcn);
+    }
 }

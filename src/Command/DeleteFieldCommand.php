@@ -82,7 +82,7 @@ class DeleteFieldCommand extends FieldCommand
     private function getField(InputInterface $input, OutputInterface $output): Field
     {
         $question = new Question('<question>What record do you want to delete?</question> (#id): ');
-        $question->setValidator(function($id) use ($output) {
+        $question->setValidator(function ($id) use ($output) {
             try {
                 return $this->fieldManager->read(Id::fromInt((int) $id));
             } catch (FieldNotFoundException $exception) {

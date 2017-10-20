@@ -17,6 +17,14 @@ class ArrayConverter
 {
     private static $value = '';
 
+    /**
+     * This helper converts a (part of) a configuration array to a string
+     * The config elements will be listed and shown when using a console command
+     *
+     * @param array $array
+     * @param int $level
+     * @return string
+     */
     public static function recursive(array $array, int $level = 1): string
     {
         if ($level === 1) {
@@ -25,14 +33,12 @@ class ArrayConverter
 
         foreach ($array as $key => $value) {
             if (is_array($value)) {
-                self::$value .=
-                    str_repeat('-', $level - 1) .
+                self::$value .= str_repeat('-', $level - 1) .
                     (($level - 1 > 0) ? ' ' : '') .
                     $key . ':' . PHP_EOL;
                 self::recursive($value, $level + 1);
             } else {
-                self::$value .=
-                    str_repeat('-', $level - 1) .
+                self::$value .= str_repeat('-', $level - 1) .
                     (($level - 1 > 0) ? ' ' : '') .
                     $key . ':' . $value . PHP_EOL;
             }

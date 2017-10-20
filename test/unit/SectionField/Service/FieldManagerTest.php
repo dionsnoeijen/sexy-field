@@ -12,6 +12,7 @@ use PHPUnit\Framework\TestCase;
 use Tardigrades\Entity\Field;
 use Tardigrades\Entity\FieldType;
 use Tardigrades\SectionField\ValueObject\FieldConfig;
+use Tardigrades\SectionField\ValueObject\Handle;
 use Tardigrades\SectionField\ValueObject\Id;
 
 /**
@@ -258,6 +259,58 @@ final class FieldManagerTest extends TestCase
 
         $this->assertSame($field, $returnedField);
         $this->assertEquals($returnedField->getHandle(), $field->getHandle());
+    }
+
+    /**
+     * @test
+     * @covers ::readByHandle
+     */
+    public function it_should_read_field_by_handle()
+    {
+        $handle = Handle::fromString('fieldHandle');
+        $fieldRepository = Mockery::mock(ObjectRepository::class);
+
+        $this->entityManager
+            ->shouldReceive('getRepository')
+            ->once()
+            ->with(Field::class)
+            ->andReturn($fieldRepository);
+
+        $fieldRepository->shouldReceive('findBy')
+            ->once()
+            ->with(['handle' => $handle])
+            ->andReturn([new Field()]);
+
+        $fields = $this->fieldManager->readByHandle($handle);
+
+        $this->assertSame(count($fields), 1);
+    }
+
+    /**
+     * @test
+     * @covers ::readByHandle
+     */
+    public function it_should_throw_exception_when_field_not_found_when_read_by_handle()
+    {
+        $this->expectException(FieldNotFoundException::class);
+
+        $handle = Handle::fromString('fieldHandle');
+        $fieldRepository = Mockery::mock(ObjectRepository::class);
+
+        $this->entityManager
+            ->shouldReceive('getRepository')
+            ->once()
+            ->with(Field::class)
+            ->andReturn($fieldRepository);
+
+        $fieldRepository->shouldReceive('findBy')
+            ->once()
+            ->with(['handle' => $handle])
+            ->andReturn([]);
+
+        $fields = $this->fieldManager->readByHandle($handle);
+
+        $this->assertSame(count($fields), 0);
     }
 
     /**
