@@ -22,7 +22,6 @@ final class Id
 
     private function __construct(int $id)
     {
-        Assertion::integerish($id, 'For the id we need an integer');
         $this->id = $id;
     }
 
@@ -38,7 +37,7 @@ final class Id
 
     public function getId(): int
     {
-        return $this->toInt();
+        return $this->id;
     }
 
     public static function fromInt(int $id): self
