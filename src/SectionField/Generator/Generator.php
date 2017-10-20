@@ -138,7 +138,7 @@ abstract class Generator implements GeneratorInterface
         $fieldType = $this->container->get((string) $field->getFieldType()->getFullyQualifiedClassName());
 
         $fieldTypeDirectory = explode('/', $fieldType->directory());
-        foreach($fieldTypeDirectory as $key=>$segment) {
+        foreach ($fieldTypeDirectory as $key => $segment) {
             if ($segment === 'vendor') {
                 $selector = $key + 2;
                 $fieldTypeDirectory[$selector] = $supportingDirectory;

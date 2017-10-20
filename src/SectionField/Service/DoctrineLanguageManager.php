@@ -152,9 +152,7 @@ class DoctrineLanguageManager implements LanguageManagerInterface
 
         foreach ($languageConfig['language'] as $configLanguage) {
             if (!in_array($configLanguage, $existingCheck)) {
-                $this->entityManager->persist(
-                    (new Language())->setI18n($configLanguage)
-                );
+                $this->entityManager->persist((new Language())->setI18n($configLanguage));
             }
         }
     }

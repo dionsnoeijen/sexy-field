@@ -14,6 +14,7 @@ declare (strict_types = 1);
 namespace Tardigrades\SectionField\Event;
 
 use Symfony\Component\EventDispatcher\Event;
+use Tardigrades\SectionField\Generator\CommonSectionInterface;
 
 /**
  * Class SectionEntryDeleted
@@ -26,12 +27,13 @@ class SectionEntryDeleted extends Event
 {
     const NAME = 'section.entry.deleted';
 
+    /** @var  CommonSectionInterface */
     protected $entry;
 
     /** @var bool */
     protected $success;
 
-    public function __construct($entry, bool $success)
+    public function __construct(CommonSectionInterface $entry, bool $success)
     {
         $this->entry = $entry;
         $this->success = $success;
@@ -40,9 +42,9 @@ class SectionEntryDeleted extends Event
     /**
      * This entry was deleted.
      *
-     * @return mixed
+     * @return CommonSectionInterface
      */
-    public function getEntry()
+    public function getEntry(): CommonSectionInterface
     {
         return $this->entry;
     }

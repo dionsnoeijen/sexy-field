@@ -9,6 +9,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
 use Tardigrades\Entity\Application;
+use Tardigrades\Entity\Language;
+use Tardigrades\SectionField\ValueObject\ApplicationConfig;
 use Tardigrades\SectionField\ValueObject\Id;
 use Tardigrades\SectionField\Service\LanguageManagerInterface;
 
@@ -189,5 +191,76 @@ final class ApplicationManagerTest extends TestCase
         $this->entityManager->shouldReceive('flush')->once();
 
         $this->applicationManager->delete($application);
+    }
+
+    /**
+     * @test
+     * @covers ::createByConfig
+     */
+    public function it_should_create_by_config()
+    {
+        $configArray = [
+            'application' => [
+                'name' => 'Name',
+                'handle' => 'handle',
+                'languages' => ['en_EN']
+            ]
+        ];
+
+        $config = ApplicationConfig::fromArray($configArray);
+
+        $language = new Language();
+        $entity = new Application();
+        $entity->setName('Name');
+        $entity->setHandle('handle');
+        $entity->addLanguage($language);
+
+        $this->entityManager
+            ->shouldReceive('persist')
+            ->once()
+            ->andReturn($entity);
+
+        $this->languageManager->shouldReceive('readByI18ns')->once()->andReturn([$language]);
+
+        $this->entityManager
+            ->shouldReceive('flush')
+            ->once();
+
+        $receive = $this->applicationManager->createByConfig($config);
+
+        $this->assertEquals($entity, $receive);
+    }
+
+    /**
+     * @test
+     * @covers ::updateByConfig
+     */
+    public function it_should_update_by_config()
+    {
+        $configArray = [
+            'application' => [
+                'name' => 'Name2',
+                'handle' => 'handle2',
+                'languages' => ['en_EN']
+            ]
+        ];
+
+        $config = ApplicationConfig::fromArray($configArray);
+
+        $language = new Language();
+        $entity = new Application();
+        $entity->setName('Name');
+        $entity->setHandle('handle');
+        $entity->addLanguage($language);
+
+        $this->languageManager->shouldReceive('readByI18ns')->once()->andReturn([$language]);
+
+        $this->entityManager
+            ->shouldReceive('flush')
+            ->once();
+
+        $receive = $this->applicationManager->updateByConfig($config, $entity);
+
+        $this->assertEquals($entity, $receive);
     }
 }
