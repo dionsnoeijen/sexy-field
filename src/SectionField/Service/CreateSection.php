@@ -17,6 +17,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Tardigrades\SectionField\Event\SectionEntryBeforeCreate;
 use Tardigrades\SectionField\Event\SectionEntryCreated;
 
+/**
+ * {@inheritdoc}
+ */
 class CreateSection implements CreateSectionInterface
 {
     /** @var array */
@@ -32,17 +35,7 @@ class CreateSection implements CreateSectionInterface
     }
 
     /**
-     * This save method goes through all available writers to store a section record
-     *
-     * Before doing that, it will dispatch a SectionEntryBeforeCreate event, so one might
-     * change the entity before it's stored.
-     *
-     * Afterwards, another event is dispatched, letting all listeners know that writing is done.
-     *
-     * There is a success true, boolean. This will be enhanced later on.
-     *
-     * @param $sectionEntryEntity
-     * @param array|null $jitRelationships
+     * {@inheritdoc}
      */
     public function save($sectionEntryEntity, array $jitRelationships = null)
     {
