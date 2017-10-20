@@ -15,6 +15,8 @@ class IdTest extends TestCase
     /**
      * @test
      * @covers ::fromInt
+     * @covers ::getId
+     * @covers ::toInt
      */
     public function it_should_create_from_int()
     {
