@@ -34,8 +34,8 @@ interface CreateSectionInterface
      *
      * There is a success true, boolean. This will be enhanced later on.
      *
-     * @param $sectionEntryEntity
+     * @param CommonSectionInterface $sectionEntryEntity
      * @param array|null $jitRelationships
      */
-    public function save(CommonSectionInterface $data, array $jitRelationships = null);
+    public function save(CommonSectionInterface $sectionEntryEntity, array $jitRelationships = null);
 }
