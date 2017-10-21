@@ -11,6 +11,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Tardigrades\Entity\Application;
 use Tardigrades\Entity\Language;
+use Tardigrades\SectionField\Event\SectionEntryDeleted;
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
 use Tardigrades\SectionField\ValueObject\ApplicationConfig;
 use Tardigrades\SectionField\ValueObject\Id;
@@ -52,7 +53,22 @@ final class DeleteSectionTest extends TestCase
     {
         $entry = Mockery::mock(CommonSectionInterface::class);
         $this->deleters[0]->shouldReceive('delete')->once()->andReturn(true);
-        $this->dispatcher->shouldReceive('dispatch')->once();
+        $this->dispatcher
+            ->shouldReceive('dispatch')
+            ->once()
+            ->withArgs([
+                'section.entry.deleted',
+                Mockery::on(
+                    function ($sectionEntryDeleted) {
+                        if (!$sectionEntryDeleted instanceof SectionEntryDeleted) {
+                            return false;
+                        }
+
+                        $this->assertTrue($sectionEntryDeleted->getSuccess());
+                        return true;
+                    }
+                )
+            ]);
 
         $result = $this->deleteSection->delete($entry);
         $this->assertTrue($result);
@@ -66,7 +82,22 @@ final class DeleteSectionTest extends TestCase
     {
         $entry = Mockery::mock(CommonSectionInterface::class);
         $this->deleters[0]->shouldReceive('delete')->once()->andReturn(false);
-        $this->dispatcher->shouldReceive('dispatch')->once();
+        $this->dispatcher
+            ->shouldReceive('dispatch')
+            ->once()
+            ->withArgs([
+                'section.entry.deleted',
+                Mockery::on(
+                    function ($sectionEntryDeleted) {
+                        if (!$sectionEntryDeleted instanceof SectionEntryDeleted) {
+                            return false;
+                        }
+
+                        $this->assertFalse($sectionEntryDeleted->getSuccess());
+                        return true;
+                    }
+                )
+            ]);
 
         $result = $this->deleteSection->delete($entry);
         $this->assertFalse($result);

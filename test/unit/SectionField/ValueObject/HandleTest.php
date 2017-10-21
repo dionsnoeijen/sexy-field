@@ -20,6 +20,6 @@ class HandleTest extends TestCase
     {
         $thing = Handle::fromString('wheeeeeee! handles!');
         $this->assertInstanceOf(Handle::class, $thing);
-        $this->assertSame((string)$thing,'wheeeeeee! handles!');
+        $this->assertSame((string)$thing, 'wheeeeeee! handles!');
     }
 }

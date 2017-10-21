@@ -20,6 +20,6 @@ class I18nTest extends TestCase
     {
         $thing = I18n::fromString('I am something which I do not really understand');
         $this->assertInstanceOf(I18n::class, $thing);
-        $this->assertSame((string)$thing,'I am something which I do not really understand');
+        $this->assertSame((string)$thing, 'I am something which I do not really understand');
     }
 }
