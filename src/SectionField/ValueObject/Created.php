@@ -25,7 +25,7 @@ final class Created
 
     public function __toString(): string
     {
-        return $this->created->format(\DateTime::ATOM);
+        return $this->created->format('Y-m-d\TH:i');
     }
 
     public function getDateTime(): \DateTime

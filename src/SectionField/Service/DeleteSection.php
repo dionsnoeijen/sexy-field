@@ -17,6 +17,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Tardigrades\SectionField\Event\SectionEntryDeleted;
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
 
+/**
+ * {@inheritdoc}
+ */
 class DeleteSection implements DeleteSectionInterface
 {
     /** @var DeleteSectionInterface[] */
@@ -25,16 +28,15 @@ class DeleteSection implements DeleteSectionInterface
     /** @var EventDispatcherInterface */
     private $dispatcher;
 
-    /**
-     * DeleteSection constructor.
-     * @param array $deleters
-     */
     public function __construct(array $deleters, EventDispatcherInterface $dispatcher)
     {
         $this->deleters = $deleters;
         $this->dispatcher = $dispatcher;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function delete(CommonSectionInterface $sectionEntryEntity): bool
     {
         $success = true;

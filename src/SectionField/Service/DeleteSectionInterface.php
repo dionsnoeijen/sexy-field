@@ -15,7 +15,20 @@ namespace Tardigrades\SectionField\Service;
 
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
 
+/**
+ * Class DeleteSection
+ *
+ * This is the entry point for deleting a section entry entity.
+ *
+ * @package Tardigrades\SectionField\Service
+ */
 interface DeleteSectionInterface
 {
+    /**
+     * This delete method loops through all deleters, so this section entry entity is deleted throughout all sources.
+     *
+     * @param CommonSectionInterface $sectionEntryEntity
+     * @return bool
+     */
     public function delete(CommonSectionInterface $sectionEntryEntity): bool;
 }

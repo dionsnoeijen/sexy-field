@@ -27,12 +27,12 @@ final class Before
 
     public function __toString()
     {
-        return $this->dateTime->format(\DateTime::ATOM);
+        return $this->dateTime->format('Y-m-d\TH:i');
     }
 
     public static function fromString(string $dateTime): self
     {
-        $format = 'D-m-y h:i';
+        $format = 'Y-m-d\TH:i';
         Assertion::date($dateTime, $format);
         $dateTime = \DateTimeImmutable::createFromFormat($format, $dateTime);
 

@@ -15,7 +15,27 @@ namespace Tardigrades\SectionField\Service;
 
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
 
+/**
+ * Class CreateSection
+ *
+ * The entry point for saving a section entry entity.
+ *
+ * @package Tardigrades\SectionField\Service
+ */
 interface CreateSectionInterface
 {
+    /**
+     * This save method goes through all available writers to store a section record
+     *
+     * Before doing that, it will dispatch a SectionEntryBeforeCreate event, so one might
+     * change the entity before it's stored.
+     *
+     * Afterwards, another event is dispatched, letting all listeners know that writing is done.
+     *
+     * There is a success true, boolean. This will be enhanced later on.
+     *
+     * @param $sectionEntryEntity
+     * @param array|null $jitRelationships
+     */
     public function save(CommonSectionInterface $data, array $jitRelationships = null);
 }
