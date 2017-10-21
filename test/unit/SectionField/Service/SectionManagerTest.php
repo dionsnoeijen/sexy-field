@@ -3,12 +3,19 @@ declare (strict_types=1);
 
 namespace Tardigrades\SectionField\Service;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManagerInterface;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use Tardigrades\Entity\Field;
+use Tardigrades\Entity\FieldType;
 use Tardigrades\Entity\Section;
 use PHPUnit\Framework\TestCase;
+use Tardigrades\SectionField\ValueObject\FieldConfig;
+use Tardigrades\SectionField\ValueObject\FullyQualifiedClassName;
+use Tardigrades\SectionField\ValueObject\Handle;
 use Tardigrades\SectionField\ValueObject\Id;
 use Tardigrades\SectionField\ValueObject\SectionConfig;
 
@@ -212,11 +219,9 @@ final class SectionManagerTest extends TestCase
                 ],
                 'slug' => ['title'],
                 'default' => 'title',
-                'namespace' => 'My\Namespace'
+                'namespace' => 'My\\Namespace'
             ]
         ]);
-
-        $section = $this->givenASection();
 
         $this->fieldManager
             ->shouldReceive('readByHandles')
@@ -232,13 +237,15 @@ final class SectionManagerTest extends TestCase
 
         $createdSection = $this->sectionManager->createByConfig($sectionConfig);
 
-        $this->assertEquals($createdSection->getName(), $section->getName());
-        $this->assertEquals($createdSection->getHandle(), $section->getHandle());
+        $this->assertSame('Super Section', (string) $createdSection->getName());
+        $this->assertSame('superSection', (string) $createdSection->getHandle());
+        $this->assertEquals($sectionConfig, $createdSection->getConfig());
     }
 
     /**
      * @test
      * @covers ::updateByConfig
+     * @covers ::getHighestVersion
      */
     public function it_should_update_by_config()
     {
@@ -257,11 +264,24 @@ final class SectionManagerTest extends TestCase
             ]
         ]);
 
-        $section = $this->givenASection();
+        $section = $this->givenASectionWithName('One');
+
+        $this->assertSame('Section One', (string) $section->getName());
+        $this->assertSame('sectionOne', (string) $section->getHandle());
+
+        $fields = [new Field()];
 
         $this->fieldManager
             ->shouldReceive('readByHandles')
-            ->once();
+            ->once()
+            ->andReturn($fields);
+
+        $query = $this->givenAQueryWithResult([0 => [0, 1]]);
+
+        $this->entityManager
+            ->shouldReceive('createQuery')
+            ->once()
+            ->andReturn($query);
 
         $this->entityManager
             ->shouldReceive('persist')
@@ -271,20 +291,298 @@ final class SectionManagerTest extends TestCase
             ->shouldReceive('flush')
             ->once();
 
-        $createdSection = $this->sectionManager->updateByConfig($sectionConfig, $section);
+        $this->sectionHistoryManager
+            ->shouldReceive('create')
+            ->once();
+
+        $createdSection = $this->sectionManager->updateByConfig($sectionConfig, $section, true);
 
         $this->assertSame($section, $createdSection);
-        $this->assertEquals($createdSection->getName(), $section->getName());
-        $this->assertEquals($createdSection->getHandle(), $section->getHandle());
+        $this->assertSame('Super Section', (string) $createdSection->getName());
+        $this->assertSame('superSection', (string) $createdSection->getHandle());
+        $this->assertSame(2, $section->getVersion()->toInt());
+        $this->assertEquals(new ArrayCollection($fields), $section->getFields());
     }
 
-    private function givenASection()
+
+    /**
+     * @test
+     * @covers ::restoreFromHistory
+     * @covers ::getHighestVersion
+     * @covers ::readByHandle
+     * @covers ::readByHandles
+     */
+    public function it_should_restore_from_history()
     {
+        $fields = [new Field()];
+
+        $oldSection = $this->givenASectionWithName('Old');
+        $oldSection->addField($fields[0]);
+
+        $activeSection = $this->givenASectionWithName('Active');
+        $activeSection->addField($fields[0]);
+
+        $query = $this->givenAQueryWithResult(null);
+
+        $fieldRepository = Mockery::mock(ObjectRepository::class);
+        $this->entityManager
+            ->shouldReceive('getRepository')
+            ->once()
+            ->with(Section::class)
+            ->andReturn($fieldRepository);
+
+        $this->entityManager
+            ->shouldReceive('createQuery')
+            ->once()
+            ->andReturn($query);
+
+        $fieldRepository
+            ->shouldReceive('findBy')
+            ->once()
+            ->andReturn([$activeSection]);
+
+        $this->fieldManager
+            ->shouldReceive('readByHandles')
+            ->once()
+            ->andReturn($fields);
+
+        $this->entityManager
+            ->shouldReceive('persist')
+            ->twice();
+
+        $this->entityManager
+            ->shouldReceive('flush')
+            ->twice();
+
+        $this->sectionHistoryManager
+            ->shouldReceive('create')
+            ->once();
+
+        $restoredSection = $this->sectionManager->restoreFromHistory($oldSection);
+
+        $this->assertSame($activeSection, $restoredSection);
+        //different object because contents of active session is overwritten by old session
+        $this->assertNotSame($oldSection, $restoredSection);
+        $this->assertEquals($oldSection, $restoredSection);
+        $this->assertSame('Section Old', (string) $restoredSection->getName());
+        $this->assertEquals(new ArrayCollection($fields), $restoredSection->getFields());
+    }
+
+    /**
+     * @test
+     * @covers ::readByHandle
+     */
+    public function it_should_throw_exception_when_section_not_found_when_reading_by_handle()
+    {
+        $this->expectException(SectionNotFoundException::class);
+
+        $handle = Handle::fromString('handleOne');
+
+        $sectionRepository = Mockery::mock(ObjectRepository::class);
+        $sectionRepository
+            ->shouldReceive('findBy')
+            ->once()
+            ->andReturn(null);
+
+        $this->entityManager
+            ->shouldReceive('getRepository')
+            ->once()
+            ->with(Section::class)
+            ->andReturn($sectionRepository);
+
+        $this->sectionManager->readByHandle($handle);
+    }
+
+    /**
+     * @test
+     * @covers ::readByHandles
+     */
+    public function it_should_read_by_handles()
+    {
+        $handle1 = Handle::fromString('handleOne');
+        $handle2 = Handle::fromString('handleTwo');
+        $handles = [$handle1, $handle2];
+
+        $section = $this->givenASectionWithName('Name');
+        $query = $this->givenAQueryWithResult([$section]);
+
+        $this->entityManager
+            ->shouldReceive('createQuery')
+            ->once()
+            ->andReturn($query);
+
+        $result = $this->sectionManager->readByHandles($handles);
+        $this->assertSame($section, $result[0]);
+    }
+
+    /**
+     * @test
+     * @covers ::readByHandles
+     */
+    public function it_should_throw_exception_when_section_not_found_when_reading_by_handles()
+    {
+        $this->expectException(SectionNotFoundException::class);
+        $handle1 = Handle::fromString('handleOne');
+        $handle2 = Handle::fromString('handleTwo');
+        $handles = [$handle1, $handle2];
+
+        $query = $this->givenAQueryWithResult(null);
+
+        $this->entityManager
+            ->shouldReceive('createQuery')
+            ->once()
+            ->andReturn($query);
+
+        $this->sectionManager->readByHandles($handles);
+    }
+
+    /**
+     * @test
+     * @covers ::getRelationshipsOfAll
+     */
+    public function it_should_get_relationships_of_all()
+    {
+        $sectionOne = $this->givenASectionWithName('One');
+        $sectionTwo = $this->givenASectionWithName('Two');
+
+        $fieldOne = $this->givenAFieldWithNameKindAndTo('One', 'many-to-one', 'Two');
+        $fieldTwo = $this->givenAFieldWithNameKindAndTo('Two', 'one-to-many', 'One');
+
+        $sectionRepository = Mockery::mock(ObjectRepository::class);
+        $sectionRepository
+            ->shouldReceive('findAll')
+            ->once()
+            ->andReturn([$sectionOne, $sectionTwo]);
+
+        $this->entityManager
+            ->shouldReceive('getRepository')
+            ->once()
+            ->with(Section::class)
+            ->andReturn($sectionRepository);
+
+        $this->fieldManager
+            ->shouldReceive('readByHandles')
+            ->once()
+            ->with(['title', 'body', 'created'])
+            ->andReturn([$fieldOne]);
+
+        $this->fieldManager
+            ->shouldReceive('readByHandles')
+            ->once()
+            ->with(['title', 'body', 'created'])
+            ->andReturn([$fieldTwo]);
+
+        $result = $this->sectionManager->getRelationshipsOfAll();
+
+        $expected = [
+            'sectionOne' => [
+                'fieldOne' => [
+                    'kind' => 'many-to-one',
+                    'to' => 'sectionTwo',
+                    'from' => 'sectionOne',
+                    'fullyQualifiedClassName' => FullyQualifiedClassName::fromString(
+                        '\\My\\Namespace\\FieldTypeClassOne'
+                    ),
+                    'relationship-type' => 'unidirectional'
+                ],
+                'fieldTwo-opposite' => [
+                    'kind' => 'many-to-one',
+                    'to' => 'sectionTwo',
+                    'fullyQualifiedClassName' => FullyQualifiedClassName::fromString(
+                        '\\My\\Namespace\\FieldTypeClassTwo'
+                    ),
+                    'relationship-type' => 'bidirectional'
+                ]
+            ],
+            'sectionTwo' => [
+                'fieldTwo' => [
+                    'kind' => 'one-to-many',
+                    'to' => 'sectionOne',
+                    'from' => 'sectionTwo',
+                    'fullyQualifiedClassName' => FullyQualifiedClassName::fromString(
+                        '\\My\\Namespace\\FieldTypeClassTwo'
+                    ),
+                    'relationship-type' => 'unidirectional'
+                ],
+                'fieldOne-opposite' => [
+                    'kind' => 'one-to-many',
+                    'to' => 'sectionOne',
+                    'fullyQualifiedClassName' => FullyQualifiedClassName::fromString(
+                        '\\My\\Namespace\\FieldTypeClassOne'
+                    ),
+                    'relationship-type' => 'bidirectional'
+                ]
+            ]
+        ];
+
+        $this->assertEquals($expected, $result);
+    }
+
+    private function givenASectionWithName($name)
+    {
+        $sectionName = 'Section ' . $name;
+        $sectionHandle = 'section' . $name;
+
+        $sectionConfig = SectionConfig::fromArray([
+            'section' => [
+                'name' => $sectionName,
+                'handle' => $sectionHandle,
+                'fields' => [
+                    'title',
+                    'body',
+                    'created'
+                ],
+                'slug' => ['title'],
+                'default' => 'title',
+                'namespace' => 'My\\Namespace'
+            ]
+        ]);
+
         $section = new Section();
 
-        $section->setName('Super Section');
-        $section->setHandle('superSection');
+        $section->setName($sectionName);
+        $section->setHandle($sectionHandle);
+        $section->setConfig($sectionConfig->toArray());
+        $section->setVersion(1);
+        $section->setCreated(new \DateTime());
+        $section->setUpdated(new \DateTime());
 
         return $section;
+    }
+
+    private function givenAQueryWithResult($result)
+    {
+        $query = Mockery::mock(AbstractQuery::class);
+        $query->shouldReceive('getResult')
+            ->once()
+            ->andReturn($result);
+
+        return $query;
+    }
+
+    private function givenAFieldWithNameKindAndTo($name, $kind, $to)
+    {
+        $fieldName = 'Field ' . $name;
+        $fieldHandle = 'field' . $name;
+        $field = new Field();
+        $field->setName($fieldName);
+        $field->setHandle($fieldHandle);
+
+        $fieldConfig = FieldConfig::fromArray([
+            'field' => [
+                'name' => $fieldName,
+                'handle' => $fieldHandle,
+                'kind' => $kind,
+                'to' => 'section' . $to,
+                'relationship-type' => 'unidirectional'
+            ]
+        ]);
+
+        $field->setConfig($fieldConfig->toArray());
+        $fieldType = new FieldType();
+        $fieldType->setFullyQualifiedClassName('\\My\\Namespace\\FieldTypeClass' . $name);
+        $field->setFieldType($fieldType);
+
+        return $field;
     }
 }
