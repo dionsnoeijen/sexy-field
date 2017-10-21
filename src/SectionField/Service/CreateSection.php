@@ -16,10 +16,11 @@ namespace Tardigrades\SectionField\Service;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Tardigrades\SectionField\Event\SectionEntryBeforeCreate;
 use Tardigrades\SectionField\Event\SectionEntryCreated;
+use Tardigrades\SectionField\Generator\CommonSectionInterface;
 
 class CreateSection implements CreateSectionInterface
 {
-    /** @var array */
+    /** @var CreateSectionInterface[] */
     private $creators;
 
     /** @var EventDispatcherInterface */
@@ -44,7 +45,7 @@ class CreateSection implements CreateSectionInterface
      * @param $sectionEntryEntity
      * @param array|null $jitRelationships
      */
-    public function save($sectionEntryEntity, array $jitRelationships = null)
+    public function save(CommonSectionInterface $sectionEntryEntity, array $jitRelationships = null)
     {
         $this->dispatcher->dispatch(
             SectionEntryBeforeCreate::NAME,

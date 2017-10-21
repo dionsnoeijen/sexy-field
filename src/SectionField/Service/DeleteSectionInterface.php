@@ -13,7 +13,9 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\Service;
 
+use Tardigrades\SectionField\Generator\CommonSectionInterface;
+
 interface DeleteSectionInterface
 {
-    public function delete($sectionEntryEntity): bool;
+    public function delete(CommonSectionInterface $sectionEntryEntity): bool;
 }
