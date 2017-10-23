@@ -13,8 +13,6 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\ValueObject;
 
-use Assert\Assertion;
-
 final class Name
 {
     /**
@@ -24,8 +22,6 @@ final class Name
 
     private function __construct(string $name)
     {
-        Assertion::string($name, 'The name has to be a string');
-
         $this->name = $name;
     }
 

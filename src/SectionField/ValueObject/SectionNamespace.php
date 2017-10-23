@@ -13,8 +13,6 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\ValueObject;
 
-use Assert\Assertion;
-
 final class SectionNamespace
 {
     /** @var string */
@@ -22,8 +20,6 @@ final class SectionNamespace
 
     private function __construct(string $sectionNamespace)
     {
-        Assertion::string($sectionNamespace, 'The name has to be a string');
-
         $this->sectionNamespace = $sectionNamespace;
     }
 

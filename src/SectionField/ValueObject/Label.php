@@ -13,8 +13,6 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\ValueObject;
 
-use Assert\Assertion;
-
 final class Label
 {
     /** @var string */
@@ -22,8 +20,6 @@ final class Label
 
     private function __construct(string $label)
     {
-        Assertion::string($label, 'The label has to be a string');
-
         $this->label = $label;
     }
 

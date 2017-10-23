@@ -23,8 +23,6 @@ final class FieldTypeGeneratorConfig
 
     private function __construct(array $config)
     {
-        Assertion::isArray($config, 'Generator config not defined');
-
         $this->config = $config;
     }
 

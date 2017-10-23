@@ -13,7 +13,6 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\ValueObject;
 
-use Assert\Assertion;
 use Tardigrades\Helper\ArrayConverter;
 
 final class FieldMetadata
@@ -23,8 +22,6 @@ final class FieldMetadata
 
     private function __construct(array $metadata)
     {
-        Assertion::isArray($metadata, 'Metadata not defined');
-
         $this->metadata = $metadata;
     }
 
