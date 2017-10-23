@@ -22,8 +22,6 @@ final class FullyQualifiedClassName
 
     private function __construct(string $fullyQualifiedClassName)
     {
-        Assertion::string($fullyQualifiedClassName, 'The fully qualified class name needs to be a string');
-
         $this->fullyQualifiedClassName = str_replace('.', '\\', $fullyQualifiedClassName);
     }
 

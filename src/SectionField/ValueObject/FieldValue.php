@@ -25,8 +25,6 @@ final class FieldValue
 
     private function __construct(Handle $handle, string $value)
     {
-        Assertion::string($value, 'The value is supposed to be a string');
-
         $this->handle = $handle;
         $this->value = $value;
     }
