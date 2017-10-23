@@ -29,12 +29,12 @@ final class JitRelationship
         $this->id = $id;
     }
 
-    public function getFullyQualifiedClassName()
+    public function getFullyQualifiedClassName(): FullyQualifiedClassName
     {
         return $this->fullyQualifiedClassName;
     }
 
-    public function getId()
+    public function getId(): Id
     {
         return $this->id;
     }
