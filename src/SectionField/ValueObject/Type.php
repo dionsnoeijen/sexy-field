@@ -24,8 +24,6 @@ final class Type
 
     private function __construct(string $type)
     {
-        Assertion::string($type, 'The type has to be a string');
-
         $this->type = $type;
     }
 
