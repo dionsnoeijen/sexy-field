@@ -17,7 +17,7 @@ class OffsetTest extends TestCase
      * @covers ::fromInt
      * @covers ::toInt
      */
-    public function it_creates_from_string()
+    public function it_creates_from_integer()
     {
         $offset = Offset::fromInt(120000);
         $this->assertInstanceOf(Offset::class, $offset);
