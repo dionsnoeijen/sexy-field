@@ -13,8 +13,6 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\ValueObject;
 
-use Assert\Assertion;
-
 final class Offset
 {
     /** @var int */
@@ -22,8 +20,6 @@ final class Offset
 
     private function __construct(int $offset)
     {
-        Assertion::integer($offset, 'Offset is supposed to be an integer');
-
         $this->offset = $offset;
     }
 

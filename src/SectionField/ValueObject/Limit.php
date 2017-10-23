@@ -13,8 +13,6 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\ValueObject;
 
-use Assert\Assertion;
-
 final class Limit
 {
     /** @var int */
@@ -22,8 +20,6 @@ final class Limit
 
     private function __construct(int $limit)
     {
-        Assertion::integer($limit, 'Limit is supposed to be an integer');
-
         $this->limit = $limit;
     }
 

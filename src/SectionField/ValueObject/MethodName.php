@@ -13,7 +13,6 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\ValueObject;
 
-use Assert\Assertion;
 use Doctrine\Common\Util\Inflector;
 
 final class MethodName
@@ -25,8 +24,6 @@ final class MethodName
 
     private function __construct(string $methodName)
     {
-        Assertion::string($methodName, 'The MethodName has to be a string');
-
         $this->methodName = $methodName;
     }
 
