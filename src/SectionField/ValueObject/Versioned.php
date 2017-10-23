@@ -25,7 +25,7 @@ final class Versioned
 
     public function __toString(): string
     {
-        return $this->versioned->format(\DateTime::ATOM);
+        return $this->versioned->format('Y-m-d\TH:i');
     }
 
     public function getDateTime(): \DateTime
