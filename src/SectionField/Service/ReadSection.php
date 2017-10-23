@@ -55,11 +55,7 @@ class ReadSection implements ReadSectionInterface
 
         $this->dispatcher->dispatch(
             SectionBeforeRead::NAME,
-            new SectionBeforeRead(
-                $sectionData,
-                $options,
-                $sectionConfig
-            )
+            new SectionBeforeRead($sectionData, $options, $sectionConfig)
         );
 
         if ($sectionConfig === null) {
@@ -85,11 +81,7 @@ class ReadSection implements ReadSectionInterface
 
         $this->dispatcher->dispatch(
             SectionDataRead::NAME,
-            new SectionDataRead(
-                $sectionData,
-                $options,
-                $sectionConfig
-            )
+            new SectionDataRead($sectionData, $options, $sectionConfig)
         );
 
         return $sectionData;

@@ -41,7 +41,9 @@ class BeforeTest extends TestCase
     public function it_should_throw_exception_if_string_not_in_good_format()
     {
         $this->expectException('InvalidArgumentException');
-        $this->expectExceptionMessage('Date "two thousand-Dec-12T12:01" is invalid or does not match format "Y-m-d\TH:i"');
+        $this->expectExceptionMessage(
+            'Date "two thousand-Dec-12T12:01" is invalid or does not match format "Y-m-d\TH:i"'
+        );
         Before::fromString('two thousand-Dec-12T12:01');
     }
 }

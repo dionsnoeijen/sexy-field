@@ -216,7 +216,7 @@ class ReadOptions implements ReadOptionsInterface
     {
         try {
             Assertion::keyIsset($this->options, ReadOptions::LOCALE, 'No locale defined');
-            Assertion::string($this->options, 'Locale is supposed to be a string like en_EN');
+            Assertion::string($this->options[ReadOptions::LOCALE], 'Locale is supposed to be a string like en_EN');
         } catch (InvalidArgumentException $exception) {
             return null;
         }
@@ -228,7 +228,7 @@ class ReadOptions implements ReadOptionsInterface
     {
         try {
             Assertion::keyIsset($this->options, ReadOptions::SEARCH, 'No search defined');
-            Assertion::string($this->options, 'The search term must be a string');
+            Assertion::string($this->options[ReadOptions::SEARCH], 'The search term must be a string');
         } catch (InvalidArgumentException $exception) {
             return null;
         }
@@ -236,7 +236,7 @@ class ReadOptions implements ReadOptionsInterface
         return Search::fromString($this->options[ReadOptions::SEARCH]);
     }
 
-    public function getField(): ? array
+    public function getField(): ?array
     {
         try {
             Assertion::isArray(
@@ -273,7 +273,11 @@ class ReadOptions implements ReadOptionsInterface
 
             // There is a possibility the read options are built with a value object,
             // added flexibility by converting value to slug first.
-            Assertion::string((string) $this->options[ReadOptions::SLUG], 'The slug is supposed to be a string');
+            if ($this->options[ReadOptions::SLUG] instanceof Slug) {
+                Assertion::string((string) $this->options[ReadOptions::SLUG], 'The slug is supposed to be a string');
+            } else {
+                Assertion::string($this->options[ReadOptions::SLUG], 'The slug is supposed to be a string');
+            }
 
             return Slug::fromString((string) $this->options[ReadOptions::SLUG]);
         } catch (InvalidArgumentException $exception) {

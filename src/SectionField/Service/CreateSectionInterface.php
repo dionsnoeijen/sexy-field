@@ -13,6 +13,8 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\Service;
 
+use Tardigrades\SectionField\Generator\CommonSectionInterface;
+
 /**
  * Class CreateSection
  *
@@ -32,8 +34,8 @@ interface CreateSectionInterface
      *
      * There is a success true, boolean. This will be enhanced later on.
      *
-     * @param $sectionEntryEntity
+     * @param CommonSectionInterface $sectionEntryEntity
      * @param array|null $jitRelationships
      */
-    public function save($data, array $jitRelationships = null);
+    public function save(CommonSectionInterface $sectionEntryEntity, array $jitRelationships = null);
 }

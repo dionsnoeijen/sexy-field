@@ -22,7 +22,7 @@ class IdTest extends TestCase
     {
         $thing = Id::fromInt(1234567890);
         $this->assertInstanceOf(Id::class, $thing);
-        $this->assertSame($thing->toInt(),1234567890);
-        $this->assertSame($thing->getId(),1234567890);
+        $this->assertSame($thing->toInt(), 1234567890);
+        $this->assertSame($thing->getId(), 1234567890);
     }
 }
