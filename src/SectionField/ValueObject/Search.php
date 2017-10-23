@@ -13,8 +13,6 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\ValueObject;
 
-use Assert\Assertion;
-
 final class Search
 {
     /** @var string */
@@ -22,8 +20,6 @@ final class Search
 
     private function __construct(string $search)
     {
-        Assertion::string($search, 'Search is supposed to be passed as a string');
-
         $this->search = $search;
     }
 

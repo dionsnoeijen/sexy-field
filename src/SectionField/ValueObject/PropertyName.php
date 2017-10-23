@@ -13,7 +13,6 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\ValueObject;
 
-use Assert\Assertion;
 use Tardigrades\Helper\StringConverter;
 
 final class PropertyName
@@ -25,8 +24,6 @@ final class PropertyName
 
     private function __construct(string $propertyName)
     {
-        Assertion::string($propertyName, 'The MethodName has to be a string');
-
         $this->propertyName = $propertyName;
     }
 
