@@ -25,4 +25,16 @@ class CreatedTest extends TestCase
         $this->assertEquals($created->getDateTime(), new \DateTime('2000-11-11T12:12:12'));
         $this->assertEquals((string) $created, '2000-11-11T12:12');
     }
+
+    /**
+     * @test
+     * @covers ::__toString
+     */
+    public function it_should_be_treatable_as_a_string()
+    {
+        $datetime = new \DateTime();
+        $afterString = (string)Created::fromDateTime($datetime);
+        $dateString = $datetime->format('Y-m-d\TH:i');
+        $this->assertSame($afterString, $dateString);
+    }
 }

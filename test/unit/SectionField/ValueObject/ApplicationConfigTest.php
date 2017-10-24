@@ -4,6 +4,7 @@ declare (strict_types=1);
 namespace Tardigrades\SectionField\ValueObject;
 
 use PHPUnit\Framework\TestCase;
+use Tardigrades\Helper\ArrayConverter;
 
 /**
  * @coversDefaultClass Tardigrades\SectionField\ValueObject\ApplicationConfig
@@ -94,5 +95,26 @@ class ApplicationConfigTest extends TestCase
             ]
         ];
         ApplicationConfig::fromArray($appConfig);
+    }
+
+    /**
+     * @test
+     * @covers ::__toString
+     */
+    public function it_should_be_treatable_as_a_string()
+    {
+        $appConfig = [
+            'application' => [
+                'name' => 'sexy',
+                'handle' => 'field',
+                'languages' => [
+                    'this one', 'that other one'
+                ]
+            ]
+        ];
+
+        $applicationConfigString = (string)ApplicationConfig::fromArray($appConfig);
+        $appConfigString = ArrayConverter::recursive($appConfig);
+        $this->assertSame($applicationConfigString, $appConfigString);
     }
 }

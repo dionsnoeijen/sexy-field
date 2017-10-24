@@ -31,4 +31,15 @@ class CreatedFieldTest extends TestCase
         $this->expectExceptionMessage('Value is not specified');
         CreatedField::fromString('');
     }
+
+    /**
+     * @test
+     * @covers ::__toString
+     */
+    public function it_should_be_treatable_as_a_string()
+    {
+        $string = 'I am a created field!';
+        $createdFieldString = (string)CreatedField::fromString($string);
+        $this->assertSame($createdFieldString, $string);
+    }
 }
