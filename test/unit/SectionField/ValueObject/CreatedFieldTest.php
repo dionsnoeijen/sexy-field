@@ -40,6 +40,6 @@ class CreatedFieldTest extends TestCase
     {
         $string = 'I am a created field!';
         $createdFieldString = (string)CreatedField::fromString($string);
-        $this->assertSame($createdFieldString, $string);
+        $this->assertSame($string, $createdFieldString);
     }
 }

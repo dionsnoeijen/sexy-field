@@ -17,12 +17,14 @@ class IdTest extends TestCase
      * @covers ::fromInt
      * @covers ::getId
      * @covers ::toInt
+     * @covers ::__toString
      */
     public function it_should_create_from_int()
     {
         $thing = Id::fromInt(1234567890);
         $this->assertInstanceOf(Id::class, $thing);
-        $this->assertSame($thing->toInt(), 1234567890);
-        $this->assertSame($thing->getId(), 1234567890);
+        $this->assertSame(1234567890, $thing->toInt());
+        $this->assertSame(1234567890, $thing->getId());
+        $this->assertSame('1234567890', (string)$thing);
     }
 }

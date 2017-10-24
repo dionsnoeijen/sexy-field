@@ -22,4 +22,16 @@ class I18nTest extends TestCase
         $this->assertInstanceOf(I18n::class, $thing);
         $this->assertSame((string)$thing, 'I am something which I do not really understand');
     }
+
+    /**
+     * @test
+     * @covers ::__toString
+     */
+    public function it_should_be_treatable_as_a_string()
+    {
+        $string = 'wheeeéeeè!';
+        $thing = (string)I18n::fromString($string);
+
+        $this->assertSame($string, $thing);
+    }
 }

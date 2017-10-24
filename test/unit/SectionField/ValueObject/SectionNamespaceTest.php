@@ -20,4 +20,15 @@ class SectionNamespaceTest extends TestCase
     {
         $this->assertInstanceOf(SectionNamespace::class, SectionNamespace::fromString('sexy string'));
     }
+    /**
+     * @test
+     * @covers ::__toString
+     */
+    public function it_should_be_treatable_as_a_string()
+    {
+        $string = 'sexy string!';
+        $thing = (string)SectionNamespace::fromString($string);
+
+        $this->assertSame($string, $thing);
+    }
 }

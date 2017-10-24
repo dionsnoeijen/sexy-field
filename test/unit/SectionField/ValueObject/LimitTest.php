@@ -21,6 +21,6 @@ class LimitTest extends TestCase
     {
         $limit = Limit::fromInt(666);
         $this->assertInstanceOf(Limit::class, $limit);
-        $this->assertSame($limit->toInt(), 666);
+        $this->assertSame(666, $limit->toInt());
     }
 }

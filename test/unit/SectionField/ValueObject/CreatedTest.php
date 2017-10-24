@@ -35,6 +35,6 @@ class CreatedTest extends TestCase
         $datetime = new \DateTime();
         $afterString = (string)Created::fromDateTime($datetime);
         $dateString = $datetime->format('Y-m-d\TH:i');
-        $this->assertSame($afterString, $dateString);
+        $this->assertSame($dateString, $afterString);
     }
 }

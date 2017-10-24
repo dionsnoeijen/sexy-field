@@ -20,6 +20,18 @@ class NameTest extends TestCase
     {
         $string = 'sexy name';
         $this->assertInstanceOf(Name::class, Name::fromString($string));
-        $this->assertSame((string) Name::fromString($string), $string);
+        $this->assertSame($string, (string) Name::fromString($string));
+    }
+
+    /**
+     * @test
+     * @covers ::__toString
+     */
+    public function it_should_be_treatable_as_a_string()
+    {
+        $string = 'sexy name';
+        $thing = (string)Name::fromString($string);
+
+        $this->assertSame($string, $thing);
     }
 }

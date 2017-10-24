@@ -24,7 +24,7 @@ class FieldMetadataTest extends TestCase
             'meta' => 'data',
             'data' => 'meta'
         ];
-        $this->assertSame(FieldMetadata::fromArray($array)->toArray(),$array);
+        $this->assertSame($array, FieldMetadata::fromArray($array)->toArray());
     }
 
     /**
@@ -38,8 +38,10 @@ class FieldMetadataTest extends TestCase
             'data' => 'meta'
         ];
 
+        $expected = "meta:data" . PHP_EOL
+                  . "data:meta" . PHP_EOL;
+
         $fieldMetadataString = (string)FieldMetadata::fromArray($array);
-        $string = ArrayConverter::recursive($array);
-        $this->assertSame($fieldMetadataString, $string);
+        $this->assertSame($expected, $fieldMetadataString);
     }
 }

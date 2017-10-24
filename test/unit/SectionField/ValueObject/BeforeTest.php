@@ -56,6 +56,6 @@ class BeforeTest extends TestCase
         $datetime = new \DateTime();
         $beforeString = (string)Before::fromDateTime($datetime);
         $dateString = $datetime->format('Y-m-d\TH:i');
-        $this->assertSame($beforeString, $dateString);
+        $this->assertSame($dateString, $beforeString);
     }
 }

@@ -23,7 +23,7 @@ class FieldTypeGeneratorConfigTest extends TestCase
         $array = [
             'some sexy index' => 'sexy content'
         ];
-        $this->assertSame(FieldTypeGeneratorConfig::fromArray($array)->toArray(),$array);
+        $this->assertSame($array, FieldTypeGeneratorConfig::fromArray($array)->toArray());
     }
 
     /**
@@ -37,7 +37,6 @@ class FieldTypeGeneratorConfigTest extends TestCase
         ];
 
         $fieldTypeGeneratorConfig = (string)FieldTypeGeneratorConfig::fromArray($array);
-        $string = ArrayConverter::recursive($array);
-        $this->assertSame($fieldTypeGeneratorConfig, $string);
+        $this->assertSame('some sexy index:sexy content' . PHP_EOL, $fieldTypeGeneratorConfig);
     }
 }

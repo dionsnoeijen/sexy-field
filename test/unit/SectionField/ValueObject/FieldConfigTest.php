@@ -247,8 +247,11 @@ class FieldConfigTest extends TestCase
                 'handle' => 'sexy handles'
             ]
         ];
+
+        $expected = "name:sexy name" . PHP_EOL
+                  . "handle:sexy handles" . PHP_EOL;
+
         $fConfigString = (string)FieldConfig::fromArray($fieldConfig);
-        $fieldConfigString = ArrayConverter::recursive($fieldConfig['field']);
-        $this->assertSame($fConfigString, $fieldConfigString);
+        $this->assertSame($expected, $fConfigString);
     }
 }

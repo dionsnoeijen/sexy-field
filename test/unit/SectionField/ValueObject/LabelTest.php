@@ -20,6 +20,19 @@ class LabelTest extends TestCase
     {
         $sexyLabel = Label::fromString('labelicious');
         $this->assertInstanceOf(Label::class, $sexyLabel);
-        $this->assertSame((string) $sexyLabel, 'labelicious');
+        $this->assertSame('labelicious', (string) $sexyLabel);
+    }
+
+
+    /**
+     * @test
+     * @covers ::__toString
+     */
+    public function it_should_be_treatable_as_a_string()
+    {
+        $string = 'labelicious';
+        $thing = (string)Label::fromString($string);
+
+        $this->assertSame($string, $thing);
     }
 }

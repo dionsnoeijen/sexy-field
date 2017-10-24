@@ -6,11 +6,11 @@ namespace Tardigrades\SectionField\ValueObject;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass Tardigrades\SectionField\ValueObject\UpdatedField
+ * @coversDefaultClass Tardigrades\SectionField\ValueObject\SlugField
  * @covers ::<private>
  * @covers ::__construct
  */
-class UpdatedFieldTest extends TestCase
+class SlugFieldTest extends TestCase
 {
     /**
      * @test
@@ -20,9 +20,10 @@ class UpdatedFieldTest extends TestCase
      */
     public function it_creates_from_string()
     {
-        $updatedField = UpdatedField::fromString('updated sexy field');
-        $this->assertInstanceOf(UpdatedField::class, $updatedField);
-        $this->assertSame('updated sexy field', (string) $updatedField);
+        $string = 'this and that';
+        $sexySnail = SlugField::fromString($string);
+        $this->assertInstanceOf(SlugField::class,$sexySnail);
+        $this->assertSame($string, (string) $sexySnail);
     }
 
     /**
@@ -30,10 +31,9 @@ class UpdatedFieldTest extends TestCase
      * @covers ::fromString
      * @covers ::__construct
      */
-    public function it_throws_exception_if_empty()
+    public function it_throws_exception_with_empty_string()
     {
         $this->expectException('InvalidArgumentException');
-        $this->expectExceptionMessage('Value is not specified');
-        UpdatedField::fromString('');
+        SlugField::fromString('');
     }
 }

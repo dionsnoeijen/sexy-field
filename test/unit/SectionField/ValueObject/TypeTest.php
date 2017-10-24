@@ -14,6 +14,8 @@ class TypeTest extends TestCase
 {
     /**
      * @test
+     * @covers ::__construct
+     * @covers ::__toString
      * @covers ::fromString
      */
     public function it_creates_from_string()

@@ -35,7 +35,7 @@ final class GeneratorConfig
 
     public function __toString(): string
     {
-        return ArrayConverter::recursive($this->sectionGeneratorConfig['generator']);
+        return ArrayConverter::recursive($this->sectionGeneratorConfig);
     }
 
     public static function fromArray(array $sectionGeneratorConfig): self

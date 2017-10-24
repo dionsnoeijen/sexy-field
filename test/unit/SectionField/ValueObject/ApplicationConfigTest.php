@@ -4,7 +4,6 @@ declare (strict_types=1);
 namespace Tardigrades\SectionField\ValueObject;
 
 use PHPUnit\Framework\TestCase;
-use Tardigrades\Helper\ArrayConverter;
 
 /**
  * @coversDefaultClass Tardigrades\SectionField\ValueObject\ApplicationConfig
@@ -31,7 +30,7 @@ class ApplicationConfigTest extends TestCase
         ];
         $applicationConfig = ApplicationConfig::fromArray($appConfig);
         $this->assertInstanceOf(ApplicationConfig::class, $applicationConfig);
-        $this->assertSame($applicationConfig->toArray(), $appConfig);
+        $this->assertSame($appConfig, $applicationConfig->toArray());
     }
 
     /**
@@ -113,8 +112,14 @@ class ApplicationConfigTest extends TestCase
             ]
         ];
 
+        $expected = "application:" . PHP_EOL
+                  . "- name:sexy" . PHP_EOL
+                  . "- handle:field" . PHP_EOL
+                  . "- languages:" . PHP_EOL
+                  . "-- 0:this one" . PHP_EOL
+                  . "-- 1:that other one" . PHP_EOL;
+
         $applicationConfigString = (string)ApplicationConfig::fromArray($appConfig);
-        $appConfigString = ArrayConverter::recursive($appConfig);
-        $this->assertSame($applicationConfigString, $appConfigString);
+        $this->assertSame($expected, $applicationConfigString);
     }
 }
