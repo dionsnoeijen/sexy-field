@@ -12,6 +12,7 @@ use Tardigrades\SectionField\ValueObject\Created;
 use Tardigrades\SectionField\ValueObject\FieldConfig;
 use Tardigrades\SectionField\ValueObject\Handle;
 use Tardigrades\SectionField\ValueObject\Id;
+use Tardigrades\SectionField\ValueObject\Name;
 
 /**
  * @coversDefaultClass Tardigrades\Entity\Field
@@ -66,6 +67,20 @@ final class FieldTest extends TestCase
     public function it_should_get_a_null_asking_for_unset_id()
     {
         $this->assertEquals(null, $this->field->getId());
+    }
+
+    /**
+     * @test
+     * @covers ::setName
+     * @covers ::getName
+     */
+    public function it_should_set_and_get_name()
+    {
+        $name = Name::fromString('someNameINeed');
+        $field = $this->field->setName((string) $name);
+
+        $this->assertEquals($this->field, $field);
+        $this->assertEquals($this->field->getName(), $name);
     }
 
     /**
