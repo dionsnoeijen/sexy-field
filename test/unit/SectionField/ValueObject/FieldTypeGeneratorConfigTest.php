@@ -37,6 +37,6 @@ class FieldTypeGeneratorConfigTest extends TestCase
         ];
 
         $fieldTypeGeneratorConfig = (string)FieldTypeGeneratorConfig::fromArray($array);
-        $this->assertSame('some sexy index:sexy content' . PHP_EOL, $fieldTypeGeneratorConfig);
+        $this->assertSame("some sexy index:sexy content\n", $fieldTypeGeneratorConfig);
     }
 }

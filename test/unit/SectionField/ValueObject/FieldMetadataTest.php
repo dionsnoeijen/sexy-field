@@ -38,8 +38,8 @@ class FieldMetadataTest extends TestCase
             'data' => 'meta'
         ];
 
-        $expected = "meta:data" . PHP_EOL
-                  . "data:meta" . PHP_EOL;
+        $expected = "meta:data\n"
+                  . "data:meta\n";
 
         $fieldMetadataString = (string)FieldMetadata::fromArray($array);
         $this->assertSame($expected, $fieldMetadataString);

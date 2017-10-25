@@ -112,12 +112,12 @@ class ApplicationConfigTest extends TestCase
             ]
         ];
 
-        $expected = "application:" . PHP_EOL
-                  . "- name:sexy" . PHP_EOL
-                  . "- handle:field" . PHP_EOL
-                  . "- languages:" . PHP_EOL
-                  . "-- 0:this one" . PHP_EOL
-                  . "-- 1:that other one" . PHP_EOL;
+        $expected = "application:\n"
+                  . "- name:sexy\n"
+                  . "- handle:field\n"
+                  . "- languages:\n"
+                  . "-- 0:this one\n"
+                  . "-- 1:that other one\n";
 
         $applicationConfigString = (string)ApplicationConfig::fromArray($appConfig);
         $this->assertSame($expected, $applicationConfigString);

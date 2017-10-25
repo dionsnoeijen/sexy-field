@@ -248,8 +248,8 @@ class FieldConfigTest extends TestCase
             ]
         ];
 
-        $expected = "name:sexy name" . PHP_EOL
-                  . "handle:sexy handles" . PHP_EOL;
+        $expected = "name:sexy name\n"
+                  . "handle:sexy handles\n";
 
         $fConfigString = (string)FieldConfig::fromArray($fieldConfig);
         $this->assertSame($expected, $fConfigString);
