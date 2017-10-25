@@ -22,4 +22,16 @@ class HandleTest extends TestCase
         $this->assertInstanceOf(Handle::class, $thing);
         $this->assertSame((string)$thing, 'wheeeeeee! handles!');
     }
+
+    /**
+     * @test
+     * @covers ::__toString
+     */
+    public function it_should_be_treatable_as_a_string()
+    {
+        $string = 'wheeeeeee! handles!';
+        $thing = (string)Handle::fromString($string);
+
+        $this->assertSame($string, $thing);
+    }
 }

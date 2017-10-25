@@ -33,4 +33,15 @@ class TextTest extends TestCase
         $this->expectExceptionMessage('Value is not specified');
         Text::fromString('');
     }
+
+    /**
+     * @test
+     * @covers ::__toString
+     */
+    public function it_should_be_treatable_as_a_string()
+    {
+        $string = 'a sexy text';
+        $thing = (string)Text::fromString($string);
+        $this->assertSame($string, $thing);
+    }
 }

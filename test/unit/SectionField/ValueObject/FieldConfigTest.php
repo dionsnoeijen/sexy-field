@@ -4,6 +4,7 @@ declare (strict_types=1);
 namespace Tardigrades\SectionField\ValueObject;
 
 use PHPUnit\Framework\TestCase;
+use Tardigrades\Helper\ArrayConverter;
 
 /**
  * @coversDefaultClass Tardigrades\SectionField\ValueObject\FieldConfig
@@ -232,5 +233,25 @@ class FieldConfigTest extends TestCase
             ]
         ];
         FieldConfig::fromArray($fieldConfig)->getEntityEvents();
+    }
+
+    /**
+     * @test
+     * @covers ::__toString
+     */
+    public function it_should_be_treatable_as_a_string()
+    {
+        $fieldConfig = [
+            'field' => [
+                'name' => 'sexy name',
+                'handle' => 'sexy handles'
+            ]
+        ];
+
+        $expected = "name:sexy name\n"
+                  . "handle:sexy handles\n";
+
+        $fConfigString = (string)FieldConfig::fromArray($fieldConfig);
+        $this->assertSame($expected, $fConfigString);
     }
 }

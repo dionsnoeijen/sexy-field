@@ -4,6 +4,7 @@ declare (strict_types=1);
 namespace Tardigrades\SectionField\ValueObject;
 
 use PHPUnit\Framework\TestCase;
+use Tardigrades\Helper\ArrayConverter;
 
 /**
  * @coversDefaultClass Tardigrades\SectionField\ValueObject\FieldMetadata
@@ -23,6 +24,24 @@ class FieldMetadataTest extends TestCase
             'meta' => 'data',
             'data' => 'meta'
         ];
-        $this->assertSame(FieldMetadata::fromArray($array)->toArray(),$array);
+        $this->assertSame($array, FieldMetadata::fromArray($array)->toArray());
+    }
+
+    /**
+     * @test
+     * @covers ::__toString
+     */
+    public function it_should_be_treatable_as_a_string()
+    {
+        $array = [
+            'meta' => 'data',
+            'data' => 'meta'
+        ];
+
+        $expected = "meta:data\n"
+                  . "data:meta\n";
+
+        $fieldMetadataString = (string)FieldMetadata::fromArray($array);
+        $this->assertSame($expected, $fieldMetadataString);
     }
 }

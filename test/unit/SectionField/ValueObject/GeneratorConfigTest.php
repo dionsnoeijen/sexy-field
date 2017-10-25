@@ -4,6 +4,7 @@ declare (strict_types=1);
 namespace Tardigrades\SectionField\ValueObject;
 
 use PHPUnit\Framework\TestCase;
+use Tardigrades\Helper\ArrayConverter;
 
 /**
  * @coversDefaultClass Tardigrades\SectionField\ValueObject\GeneratorConfig
@@ -40,5 +41,20 @@ class GeneratorConfigTest extends TestCase
         $this->expectException('InvalidArgumentException');
         $this->expectExceptionMessage('Config is not a section config');
         GeneratorConfig::fromArray($array);
+    }
+
+    /**
+     * @test
+     * @covers ::__toString
+     */
+    public function it_should_be_treatable_as_a_string()
+    {
+        $array = ['generator' =>
+            ['sexyGenerator' => 'something']
+        ];
+        $sexyGeneratorConfigString = (string)GeneratorConfig::fromArray($array);
+        $arrayString = ArrayConverter::recursive($array['generator']);
+
+        $this->assertSame($arrayString, $sexyGeneratorConfigString);
     }
 }

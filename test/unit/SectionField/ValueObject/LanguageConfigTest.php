@@ -55,4 +55,15 @@ class LanguageConfigTest extends TestCase
         ];
         LanguageConfig::fromArray($array);
     }
+
+    /**
+     * @test
+     * @covers ::__toString
+     */
+    public function it_should_be_treatable_as_a_string()
+    {
+        $application['language'] = ['nl_NL', 'en_EN'];
+        $languageConfigString = (string)LanguageConfig::fromArray($application);
+        $this->assertSame("0:nl_NL\n1:en_EN\n", $languageConfigString);
+    }
 }

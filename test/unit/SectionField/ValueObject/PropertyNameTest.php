@@ -23,4 +23,23 @@ class PropertyNameTest extends TestCase
         $this->assertInstanceOf(PropertyName::class, $propertyName);
         $this->assertSame((string) $propertyName, 'aSexyCamel');
     }
+    /**
+     * @test
+     * @covers ::__toString
+     */
+    public function it_should_be_treatable_as_a_string()
+    {
+        $propertyNameString = (string)PropertyName::fromString('a sexy camel');
+        $this->assertSame('aSexyCamel', $propertyNameString);
+
+        $propertyNameString = (string)PropertyName::fromString('a-sexy-camel');
+        $this->assertSame('aSexyCamel', $propertyNameString);
+
+        $propertyNameString = (string)PropertyName::fromString('a_sexy_camel');
+        $this->assertSame('aSexyCamel', $propertyNameString);
+
+        $propertyNameString = (string)PropertyName::fromString('a.sexy.camel');
+        $this->assertSame('aSexyCamel', $propertyNameString);
+    }
+
 }

@@ -46,4 +46,16 @@ class AfterTest extends TestCase
         );
         After::fromString('two thousand-Dec-12T12:01');
     }
+
+    /**
+     * @test
+     * @covers ::__toString
+     */
+    public function it_should_be_treatable_as_a_string()
+    {
+        $datetime = new \DateTime();
+        $afterString = (string)After::fromDateTime($datetime);
+        $dateString = $datetime->format('Y-m-d\TH:i');
+        $this->assertSame($dateString, $afterString);
+    }
 }

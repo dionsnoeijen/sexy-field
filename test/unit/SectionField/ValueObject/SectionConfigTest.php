@@ -414,4 +414,37 @@ class SectionConfigTest extends TestCase
         $this->expectExceptionMessage('The namespace value should not be empty');
         SectionConfig::fromArray($sexyArray);
     }
+
+    /**
+     * @test
+     * @covers ::__toString
+     */
+    public function it_should_be_treatable_as_a_string()
+    {
+        $sexyConfigArray = [
+            'section' => [
+                'name' => 'sexyName',
+                'handle' => 'sexyHandles',
+                'fields' => [
+                    's' => 'e',
+                    'x' => 'y'
+                ],
+                'default' => 'Sexy per Default',
+                'namespace' => 'sexy space',
+                'generator' => 'Generator of awesome sexyness'
+            ]
+        ];
+
+        $expected = "name:sexyName\n"
+                  . "handle:sexyHandles\n"
+                  . "fields:\n"
+                  . "- s:e\n"
+                  . "- x:y\n"
+                  . "default:Sexy per Default\n"
+                  . "namespace:sexy space\n"
+                  . "generator:Generator of awesome sexyness\n";
+
+        $sexyConfigArrayString = (string)SectionConfig::fromArray($sexyConfigArray);
+        $this->assertEquals($expected, $sexyConfigArrayString);
+    }
 }

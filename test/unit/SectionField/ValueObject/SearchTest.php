@@ -21,6 +21,17 @@ class SearchTest extends TestCase
         $string = 'a sexy search';
         $search = Search::fromString($string);
         $this->assertInstanceOf(Search::class, $search);
-        $this->assertSame((string) $search, $string);
+        $this->assertSame($string, (string) $search);
+    }
+
+    /**
+     * @test
+     * @covers ::__toString
+     */
+    public function it_should_be_treatable_as_a_string()
+    {
+        $string = 'a sexy search';
+        $thing = (string)Search::fromString($string);
+        $this->assertSame($string, $thing);
     }
 }

@@ -36,6 +36,17 @@ class FullyQualifiedClassNameTest extends TestCase
         $classname = ClassName::fromString('Sexyclass');
         $fullyQualifiedSexyClassName = FullyQualifiedClassName::fromNamespaceAndClassName($namespace, $classname);
         $this->assertInstanceOf(FullyQualifiedClassName::class, $fullyQualifiedSexyClassName);
-        $this->assertSame($fullyQualifiedSexyClassName->getClassName(), 'Sexyclass');
+        $this->assertSame('Sexyclass', $fullyQualifiedSexyClassName->getClassName());
+    }
+
+    /**
+     * @test
+     * @covers ::__toString
+     */
+    public function it_should_be_treatable_as_a_string()
+    {
+        $sexyString = 'sexy.class';
+        $fullyQualifiedSexyClassNameString = (string)FullyQualifiedClassName::fromString($sexyString);
+        $this->assertSame('sexy\class', $fullyQualifiedSexyClassNameString);
     }
 }

@@ -30,7 +30,7 @@ class ApplicationConfigTest extends TestCase
         ];
         $applicationConfig = ApplicationConfig::fromArray($appConfig);
         $this->assertInstanceOf(ApplicationConfig::class, $applicationConfig);
-        $this->assertSame($applicationConfig->toArray(), $appConfig);
+        $this->assertSame($appConfig, $applicationConfig->toArray());
     }
 
     /**
@@ -94,5 +94,32 @@ class ApplicationConfigTest extends TestCase
             ]
         ];
         ApplicationConfig::fromArray($appConfig);
+    }
+
+    /**
+     * @test
+     * @covers ::__toString
+     */
+    public function it_should_be_treatable_as_a_string()
+    {
+        $appConfig = [
+            'application' => [
+                'name' => 'sexy',
+                'handle' => 'field',
+                'languages' => [
+                    'this one', 'that other one'
+                ]
+            ]
+        ];
+
+        $expected = "application:\n"
+                  . "- name:sexy\n"
+                  . "- handle:field\n"
+                  . "- languages:\n"
+                  . "-- 0:this one\n"
+                  . "-- 1:that other one\n";
+
+        $applicationConfigString = (string)ApplicationConfig::fromArray($appConfig);
+        $this->assertSame($expected, $applicationConfigString);
     }
 }

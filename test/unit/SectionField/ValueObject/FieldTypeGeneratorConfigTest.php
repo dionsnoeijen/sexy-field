@@ -4,6 +4,7 @@ declare (strict_types=1);
 namespace Tardigrades\SectionField\ValueObject;
 
 use PHPUnit\Framework\TestCase;
+use Tardigrades\Helper\ArrayConverter;
 
 /**
  * @coversDefaultClass Tardigrades\SectionField\ValueObject\FieldTypeGeneratorConfig
@@ -22,6 +23,20 @@ class FieldTypeGeneratorConfigTest extends TestCase
         $array = [
             'some sexy index' => 'sexy content'
         ];
-        $this->assertSame(FieldTypeGeneratorConfig::fromArray($array)->toArray(),$array);
+        $this->assertSame($array, FieldTypeGeneratorConfig::fromArray($array)->toArray());
+    }
+
+    /**
+     * @test
+     * @covers ::__toString
+     */
+    public function it_should_be_treatable_as_a_string()
+    {
+        $array = [
+            'some sexy index' => 'sexy content'
+        ];
+
+        $fieldTypeGeneratorConfig = (string)FieldTypeGeneratorConfig::fromArray($array);
+        $this->assertSame("some sexy index:sexy content\n", $fieldTypeGeneratorConfig);
     }
 }
