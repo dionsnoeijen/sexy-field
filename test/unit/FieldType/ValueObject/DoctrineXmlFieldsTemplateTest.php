@@ -15,11 +15,12 @@ class DoctrineXmlFieldsTemplateTest extends TestCase
     /**
      * @test
      * @covers ::create
+     * @covers ::__toString
      */
     public function it_should_create()
     {
         $template = DoctrineXmlFieldsTemplate::create('wheeee');
         $this->assertInstanceOf(DoctrineXmlFieldsTemplate::class, $template);
-        $this->assertSame((string) $template, 'wheeee');
+        $this->assertSame('wheeee', (string) $template);
     }
 }
