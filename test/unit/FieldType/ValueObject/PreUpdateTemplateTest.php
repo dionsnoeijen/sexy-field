@@ -15,11 +15,12 @@ class PreUpdateTemplateTest extends TestCase
     /**
      * @test
      * @covers ::create
+     * @covers ::__toString
      */
     public function it_should_create()
     {
         $template = PreUpdateTemplate::create('wheeee');
         $this->assertInstanceOf(PreUpdateTemplate::class, $template);
-        $this->assertSame((string) $template, 'wheeee');
+        $this->assertSame('wheeee', (string) $template);
     }
 }

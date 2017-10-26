@@ -6,21 +6,21 @@ namespace Tardigrades\FieldType\ValueObject;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass Tardigrades\FieldType\ValueObject\EntityMethodsTemplate
+ * @coversDefaultClass Tardigrades\FieldType\ValueObject\TemplateDir
  * @covers ::<private>
  * @covers ::__construct
  */
-class EntityMethodsTemplateTest extends TestCase
+class TemplateDirTest extends TestCase
 {
     /**
      * @test
-     * @covers ::create
+     * @covers ::fromString
      * @covers ::__toString
      */
     public function it_should_create()
     {
-        $template = EntityMethodsTemplate::create('wheeee');
-        $this->assertInstanceOf(EntityMethodsTemplate::class, $template);
+        $template = TemplateDir::fromString('wheeee');
+        $this->assertInstanceOf(TemplateDir::class, $template);
         $this->assertSame('wheeee', (string) $template);
     }
 }

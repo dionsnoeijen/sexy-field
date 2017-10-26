@@ -15,11 +15,12 @@ class EntityPropertiesTemplateTest extends TestCase
     /**
      * @test
      * @covers ::create
+     * @covers ::__toString
      */
     public function it_should_create()
     {
         $template = EntityPropertiesTemplate::create('wheeee');
         $this->assertInstanceOf(EntityPropertiesTemplate::class, $template);
-        $this->assertSame((string) $template, 'wheeee');
+        $this->assertSame('wheeee', (string) $template);
     }
 }
