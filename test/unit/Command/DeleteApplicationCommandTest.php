@@ -7,7 +7,6 @@ use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tardigrades\Entity\Language;
 use Tardigrades\Entity\Section;
