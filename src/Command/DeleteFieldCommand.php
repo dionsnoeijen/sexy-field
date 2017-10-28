@@ -66,20 +66,22 @@ class DeleteFieldCommand extends FieldCommand
     {
         $field = $this->getField($input, $output);
 
-        $output->writeln('<info>Record with id #' . $field->getId() . ' will be deleted</info>');
+        if ($field !== null) {
+            $output->writeln('<info>Record with id #' . $field->getId() . ' will be deleted</info>');
 
-        $sure = new ConfirmationQuestion('<comment>Are you sure?</comment> (y/n) ', false);
+            $sure = new ConfirmationQuestion('<comment>Are you sure?</comment> (y/n) ', false);
 
-        if (!$this->questionHelper->ask($input, $output, $sure)) {
-            $output->writeln('<comment>Cancelled, nothing deleted.</comment>');
-            return;
+            if (!$this->questionHelper->ask($input, $output, $sure)) {
+                $output->writeln('<comment>Cancelled, nothing deleted.</comment>');
+                return;
+            }
+            $this->fieldManager->delete($field);
+
+            $output->writeln('<info>Removed!</info>');
         }
-        $this->fieldManager->delete($field);
-
-        $output->writeln('<info>Removed!</info>');
     }
 
-    private function getField(InputInterface $input, OutputInterface $output): Field
+    private function getField(InputInterface $input, OutputInterface $output): ?Field
     {
         $question = new Question('<question>What record do you want to delete?</question> (#id): ');
         $question->setValidator(function ($id) use ($output) {
