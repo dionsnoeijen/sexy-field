@@ -96,7 +96,7 @@ YML;
      * @test
      * @covers ::deleteWhatRecord
      */
-    public function it_should_not_delete_field_command_when_user_does_not_confirm()
+    public function it_should_not_delete_field_when_user_does_not_confirm()
     {
         $command = $this->application->find('sf:delete-field');
         $commandTester = new CommandTester($command);
@@ -123,7 +123,7 @@ YML;
      * @test
      * @covers ::deleteWhatRecord
      */
-    public function it_should_not_try_to_delete_non_existing_field_commands()
+    public function it_should_not_try_to_delete_non_existing_fields()
     {
         $command = $this->application->find('sf:delete-field');
         $commandTester = new CommandTester($command);
