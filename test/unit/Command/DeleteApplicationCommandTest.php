@@ -7,11 +7,13 @@ use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tardigrades\Entity\Language;
 use Tardigrades\Entity\Section;
 use Tardigrades\SectionField\Service\ApplicationManagerInterface;
 use Tardigrades\Entity\Application as ApplicationEntity;
+use Tardigrades\SectionField\Service\ApplicationNotFoundException;
 
 /**
  * @coversDefaultClass Tardigrades\Command\DeleteApplicationCommand
@@ -96,6 +98,35 @@ final class DeleteApplicationCommandTest extends TestCase
 
         $this->assertRegExp(
             '/Removed!/',
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::getApplicationRecord
+     */
+    public function it_should_not_try_to_delete_non_existing_applications()
+    {
+        $command = $this->application->find('sf:delete-application');
+        $commandTester = new CommandTester($command);
+
+        $fields = $this->givenAnArrayOfApplications();
+
+        $this->applicationManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andReturn($fields);
+
+        $this->applicationManager
+            ->shouldReceive('read')
+            ->andThrow(ApplicationNotFoundException::class);
+
+        $commandTester->setInputs([3, 'y']);
+        $commandTester->execute(['command' => $command->getName()]);
+
+        $this->assertRegExp(
+            '/Application not found/',
             $commandTester->getDisplay()
         );
     }
