@@ -61,7 +61,7 @@ class DeleteApplicationCommand extends ApplicationCommand
         $this->deleteWhatRecord($input, $output);
     }
 
-    private function getApplicationRecord(InputInterface $input, OutputInterface $output): ApplicationInterface
+    private function getApplicationRecord(InputInterface $input, OutputInterface $output): ?ApplicationInterface
     {
         $question = new Question('<question>What record do you want to delete?</question> (#id): ');
         $question->setValidator(function ($id) use ($output) {
@@ -80,16 +80,18 @@ class DeleteApplicationCommand extends ApplicationCommand
     {
         $application = $this->getApplicationRecord($input, $output);
 
-        $output->writeln('<info>Record with id #' . $application->getId() . ' will be deleted</info>');
+        if ($application !== null) {
+            $output->writeln('<info>Record with id #' . $application->getId() . ' will be deleted</info>');
 
-        $sure = new ConfirmationQuestion('<comment>Are you sure?</comment> (y/n) ', false);
+            $sure = new ConfirmationQuestion('<comment>Are you sure?</comment> (y/n) ', false);
 
-        if (!$this->questionHelper->ask($input, $output, $sure)) {
-            $output->writeln('<comment>Cancelled, nothing deleted.</comment>');
-            return;
+            if (!$this->questionHelper->ask($input, $output, $sure)) {
+                $output->writeln('<comment>Cancelled, nothing deleted.</comment>');
+                return;
+            }
+            $this->applicationManager->delete($application);
+
+            $output->writeln('<info>Removed!</info>');
         }
-        $this->applicationManager->delete($application);
-
-        $output->writeln('<info>Removed!</info>');
     }
 }

@@ -102,10 +102,9 @@ final class DeleteApplicationCommandTest extends TestCase
 
     /**
      * @test
-     * @covers ::configure
-     * @covers ::execute
+     * @covers ::getApplicationRecord
      */
-    public function it_should_not_delete_application_when_user_does_not_confirm()
+    public function it_should_not_try_to_delete_non_existing_applications()
     {
         $command = $this->application->find('sf:delete-application');
         $commandTester = new CommandTester($command);
@@ -119,17 +118,13 @@ final class DeleteApplicationCommandTest extends TestCase
 
         $this->applicationManager
             ->shouldReceive('read')
-            ->once()
-            ->andReturn($fields[0]);
+            ->andThrow(ApplicationNotFoundException::class);
 
-        $this->applicationManager
-            ->shouldNotReceive('delete');
-
-        $commandTester->setInputs([1, 'n']);
+        $commandTester->setInputs([3, 'y']);
         $commandTester->execute(['command' => $command->getName()]);
 
         $this->assertRegExp(
-            '/Cancelled/',
+            '/Application not found/',
             $commandTester->getDisplay()
         );
     }
