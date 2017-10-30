@@ -12,6 +12,7 @@ use Tardigrades\Entity\Language;
 use Tardigrades\Entity\Section;
 use Tardigrades\SectionField\Service\ApplicationManagerInterface;
 use Tardigrades\Entity\Application as ApplicationEntity;
+use Tardigrades\SectionField\Service\ApplicationNotFoundException;
 
 /**
  * @coversDefaultClass Tardigrades\Command\DeleteApplicationCommand
