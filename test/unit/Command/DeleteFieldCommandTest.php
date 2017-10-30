@@ -13,6 +13,7 @@ use Symfony\Component\Yaml\Yaml;
 use Tardigrades\Entity\Field;
 use Tardigrades\Entity\FieldType;
 use Tardigrades\SectionField\Service\FieldManagerInterface;
+use Tardigrades\SectionField\Service\FieldNotFoundException;
 
 /**
  * @coversDefaultClass Tardigrades\Command\DeleteFieldCommand
@@ -43,6 +44,15 @@ final class DeleteFieldCommandTest extends TestCase
         $this->deleteFieldCommand = new DeleteFieldCommand($this->fieldManager);
         $this->application = new Application();
         $this->application->add($this->deleteFieldCommand);
+
+        $yml = <<<YML
+field:
+    name: foo
+    handle: bar
+    label: [ label ]
+YML;
+
+        file_put_contents($this->file, $yml);
     }
 
     /**
@@ -52,15 +62,6 @@ final class DeleteFieldCommandTest extends TestCase
      */
     public function it_should_delete_field_with_id_1()
     {
-        $yml = <<<YML
-field:
-    name: foo
-    handle: bar
-    label: [ label ]
-YML;
-
-        file_put_contents($this->file, $yml);
-
         $command = $this->application->find('sf:delete-field');
         $commandTester = new CommandTester($command);
 
@@ -87,6 +88,57 @@ YML;
 
         $this->assertRegExp(
             '/Removed!/',
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::deleteWhatRecord
+     */
+    public function it_should_not_delete_field_when_user_does_not_confirm()
+    {
+        $command = $this->application->find('sf:delete-field');
+        $commandTester = new CommandTester($command);
+        $fields = $this->givenAnArrayOfFields();
+        $this->fieldManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andReturn($fields);
+        $this->fieldManager
+            ->shouldReceive('read')
+            ->once()
+            ->andReturn($fields[0]);
+        $this->fieldManager
+            ->shouldNotReceive('delete');
+        $commandTester->setInputs([1, 'n']);
+        $commandTester->execute(['command' => $command->getName()]);
+        $this->assertRegExp(
+            '/Cancelled/',
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::deleteWhatRecord
+     */
+    public function it_should_not_try_to_delete_non_existing_fields()
+    {
+        $command = $this->application->find('sf:delete-field');
+        $commandTester = new CommandTester($command);
+        $fields = $this->givenAnArrayOfFields();
+        $this->fieldManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andReturn($fields);
+        $this->fieldManager
+            ->shouldReceive('read')
+            ->andThrow(FieldNotFoundException::class);
+        $commandTester->setInputs([9, 'y']);
+        $commandTester->execute(['command' => $command->getName()]);
+        $this->assertRegExp(
+            '/Field not found/',
             $commandTester->getDisplay()
         );
     }
