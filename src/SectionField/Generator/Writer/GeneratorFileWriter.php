@@ -21,7 +21,7 @@ class GeneratorFileWriter
     public static function write(
         Writable $writable
     ) {
-        $path = self::getPsr4AutoloadDirectoryForNamespace($writable->getNamespace(), ClassLoader::class);
+        $path = self::getPsr4AutoloadDirectoryForNamespace($writable->getNamespace());
         $store = $path . $writable->getFilename();
 
         try {
@@ -44,10 +44,10 @@ class GeneratorFileWriter
         }
     }
 
-    private static function getPsr4AutoloadDirectoryForNamespace(string $namespace, string $classLoader)
+    public static function getPsr4AutoloadDirectoryForNamespace(string $namespace)
     {
         $find = explode('\\', $namespace)[0];
-        $reflector = new \ReflectionClass($classLoader);
+        $reflector = new \ReflectionClass(ClassLoader::class);
         $vendorPath = preg_replace(
             '/^(.*)\/composer\/ClassLoader\.php$/',
             '$1',
