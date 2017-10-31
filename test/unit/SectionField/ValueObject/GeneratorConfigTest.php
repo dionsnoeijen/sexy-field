@@ -26,7 +26,6 @@ class GeneratorConfigTest extends TestCase
         $sexyGeneratorConfig = GeneratorConfig::fromArray($array);
         $this->assertInstanceOf(GeneratorConfig::class, $sexyGeneratorConfig);
         $this->assertSame($sexyGeneratorConfig->toArray(), $array['generator']);
-
     }
 
     /**

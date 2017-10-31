@@ -38,7 +38,7 @@ class SectionFormOptionsTest extends TestCase
         $formOptions = SectionFormOptions::fromArray($array);
         $this->assertEquals($formOptions->getId(), Id::fromInt(1));
         $this->assertEquals($formOptions->getSlug(), Slug::fromString('snail'));
-        $this->assertSame($formOptions->getRedirect(),'where?');
+        $this->assertSame($formOptions->getRedirect(), 'where?');
     }
 
     /**

@@ -32,6 +32,11 @@
       "Tardigrades\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Tardigrades\\": "test/unit/"
+    }
+  },
   "require-dev": {
     "phpunit/phpunit": "^6.1",
     "squizlabs/PHP_CodeSniffer": "^2.8",

@@ -46,12 +46,18 @@ class SectionConfigTest extends TestCase
         $this->assertEquals($sexySectionConfig->getName(), Name::fromString('sexyName'));
         $this->assertEquals($sexySectionConfig->getClassName(), ClassName::fromString('sexyHandles'));
         $this->assertSame($sexySectionConfig->getFields(), ['s' => 'e', 'x' => 'y']);
-        $this->assertEquals($sexySectionConfig->getNamespace(),SectionNamespace::fromString('sexy space'));
-        $this->assertEquals($sexySectionConfig->getGeneratorConfig(), GeneratorConfig::fromArray($sexyConfigArray['section']));
+        $this->assertEquals($sexySectionConfig->getNamespace(), SectionNamespace::fromString('sexy space'));
+        $this->assertEquals(
+            $sexySectionConfig->getGeneratorConfig(),
+            GeneratorConfig::fromArray($sexyConfigArray['section'])
+        );
         $this->assertSame($sexySectionConfig->getDefault(), $sexyConfigArray['section']['default']);
         $this->assertEquals(
             $sexySectionConfig->getFullyQualifiedClassName(),
-                FullyQualifiedClassName::fromNamespaceAndClassName($sexySectionConfig->getNamespace(),$sexySectionConfig->getClassName())
+            FullyQualifiedClassName::fromNamespaceAndClassName(
+                $sexySectionConfig->getNamespace(),
+                $sexySectionConfig->getClassName()
+            )
         );
         $this->assertSame($sexySectionConfig->toArray(), $sexyConfigArray);
     }
@@ -63,7 +69,8 @@ class SectionConfigTest extends TestCase
      * @covers ::getCreatedField
      * @covers ::getUpdatedField
      */
-    public function it_returns_default_fields_when_not_defined(){
+    public function it_returns_default_fields_when_not_defined()
+    {
         $sexyArray = [
             'section' => [
                 'name' => 'sexyName',

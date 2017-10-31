@@ -42,5 +42,4 @@ class ClassNameTest extends TestCase
         $propertyNameString = (string)ClassName::fromString('a.sexy.camel');
         $this->assertSame('A.sexy.camel', $propertyNameString);
     }
-
 }

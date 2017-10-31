@@ -99,18 +99,16 @@ abstract class Generator implements GeneratorInterface
         $fieldType = $this->container->get((string) $field->getFieldType()->getFullyQualifiedClassName());
         $fieldTypeGeneratorConfig = $fieldType->getFieldTypeGeneratorConfig()->toArray();
 
-        try {
-            Assertion::notEmpty(
-                $fieldTypeGeneratorConfig,
-                'No generator defined for ' .
-                $field->getName() . 'type: ' . $field->getFieldType()->getType()
-            );
+        $messageWhenEmpty = 'No generator defined for '
+            . $field->getName()
+            . ' type: '
+            . $field->getFieldType()->getType();
 
-            Assertion::keyExists(
-                $fieldTypeGeneratorConfig,
-                $generateFor,
-                'Nothing to do for this generator: ' . $generateFor
-            );
+        $messageWhenNoKey = 'Nothing to do for this generator: ' . $generateFor;
+
+        try {
+            Assertion::notEmpty($fieldTypeGeneratorConfig, $messageWhenEmpty);
+            Assertion::keyExists($fieldTypeGeneratorConfig, $generateFor, $messageWhenNoKey);
         } catch (\Exception $exception) {
             $this->buildMessages[] = $exception->getMessage();
         }
