@@ -177,16 +177,6 @@ final class GeneratorTest extends TestCase
         return $section;
     }
 
-//    private function givenAQueryWithResult($result)
-//    {
-//        $query = Mockery::mock(AbstractQuery::class);
-//        $query->shouldReceive('getResult')
-//            ->once()
-//            ->andReturn($result);
-//
-//        return $query;
-//    }
-//
     private function givenAFieldWithNameKindAndTo($name, $kind, $to)
     {
         $fieldName = 'field' . $name;
