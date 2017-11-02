@@ -19,5 +19,4 @@ interface GeneratorsInterface
 {
     public function generateBySection(SectionInterface $section): array;
     public function getBuildMessages(): array;
-    public function getWritables(): array;
 }

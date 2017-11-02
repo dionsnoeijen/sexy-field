@@ -40,8 +40,11 @@ class SectionBeforeRead extends Event
     /** @var SectionConfig */
     private $sectionConfig;
 
-    public function __construct(\ArrayIterator $data, ReadOptionsInterface $readOptions, SectionConfig $sectionConfig = null)
-    {
+    public function __construct(
+        \ArrayIterator $data,
+        ReadOptionsInterface $readOptions,
+        SectionConfig $sectionConfig = null
+    ) {
         $this->data = $data;
         $this->readOptions = $readOptions;
         $this->sectionConfig = $sectionConfig;

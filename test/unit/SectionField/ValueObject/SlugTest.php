@@ -21,7 +21,7 @@ class SlugTest extends TestCase
     public function it_creates_from_string()
     {
         $sexySnail = Slug::fromString('this and that');
-        $this->assertInstanceOf(Slug::class,$sexySnail);
+        $this->assertInstanceOf(Slug::class, $sexySnail);
         $this->assertSame(['this and that'], $sexySnail->toArray());
         $this->assertSame('this and that', (string) $sexySnail);
     }

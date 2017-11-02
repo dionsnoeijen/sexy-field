@@ -22,7 +22,7 @@ class SlugFieldTest extends TestCase
     {
         $string = 'this and that';
         $sexySnail = SlugField::fromString($string);
-        $this->assertInstanceOf(SlugField::class,$sexySnail);
+        $this->assertInstanceOf(SlugField::class, $sexySnail);
         $this->assertSame($string, (string) $sexySnail);
     }
 

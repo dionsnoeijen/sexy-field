@@ -22,6 +22,6 @@ class FieldValueTest extends TestCase
         $handle = Handle::fromString('sexy handle');
         $value = 'sexy value';
         $sexyFieldValue = FieldValue::fromHandleAndValue($handle, $value);
-        $this->assertSame($sexyFieldValue->toArray(),[(string) $handle, $value]);
+        $this->assertSame($sexyFieldValue->toArray(), [(string) $handle, $value]);
     }
 }

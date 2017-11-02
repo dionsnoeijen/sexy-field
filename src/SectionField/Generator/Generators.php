@@ -14,17 +14,15 @@ declare (strict_types = 1);
 namespace Tardigrades\SectionField\Generator;
 
 use Tardigrades\Entity\SectionInterface;
+use Tardigrades\SectionField\Generator\Writer\Writable;
 
 class Generators implements GeneratorsInterface
 {
-    /** @var array */
+    /** @var GeneratorInterface[] */
     private $generators;
 
-    /** @var array */
+    /** @var string[] */
     private $buildMessages = [];
-
-    /** @var array */
-    private $writables = [];
 
     public function __construct(array $generators)
     {
@@ -46,11 +44,6 @@ class Generators implements GeneratorsInterface
         }
 
         return $writables;
-    }
-
-    public function getWritables(): array
-    {
-        return $this->writables;
     }
 
     public function getBuildMessages(): array
