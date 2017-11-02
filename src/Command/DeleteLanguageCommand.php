@@ -61,7 +61,7 @@ class DeleteLanguageCommand extends LanguageCommand
         $this->deleteWhatRecord($input, $output);
     }
 
-    private function getLanguageRecord(InputInterface $input, OutputInterface $output): LanguageInterface
+    private function getLanguageRecord(InputInterface $input, OutputInterface $output): ?LanguageInterface
     {
         $question = new Question('<question>What record do you want to delete?</question> (#id): ');
         $question->setValidator(function ($id) use ($output) {
@@ -79,6 +79,10 @@ class DeleteLanguageCommand extends LanguageCommand
     private function deleteWhatRecord(InputInterface $input, OutputInterface $output): void
     {
         $language = $this->getLanguageRecord($input, $output);
+
+        if ($language === null) {
+            return;
+        }
 
         $output->writeln('<info>Record with id #' . $language->getId() . ' will be deleted</info>');
 
