@@ -7,13 +7,12 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass Tardigrades\SectionField\Generator\PhpFormatter
- * @covers ::__construct
- * @covers ::<protected>
  */
 final class PhpFormatterTest extends TestCase
 {
     /**
      * @test
+     * @covers ::format
      */
     public function it_should_format()
     {
@@ -30,6 +29,8 @@ class {{ section }}
     {{ properties }}
     /** @var int */
     private \$id;
+    /** @var string */
+    private \$name;
     public function __construct()
     {
         {{ constructor }}
@@ -80,6 +81,9 @@ class {{ section }}
     /** @var int */
     private \$id;
 
+    /** @var string */
+    private \$name;
+
     public function __construct()
     {
     {{ constructor }}
@@ -112,7 +116,6 @@ class {{ section }}
 
 
 TXT;
-
 
         $result = PhpFormatter::format($inputText);
 
