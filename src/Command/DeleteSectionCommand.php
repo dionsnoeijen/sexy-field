@@ -18,6 +18,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Tardigrades\Entity\SectionInterface;
 use Tardigrades\SectionField\Service\SectionManagerInterface;
+use Tardigrades\SectionField\Service\SectionNotFoundException;
 
 class DeleteSectionCommand extends SectionCommand
 {
@@ -46,6 +47,10 @@ class DeleteSectionCommand extends SectionCommand
     {
         /** @var SectionInterface $section */
         $section = $this->getSection($input, $output);
+
+        if (!$section) {
+            return;
+        }
 
         $output->writeln('<info>Record with id #' . $section->getId() . ' will be deleted</info>');
 

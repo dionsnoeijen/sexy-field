@@ -12,10 +12,12 @@ use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Yaml\Yaml;
 use Tardigrades\Entity\Section;
 use Tardigrades\SectionField\Service\SectionManagerInterface;
+use Tardigrades\SectionField\Service\SectionNotFoundException;
 
 /**
  * @coversDefaultClass Tardigrades\Command\UpdateSectionCommand
  * @covers ::<private>
+ * @covers ::<protected>
  * @covers ::__construct
  */
 final class UpdateSectionCommandTest extends TestCase
@@ -142,6 +144,56 @@ YML;
 
         $this->assertRegExp(
             '/Invalid configuration/',
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_fail_on_non_existing_id()
+    {
+        $yml = <<<YML
+section:
+    name: foo
+    handle: bar
+    fields: []
+    default: Default
+    namespace: My\Namespace
+YML;
+
+        file_put_contents($this->file, $yml);
+
+        $command = $this->application->find('sf:update-section');
+        $commandTester = new CommandTester($command);
+
+        $this->sectionManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andReturn($this->givenAnArrayOfSections());
+
+        $this->sectionManager
+            ->shouldReceive('read')
+            ->once()
+            ->andThrow(SectionNotFoundException::class);
+
+        $commandTester->setInputs([1]);
+        $commandTester->execute(
+            [
+                'command' => $command->getName(),
+                'config' => $yml
+            ]
+        );
+
+        $this->assertRegExp(
+            '/Section not found/',
+            $commandTester->getDisplay()
+        );
+
+        $this->assertRegExp(
+            '/Invalid configuration file/',
             $commandTester->getDisplay()
         );
     }

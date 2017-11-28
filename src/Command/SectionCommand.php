@@ -68,7 +68,7 @@ abstract class SectionCommand extends Command
         $table->render();
     }
 
-    protected function getSection(InputInterface $input, OutputInterface $output): SectionInterface
+    protected function getSection(InputInterface $input, OutputInterface $output): ?SectionInterface
     {
         $question = new Question('<question>Choose record.</question> (#id): ');
 
