@@ -3,3 +3,4 @@ docker/data
 build/logs/coverage
 log
 .notes
+report/
