@@ -28,8 +28,11 @@ final class NoPrePersistEntityEventDefinedInFieldConfigExceptionTest extends Tes
     {
         $exception = new NoPrePersistEntityEventDefinedInFieldConfigException();
         $this->assertSame(
+
+        // @codingStandardsIgnoreStart
             'In the field config this key: entityEvents with this value: - prePersist is not defined. Skipping pre update rendering for this field.',
             $exception->getMessage()
+        // @codingStandardsIgnoreEnd
         );
     }
 }

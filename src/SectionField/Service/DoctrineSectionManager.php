@@ -39,7 +39,8 @@ class DoctrineSectionManager implements SectionManagerInterface
     private $opposingRelationships = [
         'many-to-one' => 'one-to-many',
         'one-to-many' => 'many-to-one',
-        'many-to-many' => 'many-to-many'
+        'many-to-many' => 'many-to-many',
+        'one-to-one' => 'one-to-one'
     ];
 
     /** @var array */
@@ -356,7 +357,7 @@ class DoctrineSectionManager implements SectionManagerInterface
                 foreach ($relationshipFields as $fieldHandle => $kindToFieldType) {
                     // At this point, use two fields for the many to many relationship, one on each side.
                     // So ignore it here.
-                    if ($kindToFieldType['kind'] !== 'many-to-many') {
+                    if ($kindToFieldType['kind'] !== 'many-to-many' && $kindToFieldType['kind'] !== 'one-to-one') {
                         $relationships[$kindToFieldType['to']][$fieldHandle . '-opposite'] = [
                             'kind' => $this->opposingRelationships[$kindToFieldType['kind']],
                             'to' => $sectionHandle,
