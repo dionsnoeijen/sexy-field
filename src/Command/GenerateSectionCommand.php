@@ -56,6 +56,10 @@ class GenerateSectionCommand extends SectionCommand
     {
         $section = $this->getSection($input, $output);
 
+        if (!$section) {
+            return;
+        }
+
         $writables = $this->entityGenerator->generateBySection($section);
 
         /** @var Writable $writable */

@@ -12,10 +12,12 @@ use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Yaml\Yaml;
 use Tardigrades\Entity\Section;
 use Tardigrades\SectionField\Service\SectionManagerInterface;
+use Tardigrades\SectionField\Service\SectionNotFoundException;
 
 /**
  * @coversDefaultClass Tardigrades\Command\DeleteSectionCommand
  * @covers ::<private>
+ * @covers ::<protected>
  * @covers ::__construct
  */
 final class DeleteSectionCommandTest extends TestCase
@@ -86,6 +88,52 @@ YML;
 
         $this->assertRegExp(
             '/Removed!/',
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_fail_on_non_existing_id()
+    {
+        $yml = <<<YML
+section:
+    name: foo
+    handle: bar
+    fields: []
+    default: Default
+    namespace: My\Namespace
+YML;
+
+        file_put_contents($this->file, $yml);
+
+        $command = $this->application->find('sf:delete-section');
+        $commandTester = new CommandTester($command);
+
+        $sections = $this->givenAnArrayOfSections();
+
+        $this->sectionManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andReturn($sections);
+
+        $this->sectionManager
+            ->shouldReceive('read')
+            ->once()
+            ->andThrow(SectionNotFoundException::class);
+
+        $this->sectionManager
+            ->shouldReceive('delete')
+            ->never();
+
+        $commandTester->setInputs([1, 'y']);
+        $commandTester->execute(['command' => $command->getName()]);
+
+        $this->assertRegExp(
+            '/Section not found/',
             $commandTester->getDisplay()
         );
     }

@@ -54,8 +54,6 @@ class Writable
         string $namespace,
         string $filename
     ): self {
-        return new self(
-            $template, $namespace, $filename
-        );
+        return new self($template, $namespace, $filename);
     }
 }

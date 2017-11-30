@@ -27,6 +27,9 @@ final class FieldTypeDoesNotExistExceptionTest extends TestCase
     public function it_should_construct_with_default_message()
     {
         $exception = new NoCustomGeneratorDefinedException();
+
+        // @codingStandardsIgnoreStart
         $this->assertSame('For this field there is no custom generator, falling back to default handling', $exception->getMessage());
+        // @codingStandardsIgnoreEnd
     }
 }

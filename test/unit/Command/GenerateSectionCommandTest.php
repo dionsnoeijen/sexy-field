@@ -13,10 +13,12 @@ use Symfony\Component\Yaml\Yaml;
 use Tardigrades\Entity\Section;
 use Tardigrades\SectionField\Generator\GeneratorsInterface;
 use Tardigrades\SectionField\Service\SectionManagerInterface;
+use Tardigrades\SectionField\Service\SectionNotFoundException;
 
 /**
  * @coversDefaultClass Tardigrades\Command\GenerateSectionCommand
  * @covers ::<private>
+ * @covers ::<protected>
  * @covers ::__construct
  */
 final class GenerateSectionCommandTest extends TestCase
@@ -141,6 +143,56 @@ YML;
 
         $this->assertRegExp(
             '/Available sections/',
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_fail_when_section_is_not_found()
+    {
+        $yml = <<<YML
+section:
+    name: foo
+    handle: bar
+    fields: []
+    default: Default
+    namespace: My\Namespace
+YML;
+
+        file_put_contents($this->file, $yml);
+
+        $command = $this->application->find('sf:generate-section');
+        $commandTester = new CommandTester($command);
+
+        $sections = $this->givenAnArrayOfSections();
+
+        $this->sectionManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andReturn($sections);
+
+        $this->sectionManager
+            ->shouldReceive('read')
+            ->once()
+            ->andThrow(SectionNotFoundException::class);
+
+        $this->entityGenerator
+            ->shouldReceive('generateBySection')
+            ->never();
+
+        $this->entityGenerator
+            ->shouldReceive('getBuildMessages')
+            ->never();
+
+        $commandTester->setInputs([1, 'y']);
+        $commandTester->execute(['command' => $command->getName()]);
+
+        $this->assertRegExp(
+            '/Section not found/',
             $commandTester->getDisplay()
         );
     }
