@@ -10,6 +10,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 use Tardigrades\Entity\Language;
 use Tardigrades\SectionField\Service\LanguageManagerInterface;
 use Tardigrades\Entity\Application as ApplicationEntity;
+use Tardigrades\SectionField\Service\LanguageNotFoundException;
 
 /**
  * @coversDefaultClass Tardigrades\Command\ListLanguageCommand
@@ -77,7 +78,7 @@ final class ListLanguageCommandTest extends TestCase
      * @covers ::configure
      * @covers ::execute
      */
-    public function it_should_list_field_types()
+    public function it_should_list_languages()
     {
         $command = $this->application->find('sf:list-language');
         $commandTester = new CommandTester($command);
@@ -123,6 +124,29 @@ final class ListLanguageCommandTest extends TestCase
 
         $this->assertRegExp(
             '/Fffff, name/',
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_fail_without_languages()
+    {
+        $command = $this->application->find('sf:list-language');
+        $commandTester = new CommandTester($command);
+
+        $this->languageManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andThrow(LanguageNotFoundException::class);
+
+        $commandTester->execute(['command' => $command->getName()]);
+
+        $this->assertRegExp(
+            '/No language found/',
             $commandTester->getDisplay()
         );
     }

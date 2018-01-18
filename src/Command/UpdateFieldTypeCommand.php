@@ -19,6 +19,7 @@ use Symfony\Component\Console\Question\Question;
 use Tardigrades\Entity\FieldType;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Tardigrades\SectionField\Service\FieldNotFoundException;
 use Tardigrades\SectionField\Service\FieldTypeManagerInterface;
 use Tardigrades\SectionField\Service\FieldTypeNotFoundException;
 use Tardigrades\SectionField\ValueObject\FullyQualifiedClassName;
@@ -50,9 +51,13 @@ class UpdateFieldTypeCommand extends FieldTypeCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->questionHelper = $this->getHelper('question');
+        try {
+            $this->questionHelper = $this->getHelper('question');
 
-        $this->showInstalledFieldTypes($input, $output);
+            $this->showInstalledFieldTypes($input, $output);
+        } catch (FieldTypeNotFoundException $exception) {
+            $output->writeln("Field type not found");
+        }
     }
 
     private function showInstalledFieldTypes(InputInterface $input, OutputInterface $output)
@@ -70,12 +75,15 @@ class UpdateFieldTypeCommand extends FieldTypeCommand
             try {
                 return $this->fieldTypeManager->read(Id::fromInt((int) $id));
             } catch (FieldTypeNotFoundException $exception) {
-                $output->writeln('<error>' . $exception->getMessage() . '</error>');
+                return null;
             }
-            return null;
         });
 
-        return $this->questionHelper->ask($input, $output, $question);
+        $fieldType = $this->questionHelper->ask($input, $output, $question);
+        if (!$fieldType) {
+            throw new FieldTypeNotFoundException();
+        }
+        return $fieldType;
     }
 
     private function getNamespace(

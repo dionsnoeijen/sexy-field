@@ -12,6 +12,7 @@ use Tardigrades\Entity\Language;
 use Tardigrades\Entity\Section;
 use Tardigrades\SectionField\Service\ApplicationManagerInterface;
 use Tardigrades\Entity\Application as ApplicationEntity;
+use Tardigrades\SectionField\Service\ApplicationNotFoundException;
 
 /**
  * @coversDefaultClass Tardigrades\Command\ListApplicationCommand
@@ -135,6 +136,29 @@ final class ListApplicationCommandTest extends TestCase
 
         $this->assertRegExp(
             '/Another Super section name/',
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_fail_without_applications()
+    {
+        $command = $this->application->find('sf:list-application');
+        $commandTester = new CommandTester($command);
+
+        $this->applicationManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andThrow(ApplicationNotFoundException::class);
+
+        $commandTester->execute(['command' => $command->getName()]);
+
+        $this->assertRegExp(
+            '/No applications found/',
             $commandTester->getDisplay()
         );
     }

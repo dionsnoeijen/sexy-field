@@ -9,6 +9,7 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tardigrades\Entity\FieldType;
 use Tardigrades\SectionField\Service\FieldTypeManagerInterface;
+use Tardigrades\SectionField\Service\FieldTypeNotFoundException;
 
 /**
  * @coversDefaultClass Tardigrades\Command\ListFieldTypeCommand
@@ -100,6 +101,29 @@ final class ListFieldTypeCommandTest extends TestCase
 
         $this->assertRegExp(
             '/All installed FieldTypes/',
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_fail_without_field_types()
+    {
+        $command = $this->application->find('sf:list-field-type');
+        $commandTester = new CommandTester($command);
+
+        $this->fieldTypeManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andThrow(FieldTypeNotFoundException::class);
+
+        $commandTester->execute(['command' => $command->getName()]);
+
+        $this->assertRegExp(
+            '/No FieldType found/',
             $commandTester->getDisplay()
         );
     }

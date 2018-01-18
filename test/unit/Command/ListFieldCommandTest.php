@@ -13,6 +13,7 @@ use Symfony\Component\Yaml\Yaml;
 use Tardigrades\Entity\Field;
 use Tardigrades\Entity\FieldType;
 use Tardigrades\SectionField\Service\FieldManagerInterface;
+use Tardigrades\SectionField\Service\FieldNotFoundException;
 
 /**
  * @coversDefaultClass Tardigrades\Command\ListFieldCommand
@@ -115,6 +116,29 @@ YML;
 
         $this->assertRegExp(
             '/All installed Fields/',
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_fail_without_fields()
+    {
+        $command = $this->application->find('sf:list-field');
+        $commandTester = new CommandTester($command);
+
+        $this->fieldManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andThrow(FieldNotFoundException::class);
+
+        $commandTester->execute(['command' => $command->getName()]);
+
+        $this->assertRegExp(
+            '/No fields found/',
             $commandTester->getDisplay()
         );
     }
