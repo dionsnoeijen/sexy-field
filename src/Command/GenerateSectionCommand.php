@@ -20,6 +20,7 @@ use Tardigrades\SectionField\Generator\Writer\GeneratorFileWriter;
 use Tardigrades\SectionField\Generator\Writer\Writable;
 use Tardigrades\SectionField\Generator\GeneratorsInterface;
 use Tardigrades\SectionField\Service\SectionManagerInterface;
+use Tardigrades\SectionField\Service\SectionNotFoundException;
 
 class GenerateSectionCommand extends SectionCommand
 {
@@ -47,18 +48,18 @@ class GenerateSectionCommand extends SectionCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $sections = $this->sectionManager->readAll();
-        $this->renderTable($output, $sections, 'Available sections.');
-        $this->generateWhatSection($input, $output);
+        try {
+            $sections = $this->sectionManager->readAll();
+            $this->renderTable($output, $sections, 'Available sections.');
+            $this->generateWhatSection($input, $output);
+        } catch (SectionNotFoundException $exception) {
+            $output->writeln("Section not found.");
+        }
     }
 
     private function generateWhatSection(InputInterface $input, OutputInterface $output): void
     {
         $section = $this->getSection($input, $output);
-
-        if (!$section) {
-            return;
-        }
 
         $writables = $this->entityGenerator->generateBySection($section);
 

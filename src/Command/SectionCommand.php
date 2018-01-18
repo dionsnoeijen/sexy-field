@@ -76,11 +76,15 @@ abstract class SectionCommand extends Command
             try {
                 return $this->sectionManager->read(Id::fromInt((int) $id));
             } catch (SectionNotFoundException $exception) {
-                $output->writeln('<error>' . $exception->getMessage() . '</error>');
+                // Exceptions thrown from here seemingly can't be caught, so signal with a return value instead
+                return null;
             }
-            return null;
         });
 
-        return $this->getHelper('question')->ask($input, $output, $question);
+        $section = $this->getHelper('question')->ask($input, $output, $question);
+        if (!$section) {
+            throw new SectionNotFoundException();
+        }
+        return $section;
     }
 }

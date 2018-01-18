@@ -183,17 +183,12 @@ YML;
         $commandTester->execute(
             [
                 'command' => $command->getName(),
-                'config' => $yml
+                'config' => $this->file
             ]
         );
 
         $this->assertRegExp(
             '/Section not found/',
-            $commandTester->getDisplay()
-        );
-
-        $this->assertRegExp(
-            '/Invalid configuration file/',
             $commandTester->getDisplay()
         );
     }
