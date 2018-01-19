@@ -38,19 +38,19 @@ class DeleteSectionCommand extends SectionCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $sections = $this->sectionManager->readAll();
-        $this->renderTable($output, $sections, 'All installed Sections');
-        $this->deleteWhatRecord($input, $output);
+        try {
+            $sections = $this->sectionManager->readAll();
+            $this->renderTable($output, $sections, 'All installed Sections');
+            $this->deleteWhatRecord($input, $output);
+        } catch (SectionNotFoundException $exception) {
+            $output->writeln("Section not found.");
+        }
     }
 
     private function deleteWhatRecord(InputInterface $input, OutputInterface $output): void
     {
         /** @var SectionInterface $section */
         $section = $this->getSection($input, $output);
-
-        if (!$section) {
-            return;
-        }
 
         $output->writeln('<info>Record with id #' . $section->getId() . ' will be deleted</info>');
 

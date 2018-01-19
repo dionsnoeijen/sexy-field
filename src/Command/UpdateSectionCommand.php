@@ -19,6 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Yaml\Yaml;
 use Tardigrades\SectionField\Service\SectionManagerInterface;
+use Tardigrades\SectionField\Service\SectionNotFoundException;
 use Tardigrades\SectionField\ValueObject\SectionConfig;
 
 class UpdateSectionCommand extends SectionCommand
@@ -42,10 +43,13 @@ class UpdateSectionCommand extends SectionCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $sections = $this->sectionManager->readAll();
-
-        $this->renderTable($output, $sections, 'All installed Sections');
-        $this->updateWhatRecord($input, $output);
+        try {
+            $sections = $this->sectionManager->readAll();
+            $this->renderTable($output, $sections, 'All installed Sections');
+            $this->updateWhatRecord($input, $output);
+        } catch (SectionNotFoundException $exception) {
+            $output->writeln("Section not found.");
+        }
     }
 
     private function updateWhatRecord(InputInterface $input, OutputInterface $output): void

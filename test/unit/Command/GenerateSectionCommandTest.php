@@ -188,7 +188,7 @@ YML;
             ->shouldReceive('getBuildMessages')
             ->never();
 
-        $commandTester->setInputs([1, 'y']);
+        $commandTester->setInputs([1]);
         $commandTester->execute(['command' => $command->getName()]);
 
         $this->assertRegExp(

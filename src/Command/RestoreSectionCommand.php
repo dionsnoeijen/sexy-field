@@ -52,7 +52,7 @@ class RestoreSectionCommand extends SectionCommand
             $this->renderTable($output, $sections, 'All installed Sections');
             $this->restoreWhatRecord($input, $output);
         } catch (SectionNotFoundException $exception) {
-            $output->writeln('No section found');
+            $output->writeln('Section not found.');
         }
     }
 
@@ -74,7 +74,7 @@ class RestoreSectionCommand extends SectionCommand
 
         $this->sectionManager->restoreFromHistory($sectionFromHistory);
 
-        $output->writeln('<info>Config Restored! Run the genereate-section command to finish rollback.</info>');
+        $output->writeln('<info>Config Restored! Run the generate-section command to finish rollback.</info>');
     }
 
     protected function getSectionFromHistory(InputInterface $input, OutputInterface $output): SectionInterface
