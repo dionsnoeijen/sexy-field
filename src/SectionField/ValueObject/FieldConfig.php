@@ -77,13 +77,16 @@ final class FieldConfig
 
     public function getEntityEvents(): array
     {
-        Assertion::keyExists($this->fieldConfig['field'], 'entityEvents', 'Entity events not defined');
+        Assertion::keyExists($this->fieldConfig['field'], 'generator', 'No generator entity events found');
+        Assertion::keyExists($this->fieldConfig['field']['generator'], 'entity', 'No generator entity events found');
+        Assertion::keyExists($this->fieldConfig['field']['generator']['entity'], 'event', 'No generator entity events found');
+
         Assertion::isArray(
-            $this->fieldConfig['field']['entityEvents'],
+            $this->fieldConfig['field']['generator']['entity']['event'],
             'Entity events should be an array of events you want a generator to run for.'
         );
 
-        return $this->fieldConfig['field']['entityEvents'];
+        return $this->fieldConfig['field']['generator']['entity']['event'];
     }
 
     public function getGeneratorConfig(): GeneratorConfig
