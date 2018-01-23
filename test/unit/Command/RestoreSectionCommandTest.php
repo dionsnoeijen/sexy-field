@@ -198,6 +198,53 @@ YML;
         );
     }
 
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_not_restore_a_section_when_user_does_not_confirm()
+    {
+        $yml = <<<YML
+section:
+    name: foo
+    handle: bar
+    fields: []
+    default: Default
+    namespace: My\Namespace
+YML;
+
+        file_put_contents($this->file, $yml);
+
+        $command = $this->application->find('sf:restore-section');
+        $commandTester = new CommandTester($command);
+
+        $this->sectionManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andReturn($this->givenAnArrayOfSections());
+
+        $this->sectionManager
+            ->shouldReceive('read')
+            ->once()
+            ->andReturn($this->givenAnArrayOfSections()[0]);
+
+        $this->sectionHistoryManager
+            ->shouldReceive('read')
+            ->once()
+            ->andReturn($this->givenAnOldSection());
+
+        $this->sectionManager
+            ->shouldNotReceive('restoreFromHistory');
+
+        $commandTester->setInputs([1, 1, 'n']);
+        $commandTester->execute(['command' => $command->getName()]);
+        $this->assertRegExp(
+            '/Cancelled/',
+            $commandTester->getDisplay()
+        );
+    }
+
     private function givenAnArrayOfSections()
     {
         return [
