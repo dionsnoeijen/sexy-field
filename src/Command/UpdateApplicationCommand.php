@@ -21,7 +21,7 @@ use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Yaml\Yaml;
 use Tardigrades\Entity\ApplicationInterface;
 use Tardigrades\SectionField\Service\ApplicationManagerInterface;
-use Tardigrades\SectionField\Service\SectionNotFoundException;
+use Tardigrades\SectionField\Service\ApplicationNotFoundException;
 use Tardigrades\SectionField\ValueObject\ApplicationConfig;
 use Tardigrades\SectionField\ValueObject\Id;
 
@@ -54,8 +54,12 @@ class UpdateApplicationCommand extends ApplicationCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $this->questionHelper = $this->getHelper('question');
-        $this->showInstalledApplications($input, $output);
+        try {
+            $this->questionHelper = $this->getHelper('question');
+            $this->showInstalledApplications($input, $output);
+        } catch (ApplicationNotFoundException $exception) {
+            $output->writeln("Section not found");
+        }
     }
 
     private function showInstalledApplications(InputInterface $input, OutputInterface $output): void
@@ -72,12 +76,16 @@ class UpdateApplicationCommand extends ApplicationCommand
         $question->setValidator(function ($id) use ($output) {
             try {
                 return $this->applicationManager->read(Id::fromInt((int) $id));
-            } catch (SectionNotFoundException $exception) {
-                $output->writeln('<error>' . $exception->getMessage() . '</error>');
+            } catch (ApplicationNotFoundException $exception) {
+                return null;
             }
         });
 
-        return $this->questionHelper->ask($input, $output, $question);
+        $applicationRecord = $this->questionHelper->ask($input, $output, $question);
+        if (!$applicationRecord) {
+            throw new ApplicationNotFoundException();
+        }
+        return $applicationRecord;
     }
 
     private function updateWhatRecord(InputInterface $input, OutputInterface $output): void

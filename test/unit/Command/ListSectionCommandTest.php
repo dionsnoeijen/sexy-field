@@ -11,6 +11,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Yaml\Yaml;
 use Tardigrades\Entity\Section;
 use Tardigrades\SectionField\Service\SectionManagerInterface;
+use Tardigrades\SectionField\Service\SectionNotFoundException;
 
 /**
  * @coversDefaultClass Tardigrades\Command\ListSectionCommand
@@ -63,12 +64,12 @@ YML;
         $command = $this->application->find('sf:list-section');
         $commandTester = new CommandTester($command);
 
-        $languages = $this->givenAnArrayOfSections();
+        $sections = $this->givenAnArrayOfSections();
 
         $this->sectionManager
             ->shouldReceive('readAll')
             ->once()
-            ->andReturn($languages);
+            ->andReturn($sections);
 
         $commandTester->execute(['command' => $command->getName()]);
 
@@ -128,6 +129,29 @@ YML;
 
         $this->assertRegExp(
             '/All installed Sections/',
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_fail_without_sections()
+    {
+        $command = $this->application->find('sf:list-section');
+        $commandTester = new CommandTester($command);
+
+        $this->sectionManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andThrow(SectionNotFoundException::class);
+
+        $commandTester->execute(['command' => $command->getName()]);
+
+        $this->assertRegExp(
+            '/No section found/',
             $commandTester->getDisplay()
         );
     }

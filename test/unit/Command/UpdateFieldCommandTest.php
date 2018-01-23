@@ -13,6 +13,7 @@ use Symfony\Component\Yaml\Yaml;
 use Tardigrades\Entity\Field;
 use Tardigrades\Entity\FieldType;
 use Tardigrades\SectionField\Service\FieldManagerInterface;
+use Tardigrades\SectionField\Service\FieldNotFoundException;
 
 /**
  * @coversDefaultClass Tardigrades\Command\UpdateFieldCommand
@@ -139,6 +140,49 @@ YML;
 
         $this->assertRegExp(
             '/Invalid configuration/',
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_fail_with_invalid_field()
+    {
+        $yml = <<<YML
+field:
+    name: foo
+    handle: bar
+    label: [ label ]
+YML;
+
+        file_put_contents($this->file, $yml);
+
+        $command = $this->application->find('sf:update-field');
+        $commandTester = new CommandTester($command);
+
+        $this->fieldManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andReturn($this->givenAnArrayOfFields());
+
+        $this->fieldManager
+            ->shouldReceive('read')
+            ->once()
+            ->andThrow(FieldNotFoundException::class);
+
+        $commandTester->setInputs([10]);
+        $commandTester->execute(
+            [
+                'command' => $command->getName(),
+                'config' => $this->file
+            ]
+        );
+
+        $this->assertRegExp(
+            '/Field not found/',
             $commandTester->getDisplay()
         );
     }

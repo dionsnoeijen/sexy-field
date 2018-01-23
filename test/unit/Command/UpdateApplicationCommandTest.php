@@ -13,6 +13,8 @@ use Tardigrades\Entity\Language;
 use Tardigrades\Entity\Section;
 use Tardigrades\SectionField\Service\ApplicationManagerInterface;
 use Tardigrades\Entity\Application as ApplicationEntity;
+use Tardigrades\SectionField\Service\ApplicationNotFoundException;
+use Tardigrades\SectionField\Service\SectionNotFoundException;
 
 /**
  * @coversDefaultClass Tardigrades\Command\UpdateApplicationCommand
@@ -123,6 +125,40 @@ YML;
 
         $this->assertRegExp(
             '/Invalid configuration/',
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_fail_with_invalid_section()
+    {
+        $command = $this->application->find('sf:update-application');
+        $commandTester = new CommandTester($command);
+
+        $this->applicationManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andReturn($this->givenAnArrayOfApplications());
+
+        $this->applicationManager
+            ->shouldReceive('read')
+            ->once()
+            ->andThrow(ApplicationNotFoundException::class);
+
+        $commandTester->setInputs([10]);
+        $commandTester->execute(
+            [
+                'command' => $command->getName(),
+                'config' => $this->file
+            ]
+        );
+
+        $this->assertRegExp(
+            '/Section not found/',
             $commandTester->getDisplay()
         );
     }

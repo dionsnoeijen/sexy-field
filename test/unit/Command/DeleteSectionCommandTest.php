@@ -138,6 +138,51 @@ YML;
         );
     }
 
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_not_delete_section_when_user_does_not_confirm()
+    {
+        $yml = <<<YML
+section:
+    name: foo
+    handle: bar
+    fields: []
+    default: Default
+    namespace: My\Namespace
+YML;
+
+        file_put_contents($this->file, $yml);
+
+        $command = $this->application->find('sf:delete-section');
+        $commandTester = new CommandTester($command);
+
+        $sections = $this->givenAnArrayOfSections();
+
+        $this->sectionManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andReturn($sections);
+
+        $this->sectionManager
+            ->shouldReceive('read')
+            ->once()
+            ->andReturn($sections[0]);
+
+        $this->sectionManager
+            ->shouldNotReceive('delete');
+
+        $commandTester->setInputs([1, 'n']);
+        $commandTester->execute(['command' => $command->getName()]);
+
+        $this->assertRegExp(
+            '/Cancelled/',
+            $commandTester->getDisplay()
+        );
+    }
+
     private function givenAnArrayOfSections()
     {
         return [

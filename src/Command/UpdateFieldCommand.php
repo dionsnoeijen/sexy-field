@@ -52,9 +52,13 @@ class UpdateFieldCommand extends FieldCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->questionHelper = $this->getHelper('question');
+        try {
+            $this->questionHelper = $this->getHelper('question');
 
-        $this->showInstalledFields($input, $output);
+            $this->showInstalledFields($input, $output);
+        } catch (FieldNotFoundException $exception) {
+            $output->writeln("Field not found");
+        }
     }
 
     private function showInstalledFields(InputInterface $input, OutputInterface $output): void
@@ -72,12 +76,15 @@ class UpdateFieldCommand extends FieldCommand
             try {
                 return $this->fieldManager->read(Id::fromInt((int) $id));
             } catch (FieldNotFoundException $exception) {
-                $output->writeln('<error>' . $exception->getMessage() . '</error>');
+                return null;
             }
-            return null;
         });
 
-        return $this->questionHelper->ask($input, $output, $question);
+        $field = $this->questionHelper->ask($input, $output, $question);
+        if (!$field) {
+            throw new FieldNotFoundException();
+        }
+        return $field;
     }
 
     private function updateWhatRecord(InputInterface $input, OutputInterface $output): void

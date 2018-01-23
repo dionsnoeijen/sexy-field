@@ -10,6 +10,7 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tardigrades\Entity\FieldType;
 use Tardigrades\SectionField\Service\FieldTypeManagerInterface;
+use Tardigrades\SectionField\Service\FieldTypeNotFoundException;
 
 /**
  * @coversDefaultClass Tardigrades\Command\UpdateFieldTypeCommand
@@ -88,6 +89,68 @@ final class UpdateFieldTypeCommandTest extends TestCase
 
         $this->assertRegExp(
             '/FieldTypeInterface Updated!/',
+            $commandTester->getDisplay()
+        );
+    }
+
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_not_update_a_field_type_when_user_does_not_confirm()
+    {
+        $command = $this->application->find('sf:update-field-type');
+        $commandTester = new CommandTester($command);
+
+        $this->fieldTypeManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andReturn($this->givenAnArrayOfFieldTypes());
+
+        $this->fieldTypeManager
+            ->shouldReceive('read')
+            ->once()
+            ->andReturn($this->givenAnArrayOfFieldTypes()[0]);
+
+        $this->fieldTypeManager
+            ->shouldNotReceive('update');
+
+        $commandTester->setInputs([1, 'Totally\\New\\Fully\\Qualified\\Class\\Name', 'n']);
+        $commandTester->execute(['command' => $command->getName()]);
+
+        $this->assertRegExp(
+            '/Cancelled/',
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_fail_with_invalid_field_type()
+    {
+        $command = $this->application->find('sf:update-field-type');
+        $commandTester = new CommandTester($command);
+
+        $this->fieldTypeManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andReturn($this->givenAnArrayOfFieldTypes());
+
+        $this->fieldTypeManager
+            ->shouldReceive('read')
+            ->once()
+            ->andThrow(FieldTypeNotFoundException::class);
+
+        $commandTester->setInputs([10]);
+        $commandTester->execute(['command' => $command->getName(),]);
+
+        $this->assertRegExp(
+            '/Field type not found/',
             $commandTester->getDisplay()
         );
     }

@@ -10,6 +10,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 use Tardigrades\Entity\Field;
 use Tardigrades\Entity\FieldType;
 use Tardigrades\SectionField\Service\FieldTypeManagerInterface;
+use Tardigrades\SectionField\Service\FieldTypeNotFoundException;
 
 /**
  * @coversDefaultClass Tardigrades\Command\DeleteFieldTypeCommand
@@ -136,6 +137,38 @@ final class DeleteFieldTypeCommandTest extends TestCase
 
         $this->assertRegExp(
             '/This FieldType has fields that use this type, delete them first./',
+            $commandTester->getDisplay()
+        );
+    }
+
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_fail_with_invalid_field_type()
+    {
+        $command = $this->application->find('sf:delete-field');
+        $commandTester = new CommandTester($command);
+
+        $fields = $this->givenAnArrayOfFieldTypesWithFields();
+
+        $this->fieldTypeManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andReturn($fields);
+
+        $this->fieldTypeManager
+            ->shouldReceive('read')
+            ->once()
+            ->andThrow(FieldTypeNotFoundException::class);
+
+        $commandTester->setInputs([10]);
+        $commandTester->execute(['command' => $command->getName()]);
+
+        $this->assertRegExp(
+            '/Field type not found/',
             $commandTester->getDisplay()
         );
     }

@@ -50,9 +50,13 @@ class DeleteFieldTypeCommand extends FieldTypeCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $this->questionHelper = $this->getHelper('question');
+        try {
+            $this->questionHelper = $this->getHelper('question');
 
-        $this->showInstalledFieldTypes($input, $output);
+            $this->showInstalledFieldTypes($input, $output);
+        } catch (FieldTypeNotFoundException $exception) {
+            $output->writeln("Field type not found");
+        }
     }
 
     private function showInstalledFieldTypes(InputInterface $input, OutputInterface $output): void
@@ -102,11 +106,14 @@ class DeleteFieldTypeCommand extends FieldTypeCommand
             try {
                 return $this->fieldTypeManager->read(Id::fromInt((int) $id));
             } catch (FieldTypeNotFoundException $exception) {
-                $output->writeln('<error>' . $exception->getMessage() . '</error>');
+                return null;
             }
-            return null;
         });
 
-        return $this->questionHelper->ask($input, $output, $question);
+        $fieldType = $this->questionHelper->ask($input, $output, $question);
+        if (!$fieldType) {
+            throw new FieldTypeNotFoundException();
+        }
+        return $fieldType;
     }
 }

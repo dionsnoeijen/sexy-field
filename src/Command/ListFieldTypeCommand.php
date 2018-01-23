@@ -45,7 +45,7 @@ class ListFieldTypeCommand extends FieldTypeCommand
             $fieldTypes = $this->fieldTypeManager->readAll();
             $this->renderTable($output, $fieldTypes, 'All installed FieldTypes');
         } catch (FieldTypeNotFoundException $exception) {
-            $output->writeln('No FieldTypeInterface found');
+            $output->writeln('No FieldType found');
         }
     }
 }

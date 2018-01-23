@@ -19,6 +19,7 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 use Tardigrades\Entity\SectionInterface;
 use Tardigrades\SectionField\Service\SectionHistoryManagerInterface;
+use Tardigrades\SectionField\Service\SectionHistoryNotFoundException;
 use Tardigrades\SectionField\Service\SectionManagerInterface;
 use Tardigrades\SectionField\Service\SectionNotFoundException;
 use Tardigrades\SectionField\ValueObject\Id;
@@ -53,6 +54,8 @@ class RestoreSectionCommand extends SectionCommand
             $this->restoreWhatRecord($input, $output);
         } catch (SectionNotFoundException $exception) {
             $output->writeln('Section not found.');
+        } catch (SectionHistoryNotFoundException $exception) {
+            $output->writeln('Section history not found.');
         }
     }
 
@@ -84,12 +87,15 @@ class RestoreSectionCommand extends SectionCommand
         $question->setValidator(function ($id) use ($output) {
             try {
                 return $this->sectionHistoryManager->read(Id::fromInt((int) $id));
-            } catch (SectionNotFoundException $exception) {
-                $output->writeln('<error>' . $exception->getMessage() . '</error>');
+            } catch (SectionHistoryNotFoundException $exception) {
+                return null;
             }
-            return null;
         });
 
-        return $this->getHelper('question')->ask($input, $output, $question);
+        $sectionFromHistory = $this->getHelper('question')->ask($input, $output, $question);
+        if (!$sectionFromHistory) {
+            throw new SectionHistoryNotFoundException();
+        }
+        return $sectionFromHistory;
     }
 }
