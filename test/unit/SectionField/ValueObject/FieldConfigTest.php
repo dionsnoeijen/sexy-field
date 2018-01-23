@@ -124,11 +124,18 @@ class FieldConfigTest extends TestCase
             'field' => [
                 'name' => 'sexy name',
                 'handle' => 'sexy handles',
-                'entityEvents' => ['some sexy Event', 'more sexy events']
+                'generator' => [
+                    'entity' => [
+                        'event' => [
+                            'sexyPrePersist',
+                            'sexyPreUpdate'
+                        ]
+                    ]
+                ]
             ]
         ];
         $fConfig = FieldConfig::fromArray($fieldConfig);
-        $this->assertSame(['some sexy Event' , 'more sexy events'], $fConfig->getEntityEvents());
+        $this->assertSame(['sexyPrePersist' , 'sexyPreUpdate'], $fConfig->getEntityEvents());
     }
 
     /**
@@ -215,7 +222,7 @@ class FieldConfigTest extends TestCase
     public function it_should_throw_exceptions_if_entityEvents_is_not_well_defined()
     {
         $this->expectException('InvalidArgumentException');
-        $this->expectExceptionMessage('Entity events not defined');
+        $this->expectExceptionMessage('No generator entity events found');
         $fieldConfig = [
             'field' => [
                 'name' => 'sexy name',
