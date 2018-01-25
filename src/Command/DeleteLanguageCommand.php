@@ -64,23 +64,27 @@ class DeleteLanguageCommand extends LanguageCommand
     private function getLanguageRecord(InputInterface $input, OutputInterface $output): ?LanguageInterface
     {
         $question = new Question('<question>What record do you want to delete?</question> (#id): ');
-        $question->setValidator(function ($id) use ($output) {
+        $question->setValidator(function ($id) {
             try {
                 return $this->languageManager->read(Id::fromInt((int) $id));
             } catch (LanguageNotFoundException $exception) {
-                $output->writeln("<error>{$exception->getMessage()}</error>");
+                return null;
             }
-            return null;
         });
 
-        return $this->questionHelper->ask($input, $output, $question);
+        $languageRecord = $this->questionHelper->ask($input, $output, $question);
+        if (!$languageRecord) {
+            throw new LanguageNotFoundException();
+        }
+        return $languageRecord;
     }
 
     private function deleteWhatRecord(InputInterface $input, OutputInterface $output): void
     {
-        $language = $this->getLanguageRecord($input, $output);
-
-        if ($language === null) {
+        try {
+            $language = $this->getLanguageRecord($input, $output);
+        } catch (LanguageNotFoundException $exception) {
+            $output->writeln("Language not found.");
             return;
         }
 

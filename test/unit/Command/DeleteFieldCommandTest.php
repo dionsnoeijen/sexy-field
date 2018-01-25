@@ -121,6 +121,7 @@ YML;
 
     /**
      * @test
+     * @covers ::execute
      * @covers ::deleteWhatRecord
      */
     public function it_should_not_try_to_delete_non_existing_fields()
@@ -135,7 +136,7 @@ YML;
         $this->fieldManager
             ->shouldReceive('read')
             ->andThrow(FieldNotFoundException::class);
-        $commandTester->setInputs([9, 'y']);
+        $commandTester->setInputs([9]);
         $commandTester->execute(['command' => $command->getName()]);
         $this->assertRegExp(
             '/Field not found/',

@@ -102,7 +102,7 @@ class DeleteFieldTypeCommand extends FieldTypeCommand
     private function getFieldType(InputInterface $input, OutputInterface $output): FieldType
     {
         $question = new Question('<question>What record do you want to delete?</question> (#id): ');
-        $question->setValidator(function ($id) use ($output) {
+        $question->setValidator(function ($id) {
             try {
                 return $this->fieldTypeManager->read(Id::fromInt((int) $id));
             } catch (FieldTypeNotFoundException $exception) {

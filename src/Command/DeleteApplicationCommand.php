@@ -50,7 +50,11 @@ class DeleteApplicationCommand extends ApplicationCommand
     {
         $this->questionHelper = $this->getHelper('question');
 
-        $this->showInstalledApplications($input, $output);
+        try {
+            $this->showInstalledApplications($input, $output);
+        } catch (ApplicationNotFoundException $exception) {
+            $output->writeln("Application not found.");
+        }
     }
 
     private function showInstalledApplications(InputInterface $input, OutputInterface $output): void
@@ -64,34 +68,35 @@ class DeleteApplicationCommand extends ApplicationCommand
     private function getApplicationRecord(InputInterface $input, OutputInterface $output): ?ApplicationInterface
     {
         $question = new Question('<question>What record do you want to delete?</question> (#id): ');
-        $question->setValidator(function ($id) use ($output) {
+        $question->setValidator(function ($id) {
             try {
                 return $this->applicationManager->read(Id::fromInt((int) $id));
             } catch (ApplicationNotFoundException $exception) {
-                $output->writeln("<error>{$exception->getMessage()}</error>");
+                return null;
             }
-            return null;
         });
 
-        return $this->questionHelper->ask($input, $output, $question);
+        $applicationRecord = $this->questionHelper->ask($input, $output, $question);
+        if (!$applicationRecord) {
+            throw new ApplicationNotFoundException();
+        }
+        return $applicationRecord;
     }
 
     private function deleteWhatRecord(InputInterface $input, OutputInterface $output): void
     {
         $application = $this->getApplicationRecord($input, $output);
 
-        if ($application !== null) {
-            $output->writeln('<info>Record with id #' . $application->getId() . ' will be deleted</info>');
+        $output->writeln('<info>Record with id #' . $application->getId() . ' will be deleted</info>');
 
-            $sure = new ConfirmationQuestion('<comment>Are you sure?</comment> (y/n) ', false);
+        $sure = new ConfirmationQuestion('<comment>Are you sure?</comment> (y/n) ', false);
 
-            if (!$this->questionHelper->ask($input, $output, $sure)) {
-                $output->writeln('<comment>Cancelled, nothing deleted.</comment>');
-                return;
-            }
-            $this->applicationManager->delete($application);
-
-            $output->writeln('<info>Removed!</info>');
+        if (!$this->questionHelper->ask($input, $output, $sure)) {
+            $output->writeln('<comment>Cancelled, nothing deleted.</comment>');
+            return;
         }
+        $this->applicationManager->delete($application);
+
+        $output->writeln('<info>Removed!</info>');
     }
 }

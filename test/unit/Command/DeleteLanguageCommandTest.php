@@ -202,7 +202,7 @@ final class DeleteLanguageCommandTest extends TestCase
         $this->languageManager
             ->shouldReceive('read')
             ->andThrow(LanguageNotFoundException::class);
-        $commandTester->setInputs([9, 'y']);
+        $commandTester->setInputs([9]);
         $commandTester->execute(['command' => $command->getName()]);
         $this->assertRegExp(
             '/Language not found/',
