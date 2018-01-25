@@ -51,7 +51,11 @@ class DeleteFieldCommand extends FieldCommand
     {
         $this->questionHelper = $this->getHelper('question');
 
-        $this->showInstalledFields($input, $output);
+        try {
+            $this->showInstalledFields($input, $output);
+        } catch (FieldNotFoundException $exception) {
+            $output->writeln("Field not found.");
+        }
     }
 
     private function showInstalledFields(InputInterface $input, OutputInterface $output): void
@@ -66,33 +70,34 @@ class DeleteFieldCommand extends FieldCommand
     {
         $field = $this->getField($input, $output);
 
-        if ($field !== null) {
-            $output->writeln('<info>Record with id #' . $field->getId() . ' will be deleted</info>');
+        $output->writeln('<info>Record with id #' . $field->getId() . ' will be deleted</info>');
 
-            $sure = new ConfirmationQuestion('<comment>Are you sure?</comment> (y/n) ', false);
+        $sure = new ConfirmationQuestion('<comment>Are you sure?</comment> (y/n) ', false);
 
-            if (!$this->questionHelper->ask($input, $output, $sure)) {
-                $output->writeln('<comment>Cancelled, nothing deleted.</comment>');
-                return;
-            }
-            $this->fieldManager->delete($field);
-
-            $output->writeln('<info>Removed!</info>');
+        if (!$this->questionHelper->ask($input, $output, $sure)) {
+            $output->writeln('<comment>Cancelled, nothing deleted.</comment>');
+            return;
         }
+        $this->fieldManager->delete($field);
+
+        $output->writeln('<info>Removed!</info>');
     }
 
     private function getField(InputInterface $input, OutputInterface $output): ?Field
     {
         $question = new Question('<question>What record do you want to delete?</question> (#id): ');
-        $question->setValidator(function ($id) use ($output) {
+        $question->setValidator(function ($id) {
             try {
                 return $this->fieldManager->read(Id::fromInt((int) $id));
             } catch (FieldNotFoundException $exception) {
-                $output->writeln("<error>{$exception->getMessage()}</error>");
+                return null;
             }
-            return null;
         });
 
-        return $this->questionHelper->ask($input, $output, $question);
+        $field = $this->questionHelper->ask($input, $output, $question);
+        if (!$field) {
+            throw new FieldNotFoundException();
+        }
+        return $field;
     }
 }

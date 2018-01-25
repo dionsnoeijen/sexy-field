@@ -103,6 +103,7 @@ final class DeleteApplicationCommandTest extends TestCase
 
     /**
      * @test
+     * @covers ::execute
      * @covers ::getApplicationRecord
      */
     public function it_should_not_try_to_delete_non_existing_applications()
@@ -121,7 +122,10 @@ final class DeleteApplicationCommandTest extends TestCase
             ->shouldReceive('read')
             ->andThrow(ApplicationNotFoundException::class);
 
-        $commandTester->setInputs([3, 'y']);
+        $this->applicationManager
+            ->shouldNotReceive('delete');
+
+        $commandTester->setInputs([3]);
         $commandTester->execute(['command' => $command->getName()]);
 
         $this->assertRegExp(
