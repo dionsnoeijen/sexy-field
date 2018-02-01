@@ -66,15 +66,4 @@ class Section extends SectionBase implements SectionInterface, SectionEntityInte
 
         return $this;
     }
-
-    public function onPrePersist(): void
-    {
-        $this->created = new \DateTime("now");
-        $this->updated = new \DateTime("now");
-    }
-
-    public function onPreUpdate(): void
-    {
-        $this->updated = new \DateTime("now");
-    }
 }

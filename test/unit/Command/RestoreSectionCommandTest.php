@@ -21,6 +21,7 @@ use Tardigrades\SectionField\Service\SectionNotFoundException;
  * @covers ::<private>
  * @covers ::<protected>
  * @covers ::__construct
+ * @covers Tardigrades\Command\SectionCommand::__construct
  */
 final class RestoreSectionCommandTest extends TestCase
 {

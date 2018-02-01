@@ -16,6 +16,7 @@ use Tardigrades\SectionField\Service\SectionManagerInterface;
  * @coversDefaultClass Tardigrades\Command\CreateSectionCommand
  * @covers ::<protected>
  * @covers ::__construct
+ * @covers Tardigrades\Command\SectionCommand::__construct
  */
 final class CreateSectionCommandTest extends TestCase
 {
