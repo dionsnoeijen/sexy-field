@@ -48,24 +48,17 @@ class GeneratorFileWriter
     {
         $find = explode('\\', $namespace)[0];
         $reflector = new \ReflectionClass(ClassLoader::class);
-        $vendorPath = preg_replace(
-            '/^(.*)\/composer\/ClassLoader\.php$/',
-            '$1',
-            $reflector->getFileName()
-        );
-        if ($vendorPath && is_dir($vendorPath)) {
-            $namespaces = include $vendorPath . '/composer/autoload_psr4.php';
-            $found = array();
+        $vendorDir = \dirname(\dirname($reflector->getFileName()));
+        $vendorFile = $vendorDir . '/composer/autoload_psr4.php';
+        if (\is_file($vendorFile)) {
+            $namespaces = include $vendorFile;
             if (is_array($namespaces)) {
                 foreach ($namespaces as $key => $value) {
                     if (strpos($key, $find) === 0) {
-                        $found[$key] = $value;
+                        return str_replace('\\', '/', $value[0] . str_replace(
+                            $find, '', $namespace));
                     }
                 }
-            }
-            if (count($found)) {
-                $found = $found[key($found)][0];
-                return str_replace('\\', '/', $found . str_replace($find, '', $namespace));
             }
 
             throw new \InvalidArgumentException('No path found for ' . $namespace);

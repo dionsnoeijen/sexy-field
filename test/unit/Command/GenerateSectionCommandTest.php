@@ -20,6 +20,7 @@ use Tardigrades\SectionField\Service\SectionNotFoundException;
  * @covers ::<private>
  * @covers ::<protected>
  * @covers ::__construct
+ * @covers Tardigrades\Command\SectionCommand::__construct
  */
 final class GenerateSectionCommandTest extends TestCase
 {
@@ -87,7 +88,8 @@ YML;
         $this->entityGenerator
             ->shouldReceive('generateBySection')
             ->with($sections[0])
-            ->once();
+            ->once()
+            ->andReturn([]);
 
         $this->entityGenerator
             ->shouldReceive('getBuildMessages')
