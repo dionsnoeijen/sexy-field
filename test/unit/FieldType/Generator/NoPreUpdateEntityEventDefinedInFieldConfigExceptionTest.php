@@ -30,7 +30,7 @@ final class NoPreUpdateEntityEventDefinedInFieldConfigExceptionTest extends Test
         $this->assertSame(
 
             // @codingStandardsIgnoreStart
-            'In the field config this key: entityEvents with this value: - preUpdate is not defined. Skipping pre update rendering for this field.',
+            'In the field config this key: generator - entity - event with this value: - preUpdate is not defined. Skipping pre update rendering for this field.',
             $exception->getMessage()
             // @codingStandardsIgnoreEnd
         );
