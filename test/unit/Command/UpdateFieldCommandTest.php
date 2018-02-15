@@ -66,6 +66,11 @@ YML;
         $commandTester = new CommandTester($command);
 
         $this->fieldManager
+            ->shouldReceive('readByHandle')
+            ->once()
+            ->andThrow(FieldNotFoundException::class);
+
+        $this->fieldManager
             ->shouldReceive('readAll')
             ->twice()
             ->andReturn($this->givenAnArrayOfFields());
@@ -80,7 +85,7 @@ YML;
             ->once()
             ->andReturn($this->givenAnArrayOfFields()[0]);
 
-        $commandTester->setInputs([1]);
+        $commandTester->setInputs(['y', 1]);
         $commandTester->execute(
             [
                 'command' => $command->getName(),
@@ -116,7 +121,6 @@ YML;
         $wrongConfig = vfsStream::url('home/wrong-config-file.yml');
         file_put_contents($wrongConfig, $wrongYml);
 
-
         $command = $this->application->find('sf:update-field');
         $commandTester = new CommandTester($command);
 
@@ -124,11 +128,6 @@ YML;
             ->shouldReceive('readAll')
             ->once()
             ->andReturn($this->givenAnArrayOfFields());
-
-        $this->fieldManager
-            ->shouldReceive('read')
-            ->once()
-            ->andReturn($this->givenAnArrayOfFields()[0]);
 
         $commandTester->setInputs([1]);
         $commandTester->execute(
@@ -169,11 +168,16 @@ YML;
             ->andReturn($this->givenAnArrayOfFields());
 
         $this->fieldManager
+            ->shouldReceive('readByHandle')
+            ->once()
+            ->andThrow(FieldNotFoundException::class);
+
+        $this->fieldManager
             ->shouldReceive('read')
             ->once()
             ->andThrow(FieldNotFoundException::class);
 
-        $commandTester->setInputs([10]);
+        $commandTester->setInputs(['y', 10]);
         $commandTester->execute(
             [
                 'command' => $command->getName(),
