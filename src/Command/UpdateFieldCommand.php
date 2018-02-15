@@ -53,7 +53,7 @@ class UpdateFieldCommand extends FieldCommand
                 'yes-mode',
                 null,
                 InputOption::VALUE_NONE,
-                'Automaticcaly say yes when a field handle is found'
+                'Automatically say yes when a field handle is found'
             );
         ;
     }
