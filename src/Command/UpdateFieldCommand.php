@@ -51,7 +51,7 @@ class UpdateFieldCommand extends FieldCommand
             ->addArgument('config', InputArgument::REQUIRED, 'The field configuration yml')
             ->addOption(
                 'yes-mode',
-                'y',
+                null,
                 InputOption::VALUE_NONE,
                 'Automaticcaly say yes when a field handle is found'
             );

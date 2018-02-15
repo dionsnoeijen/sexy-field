@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1518700725">
-  <project timestamp="1518700725">
+<coverage generated="1518703247">
+  <project timestamp="1518703247">
     <package name="Tardigrades\Command">
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/ApplicationCommand.php">
         <class name="ApplicationCommand" namespace="Tardigrades\Command">
@@ -732,33 +732,33 @@
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/UpdateFieldCommand.php">
         <class name="UpdateFieldCommand" namespace="Tardigrades\Command">
-          <metrics complexity="16" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="56" coveredstatements="47" elements="63" coveredelements="53"/>
+          <metrics complexity="16" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="56" coveredstatements="53" elements="63" coveredelements="59"/>
         </class>
-        <line num="38" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
-        <line num="41" type="stmt" count="3"/>
-        <line num="43" type="stmt" count="3"/>
-        <line num="44" type="stmt" count="3"/>
-        <line num="46" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="3"/>
-        <line num="49" type="stmt" count="3"/>
-        <line num="50" type="stmt" count="3"/>
-        <line num="51" type="stmt" count="3"/>
-        <line num="52" type="stmt" count="3"/>
-        <line num="53" type="stmt" count="3"/>
-        <line num="54" type="stmt" count="3"/>
-        <line num="55" type="stmt" count="3"/>
-        <line num="56" type="stmt" count="3"/>
-        <line num="59" type="stmt" count="3"/>
-        <line num="61" type="method" name="execute" visibility="protected" complexity="2" crap="2" count="3"/>
-        <line num="64" type="stmt" count="3"/>
-        <line num="66" type="stmt" count="3"/>
+        <line num="38" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="41" type="stmt" count="5"/>
+        <line num="43" type="stmt" count="5"/>
+        <line num="44" type="stmt" count="5"/>
+        <line num="46" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="5"/>
+        <line num="49" type="stmt" count="5"/>
+        <line num="50" type="stmt" count="5"/>
+        <line num="51" type="stmt" count="5"/>
+        <line num="52" type="stmt" count="5"/>
+        <line num="53" type="stmt" count="5"/>
+        <line num="54" type="stmt" count="5"/>
+        <line num="55" type="stmt" count="5"/>
+        <line num="56" type="stmt" count="5"/>
+        <line num="59" type="stmt" count="5"/>
+        <line num="61" type="method" name="execute" visibility="protected" complexity="2" crap="2" count="5"/>
+        <line num="64" type="stmt" count="5"/>
+        <line num="66" type="stmt" count="5"/>
         <line num="67" type="stmt" count="1"/>
         <line num="68" type="stmt" count="1"/>
-        <line num="70" type="stmt" count="3"/>
-        <line num="72" type="method" name="showInstalledFields" visibility="private" complexity="1" crap="1" count="3"/>
-        <line num="74" type="stmt" count="3"/>
-        <line num="76" type="stmt" count="3"/>
-        <line num="77" type="stmt" count="3"/>
-        <line num="78" type="stmt" count="2"/>
+        <line num="70" type="stmt" count="5"/>
+        <line num="72" type="method" name="showInstalledFields" visibility="private" complexity="1" crap="1" count="5"/>
+        <line num="74" type="stmt" count="5"/>
+        <line num="76" type="stmt" count="5"/>
+        <line num="77" type="stmt" count="5"/>
+        <line num="78" type="stmt" count="4"/>
         <line num="80" type="method" name="getField" visibility="private" complexity="3" crap="3" count="2"/>
         <line num="82" type="stmt" count="2"/>
         <line num="83" type="method" name="anonymous function" complexity="2" crap="2" count="2"/>
@@ -770,22 +770,22 @@
         <line num="92" type="stmt" count="2"/>
         <line num="93" type="stmt" count="1"/>
         <line num="95" type="stmt" count="1"/>
-        <line num="98" type="method" name="updateWhatRecord" visibility="private" complexity="6" crap="6.97" count="3"/>
-        <line num="100" type="stmt" count="3"/>
-        <line num="103" type="stmt" count="3"/>
-        <line num="104" type="stmt" count="3"/>
-        <line num="105" type="stmt" count="3"/>
+        <line num="98" type="method" name="updateWhatRecord" visibility="private" complexity="6" crap="6.04" count="5"/>
+        <line num="100" type="stmt" count="5"/>
+        <line num="103" type="stmt" count="5"/>
+        <line num="104" type="stmt" count="5"/>
+        <line num="105" type="stmt" count="5"/>
         <line num="108" type="stmt" count="1"/>
         <line num="109" type="stmt" count="1"/>
         <line num="110" type="stmt" count="1"/>
-        <line num="114" type="stmt" count="2"/>
-        <line num="116" type="stmt" count="0"/>
-        <line num="117" type="stmt" count="0"/>
-        <line num="118" type="stmt" count="0"/>
-        <line num="119" type="stmt" count="0"/>
-        <line num="122" type="stmt" count="0"/>
+        <line num="114" type="stmt" count="4"/>
+        <line num="116" type="stmt" count="2"/>
+        <line num="117" type="stmt" count="1"/>
+        <line num="118" type="stmt" count="1"/>
+        <line num="119" type="stmt" count="1"/>
+        <line num="122" type="stmt" count="1"/>
         <line num="123" type="stmt" count="0"/>
-        <line num="124" type="stmt" count="0"/>
+        <line num="124" type="stmt" count="2"/>
         <line num="127" type="stmt" count="2"/>
         <line num="128" type="stmt" count="2"/>
         <line num="129" type="stmt" count="2"/>
@@ -798,10 +798,10 @@
         <line num="140" type="stmt" count="0"/>
         <line num="141" type="stmt" count="0"/>
         <line num="144" type="stmt" count="2"/>
-        <line num="147" type="stmt" count="1"/>
-        <line num="148" type="stmt" count="1"/>
-        <line num="149" type="stmt" count="1"/>
-        <metrics loc="150" ncloc="140" classes="1" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="60" coveredstatements="51" elements="67" coveredelements="57"/>
+        <line num="147" type="stmt" count="3"/>
+        <line num="148" type="stmt" count="3"/>
+        <line num="149" type="stmt" count="3"/>
+        <metrics loc="150" ncloc="140" classes="1" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="60" coveredstatements="57" elements="67" coveredelements="63"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/UpdateFieldTypeCommand.php">
         <class name="UpdateFieldTypeCommand" namespace="Tardigrades\Command">
@@ -3364,6 +3364,6 @@
         <metrics loc="248" ncloc="143" classes="1" methods="16" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="0" elements="54" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="140" loc="8971" ncloc="7253" classes="118" methods="566" coveredmethods="543" conditionals="0" coveredconditionals="0" statements="1995" coveredstatements="1916" elements="2561" coveredelements="2459"/>
+    <metrics files="140" loc="8971" ncloc="7253" classes="118" methods="566" coveredmethods="543" conditionals="0" coveredconditionals="0" statements="1995" coveredstatements="1922" elements="2561" coveredelements="2465"/>
   </project>
 </coverage>
