@@ -50,19 +50,21 @@ class DeleteSectionCommand extends SectionCommand
     private function deleteWhatRecord(InputInterface $input, OutputInterface $output): void
     {
         /** @var SectionInterface $section */
-        $section = $this->getSection($input, $output);
+        $sections = $this->getSections($input, $output);
 
-        $output->writeln('<info>Record with id #' . $section->getId() . ' will be deleted</info>');
+        foreach ($sections as $section) {
+            $output->writeln('<info>Record with id #' . $section->getId() . ' will be deleted</info>');
 
-        $sure = new ConfirmationQuestion('<comment>Are you sure?</comment> (y/n) ', false);
+            $sure = new ConfirmationQuestion('<comment>Are you sure?</comment> (y/n) ', false);
 
-        if (!$this->getHelper('question')->ask($input, $output, $sure)) {
-            $output->writeln('<comment>Cancelled, nothing deleted.</comment>');
-            return;
+            if (!$this->getHelper('question')->ask($input, $output, $sure)) {
+                $output->writeln('<comment>Cancelled, nothing deleted.</comment>');
+                return;
+            }
+
+            $this->sectionManager->delete($section);
+
+            $output->writeln('<info>Removed!</info>');
         }
-
-        $this->sectionManager->delete($section);
-
-        $output->writeln('<info>Removed!</info>');
     }
 }

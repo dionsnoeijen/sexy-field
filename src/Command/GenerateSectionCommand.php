@@ -59,29 +59,31 @@ class GenerateSectionCommand extends SectionCommand
 
     private function generateWhatSection(InputInterface $input, OutputInterface $output): void
     {
-        $section = $this->getSection($input, $output);
+        $sections = $this->getSections($input, $output);
 
-        $writables = $this->entityGenerator->generateBySection($section);
+        foreach ($sections as $section) {
+            $writables = $this->entityGenerator->generateBySection($section);
 
-        /** @var Writable $writable */
-        foreach ($writables as $writable) {
-            $output->writeln(
-                '<info>------------ * TEMPLATE: ' .
-                $writable->getNamespace() . $writable->getFilename() .
-                ' * ------------</info>'
-            );
-            $output->writeln($writable->getTemplate());
+            /** @var Writable $writable */
+            foreach ($writables as $writable) {
+                $output->writeln(
+                    '<info>------------ * TEMPLATE: ' .
+                    $writable->getNamespace() . $writable->getFilename() .
+                    ' * ------------</info>'
+                );
+                $output->writeln($writable->getTemplate());
+            }
+
+            $sure = new ConfirmationQuestion('<comment>Are you sure?</comment> (y/n) ', false);
+            if (!$this->getHelper('question')->ask($input, $output, $sure)) {
+                $output->writeln('<comment>Cancelled, nothing generated.</comment>');
+                return;
+            }
+            foreach ($writables as $writable) {
+                GeneratorFileWriter::write($writable);
+            }
+
+            $output->writeln($this->entityGenerator->getBuildMessages());
         }
-
-        $sure = new ConfirmationQuestion('<comment>Are you sure?</comment> (y/n) ', false);
-        if (!$this->getHelper('question')->ask($input, $output, $sure)) {
-            $output->writeln('<comment>Cancelled, nothing generated.</comment>');
-            return;
-        }
-        foreach ($writables as $writable) {
-            GeneratorFileWriter::write($writable);
-        }
-
-        $output->writeln($this->entityGenerator->getBuildMessages());
     }
 }

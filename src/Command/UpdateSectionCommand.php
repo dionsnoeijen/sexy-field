@@ -54,32 +54,34 @@ class UpdateSectionCommand extends SectionCommand
 
     private function updateWhatRecord(InputInterface $input, OutputInterface $output): void
     {
-        $section = $this->getSection($input, $output);
+        $sections = $this->getSections($input, $output);
         $config = $input->getArgument('config');
 
-        try {
-            $sectionConfig = SectionConfig::fromArray(
-                Yaml::parse(
-                    file_get_contents($config)
-                )
-            );
+        foreach ($sections as $section) {
+            try {
+                $sectionConfig = SectionConfig::fromArray(
+                    Yaml::parse(
+                        file_get_contents($config)
+                    )
+                );
 
-            $inHistory = $this->getHelper('question')->ask(
-                $input,
-                $output,
-                new ConfirmationQuestion(
-                    '<comment>Do you want to store the current version in history?</comment> (y/n) ',
-                    false
-                )
-            );
+                $inHistory = $this->getHelper('question')->ask(
+                    $input,
+                    $output,
+                    new ConfirmationQuestion(
+                        '<comment>Do you want to store the current version in history?</comment> (y/n) ',
+                        false
+                    )
+                );
 
-            $this->sectionManager->updateByConfig($sectionConfig, $section, $inHistory);
-        } catch (\Exception $exception) {
-            $output->writeln("<error>Invalid configuration file.  {$exception->getMessage()}</error>");
-            return;
+                $this->sectionManager->updateByConfig($sectionConfig, $section, $inHistory);
+            } catch (\Exception $exception) {
+                $output->writeln("<error>Invalid configuration file.  {$exception->getMessage()}</error>");
+                return;
+            }
+
+            $sections = $this->sectionManager->readAll();
+            $this->renderTable($output, $sections, 'Section updated!');
         }
-
-        $sections = $this->sectionManager->readAll();
-        $this->renderTable($output, $sections, 'Section updated!');
     }
 }

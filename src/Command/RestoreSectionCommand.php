@@ -61,23 +61,25 @@ class RestoreSectionCommand extends SectionCommand
 
     private function restoreWhatRecord(InputInterface $input, OutputInterface $output): void
     {
-        $section = $this->getSection($input, $output);
+        $sections = $this->getSections($input, $output);
 
-        $output->writeln('<info>Record with id #' . $section->getId() .
-            ' will be restored, select a record from history to restore the section with.</info>');
+        foreach ($sections as $section) {
+            $output->writeln('<info>Record with id #' . $section->getId() .
+                ' will be restored, select a record from history to restore the section with.</info>');
 
-        $this->renderTable($output, $section->getHistory()->toArray(), 'Section history');
-        $sectionFromHistory = $this->getSectionFromHistory($input, $output);
+            $this->renderTable($output, $section->getHistory()->toArray(), 'Section history');
+            $sectionFromHistory = $this->getSectionFromHistory($input, $output);
 
-        $sure = new ConfirmationQuestion('<comment>Are you sure?</comment> (y/n) ', false);
-        if (!$this->getHelper('question')->ask($input, $output, $sure)) {
-            $output->writeln('<comment>Cancelled, nothing restored.</comment>');
-            return;
+            $sure = new ConfirmationQuestion('<comment>Are you sure?</comment> (y/n) ', false);
+            if (!$this->getHelper('question')->ask($input, $output, $sure)) {
+                $output->writeln('<comment>Cancelled, nothing restored.</comment>');
+                return;
+            }
+
+            $this->sectionManager->restoreFromHistory($sectionFromHistory);
+
+            $output->writeln('<info>Config Restored! Run the generate-section command to finish rollback.</info>');
         }
-
-        $this->sectionManager->restoreFromHistory($sectionFromHistory);
-
-        $output->writeln('<info>Config Restored! Run the generate-section command to finish rollback.</info>');
     }
 
     protected function getSectionFromHistory(InputInterface $input, OutputInterface $output): SectionInterface
