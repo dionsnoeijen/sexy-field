@@ -29,7 +29,7 @@ final class GenerateSectionCommandTest extends TestCase
     /** @var SectionManagerInterface|Mockery\MockInterface */
     private $sectionManager;
 
-    /** @var GeneratorsInterface */
+    /** @var GeneratorsInterface|Mockery\MockInterface */
     private $entityGenerator;
 
     /** @var GenerateSectionCommand */
@@ -154,6 +154,110 @@ YML;
      * @covers ::configure
      * @covers ::execute
      */
+    public function it_should_generate_all_sections_when_all_is_requested()
+    {
+        $yml = <<<YML
+section:
+    name: foo
+    handle: bar
+    fields: []
+    default: Default
+    namespace: My\Namespace
+YML;
+
+        file_put_contents($this->file, $yml);
+
+        $command = $this->application->find('sf:generate-section');
+        $commandTester = new CommandTester($command);
+
+        $sections = $this->givenAnArrayOfSections();
+
+        $this->sectionManager
+            ->shouldReceive('readAll')
+            ->twice()
+            ->andReturn($sections);
+
+        $this->sectionManager
+            ->shouldReceive('read')
+            ->never();
+
+        $this->entityGenerator
+            ->shouldReceive('generateBySection')
+            ->with($sections[0]);
+
+        $this->entityGenerator
+            ->shouldReceive('generateBySection')
+            ->with($sections[1]);
+
+        $this->entityGenerator
+            ->shouldReceive('generateBySection')
+            ->with($sections[2]);
+
+        $this->entityGenerator
+            ->shouldReceive('getBuildMessages')
+            ->times(3);
+
+        $commandTester->setInputs(['all', 'y', 'y', 'y']);
+        $commandTester->execute(['command' => $command->getName()]);
+    }
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_generate_selected_sections_when_requested_comma_separated()
+    {
+        $yml = <<<YML
+section:
+    name: foo
+    handle: bar
+    fields: []
+    default: Default
+    namespace: My\Namespace
+YML;
+
+        file_put_contents($this->file, $yml);
+
+        $command = $this->application->find('sf:generate-section');
+        $commandTester = new CommandTester($command);
+
+        $sections = $this->givenAnArrayOfSections();
+
+        $this->sectionManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andReturn($sections);
+
+        $this->sectionManager
+            ->shouldReceive('read')
+            ->andReturn($sections[0]);
+
+        $this->sectionManager
+            ->shouldReceive('read')
+            ->andReturn($sections[2]);
+
+        $this->entityGenerator
+            ->shouldReceive('generateBySection')
+            ->with($sections[0]);
+
+        $this->entityGenerator
+            ->shouldReceive('generateBySection')
+            ->with($sections[2]);
+
+        $this->entityGenerator
+            ->shouldReceive('getBuildMessages')
+            ->twice();
+
+        $commandTester->setInputs(['1, 2', 'y', 'y']);
+        $commandTester->execute(['command' => $command->getName()]);
+    }
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
     public function it_should_fail_when_section_is_not_found()
     {
         $yml = <<<YML
@@ -264,6 +368,14 @@ YML;
                 ->setId(2)
                 ->setName('Some other name')
                 ->setHandle('someOtherHandle')
+                ->setConfig(Yaml::parse(file_get_contents($this->file)))
+                ->setCreated(new \DateTime())
+                ->setUpdated(new \DateTime())
+                ->setVersion(1),
+            (new Section())
+                ->setId(3)
+                ->setName('Yet another name')
+                ->setHandle('AnotherHandle')
                 ->setConfig(Yaml::parse(file_get_contents($this->file)))
                 ->setCreated(new \DateTime())
                 ->setUpdated(new \DateTime())

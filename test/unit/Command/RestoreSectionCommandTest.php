@@ -27,13 +27,13 @@ final class RestoreSectionCommandTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
-    /** @var SectionManagerInterface */
+    /** @var SectionManagerInterface|Mockery\MockInterface */
     private $sectionManager;
 
-    /** @var SectionHistoryManagerInterface */
+    /** @var SectionHistoryManagerInterface|Mockery\MockInterface */
     private $sectionHistoryManager;
 
-    /** @var RestoreSectionCommand */
+    /** @var RestoreSectionCommand|Mockery\MockInterface */
     private $restoreSectionCommand;
 
     /** @var Application */
