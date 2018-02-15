@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1518703247">
-  <project timestamp="1518703247">
+<coverage generated="1518703843">
+  <project timestamp="1518703843">
     <package name="Tardigrades\Command">
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/ApplicationCommand.php">
         <class name="ApplicationCommand" namespace="Tardigrades\Command">

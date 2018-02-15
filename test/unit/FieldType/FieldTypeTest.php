@@ -75,7 +75,7 @@ final class FieldTypeTest extends TestCase
     public function it_should_return_its_directory()
     {
         $fieldType = $this->givenAFieldType();
-        $this->assertStringEndsWith('phpunit-mock-objects', $fieldType->directory());
+        $this->assertRegExp('/phpunit-mock-objects/', $fieldType->directory());
     }
 
     private function givenAFieldType()
