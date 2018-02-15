@@ -185,7 +185,6 @@ YML;
             ->once()
             ->andReturn($this->givenAnArrayOfFields()[0]);
 
-//        $commandTester->setInputs(['--yes-mode']);
         $commandTester->execute(
             [
                 'command' => $command->getName(),
