@@ -171,11 +171,6 @@ YML;
         $commandTester = new CommandTester($command);
 
         $this->fieldManager
-            ->shouldReceive('readAll')
-            ->twice()
-            ->andReturn($this->givenAnArrayOfFields());
-
-        $this->fieldManager
             ->shouldReceive('readByHandle')
             ->once()
             ->andReturn($this->givenAnArrayOfFields()[0]);

@@ -71,9 +71,9 @@ class UpdateFieldCommand extends FieldCommand
 
     private function showInstalledFields(InputInterface $input, OutputInterface $output): void
     {
-        $fields = $this->fieldManager->readAll();
-
-        $this->renderTable($output, $fields, 'All installed Fields');
+        if (!$input->getOption('yes-mode')) {
+            $this->renderTable($output, $this->fieldManager->readAll(), 'All installed Fields');
+        }
         $this->updateWhatRecord($input, $output);
     }
 
@@ -145,6 +145,10 @@ class UpdateFieldCommand extends FieldCommand
         }
 
         $this->fieldManager->updateByConfig($fieldConfig, $field);
-        $this->renderTable($output, $this->fieldManager->readAll(), 'Field updated!');
+        if (!$input->getOption('yes-mode')) {
+            $this->renderTable($output, $this->fieldManager->readAll(), 'Field updated!');
+        } else {
+            $output->writeln('Field updated!');
+        }
     }
 }
