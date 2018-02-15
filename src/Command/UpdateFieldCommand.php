@@ -14,6 +14,8 @@ declare (strict_types = 1);
 namespace Tardigrades\Command;
 
 use Symfony\Component\Console\Helper\QuestionHelper;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Yaml\Yaml;
 use Tardigrades\Entity\Field;
@@ -47,6 +49,12 @@ class UpdateFieldCommand extends FieldCommand
             ->setDescription('Updates an existing field.')
             ->setHelp('Update field by giving a new or updated field config file.')
             ->addArgument('config', InputArgument::REQUIRED, 'The field configuration yml')
+            ->addOption(
+                'yes-mode',
+                null,
+                InputOption::VALUE_NONE,
+                'Automatically say yes when a field handle is found'
+            );
         ;
     }
 
@@ -89,7 +97,6 @@ class UpdateFieldCommand extends FieldCommand
 
     private function updateWhatRecord(InputInterface $input, OutputInterface $output): void
     {
-        $field = $this->getField($input, $output);
         $config = $input->getArgument('config');
 
         try {
@@ -98,12 +105,46 @@ class UpdateFieldCommand extends FieldCommand
                     file_get_contents($config)
                 )
             );
-            $this->fieldManager->updateByConfig($fieldConfig, $field);
         } catch (\Exception $exception) {
             $output->writeln("<error>Invalid configuration file.  {$exception->getMessage()}</error>");
             return;
         }
 
+        try {
+            $field = $this->fieldManager->readByHandle($fieldConfig->getHandle());
+
+            if (!$input->getOption('yes-mode')) {
+                $sure = new ConfirmationQuestion(
+                    '<comment>Do you want to update the field with id: ' . $field->getId() . '?</comment> (y/n) ',
+                    false
+                );
+
+                if (!$this->getHelper('question')->ask($input, $output, $sure)) {
+                    $output->writeln('<comment>Cancelled, nothing updated.</comment>', false);
+                    return;
+                }
+            }
+        } catch (FieldNotFoundException $exception) {
+            $output->writeln(
+                'You are trying to update a field with handle: ' . $fieldConfig->getHandle() . '. No field with ' .
+                'that handle exists in the database, use sf:create-field if you actually need a new field, or ' .
+                'select an existing field id that will be overwritten with this config.'
+            );
+
+            $sure = new ConfirmationQuestion(
+                '<comment>Do you want to continue to select a field that will be overwritten?</comment> (y/n) ',
+                false
+            );
+
+            if (!$this->getHelper('question')->ask($input, $output, $sure)) {
+                $output->writeln('<comment>Cancelled, nothing updated.</comment>');
+                return;
+            }
+
+            $field = $this->getField($input, $output);
+        }
+
+        $this->fieldManager->updateByConfig($fieldConfig, $field);
         $this->renderTable($output, $this->fieldManager->readAll(), 'Field updated!');
     }
 }

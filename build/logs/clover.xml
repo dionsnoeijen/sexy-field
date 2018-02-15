@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1516366926">
-  <project timestamp="1516366926">
+<coverage generated="1518703843">
+  <project timestamp="1518703843">
     <package name="Tardigrades\Command">
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/ApplicationCommand.php">
         <class name="ApplicationCommand" namespace="Tardigrades\Command">
@@ -140,7 +140,7 @@
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/DeleteApplicationCommand.php">
         <class name="DeleteApplicationCommand" namespace="Tardigrades\Command">
-          <metrics complexity="12" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="29" elements="36" coveredelements="36"/>
+          <metrics complexity="13" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="29" elements="36" coveredelements="36"/>
         </class>
         <line num="34" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
         <line num="37" type="stmt" count="3"/>
@@ -150,40 +150,43 @@
         <line num="45" type="stmt" count="2"/>
         <line num="46" type="stmt" count="2"/>
         <line num="47" type="stmt" count="2"/>
-        <line num="49" type="method" name="execute" visibility="protected" complexity="1" crap="1" count="2"/>
-        <line num="51" type="stmt" count="2"/>
-        <line num="53" type="stmt" count="2"/>
-        <line num="54" type="stmt" count="2"/>
-        <line num="56" type="method" name="showInstalledApplications" visibility="private" complexity="1" crap="1" count="3"/>
+        <line num="49" type="method" name="execute" visibility="protected" complexity="2" crap="2" count="3"/>
+        <line num="51" type="stmt" count="3"/>
+        <line num="54" type="stmt" count="3"/>
+        <line num="55" type="stmt" count="1"/>
+        <line num="56" type="stmt" count="1"/>
         <line num="58" type="stmt" count="3"/>
-        <line num="60" type="stmt" count="3"/>
-        <line num="61" type="stmt" count="3"/>
+        <line num="60" type="method" name="showInstalledApplications" visibility="private" complexity="1" crap="1" count="3"/>
         <line num="62" type="stmt" count="3"/>
-        <line num="64" type="method" name="getApplicationRecord" visibility="private" complexity="3" crap="3" count="3"/>
-        <line num="66" type="stmt" count="3"/>
-        <line num="67" type="method" name="anonymous function" complexity="2" crap="2" count="3"/>
-        <line num="69" type="stmt" count="3"/>
-        <line num="70" type="stmt" count="1"/>
-        <line num="71" type="stmt" count="1"/>
-        <line num="73" type="stmt" count="1"/>
-        <line num="74" type="stmt" count="3"/>
-        <line num="76" type="stmt" count="3"/>
-        <line num="79" type="method" name="deleteWhatRecord" visibility="private" complexity="3" crap="3" count="3"/>
-        <line num="81" type="stmt" count="3"/>
-        <line num="83" type="stmt" count="3"/>
-        <line num="84" type="stmt" count="2"/>
-        <line num="86" type="stmt" count="2"/>
-        <line num="88" type="stmt" count="2"/>
-        <line num="89" type="stmt" count="1"/>
-        <line num="90" type="stmt" count="1"/>
-        <line num="92" type="stmt" count="1"/>
-        <line num="94" type="stmt" count="1"/>
-        <line num="96" type="stmt" count="2"/>
-        <metrics loc="97" ncloc="87" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="30" elements="37" coveredelements="37"/>
+        <line num="64" type="stmt" count="3"/>
+        <line num="65" type="stmt" count="3"/>
+        <line num="66" type="stmt" count="2"/>
+        <line num="68" type="method" name="getApplicationRecord" visibility="private" complexity="4" crap="4" count="3"/>
+        <line num="70" type="stmt" count="3"/>
+        <line num="71" type="method" name="anonymous function" complexity="2" crap="2" count="3"/>
+        <line num="73" type="stmt" count="3"/>
+        <line num="74" type="stmt" count="1"/>
+        <line num="75" type="stmt" count="1"/>
+        <line num="77" type="stmt" count="3"/>
+        <line num="79" type="stmt" count="3"/>
+        <line num="80" type="stmt" count="3"/>
+        <line num="81" type="stmt" count="1"/>
+        <line num="83" type="stmt" count="2"/>
+        <line num="86" type="method" name="deleteWhatRecord" visibility="private" complexity="2" crap="2" count="3"/>
+        <line num="88" type="stmt" count="3"/>
+        <line num="90" type="stmt" count="2"/>
+        <line num="92" type="stmt" count="2"/>
+        <line num="94" type="stmt" count="2"/>
+        <line num="95" type="stmt" count="1"/>
+        <line num="96" type="stmt" count="1"/>
+        <line num="98" type="stmt" count="1"/>
+        <line num="100" type="stmt" count="1"/>
+        <line num="101" type="stmt" count="1"/>
+        <metrics loc="102" ncloc="92" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="33" elements="40" coveredelements="40"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/DeleteFieldCommand.php">
         <class name="DeleteFieldCommand" namespace="Tardigrades\Command">
-          <metrics complexity="12" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="29" elements="36" coveredelements="36"/>
+          <metrics complexity="13" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="29" elements="36" coveredelements="36"/>
         </class>
         <line num="35" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
         <line num="38" type="stmt" count="3"/>
@@ -193,90 +196,97 @@
         <line num="46" type="stmt" count="1"/>
         <line num="47" type="stmt" count="1"/>
         <line num="48" type="stmt" count="1"/>
-        <line num="50" type="method" name="execute" visibility="protected" complexity="1" crap="1" count="1"/>
-        <line num="52" type="stmt" count="1"/>
-        <line num="54" type="stmt" count="1"/>
-        <line num="55" type="stmt" count="1"/>
-        <line num="57" type="method" name="showInstalledFields" visibility="private" complexity="1" crap="1" count="3"/>
-        <line num="59" type="stmt" count="3"/>
-        <line num="61" type="stmt" count="3"/>
-        <line num="62" type="stmt" count="3"/>
+        <line num="50" type="method" name="execute" visibility="protected" complexity="2" crap="2" count="2"/>
+        <line num="52" type="stmt" count="2"/>
+        <line num="55" type="stmt" count="2"/>
+        <line num="56" type="stmt" count="1"/>
+        <line num="57" type="stmt" count="1"/>
+        <line num="59" type="stmt" count="2"/>
+        <line num="61" type="method" name="showInstalledFields" visibility="private" complexity="1" crap="1" count="3"/>
         <line num="63" type="stmt" count="3"/>
-        <line num="65" type="method" name="deleteWhatRecord" visibility="private" complexity="3" crap="3" count="3"/>
-        <line num="67" type="stmt" count="3"/>
-        <line num="69" type="stmt" count="3"/>
-        <line num="70" type="stmt" count="2"/>
-        <line num="72" type="stmt" count="2"/>
-        <line num="74" type="stmt" count="2"/>
-        <line num="75" type="stmt" count="1"/>
-        <line num="76" type="stmt" count="1"/>
-        <line num="78" type="stmt" count="1"/>
-        <line num="80" type="stmt" count="1"/>
-        <line num="82" type="stmt" count="2"/>
-        <line num="84" type="method" name="getField" visibility="private" complexity="3" crap="3" count="3"/>
-        <line num="86" type="stmt" count="3"/>
-        <line num="87" type="method" name="anonymous function" complexity="2" crap="2" count="3"/>
-        <line num="89" type="stmt" count="3"/>
-        <line num="90" type="stmt" count="1"/>
-        <line num="91" type="stmt" count="1"/>
-        <line num="93" type="stmt" count="1"/>
-        <line num="94" type="stmt" count="3"/>
-        <line num="96" type="stmt" count="3"/>
-        <metrics loc="98" ncloc="88" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="30" elements="37" coveredelements="37"/>
-      </file>
-      <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/DeleteFieldTypeCommand.php">
-        <class name="DeleteFieldTypeCommand" namespace="Tardigrades\Command">
-          <metrics complexity="12" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="36" coveredstatements="33" elements="43" coveredelements="39"/>
-        </class>
-        <line num="35" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
-        <line num="38" type="stmt" count="3"/>
-        <line num="40" type="stmt" count="3"/>
-        <line num="41" type="stmt" count="3"/>
-        <line num="43" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="3"/>
-        <line num="46" type="stmt" count="3"/>
-        <line num="47" type="stmt" count="3"/>
-        <line num="49" type="stmt" count="3"/>
-        <line num="51" type="method" name="execute" visibility="protected" complexity="1" crap="1" count="3"/>
-        <line num="53" type="stmt" count="3"/>
-        <line num="55" type="stmt" count="3"/>
-        <line num="56" type="stmt" count="3"/>
-        <line num="58" type="method" name="showInstalledFieldTypes" visibility="private" complexity="1" crap="1" count="3"/>
-        <line num="60" type="stmt" count="3"/>
-        <line num="62" type="stmt" count="3"/>
-        <line num="63" type="stmt" count="3"/>
-        <line num="64" type="stmt" count="3"/>
-        <line num="66" type="method" name="deleteWhatRecord" visibility="private" complexity="4" crap="4" count="3"/>
-        <line num="68" type="stmt" count="3"/>
-        <line num="70" type="stmt" count="3"/>
-        <line num="71" type="stmt" count="1"/>
-        <line num="72" type="stmt" count="1"/>
-        <line num="73" type="stmt" count="1"/>
-        <line num="76" type="stmt" count="1"/>
+        <line num="65" type="stmt" count="3"/>
+        <line num="66" type="stmt" count="3"/>
+        <line num="67" type="stmt" count="2"/>
+        <line num="69" type="method" name="deleteWhatRecord" visibility="private" complexity="2" crap="2" count="3"/>
+        <line num="71" type="stmt" count="3"/>
+        <line num="73" type="stmt" count="2"/>
+        <line num="75" type="stmt" count="2"/>
+        <line num="77" type="stmt" count="2"/>
         <line num="78" type="stmt" count="1"/>
         <line num="79" type="stmt" count="1"/>
         <line num="81" type="stmt" count="1"/>
-        <line num="84" type="stmt" count="2"/>
-        <line num="86" type="stmt" count="2"/>
-        <line num="88" type="stmt" count="2"/>
-        <line num="89" type="stmt" count="1"/>
-        <line num="90" type="stmt" count="1"/>
+        <line num="83" type="stmt" count="1"/>
+        <line num="84" type="stmt" count="1"/>
+        <line num="86" type="method" name="getField" visibility="private" complexity="4" crap="4" count="3"/>
+        <line num="88" type="stmt" count="3"/>
+        <line num="89" type="method" name="anonymous function" complexity="2" crap="2" count="3"/>
+        <line num="91" type="stmt" count="3"/>
+        <line num="92" type="stmt" count="1"/>
         <line num="93" type="stmt" count="1"/>
-        <line num="95" type="stmt" count="1"/>
-        <line num="96" type="stmt" count="1"/>
-        <line num="98" type="method" name="getFieldType" visibility="private" complexity="2" crap="2" count="3"/>
-        <line num="100" type="stmt" count="3"/>
-        <line num="101" type="method" name="anonymous function" complexity="2" crap="2.86" count="3"/>
-        <line num="103" type="stmt" count="3"/>
-        <line num="104" type="stmt" count="0"/>
-        <line num="105" type="stmt" count="0"/>
-        <line num="107" type="stmt" count="0"/>
-        <line num="108" type="stmt" count="3"/>
-        <line num="110" type="stmt" count="3"/>
-        <metrics loc="112" ncloc="102" classes="1" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="37" coveredstatements="34" elements="44" coveredelements="40"/>
+        <line num="95" type="stmt" count="3"/>
+        <line num="97" type="stmt" count="3"/>
+        <line num="98" type="stmt" count="3"/>
+        <line num="99" type="stmt" count="1"/>
+        <line num="101" type="stmt" count="2"/>
+        <metrics loc="103" ncloc="93" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="33" elements="40" coveredelements="40"/>
+      </file>
+      <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/DeleteFieldTypeCommand.php">
+        <class name="DeleteFieldTypeCommand" namespace="Tardigrades\Command">
+          <metrics complexity="14" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="37" coveredstatements="37" elements="44" coveredelements="44"/>
+        </class>
+        <line num="35" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="4"/>
+        <line num="38" type="stmt" count="4"/>
+        <line num="40" type="stmt" count="4"/>
+        <line num="41" type="stmt" count="4"/>
+        <line num="43" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="4"/>
+        <line num="46" type="stmt" count="4"/>
+        <line num="47" type="stmt" count="4"/>
+        <line num="49" type="stmt" count="4"/>
+        <line num="51" type="method" name="execute" visibility="protected" complexity="2" crap="2" count="4"/>
+        <line num="54" type="stmt" count="4"/>
+        <line num="56" type="stmt" count="4"/>
+        <line num="57" type="stmt" count="1"/>
+        <line num="58" type="stmt" count="1"/>
+        <line num="60" type="stmt" count="4"/>
+        <line num="62" type="method" name="showInstalledFieldTypes" visibility="private" complexity="1" crap="1" count="4"/>
+        <line num="64" type="stmt" count="4"/>
+        <line num="66" type="stmt" count="4"/>
+        <line num="67" type="stmt" count="4"/>
+        <line num="68" type="stmt" count="3"/>
+        <line num="70" type="method" name="deleteWhatRecord" visibility="private" complexity="4" crap="4" count="4"/>
+        <line num="72" type="stmt" count="4"/>
+        <line num="74" type="stmt" count="3"/>
+        <line num="75" type="stmt" count="1"/>
+        <line num="76" type="stmt" count="1"/>
+        <line num="77" type="stmt" count="1"/>
+        <line num="80" type="stmt" count="1"/>
+        <line num="82" type="stmt" count="1"/>
+        <line num="83" type="stmt" count="1"/>
+        <line num="85" type="stmt" count="1"/>
+        <line num="88" type="stmt" count="2"/>
+        <line num="90" type="stmt" count="2"/>
+        <line num="92" type="stmt" count="2"/>
+        <line num="93" type="stmt" count="1"/>
+        <line num="94" type="stmt" count="1"/>
+        <line num="97" type="stmt" count="1"/>
+        <line num="99" type="stmt" count="1"/>
+        <line num="100" type="stmt" count="1"/>
+        <line num="102" type="method" name="getFieldType" visibility="private" complexity="3" crap="3" count="4"/>
+        <line num="104" type="stmt" count="4"/>
+        <line num="105" type="method" name="anonymous function" complexity="2" crap="2" count="4"/>
+        <line num="107" type="stmt" count="4"/>
+        <line num="108" type="stmt" count="1"/>
+        <line num="109" type="stmt" count="1"/>
+        <line num="111" type="stmt" count="4"/>
+        <line num="113" type="stmt" count="4"/>
+        <line num="114" type="stmt" count="4"/>
+        <line num="115" type="stmt" count="1"/>
+        <line num="117" type="stmt" count="3"/>
+        <metrics loc="119" ncloc="109" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="41" coveredstatements="41" elements="48" coveredelements="48"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/DeleteLanguageCommand.php">
         <class name="DeleteLanguageCommand" namespace="Tardigrades\Command">
-          <metrics complexity="13" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="32" elements="39" coveredelements="39"/>
+          <metrics complexity="14" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="32" elements="39" coveredelements="39"/>
         </class>
         <line num="34" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="4"/>
         <line num="37" type="stmt" count="4"/>
@@ -295,60 +305,63 @@
         <line num="60" type="stmt" count="4"/>
         <line num="61" type="stmt" count="4"/>
         <line num="62" type="stmt" count="4"/>
-        <line num="64" type="method" name="getLanguageRecord" visibility="private" complexity="3" crap="3" count="4"/>
+        <line num="64" type="method" name="getLanguageRecord" visibility="private" complexity="4" crap="4" count="4"/>
         <line num="66" type="stmt" count="4"/>
         <line num="67" type="method" name="anonymous function" complexity="2" crap="2" count="4"/>
         <line num="69" type="stmt" count="4"/>
         <line num="70" type="stmt" count="1"/>
         <line num="71" type="stmt" count="1"/>
-        <line num="73" type="stmt" count="1"/>
-        <line num="74" type="stmt" count="4"/>
+        <line num="73" type="stmt" count="4"/>
+        <line num="75" type="stmt" count="4"/>
         <line num="76" type="stmt" count="4"/>
-        <line num="79" type="method" name="deleteWhatRecord" visibility="private" complexity="4" crap="4" count="4"/>
-        <line num="81" type="stmt" count="4"/>
-        <line num="83" type="stmt" count="4"/>
-        <line num="84" type="stmt" count="1"/>
-        <line num="87" type="stmt" count="3"/>
-        <line num="89" type="stmt" count="3"/>
+        <line num="77" type="stmt" count="1"/>
+        <line num="79" type="stmt" count="3"/>
+        <line num="82" type="method" name="deleteWhatRecord" visibility="private" complexity="4" crap="4" count="4"/>
+        <line num="85" type="stmt" count="4"/>
+        <line num="86" type="stmt" count="1"/>
+        <line num="87" type="stmt" count="1"/>
+        <line num="88" type="stmt" count="1"/>
         <line num="91" type="stmt" count="3"/>
-        <line num="92" type="stmt" count="1"/>
-        <line num="93" type="stmt" count="1"/>
-        <line num="95" type="stmt" count="2"/>
-        <line num="98" type="stmt" count="2"/>
-        <line num="99" type="stmt" count="1"/>
-        <line num="100" type="stmt" count="1"/>
+        <line num="93" type="stmt" count="3"/>
+        <line num="95" type="stmt" count="3"/>
+        <line num="96" type="stmt" count="1"/>
+        <line num="97" type="stmt" count="1"/>
+        <line num="99" type="stmt" count="2"/>
         <line num="102" type="stmt" count="2"/>
-        <metrics loc="103" ncloc="93" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="33" elements="40" coveredelements="40"/>
+        <line num="103" type="stmt" count="1"/>
+        <line num="104" type="stmt" count="1"/>
+        <line num="106" type="stmt" count="2"/>
+        <metrics loc="107" ncloc="97" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="36" coveredstatements="36" elements="43" coveredelements="43"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/DeleteSectionCommand.php">
         <class name="DeleteSectionCommand" namespace="Tardigrades\Command">
-          <metrics complexity="6" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="18" elements="24" coveredelements="21"/>
+          <metrics complexity="6" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="20" elements="24" coveredelements="24"/>
         </class>
-        <line num="25" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="28" type="stmt" count="2"/>
-        <line num="29" type="stmt" count="2"/>
-        <line num="31" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="2"/>
-        <line num="34" type="stmt" count="2"/>
-        <line num="35" type="stmt" count="2"/>
-        <line num="37" type="stmt" count="2"/>
-        <line num="39" type="method" name="execute" visibility="protected" complexity="2" crap="2" count="2"/>
-        <line num="42" type="stmt" count="2"/>
-        <line num="43" type="stmt" count="2"/>
-        <line num="44" type="stmt" count="2"/>
+        <line num="25" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="28" type="stmt" count="3"/>
+        <line num="29" type="stmt" count="3"/>
+        <line num="31" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="3"/>
+        <line num="34" type="stmt" count="3"/>
+        <line num="35" type="stmt" count="3"/>
+        <line num="37" type="stmt" count="3"/>
+        <line num="39" type="method" name="execute" visibility="protected" complexity="2" crap="2" count="3"/>
+        <line num="42" type="stmt" count="3"/>
+        <line num="43" type="stmt" count="3"/>
+        <line num="44" type="stmt" count="3"/>
         <line num="45" type="stmt" count="1"/>
         <line num="46" type="stmt" count="1"/>
-        <line num="48" type="stmt" count="2"/>
-        <line num="50" type="method" name="deleteWhatRecord" visibility="private" complexity="2" crap="2.04" count="2"/>
-        <line num="53" type="stmt" count="2"/>
-        <line num="55" type="stmt" count="1"/>
-        <line num="57" type="stmt" count="1"/>
-        <line num="59" type="stmt" count="1"/>
-        <line num="60" type="stmt" count="0"/>
-        <line num="61" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="3"/>
+        <line num="50" type="method" name="deleteWhatRecord" visibility="private" complexity="2" crap="2" count="3"/>
+        <line num="53" type="stmt" count="3"/>
+        <line num="55" type="stmt" count="2"/>
+        <line num="57" type="stmt" count="2"/>
+        <line num="59" type="stmt" count="2"/>
+        <line num="60" type="stmt" count="1"/>
+        <line num="61" type="stmt" count="1"/>
         <line num="64" type="stmt" count="1"/>
         <line num="66" type="stmt" count="1"/>
         <line num="67" type="stmt" count="1"/>
-        <metrics loc="68" ncloc="59" classes="1" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="18" elements="24" coveredelements="21"/>
+        <metrics loc="68" ncloc="59" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="20" elements="24" coveredelements="24"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/FieldCommand.php">
         <class name="FieldCommand" namespace="Tardigrades\Command">
@@ -400,40 +413,40 @@
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/GenerateSectionCommand.php">
         <class name="GenerateSectionCommand" namespace="Tardigrades\Command">
-          <metrics complexity="8" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="20" elements="31" coveredelements="23"/>
+          <metrics complexity="8" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="22" elements="31" coveredelements="25"/>
         </class>
-        <line num="30" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="34" type="stmt" count="2"/>
-        <line num="36" type="stmt" count="2"/>
-        <line num="37" type="stmt" count="2"/>
-        <line num="39" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="2"/>
-        <line num="43" type="stmt" count="2"/>
-        <line num="44" type="stmt" count="2"/>
-        <line num="47" type="stmt" count="2"/>
-        <line num="49" type="method" name="execute" visibility="protected" complexity="2" crap="2" count="2"/>
-        <line num="52" type="stmt" count="2"/>
-        <line num="53" type="stmt" count="2"/>
-        <line num="54" type="stmt" count="2"/>
+        <line num="30" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="34" type="stmt" count="3"/>
+        <line num="36" type="stmt" count="3"/>
+        <line num="37" type="stmt" count="3"/>
+        <line num="39" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="3"/>
+        <line num="43" type="stmt" count="3"/>
+        <line num="44" type="stmt" count="3"/>
+        <line num="47" type="stmt" count="3"/>
+        <line num="49" type="method" name="execute" visibility="protected" complexity="2" crap="2" count="3"/>
+        <line num="52" type="stmt" count="3"/>
+        <line num="53" type="stmt" count="3"/>
+        <line num="54" type="stmt" count="3"/>
         <line num="55" type="stmt" count="1"/>
         <line num="56" type="stmt" count="1"/>
-        <line num="58" type="stmt" count="2"/>
-        <line num="60" type="method" name="generateWhatSection" visibility="private" complexity="4" crap="5.63" count="2"/>
-        <line num="62" type="stmt" count="2"/>
-        <line num="64" type="stmt" count="1"/>
-        <line num="67" type="stmt" count="1"/>
+        <line num="58" type="stmt" count="3"/>
+        <line num="60" type="method" name="generateWhatSection" visibility="private" complexity="4" crap="4.59" count="3"/>
+        <line num="62" type="stmt" count="3"/>
+        <line num="64" type="stmt" count="2"/>
+        <line num="67" type="stmt" count="2"/>
         <line num="68" type="stmt" count="0"/>
         <line num="70" type="stmt" count="0"/>
         <line num="71" type="stmt" count="0"/>
         <line num="73" type="stmt" count="0"/>
-        <line num="76" type="stmt" count="1"/>
-        <line num="77" type="stmt" count="1"/>
-        <line num="78" type="stmt" count="0"/>
-        <line num="79" type="stmt" count="0"/>
+        <line num="76" type="stmt" count="2"/>
+        <line num="77" type="stmt" count="2"/>
+        <line num="78" type="stmt" count="1"/>
+        <line num="79" type="stmt" count="1"/>
         <line num="81" type="stmt" count="1"/>
         <line num="82" type="stmt" count="0"/>
         <line num="85" type="stmt" count="1"/>
         <line num="86" type="stmt" count="1"/>
-        <metrics loc="87" ncloc="73" classes="1" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="20" elements="31" coveredelements="23"/>
+        <metrics loc="87" ncloc="73" classes="1" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="22" elements="31" coveredelements="25"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/InstallFieldTypeCommand.php">
         <class name="InstallFieldTypeCommand" namespace="Tardigrades\Command">
@@ -485,337 +498,376 @@
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/ListApplicationCommand.php">
         <class name="ListApplicationCommand" namespace="Tardigrades\Command">
-          <metrics complexity="4" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="9" elements="14" coveredelements="11"/>
+          <metrics complexity="4" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="14" coveredelements="14"/>
         </class>
-        <line num="25" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="28" type="stmt" count="1"/>
-        <line num="30" type="stmt" count="1"/>
-        <line num="31" type="stmt" count="1"/>
-        <line num="33" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="1"/>
-        <line num="36" type="stmt" count="1"/>
-        <line num="37" type="stmt" count="1"/>
-        <line num="38" type="stmt" count="1"/>
-        <line num="40" type="method" name="execute" visibility="protected" complexity="2" crap="2.26" count="1"/>
-        <line num="43" type="stmt" count="1"/>
+        <line num="25" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="28" type="stmt" count="2"/>
+        <line num="30" type="stmt" count="2"/>
+        <line num="31" type="stmt" count="2"/>
+        <line num="33" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="2"/>
+        <line num="36" type="stmt" count="2"/>
+        <line num="37" type="stmt" count="2"/>
+        <line num="38" type="stmt" count="2"/>
+        <line num="40" type="method" name="execute" visibility="protected" complexity="2" crap="2" count="2"/>
+        <line num="43" type="stmt" count="2"/>
         <line num="44" type="stmt" count="1"/>
-        <line num="45" type="stmt" count="0"/>
-        <line num="46" type="stmt" count="0"/>
-        <line num="48" type="stmt" count="1"/>
-        <metrics loc="49" ncloc="41" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="9" elements="14" coveredelements="11"/>
+        <line num="45" type="stmt" count="1"/>
+        <line num="46" type="stmt" count="1"/>
+        <line num="48" type="stmt" count="2"/>
+        <metrics loc="49" ncloc="41" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="14" coveredelements="14"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/ListFieldCommand.php">
         <class name="ListFieldCommand" namespace="Tardigrades\Command">
-          <metrics complexity="4" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="9" elements="14" coveredelements="11"/>
+          <metrics complexity="4" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="14" coveredelements="14"/>
         </class>
-        <line num="26" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="29" type="stmt" count="1"/>
-        <line num="31" type="stmt" count="1"/>
-        <line num="32" type="stmt" count="1"/>
-        <line num="34" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="1"/>
-        <line num="37" type="stmt" count="1"/>
-        <line num="38" type="stmt" count="1"/>
-        <line num="40" type="stmt" count="1"/>
-        <line num="42" type="method" name="execute" visibility="protected" complexity="2" crap="2.26" count="1"/>
-        <line num="45" type="stmt" count="1"/>
+        <line num="26" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="29" type="stmt" count="2"/>
+        <line num="31" type="stmt" count="2"/>
+        <line num="32" type="stmt" count="2"/>
+        <line num="34" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="2"/>
+        <line num="37" type="stmt" count="2"/>
+        <line num="38" type="stmt" count="2"/>
+        <line num="40" type="stmt" count="2"/>
+        <line num="42" type="method" name="execute" visibility="protected" complexity="2" crap="2" count="2"/>
+        <line num="45" type="stmt" count="2"/>
         <line num="46" type="stmt" count="1"/>
-        <line num="47" type="stmt" count="0"/>
-        <line num="48" type="stmt" count="0"/>
-        <line num="50" type="stmt" count="1"/>
-        <metrics loc="51" ncloc="42" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="9" elements="14" coveredelements="11"/>
+        <line num="47" type="stmt" count="1"/>
+        <line num="48" type="stmt" count="1"/>
+        <line num="50" type="stmt" count="2"/>
+        <metrics loc="51" ncloc="42" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="14" coveredelements="14"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/ListFieldTypeCommand.php">
         <class name="ListFieldTypeCommand" namespace="Tardigrades\Command">
-          <metrics complexity="4" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="9" elements="14" coveredelements="11"/>
+          <metrics complexity="4" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="14" coveredelements="14"/>
         </class>
-        <line num="26" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="29" type="stmt" count="1"/>
-        <line num="31" type="stmt" count="1"/>
-        <line num="32" type="stmt" count="1"/>
-        <line num="34" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="1"/>
-        <line num="37" type="stmt" count="1"/>
-        <line num="38" type="stmt" count="1"/>
-        <line num="40" type="stmt" count="1"/>
-        <line num="42" type="method" name="execute" visibility="protected" complexity="2" crap="2.26" count="1"/>
-        <line num="45" type="stmt" count="1"/>
+        <line num="26" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="29" type="stmt" count="2"/>
+        <line num="31" type="stmt" count="2"/>
+        <line num="32" type="stmt" count="2"/>
+        <line num="34" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="2"/>
+        <line num="37" type="stmt" count="2"/>
+        <line num="38" type="stmt" count="2"/>
+        <line num="40" type="stmt" count="2"/>
+        <line num="42" type="method" name="execute" visibility="protected" complexity="2" crap="2" count="2"/>
+        <line num="45" type="stmt" count="2"/>
         <line num="46" type="stmt" count="1"/>
-        <line num="47" type="stmt" count="0"/>
-        <line num="48" type="stmt" count="0"/>
-        <line num="50" type="stmt" count="1"/>
-        <metrics loc="51" ncloc="42" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="9" elements="14" coveredelements="11"/>
+        <line num="47" type="stmt" count="1"/>
+        <line num="48" type="stmt" count="1"/>
+        <line num="50" type="stmt" count="2"/>
+        <metrics loc="51" ncloc="42" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="14" coveredelements="14"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/ListLanguageCommand.php">
         <class name="ListLanguageCommand" namespace="Tardigrades\Command">
-          <metrics complexity="4" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="9" elements="14" coveredelements="11"/>
+          <metrics complexity="4" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="14" coveredelements="14"/>
         </class>
-        <line num="25" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="28" type="stmt" count="1"/>
-        <line num="30" type="stmt" count="1"/>
-        <line num="31" type="stmt" count="1"/>
-        <line num="33" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="1"/>
-        <line num="36" type="stmt" count="1"/>
-        <line num="37" type="stmt" count="1"/>
-        <line num="38" type="stmt" count="1"/>
-        <line num="40" type="method" name="execute" visibility="protected" complexity="2" crap="2.26" count="1"/>
-        <line num="43" type="stmt" count="1"/>
+        <line num="25" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="28" type="stmt" count="2"/>
+        <line num="30" type="stmt" count="2"/>
+        <line num="31" type="stmt" count="2"/>
+        <line num="33" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="2"/>
+        <line num="36" type="stmt" count="2"/>
+        <line num="37" type="stmt" count="2"/>
+        <line num="38" type="stmt" count="2"/>
+        <line num="40" type="method" name="execute" visibility="protected" complexity="2" crap="2" count="2"/>
+        <line num="43" type="stmt" count="2"/>
         <line num="44" type="stmt" count="1"/>
-        <line num="45" type="stmt" count="0"/>
-        <line num="46" type="stmt" count="0"/>
-        <line num="48" type="stmt" count="1"/>
-        <metrics loc="49" ncloc="41" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="9" elements="14" coveredelements="11"/>
+        <line num="45" type="stmt" count="1"/>
+        <line num="46" type="stmt" count="1"/>
+        <line num="48" type="stmt" count="2"/>
+        <metrics loc="49" ncloc="41" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="14" coveredelements="14"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/ListSectionCommand.php">
         <class name="ListSectionCommand" namespace="Tardigrades\Command">
-          <metrics complexity="4" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="8" elements="13" coveredelements="10"/>
+          <metrics complexity="4" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="13" coveredelements="13"/>
         </class>
-        <line num="23" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="26" type="stmt" count="1"/>
-        <line num="27" type="stmt" count="1"/>
-        <line num="29" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="1"/>
-        <line num="32" type="stmt" count="1"/>
-        <line num="33" type="stmt" count="1"/>
-        <line num="35" type="stmt" count="1"/>
-        <line num="37" type="method" name="execute" visibility="protected" complexity="2" crap="2.26" count="1"/>
-        <line num="40" type="stmt" count="1"/>
+        <line num="23" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="26" type="stmt" count="2"/>
+        <line num="27" type="stmt" count="2"/>
+        <line num="29" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="2"/>
+        <line num="32" type="stmt" count="2"/>
+        <line num="33" type="stmt" count="2"/>
+        <line num="35" type="stmt" count="2"/>
+        <line num="37" type="method" name="execute" visibility="protected" complexity="2" crap="2" count="2"/>
+        <line num="40" type="stmt" count="2"/>
         <line num="41" type="stmt" count="1"/>
-        <line num="42" type="stmt" count="0"/>
-        <line num="43" type="stmt" count="0"/>
-        <line num="45" type="stmt" count="1"/>
-        <metrics loc="46" ncloc="38" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="8" elements="13" coveredelements="10"/>
+        <line num="42" type="stmt" count="1"/>
+        <line num="43" type="stmt" count="1"/>
+        <line num="45" type="stmt" count="2"/>
+        <metrics loc="46" ncloc="38" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="13" coveredelements="13"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/RestoreSectionCommand.php">
         <class name="RestoreSectionCommand" namespace="Tardigrades\Command">
-          <metrics complexity="10" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="0" elements="36" coveredelements="0"/>
+          <metrics complexity="12" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="31" elements="37" coveredelements="37"/>
         </class>
-        <line num="31" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="35" type="stmt" count="0"/>
-        <line num="37" type="stmt" count="0"/>
-        <line num="38" type="stmt" count="0"/>
-        <line num="40" type="method" name="configure" visibility="protected" complexity="1" crap="2" count="0"/>
-        <line num="43" type="stmt" count="0"/>
-        <line num="44" type="stmt" count="0"/>
-        <line num="46" type="stmt" count="0"/>
-        <line num="48" type="method" name="execute" visibility="protected" complexity="2" crap="6" count="0"/>
-        <line num="51" type="stmt" count="0"/>
-        <line num="52" type="stmt" count="0"/>
-        <line num="53" type="stmt" count="0"/>
-        <line num="54" type="stmt" count="0"/>
-        <line num="55" type="stmt" count="0"/>
-        <line num="57" type="stmt" count="0"/>
-        <line num="59" type="method" name="restoreWhatRecord" visibility="private" complexity="2" crap="6" count="0"/>
-        <line num="61" type="stmt" count="0"/>
-        <line num="63" type="stmt" count="0"/>
-        <line num="64" type="stmt" count="0"/>
-        <line num="66" type="stmt" count="0"/>
-        <line num="67" type="stmt" count="0"/>
-        <line num="69" type="stmt" count="0"/>
-        <line num="70" type="stmt" count="0"/>
-        <line num="71" type="stmt" count="0"/>
-        <line num="72" type="stmt" count="0"/>
-        <line num="75" type="stmt" count="0"/>
-        <line num="77" type="stmt" count="0"/>
-        <line num="78" type="stmt" count="0"/>
-        <line num="80" type="method" name="getSectionFromHistory" visibility="protected" complexity="2" crap="6" count="0"/>
-        <line num="82" type="stmt" count="0"/>
-        <line num="84" type="method" name="anonymous function" complexity="2" crap="6" count="0"/>
-        <line num="86" type="stmt" count="0"/>
-        <line num="87" type="stmt" count="0"/>
-        <line num="88" type="stmt" count="0"/>
-        <line num="90" type="stmt" count="0"/>
-        <line num="91" type="stmt" count="0"/>
-        <line num="93" type="stmt" count="0"/>
-        <metrics loc="95" ncloc="86" classes="1" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="0" elements="37" coveredelements="0"/>
+        <line num="32" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="4"/>
+        <line num="36" type="stmt" count="4"/>
+        <line num="38" type="stmt" count="4"/>
+        <line num="39" type="stmt" count="4"/>
+        <line num="41" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="4"/>
+        <line num="44" type="stmt" count="4"/>
+        <line num="45" type="stmt" count="4"/>
+        <line num="47" type="stmt" count="4"/>
+        <line num="49" type="method" name="execute" visibility="protected" complexity="3" crap="3" count="4"/>
+        <line num="52" type="stmt" count="4"/>
+        <line num="53" type="stmt" count="4"/>
+        <line num="54" type="stmt" count="4"/>
+        <line num="55" type="stmt" count="2"/>
+        <line num="56" type="stmt" count="1"/>
+        <line num="57" type="stmt" count="1"/>
+        <line num="58" type="stmt" count="1"/>
+        <line num="60" type="stmt" count="4"/>
+        <line num="62" type="method" name="restoreWhatRecord" visibility="private" complexity="2" crap="2" count="4"/>
+        <line num="64" type="stmt" count="4"/>
+        <line num="66" type="stmt" count="3"/>
+        <line num="67" type="stmt" count="3"/>
+        <line num="69" type="stmt" count="3"/>
+        <line num="70" type="stmt" count="3"/>
+        <line num="72" type="stmt" count="2"/>
+        <line num="73" type="stmt" count="2"/>
+        <line num="74" type="stmt" count="1"/>
+        <line num="75" type="stmt" count="1"/>
+        <line num="78" type="stmt" count="1"/>
+        <line num="80" type="stmt" count="1"/>
+        <line num="81" type="stmt" count="1"/>
+        <line num="83" type="method" name="getSectionFromHistory" visibility="protected" complexity="3" crap="3" count="3"/>
+        <line num="85" type="stmt" count="3"/>
+        <line num="87" type="method" name="anonymous function" complexity="2" crap="2" count="3"/>
+        <line num="89" type="stmt" count="3"/>
+        <line num="90" type="stmt" count="1"/>
+        <line num="91" type="stmt" count="1"/>
+        <line num="93" type="stmt" count="3"/>
+        <line num="95" type="stmt" count="3"/>
+        <line num="96" type="stmt" count="3"/>
+        <line num="97" type="stmt" count="1"/>
+        <line num="99" type="stmt" count="2"/>
+        <metrics loc="101" ncloc="92" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="35" coveredstatements="35" elements="41" coveredelements="41"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/SectionCommand.php">
         <class name="SectionCommand" namespace="Tardigrades\Command">
-          <metrics complexity="9" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="22" elements="29" coveredelements="25"/>
+          <metrics complexity="9" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="25" elements="29" coveredelements="29"/>
         </class>
-        <line num="33" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="37" type="stmt" count="0"/>
-        <line num="39" type="stmt" count="0"/>
-        <line num="40" type="stmt" count="0"/>
-        <line num="42" type="method" name="renderTable" visibility="protected" complexity="2" crap="2" count="8"/>
-        <line num="44" type="stmt" count="8"/>
-        <line num="46" type="stmt" count="8"/>
-        <line num="48" type="stmt" count="8"/>
-        <line num="49" type="stmt" count="8"/>
-        <line num="50" type="stmt" count="8"/>
-        <line num="51" type="stmt" count="8"/>
-        <line num="52" type="stmt" count="8"/>
-        <line num="53" type="stmt" count="8"/>
-        <line num="54" type="stmt" count="8"/>
-        <line num="55" type="stmt" count="8"/>
-        <line num="59" type="stmt" count="8"/>
-        <line num="60" type="stmt" count="8"/>
-        <line num="61" type="stmt" count="8"/>
-        <line num="65" type="stmt" count="8"/>
-        <line num="66" type="stmt" count="8"/>
-        <line num="68" type="stmt" count="8"/>
-        <line num="69" type="stmt" count="8"/>
-        <line num="71" type="method" name="getSection" visibility="protected" complexity="4" crap="4" count="7"/>
-        <line num="73" type="stmt" count="7"/>
-        <line num="75" type="method" name="anonymous function" complexity="2" crap="2" count="7"/>
-        <line num="77" type="stmt" count="7"/>
-        <line num="78" type="stmt" count="3"/>
-        <line num="80" type="stmt" count="3"/>
-        <line num="82" type="stmt" count="7"/>
-        <line num="84" type="stmt" count="7"/>
-        <line num="85" type="stmt" count="7"/>
-        <line num="86" type="stmt" count="3"/>
-        <line num="88" type="stmt" count="4"/>
-        <metrics loc="90" ncloc="78" classes="1" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="26" elements="33" coveredelements="29"/>
+        <line num="33" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="18"/>
+        <line num="37" type="stmt" count="18"/>
+        <line num="39" type="stmt" count="18"/>
+        <line num="40" type="stmt" count="18"/>
+        <line num="42" type="method" name="renderTable" visibility="protected" complexity="2" crap="2" count="14"/>
+        <line num="44" type="stmt" count="14"/>
+        <line num="46" type="stmt" count="14"/>
+        <line num="48" type="stmt" count="14"/>
+        <line num="49" type="stmt" count="14"/>
+        <line num="50" type="stmt" count="14"/>
+        <line num="51" type="stmt" count="14"/>
+        <line num="52" type="stmt" count="14"/>
+        <line num="53" type="stmt" count="14"/>
+        <line num="54" type="stmt" count="14"/>
+        <line num="55" type="stmt" count="14"/>
+        <line num="59" type="stmt" count="14"/>
+        <line num="60" type="stmt" count="14"/>
+        <line num="61" type="stmt" count="14"/>
+        <line num="65" type="stmt" count="14"/>
+        <line num="66" type="stmt" count="14"/>
+        <line num="68" type="stmt" count="14"/>
+        <line num="69" type="stmt" count="14"/>
+        <line num="71" type="method" name="getSection" visibility="protected" complexity="4" crap="4" count="13"/>
+        <line num="73" type="stmt" count="13"/>
+        <line num="75" type="method" name="anonymous function" complexity="2" crap="2" count="13"/>
+        <line num="77" type="stmt" count="13"/>
+        <line num="78" type="stmt" count="4"/>
+        <line num="80" type="stmt" count="4"/>
+        <line num="82" type="stmt" count="13"/>
+        <line num="84" type="stmt" count="13"/>
+        <line num="85" type="stmt" count="13"/>
+        <line num="86" type="stmt" count="4"/>
+        <line num="88" type="stmt" count="9"/>
+        <metrics loc="90" ncloc="78" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="29" elements="33" coveredelements="33"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/UpdateApplicationCommand.php">
         <class name="UpdateApplicationCommand" namespace="Tardigrades\Command">
-          <metrics complexity="10" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="28" elements="37" coveredelements="34"/>
+          <metrics complexity="12" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="32" elements="39" coveredelements="39"/>
         </class>
-        <line num="36" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="39" type="stmt" count="2"/>
-        <line num="41" type="stmt" count="2"/>
-        <line num="42" type="stmt" count="2"/>
-        <line num="44" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="2"/>
-        <line num="48" type="stmt" count="2"/>
-        <line num="49" type="stmt" count="2"/>
-        <line num="50" type="stmt" count="2"/>
-        <line num="53" type="stmt" count="2"/>
-        <line num="55" type="method" name="execute" visibility="protected" complexity="1" crap="1" count="2"/>
-        <line num="57" type="stmt" count="2"/>
-        <line num="58" type="stmt" count="2"/>
-        <line num="59" type="stmt" count="2"/>
-        <line num="61" type="method" name="showInstalledApplications" visibility="private" complexity="1" crap="1" count="2"/>
-        <line num="63" type="stmt" count="2"/>
-        <line num="65" type="stmt" count="2"/>
-        <line num="66" type="stmt" count="2"/>
-        <line num="67" type="stmt" count="2"/>
-        <line num="69" type="method" name="getApplicationRecord" visibility="private" complexity="2" crap="2" count="2"/>
+        <line num="36" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="39" type="stmt" count="3"/>
+        <line num="41" type="stmt" count="3"/>
+        <line num="42" type="stmt" count="3"/>
+        <line num="44" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="3"/>
+        <line num="48" type="stmt" count="3"/>
+        <line num="49" type="stmt" count="3"/>
+        <line num="50" type="stmt" count="3"/>
+        <line num="53" type="stmt" count="3"/>
+        <line num="55" type="method" name="execute" visibility="protected" complexity="2" crap="2" count="3"/>
+        <line num="58" type="stmt" count="3"/>
+        <line num="59" type="stmt" count="3"/>
+        <line num="60" type="stmt" count="1"/>
+        <line num="61" type="stmt" count="1"/>
+        <line num="63" type="stmt" count="3"/>
+        <line num="65" type="method" name="showInstalledApplications" visibility="private" complexity="1" crap="1" count="3"/>
+        <line num="67" type="stmt" count="3"/>
+        <line num="69" type="stmt" count="3"/>
+        <line num="70" type="stmt" count="3"/>
         <line num="71" type="stmt" count="2"/>
-        <line num="72" type="method" name="anonymous function" complexity="2" crap="2.50" count="2"/>
-        <line num="74" type="stmt" count="2"/>
-        <line num="75" type="stmt" count="0"/>
-        <line num="76" type="stmt" count="0"/>
-        <line num="78" type="stmt" count="2"/>
-        <line num="80" type="stmt" count="2"/>
-        <line num="83" type="method" name="updateWhatRecord" visibility="private" complexity="2" crap="2" count="2"/>
-        <line num="85" type="stmt" count="2"/>
-        <line num="86" type="stmt" count="2"/>
-        <line num="89" type="stmt" count="2"/>
-        <line num="90" type="stmt" count="2"/>
-        <line num="91" type="stmt" count="2"/>
-        <line num="94" type="stmt" count="1"/>
-        <line num="95" type="stmt" count="1"/>
-        <line num="96" type="stmt" count="1"/>
-        <line num="97" type="stmt" count="1"/>
-        <line num="100" type="stmt" count="1"/>
-        <line num="101" type="stmt" count="1"/>
-        <metrics loc="102" ncloc="88" classes="1" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="29" elements="38" coveredelements="35"/>
+        <line num="73" type="method" name="getApplicationRecord" visibility="private" complexity="3" crap="3" count="3"/>
+        <line num="75" type="stmt" count="3"/>
+        <line num="76" type="method" name="anonymous function" complexity="2" crap="2" count="3"/>
+        <line num="78" type="stmt" count="3"/>
+        <line num="79" type="stmt" count="1"/>
+        <line num="80" type="stmt" count="1"/>
+        <line num="82" type="stmt" count="3"/>
+        <line num="84" type="stmt" count="3"/>
+        <line num="85" type="stmt" count="3"/>
+        <line num="86" type="stmt" count="1"/>
+        <line num="88" type="stmt" count="2"/>
+        <line num="91" type="method" name="updateWhatRecord" visibility="private" complexity="2" crap="2" count="3"/>
+        <line num="93" type="stmt" count="3"/>
+        <line num="94" type="stmt" count="2"/>
+        <line num="97" type="stmt" count="2"/>
+        <line num="98" type="stmt" count="2"/>
+        <line num="99" type="stmt" count="2"/>
+        <line num="102" type="stmt" count="1"/>
+        <line num="103" type="stmt" count="1"/>
+        <line num="104" type="stmt" count="1"/>
+        <line num="105" type="stmt" count="1"/>
+        <line num="108" type="stmt" count="1"/>
+        <line num="109" type="stmt" count="1"/>
+        <metrics loc="110" ncloc="96" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="36" coveredstatements="36" elements="43" coveredelements="43"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/UpdateFieldCommand.php">
         <class name="UpdateFieldCommand" namespace="Tardigrades\Command">
-          <metrics complexity="10" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="28" elements="38" coveredelements="34"/>
+          <metrics complexity="16" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="56" coveredstatements="53" elements="63" coveredelements="59"/>
         </class>
-        <line num="36" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
-        <line num="39" type="stmt" count="2"/>
-        <line num="41" type="stmt" count="2"/>
-        <line num="42" type="stmt" count="2"/>
-        <line num="44" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="2"/>
-        <line num="47" type="stmt" count="2"/>
-        <line num="48" type="stmt" count="2"/>
-        <line num="49" type="stmt" count="2"/>
-        <line num="51" type="stmt" count="2"/>
-        <line num="53" type="method" name="execute" visibility="protected" complexity="1" crap="1" count="2"/>
-        <line num="55" type="stmt" count="2"/>
-        <line num="57" type="stmt" count="2"/>
-        <line num="58" type="stmt" count="2"/>
-        <line num="60" type="method" name="showInstalledFields" visibility="private" complexity="1" crap="1" count="2"/>
-        <line num="62" type="stmt" count="2"/>
-        <line num="64" type="stmt" count="2"/>
-        <line num="65" type="stmt" count="2"/>
-        <line num="66" type="stmt" count="2"/>
-        <line num="68" type="method" name="getField" visibility="private" complexity="2" crap="2" count="2"/>
-        <line num="70" type="stmt" count="2"/>
-        <line num="71" type="method" name="anonymous function" complexity="2" crap="2.86" count="2"/>
-        <line num="73" type="stmt" count="2"/>
-        <line num="74" type="stmt" count="0"/>
-        <line num="75" type="stmt" count="0"/>
-        <line num="77" type="stmt" count="0"/>
-        <line num="78" type="stmt" count="2"/>
-        <line num="80" type="stmt" count="2"/>
-        <line num="83" type="method" name="updateWhatRecord" visibility="private" complexity="2" crap="2" count="2"/>
+        <line num="38" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="41" type="stmt" count="5"/>
+        <line num="43" type="stmt" count="5"/>
+        <line num="44" type="stmt" count="5"/>
+        <line num="46" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="5"/>
+        <line num="49" type="stmt" count="5"/>
+        <line num="50" type="stmt" count="5"/>
+        <line num="51" type="stmt" count="5"/>
+        <line num="52" type="stmt" count="5"/>
+        <line num="53" type="stmt" count="5"/>
+        <line num="54" type="stmt" count="5"/>
+        <line num="55" type="stmt" count="5"/>
+        <line num="56" type="stmt" count="5"/>
+        <line num="59" type="stmt" count="5"/>
+        <line num="61" type="method" name="execute" visibility="protected" complexity="2" crap="2" count="5"/>
+        <line num="64" type="stmt" count="5"/>
+        <line num="66" type="stmt" count="5"/>
+        <line num="67" type="stmt" count="1"/>
+        <line num="68" type="stmt" count="1"/>
+        <line num="70" type="stmt" count="5"/>
+        <line num="72" type="method" name="showInstalledFields" visibility="private" complexity="1" crap="1" count="5"/>
+        <line num="74" type="stmt" count="5"/>
+        <line num="76" type="stmt" count="5"/>
+        <line num="77" type="stmt" count="5"/>
+        <line num="78" type="stmt" count="4"/>
+        <line num="80" type="method" name="getField" visibility="private" complexity="3" crap="3" count="2"/>
+        <line num="82" type="stmt" count="2"/>
+        <line num="83" type="method" name="anonymous function" complexity="2" crap="2" count="2"/>
         <line num="85" type="stmt" count="2"/>
-        <line num="86" type="stmt" count="2"/>
+        <line num="86" type="stmt" count="1"/>
+        <line num="87" type="stmt" count="1"/>
         <line num="89" type="stmt" count="2"/>
-        <line num="90" type="stmt" count="2"/>
         <line num="91" type="stmt" count="2"/>
-        <line num="94" type="stmt" count="1"/>
+        <line num="92" type="stmt" count="2"/>
+        <line num="93" type="stmt" count="1"/>
         <line num="95" type="stmt" count="1"/>
-        <line num="96" type="stmt" count="1"/>
-        <line num="97" type="stmt" count="1"/>
-        <line num="100" type="stmt" count="1"/>
-        <line num="101" type="stmt" count="1"/>
-        <metrics loc="102" ncloc="92" classes="1" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="29" elements="39" coveredelements="35"/>
+        <line num="98" type="method" name="updateWhatRecord" visibility="private" complexity="6" crap="6.04" count="5"/>
+        <line num="100" type="stmt" count="5"/>
+        <line num="103" type="stmt" count="5"/>
+        <line num="104" type="stmt" count="5"/>
+        <line num="105" type="stmt" count="5"/>
+        <line num="108" type="stmt" count="1"/>
+        <line num="109" type="stmt" count="1"/>
+        <line num="110" type="stmt" count="1"/>
+        <line num="114" type="stmt" count="4"/>
+        <line num="116" type="stmt" count="2"/>
+        <line num="117" type="stmt" count="1"/>
+        <line num="118" type="stmt" count="1"/>
+        <line num="119" type="stmt" count="1"/>
+        <line num="122" type="stmt" count="1"/>
+        <line num="123" type="stmt" count="0"/>
+        <line num="124" type="stmt" count="2"/>
+        <line num="127" type="stmt" count="2"/>
+        <line num="128" type="stmt" count="2"/>
+        <line num="129" type="stmt" count="2"/>
+        <line num="130" type="stmt" count="2"/>
+        <line num="131" type="stmt" count="2"/>
+        <line num="134" type="stmt" count="2"/>
+        <line num="135" type="stmt" count="2"/>
+        <line num="136" type="stmt" count="2"/>
+        <line num="139" type="stmt" count="2"/>
+        <line num="140" type="stmt" count="0"/>
+        <line num="141" type="stmt" count="0"/>
+        <line num="144" type="stmt" count="2"/>
+        <line num="147" type="stmt" count="3"/>
+        <line num="148" type="stmt" count="3"/>
+        <line num="149" type="stmt" count="3"/>
+        <metrics loc="150" ncloc="140" classes="1" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="60" coveredstatements="57" elements="67" coveredelements="63"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/UpdateFieldTypeCommand.php">
         <class name="UpdateFieldTypeCommand" namespace="Tardigrades\Command">
-          <metrics complexity="13" methods="9" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="48" coveredstatements="40" elements="57" coveredelements="45"/>
+          <metrics complexity="13" methods="9" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="50" coveredstatements="49" elements="59" coveredelements="57"/>
         </class>
-        <line num="35" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="38" type="stmt" count="1"/>
-        <line num="40" type="stmt" count="1"/>
-        <line num="41" type="stmt" count="1"/>
-        <line num="43" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="1"/>
-        <line num="46" type="stmt" count="1"/>
-        <line num="47" type="stmt" count="1"/>
-        <line num="49" type="stmt" count="1"/>
-        <line num="51" type="method" name="execute" visibility="protected" complexity="1" crap="1" count="1"/>
-        <line num="53" type="stmt" count="1"/>
-        <line num="55" type="stmt" count="1"/>
-        <line num="56" type="stmt" count="1"/>
-        <line num="58" type="method" name="showInstalledFieldTypes" visibility="private" complexity="1" crap="1" count="1"/>
-        <line num="60" type="stmt" count="1"/>
-        <line num="62" type="stmt" count="1"/>
-        <line num="63" type="stmt" count="1"/>
-        <line num="64" type="stmt" count="1"/>
-        <line num="66" type="method" name="getFieldType" visibility="private" complexity="2" crap="2.31" count="1"/>
-        <line num="68" type="stmt" count="1"/>
-        <line num="71" type="stmt" count="1"/>
-        <line num="72" type="stmt" count="0"/>
-        <line num="73" type="stmt" count="0"/>
-        <line num="75" type="stmt" count="0"/>
-        <line num="76" type="stmt" count="1"/>
+        <line num="36" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="39" type="stmt" count="3"/>
+        <line num="41" type="stmt" count="3"/>
+        <line num="42" type="stmt" count="3"/>
+        <line num="44" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="3"/>
+        <line num="47" type="stmt" count="3"/>
+        <line num="48" type="stmt" count="3"/>
+        <line num="50" type="stmt" count="3"/>
+        <line num="52" type="method" name="execute" visibility="protected" complexity="2" crap="2" count="3"/>
+        <line num="55" type="stmt" count="3"/>
+        <line num="57" type="stmt" count="3"/>
+        <line num="58" type="stmt" count="1"/>
+        <line num="59" type="stmt" count="1"/>
+        <line num="61" type="stmt" count="3"/>
+        <line num="63" type="method" name="showInstalledFieldTypes" visibility="private" complexity="1" crap="1" count="3"/>
+        <line num="65" type="stmt" count="3"/>
+        <line num="67" type="stmt" count="3"/>
+        <line num="68" type="stmt" count="3"/>
+        <line num="69" type="stmt" count="2"/>
+        <line num="71" type="method" name="getFieldType" visibility="private" complexity="3" crap="3" count="3"/>
+        <line num="73" type="stmt" count="3"/>
+        <line num="76" type="stmt" count="3"/>
+        <line num="77" type="stmt" count="1"/>
         <line num="78" type="stmt" count="1"/>
-        <line num="81" type="method" name="getNamespace" visibility="private" complexity="2" crap="2" count="1"/>
-        <line num="86" type="stmt" count="1"/>
-        <line num="88" type="stmt" count="1"/>
-        <line num="89" type="stmt" count="1"/>
-        <line num="91" type="method" name="anonymous function" complexity="2" crap="2.50" count="1"/>
-        <line num="93" type="stmt" count="1"/>
-        <line num="94" type="stmt" count="0"/>
-        <line num="95" type="stmt" count="0"/>
-        <line num="97" type="stmt" count="1"/>
-        <line num="99" type="stmt" count="1"/>
-        <line num="102" type="method" name="updateWhatRecord" visibility="private" complexity="2" crap="2.02" count="1"/>
-        <line num="104" type="stmt" count="1"/>
-        <line num="105" type="stmt" count="1"/>
-        <line num="107" type="stmt" count="1"/>
-        <line num="109" type="stmt" count="1"/>
-        <line num="110" type="stmt" count="1"/>
-        <line num="111" type="stmt" count="1"/>
-        <line num="114" type="stmt" count="1"/>
-        <line num="116" type="stmt" count="1"/>
-        <line num="117" type="stmt" count="0"/>
-        <line num="118" type="stmt" count="0"/>
+        <line num="80" type="stmt" count="3"/>
+        <line num="82" type="stmt" count="3"/>
+        <line num="83" type="stmt" count="3"/>
+        <line num="84" type="stmt" count="1"/>
+        <line num="86" type="stmt" count="2"/>
+        <line num="89" type="method" name="getNamespace" visibility="private" complexity="1" crap="1" count="2"/>
+        <line num="94" type="stmt" count="2"/>
+        <line num="96" type="stmt" count="2"/>
+        <line num="97" type="stmt" count="2"/>
+        <line num="99" type="method" name="anonymous function" complexity="1" crap="1" count="2"/>
+        <line num="100" type="stmt" count="2"/>
+        <line num="101" type="stmt" count="2"/>
+        <line num="103" type="stmt" count="2"/>
+        <line num="106" type="method" name="updateWhatRecord" visibility="private" complexity="2" crap="2" count="3"/>
+        <line num="108" type="stmt" count="3"/>
+        <line num="109" type="stmt" count="2"/>
+        <line num="111" type="stmt" count="2"/>
+        <line num="113" type="stmt" count="2"/>
+        <line num="114" type="stmt" count="2"/>
+        <line num="115" type="stmt" count="2"/>
+        <line num="118" type="stmt" count="2"/>
+        <line num="120" type="stmt" count="2"/>
         <line num="121" type="stmt" count="1"/>
         <line num="122" type="stmt" count="1"/>
-        <line num="124" type="method" name="updateRecord" visibility="private" complexity="1" crap="1.00" count="1"/>
-        <line num="130" type="stmt" count="1"/>
-        <line num="131" type="stmt" count="1"/>
-        <line num="132" type="stmt" count="1"/>
-        <line num="133" type="stmt" count="1"/>
-        <line num="134" type="stmt" count="0"/>
+        <line num="125" type="stmt" count="1"/>
+        <line num="126" type="stmt" count="1"/>
+        <line num="128" type="method" name="updateRecord" visibility="private" complexity="1" crap="1.00" count="1"/>
+        <line num="134" type="stmt" count="1"/>
         <line num="135" type="stmt" count="1"/>
         <line num="136" type="stmt" count="1"/>
+        <line num="137" type="stmt" count="1"/>
+        <line num="138" type="stmt" count="0"/>
         <line num="139" type="stmt" count="1"/>
         <line num="140" type="stmt" count="1"/>
-        <metrics loc="141" ncloc="131" classes="1" methods="9" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="49" coveredstatements="41" elements="58" coveredelements="46"/>
+        <line num="143" type="stmt" count="1"/>
+        <line num="144" type="stmt" count="1"/>
+        <metrics loc="145" ncloc="135" classes="1" methods="9" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="51" coveredstatements="50" elements="60" coveredelements="58"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/UpdateLanguageCommand.php">
         <class name="UpdateLanguageCommand" namespace="Tardigrades\Command">
@@ -1169,7 +1221,7 @@
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Entity/Section.php">
         <class name="Section" namespace="Tardigrades\Entity">
-          <metrics complexity="11" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="20" elements="26" coveredelements="26"/>
+          <metrics complexity="9" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="19" coveredelements="19"/>
         </class>
         <line num="31" type="method" name="__construct" visibility="public" complexity="4" crap="4" count="31"/>
         <line num="36" type="stmt" count="31"/>
@@ -1190,18 +1242,11 @@
         <line num="63" type="stmt" count="1"/>
         <line num="65" type="stmt" count="1"/>
         <line num="67" type="stmt" count="1"/>
-        <line num="70" type="method" name="onPrePersist" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="72" type="stmt" count="1"/>
-        <line num="73" type="stmt" count="1"/>
-        <line num="74" type="stmt" count="1"/>
-        <line num="76" type="method" name="onPreUpdate" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="78" type="stmt" count="1"/>
-        <line num="79" type="stmt" count="1"/>
-        <metrics loc="80" ncloc="71" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="20" elements="26" coveredelements="26"/>
+        <metrics loc="69" ncloc="60" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="19" coveredelements="19"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Entity/SectionBase.php">
         <class name="SectionBase" namespace="Tardigrades\Entity">
-          <metrics complexity="35" methods="27" coveredmethods="25" conditionals="0" coveredconditionals="0" statements="56" coveredstatements="51" elements="83" coveredelements="76"/>
+          <metrics complexity="35" methods="27" coveredmethods="27" conditionals="0" coveredconditionals="0" statements="56" coveredstatements="56" elements="83" coveredelements="83"/>
         </class>
         <line num="55" type="method" name="__construct" visibility="public" complexity="3" crap="3" count="28"/>
         <line num="59" type="stmt" count="28"/>
@@ -1279,14 +1324,14 @@
         <line num="217" type="stmt" count="2"/>
         <line num="220" type="method" name="getUpdatedValueObject" visibility="public" complexity="1" crap="1" count="2"/>
         <line num="222" type="stmt" count="2"/>
-        <line num="225" type="method" name="onPrePersist" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="227" type="stmt" count="0"/>
-        <line num="228" type="stmt" count="0"/>
-        <line num="229" type="stmt" count="0"/>
-        <line num="231" type="method" name="onPreUpdate" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="233" type="stmt" count="0"/>
-        <line num="234" type="stmt" count="0"/>
-        <metrics loc="235" ncloc="217" classes="1" methods="27" coveredmethods="25" conditionals="0" coveredconditionals="0" statements="56" coveredstatements="51" elements="83" coveredelements="76"/>
+        <line num="225" type="method" name="onPrePersist" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="227" type="stmt" count="1"/>
+        <line num="228" type="stmt" count="1"/>
+        <line num="229" type="stmt" count="1"/>
+        <line num="231" type="method" name="onPreUpdate" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="233" type="stmt" count="1"/>
+        <line num="234" type="stmt" count="1"/>
+        <metrics loc="235" ncloc="217" classes="1" methods="27" coveredmethods="27" conditionals="0" coveredconditionals="0" statements="56" coveredstatements="56" elements="83" coveredelements="83"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Entity/SectionHistory.php">
         <class name="SectionHistory" namespace="Tardigrades\Entity">
@@ -1332,38 +1377,38 @@
     <package name="Tardigrades\FieldType">
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/FieldType/FieldType.php">
         <class name="FieldType" namespace="Tardigrades\FieldType">
-          <metrics complexity="14" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="0" elements="29" coveredelements="0"/>
+          <metrics complexity="14" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="22" elements="29" coveredelements="29"/>
         </class>
-        <line num="32" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="34" type="stmt" count="0"/>
-        <line num="35" type="stmt" count="0"/>
-        <line num="37" type="method" name="setConfig" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="39" type="stmt" count="0"/>
-        <line num="41" type="stmt" count="0"/>
-        <line num="44" type="method" name="getFieldTypeGeneratorConfig" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="46" type="stmt" count="0"/>
-        <line num="49" type="method" name="getConfig" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="51" type="stmt" count="0"/>
-        <line num="54" type="method" name="formOptions" visibility="public" complexity="6" crap="42" count="0"/>
-        <line num="56" type="stmt" count="0"/>
-        <line num="57" type="stmt" count="0"/>
-        <line num="58" type="stmt" count="0"/>
-        <line num="59" type="stmt" count="0"/>
-        <line num="60" type="stmt" count="0"/>
-        <line num="61" type="stmt" count="0"/>
-        <line num="62" type="stmt" count="0"/>
-        <line num="64" type="stmt" count="0"/>
-        <line num="65" type="stmt" count="0"/>
-        <line num="68" type="stmt" count="0"/>
-        <line num="71" type="method" name="hasEntityEvent" visibility="public" complexity="2" crap="6" count="0"/>
-        <line num="74" type="stmt" count="0"/>
-        <line num="75" type="stmt" count="0"/>
-        <line num="76" type="stmt" count="0"/>
-        <line num="79" type="stmt" count="0"/>
-        <line num="82" type="method" name="directory" visibility="public" complexity="1" crap="2" count="0"/>
-        <line num="84" type="stmt" count="0"/>
-        <line num="85" type="stmt" count="0"/>
-        <metrics loc="95" ncloc="85" classes="1" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="0" elements="29" coveredelements="0"/>
+        <line num="32" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="4"/>
+        <line num="34" type="stmt" count="4"/>
+        <line num="35" type="stmt" count="4"/>
+        <line num="37" type="method" name="setConfig" visibility="public" complexity="1" crap="1" count="4"/>
+        <line num="39" type="stmt" count="4"/>
+        <line num="41" type="stmt" count="4"/>
+        <line num="44" type="method" name="getFieldTypeGeneratorConfig" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="46" type="stmt" count="2"/>
+        <line num="49" type="method" name="getConfig" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="51" type="stmt" count="2"/>
+        <line num="54" type="method" name="formOptions" visibility="public" complexity="6" crap="6" count="2"/>
+        <line num="56" type="stmt" count="2"/>
+        <line num="57" type="stmt" count="2"/>
+        <line num="58" type="stmt" count="2"/>
+        <line num="59" type="stmt" count="2"/>
+        <line num="60" type="stmt" count="2"/>
+        <line num="61" type="stmt" count="2"/>
+        <line num="62" type="stmt" count="1"/>
+        <line num="64" type="stmt" count="2"/>
+        <line num="65" type="stmt" count="1"/>
+        <line num="68" type="stmt" count="2"/>
+        <line num="71" type="method" name="hasEntityEvent" visibility="public" complexity="2" crap="2" count="1"/>
+        <line num="74" type="stmt" count="1"/>
+        <line num="75" type="stmt" count="1"/>
+        <line num="76" type="stmt" count="1"/>
+        <line num="79" type="stmt" count="1"/>
+        <line num="82" type="method" name="directory" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="84" type="stmt" count="1"/>
+        <line num="85" type="stmt" count="1"/>
+        <metrics loc="95" ncloc="85" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="22" elements="29" coveredelements="29"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/FieldType/NoCustomGeneratorDefinedException.php">
         <class name="NoCustomGeneratorDefinedException" namespace="Tardigrades\FieldType">
@@ -1802,7 +1847,7 @@
     <package name="Tardigrades\SectionField\Generator\Writer">
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/SectionField/Generator/Writer/GeneratorFileWriter.php">
         <class name="GeneratorFileWriter" namespace="Tardigrades\SectionField\Generator\Writer">
-          <metrics complexity="10" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="34" coveredstatements="0" elements="36" coveredelements="0"/>
+          <metrics complexity="8" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="12" elements="31" coveredelements="12"/>
         </class>
         <line num="21" type="method" name="write" visibility="public" complexity="3" crap="12" count="0"/>
         <line num="24" type="stmt" count="0"/>
@@ -1821,26 +1866,21 @@
         <line num="42" type="stmt" count="0"/>
         <line num="43" type="stmt" count="0"/>
         <line num="45" type="stmt" count="0"/>
-        <line num="47" type="method" name="getPsr4AutoloadDirectoryForNamespace" visibility="public" complexity="7" crap="56" count="0"/>
-        <line num="49" type="stmt" count="0"/>
-        <line num="50" type="stmt" count="0"/>
-        <line num="51" type="stmt" count="0"/>
-        <line num="52" type="stmt" count="0"/>
-        <line num="53" type="stmt" count="0"/>
-        <line num="54" type="stmt" count="0"/>
-        <line num="56" type="stmt" count="0"/>
-        <line num="57" type="stmt" count="0"/>
-        <line num="58" type="stmt" count="0"/>
-        <line num="59" type="stmt" count="0"/>
-        <line num="60" type="stmt" count="0"/>
-        <line num="61" type="stmt" count="0"/>
-        <line num="62" type="stmt" count="0"/>
+        <line num="47" type="method" name="getPsr4AutoloadDirectoryForNamespace" visibility="public" complexity="5" crap="5.01" count="2"/>
+        <line num="49" type="stmt" count="2"/>
+        <line num="50" type="stmt" count="2"/>
+        <line num="51" type="stmt" count="2"/>
+        <line num="52" type="stmt" count="2"/>
+        <line num="53" type="stmt" count="2"/>
+        <line num="54" type="stmt" count="2"/>
+        <line num="55" type="stmt" count="2"/>
+        <line num="56" type="stmt" count="2"/>
+        <line num="57" type="stmt" count="2"/>
+        <line num="58" type="stmt" count="1"/>
+        <line num="59" type="stmt" count="2"/>
+        <line num="64" type="stmt" count="1"/>
         <line num="66" type="stmt" count="0"/>
-        <line num="67" type="stmt" count="0"/>
-        <line num="68" type="stmt" count="0"/>
-        <line num="71" type="stmt" count="0"/>
-        <line num="73" type="stmt" count="0"/>
-        <metrics loc="75" ncloc="67" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="34" coveredstatements="0" elements="36" coveredelements="0"/>
+        <metrics loc="68" ncloc="60" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="12" elements="31" coveredelements="12"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/SectionField/Generator/Writer/Writable.php">
         <class name="Writable" namespace="Tardigrades\SectionField\Generator\Writer">
@@ -3324,6 +3364,6 @@
         <metrics loc="248" ncloc="143" classes="1" methods="16" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="0" elements="54" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="140" loc="8902" ncloc="7184" classes="118" methods="568" coveredmethods="518" conditionals="0" coveredconditionals="0" statements="1953" coveredstatements="1776" elements="2521" coveredelements="2294"/>
+    <metrics files="140" loc="8971" ncloc="7253" classes="118" methods="566" coveredmethods="543" conditionals="0" coveredconditionals="0" statements="1995" coveredstatements="1922" elements="2561" coveredelements="2465"/>
   </project>
 </coverage>
