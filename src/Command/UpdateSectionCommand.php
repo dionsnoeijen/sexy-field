@@ -40,22 +40,18 @@ class UpdateSectionCommand extends SectionCommand
         // @codingStandardsIgnoreStart
         $this
             ->setDescription('Updates an existing section.')
-            //->setHelp('This command allows you to update a section based on a yml section configuration. Pass along the path to a section configuration yml. Something like: section/blog.yml')
             ->setHelp(<<<EOF
 The <info>%command.name%</info> command allows you to update a section based on a yml section cofiguration. Pass along the path to a section cofiguration yml. Something like: section/blog.yml
 
-You can automatically continue :
+You can automatically continue with flags:
 
-  <info>cat filename | php %command.full_name%</info>
+  <info>--yes-mode --in-history</info>
 
-You can also validate the syntax of a file:
+Will store the section config that will be replaced in history.
 
-  <info>php %command.full_name% filename</info>
+  <info>--yes-mode --not-in-history</info>
 
-Or of a whole directory:
-
-  <info>php %command.full_name% dirname</info>
-  <info>php %command.full_name% dirname --format=json</info>
+Will not store anything in history.
 
 EOF
             )
@@ -124,11 +120,6 @@ EOF
 
         try {
             $section = $this->sectionManager->readByHandle($sectionConfig->getHandle());
-
-//            echo "\n\n\n";
-//            var_dump($input->getOption('yes-mode'));
-//            echo "\n\n\n";
-
             if (!$input->getOption('yes-mode')) {
                 $sure = new ConfirmationQuestion(
                     '<comment>Do you want to update the section with id: ' . $section->getId() . '?</comment> (y/n) ',
