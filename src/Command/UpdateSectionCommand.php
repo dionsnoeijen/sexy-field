@@ -13,8 +13,10 @@ declare (strict_types = 1);
 
 namespace Tardigrades\Command;
 
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Yaml\Yaml;
@@ -24,6 +26,9 @@ use Tardigrades\SectionField\ValueObject\SectionConfig;
 
 class UpdateSectionCommand extends SectionCommand
 {
+    /** @var QuestionHelper */
+    private $questionHelper;
+
     public function __construct(
         SectionManagerInterface $sectionManager
     ) {
@@ -35,8 +40,44 @@ class UpdateSectionCommand extends SectionCommand
         // @codingStandardsIgnoreStart
         $this
             ->setDescription('Updates an existing section.')
-            ->setHelp('This command allows you to update a section based on a yml section configuration. Pass along the path to a section configuration yml. Something like: section/blog.yml')
+            //->setHelp('This command allows you to update a section based on a yml section configuration. Pass along the path to a section configuration yml. Something like: section/blog.yml')
+            ->setHelp(<<<EOF
+The <info>%command.name%</info> command allows you to update a section based on a yml section cofiguration. Pass along the path to a section cofiguration yml. Something like: section/blog.yml
+
+You can automatically continue :
+
+  <info>cat filename | php %command.full_name%</info>
+
+You can also validate the syntax of a file:
+
+  <info>php %command.full_name% filename</info>
+
+Or of a whole directory:
+
+  <info>php %command.full_name% dirname</info>
+  <info>php %command.full_name% dirname --format=json</info>
+
+EOF
+            )
             ->addArgument('config', InputArgument::REQUIRED, 'The section configuration yml')
+            ->addOption(
+                'yes-mode',
+                'ym',
+                InputOption::VALUE_NONE,
+                'Automatically say yes when a field handle is found'
+            )
+            ->addOption(
+                'in-history',
+                null,
+                InputOption::VALUE_NONE,
+                'Set this flag if you want to store the section in history automatically'
+            )
+            ->addOption(
+                'not-in-history',
+                null,
+                InputOption::VALUE_NONE,
+                'Set this flag if you don\'t want to store the section in history automatically'
+            )
         ;
         // @codingStandardsIgnoreEnd
     }
@@ -44,26 +85,85 @@ class UpdateSectionCommand extends SectionCommand
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         try {
-            $sections = $this->sectionManager->readAll();
-            $this->renderTable($output, $sections, 'All installed Sections');
-            $this->updateWhatRecord($input, $output);
+            $this->questionHelper = $this->getHelper('question');
+            $this->showInstalledSections($input, $output);
         } catch (SectionNotFoundException $exception) {
-            $output->writeln("Section not found.");
+            $output->writeln("Section not found");
         }
     }
 
-    private function updateWhatRecord(InputInterface $input, OutputInterface $output): void
+    private function showInstalledSections(InputInterface $input, OutputInterface $output): void
     {
-        $section = $this->getSection($input, $output);
-        $config = $input->getArgument('config');
+        if (!$input->getOption('yes-mode')) {
+            $this->renderTable($output, $this->sectionManager->readAll(), 'All installed Sections');
+        }
+        $this->updateWhatRecord($input, $output);
+    }
 
+    private function getConfig(InputInterface $input, OutputInterface $output): ?SectionConfig
+    {
         try {
+            $config = $input->getArgument('config');
             $sectionConfig = SectionConfig::fromArray(
                 Yaml::parse(
                     file_get_contents($config)
                 )
             );
+            return $sectionConfig;
+        } catch (\Exception $exception) {
+            $output->writeln("<error>Invalid configuration file.  {$exception->getMessage()}</error>");
+            return null;
+        }
+    }
 
+    private function updateWhatRecord(InputInterface $input, OutputInterface $output): void
+    {
+        if (is_null($sectionConfig = $this->getConfig($input, $output))) {
+            return;
+        }
+
+        try {
+            $section = $this->sectionManager->readByHandle($sectionConfig->getHandle());
+
+//            echo "\n\n\n";
+//            var_dump($input->getOption('yes-mode'));
+//            echo "\n\n\n";
+
+            if (!$input->getOption('yes-mode')) {
+                $sure = new ConfirmationQuestion(
+                    '<comment>Do you want to update the section with id: ' . $section->getId() . '?</comment> (y/n) ',
+                    false
+                );
+
+                if (!$this->getHelper('question')->ask($input, $output, $sure)) {
+                    $output->writeln('<comment>Cancelled, nothing updated.</comment>', false);
+                    return;
+                }
+            }
+
+        } catch (SectionNotFoundException $exception) {
+            $output->writeln(
+                'You are trying to update a section with handle: ' . $sectionConfig->getHandle() . '. No field with ' .
+                'that handle exists in the database, use sf:create-section is you actually need a new section, or' .
+                'select an existing section id that will be overwritten with this config.'
+            );
+
+            $sure = new ConfirmationQuestion(
+                '<comment>Do you want to continue to select a section that will be overwritten?</comment> (y/n) ', false
+            );
+
+            if (!$this->getHelper('question')->ask($input, $output, $sure)) {
+                $output->writeln('<comment>Cancelled, nothing updated</comment>');
+                return;
+            }
+
+            $section = $this->getSection($input, $output);
+        }
+
+        $inHistory = $input->getOption('in-history');
+        $notInHistory = $input->getOption('not-in-history');
+
+        if (!$inHistory && !$notInHistory) {
             $inHistory = $this->getHelper('question')->ask(
                 $input,
                 $output,
@@ -72,14 +172,20 @@ class UpdateSectionCommand extends SectionCommand
                     false
                 )
             );
-
-            $this->sectionManager->updateByConfig($sectionConfig, $section, $inHistory);
-        } catch (\Exception $exception) {
-            $output->writeln("<error>Invalid configuration file.  {$exception->getMessage()}</error>");
-            return;
         }
 
-        $sections = $this->sectionManager->readAll();
-        $this->renderTable($output, $sections, 'Section updated!');
+        if ($notInHistory) {
+            $inHistory = false;
+        }
+
+        $this->sectionManager->updateByConfig($sectionConfig, $section, $inHistory);
+        if (!$input->getOption('yes-mode')) {
+            $this->renderTable($output, $this->sectionManager->readAll(), 'Section updated!');
+        } else {
+            $output->writeln(
+                'Section updated! ' .
+                ($inHistory ? 'Old version stored in history.' : 'Nothing stored in history.')
+            );
+        }
     }
 }

@@ -11,6 +11,7 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Yaml\Yaml;
 use Tardigrades\Entity\Section;
+use Tardigrades\SectionField\Service\FieldNotFoundException;
 use Tardigrades\SectionField\Service\SectionManagerInterface;
 use Tardigrades\SectionField\Service\SectionNotFoundException;
 
@@ -52,7 +53,7 @@ final class UpdateSectionCommandTest extends TestCase
      * @covers ::configure
      * @covers ::execute
      */
-    public function it_should_update_a_section()
+    public function it_should_update_a_section_by_manual_selection()
     {
         $yml = <<<YML
 section:
@@ -74,6 +75,11 @@ YML;
             ->andReturn($this->givenAnArrayOfSections());
 
         $this->sectionManager
+            ->shouldReceive('readByHandle')
+            ->once()
+            ->andThrow(SectionNotFoundException::class);
+
+        $this->sectionManager
             ->shouldReceive('read')
             ->once()
             ->andReturn($this->givenAnArrayOfSections()[0]);
@@ -83,8 +89,7 @@ YML;
             ->once()
             ->andReturn($this->givenAnArrayOfSections()[0]);
 
-        $commandTester->setInputs([1]);
-        $commandTester->setInputs([1, 'y']);
+        $commandTester->setInputs(['y', 1, 'y']);
         $commandTester->execute(
             [
                 'command' => $command->getName(),
@@ -94,6 +99,152 @@ YML;
 
         $this->assertRegExp(
             '/Section updated!/',
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_update_a_field_by_auto_selection_and_ask_for_confirmation() {
+        $yml = <<<YML
+section:
+    name: foo
+    handle: someHandle
+    fields: []
+    default: Default
+    namespace: My\Namespace
+YML;
+
+        file_put_contents($this->file, $yml);
+
+        $command = $this->application->find('sf:update-section');
+        $commandTester = new CommandTester($command);
+
+        $this->sectionManager
+            ->shouldReceive('readAll')
+            ->twice()
+            ->andReturn($this->givenAnArrayOfSections());
+
+        $this->sectionManager
+            ->shouldReceive('readByHandle')
+            ->once()
+            ->andReturn($this->givenAnArrayOfSections()[0]);
+
+        $this->sectionManager
+            ->shouldReceive('updateByConfig')
+            ->once()
+            ->andReturn($this->givenAnArrayOfSections()[0]);
+
+        $commandTester->setInputs(['y', 'n']);
+        $commandTester->execute(
+            [
+                'command' => $command->getName(),
+                'config' => $this->file
+            ]
+        );
+
+        $this->assertRegExp(
+            '/Do you want to update the section with id: 1/',
+            $commandTester->getDisplay()
+        );
+
+        $this->assertRegExp(
+            '/Section updated!/',
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_update_a_field_by_auto_selection_and_not_ask_for_confirmation_not_in_history()
+    {
+        $yml = <<<YML
+section:
+    name: foo
+    handle: someHandle
+    fields: []
+    default: Default
+    namespace: My\Namespace
+YML;
+
+        file_put_contents($this->file, $yml);
+
+        $command = $this->application->find('sf:update-section');
+        $commandTester = new CommandTester($command);
+
+        $this->sectionManager
+            ->shouldReceive('readByHandle')
+            ->once()
+            ->andReturn($this->givenAnArrayOfSections()[0]);
+
+        $this->sectionManager
+            ->shouldReceive('updateByConfig')
+            ->once()
+            ->andReturn($this->givenAnArrayOfSections()[0]);
+
+        $commandTester->execute(
+            [
+                'command' => $command->getName(),
+                'config' => $this->file,
+                '--yes-mode' => null,
+                '--not-in-history' => null
+            ]
+        );
+
+        $this->assertRegExp(
+            '/Section updated! Nothing stored in history./',
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_update_a_field_by_auto_selection_and_not_ask_for_confirmation_in_history()
+    {
+        $yml = <<<YML
+section:
+    name: foo
+    handle: someHandle
+    fields: []
+    default: Default
+    namespace: My\Namespace
+YML;
+
+        file_put_contents($this->file, $yml);
+
+        $command = $this->application->find('sf:update-section');
+        $commandTester = new CommandTester($command);
+
+        $this->sectionManager
+            ->shouldReceive('readByHandle')
+            ->once()
+            ->andReturn($this->givenAnArrayOfSections()[0]);
+
+        $this->sectionManager
+            ->shouldReceive('updateByConfig')
+            ->once()
+            ->andReturn($this->givenAnArrayOfSections()[0]);
+
+        $commandTester->execute(
+            [
+                'command' => $command->getName(),
+                'config' => $this->file,
+                '--yes-mode' => null,
+                '--in-history' => null
+            ]
+        );
+
+        $this->assertRegExp(
+            '/Section updated! Old version stored in history./',
             $commandTester->getDisplay()
         );
     }
@@ -129,11 +280,6 @@ YML;
             ->shouldReceive('readAll')
             ->once()
             ->andReturn($this->givenAnArrayOfSections());
-
-        $this->sectionManager
-            ->shouldReceive('read')
-            ->once()
-            ->andReturn($this->givenAnArrayOfSections()[0]);
 
         $commandTester->setInputs([1]);
         $commandTester->execute(
@@ -176,11 +322,16 @@ YML;
             ->andReturn($this->givenAnArrayOfSections());
 
         $this->sectionManager
+            ->shouldReceive('readByHandle')
+            ->once()
+            ->andThrow(SectionNotFoundException::class);
+
+        $this->sectionManager
             ->shouldReceive('read')
             ->once()
             ->andThrow(SectionNotFoundException::class);
 
-        $commandTester->setInputs([1]);
+        $commandTester->setInputs(['y', 1]);
         $commandTester->execute(
             [
                 'command' => $command->getName(),
@@ -198,6 +349,7 @@ YML;
     {
         return [
             (new Section())
+                ->setId(1)
                 ->setName('Some name')
                 ->setHandle('someHandle')
                 ->setConfig(
@@ -209,6 +361,7 @@ YML;
                 ->setUpdated(new \DateTime())
                 ->setVersion(1),
             (new Section())
+                ->setId(2)
                 ->setName('Some other name')
                 ->setHandle('someOtherHandle')
                 ->setConfig(
