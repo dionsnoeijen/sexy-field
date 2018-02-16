@@ -62,7 +62,6 @@ class UpdateFieldCommand extends FieldCommand
     {
         try {
             $this->questionHelper = $this->getHelper('question');
-
             $this->showInstalledFields($input, $output);
         } catch (FieldNotFoundException $exception) {
             $output->writeln("Field not found");
