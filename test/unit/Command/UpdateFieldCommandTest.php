@@ -104,6 +104,57 @@ YML;
      * @covers ::configure
      * @covers ::execute
      */
+    public function it_should_not_update_a_field_by_manual_selection_when_cancelled()
+    {
+        $yml = <<<YML
+field:
+    name: foo
+    handle: bar
+    label: [ label ]
+YML;
+
+        file_put_contents($this->file, $yml);
+
+        $command = $this->application->find('sf:update-field');
+        $commandTester = new CommandTester($command);
+
+        $this->fieldManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andReturn($this->givenAnArrayOfFields());
+
+        $this->fieldManager
+            ->shouldReceive('readByHandle')
+            ->once()
+            ->andThrow(FieldNotFoundException::class);
+
+        $this->fieldManager
+            ->shouldReceive('read')
+            ->never();
+
+        $this->fieldManager
+            ->shouldReceive('updateByConfig')
+            ->never();
+
+        $commandTester->setInputs(['n']);
+        $commandTester->execute(
+            [
+                'command' => $command->getName(),
+                'config' => $this->file
+            ]
+        );
+
+        $this->assertRegExp(
+            '/Cancelled, nothing updated/',
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
     public function it_should_update_a_field_by_auto_selection_and_ask_for_confirmation() {
         $yml = <<<YML
 field:
@@ -147,6 +198,58 @@ YML;
 
         $this->assertRegExp(
             '/Field updated!/',
+            $commandTester->getDisplay()
+        );
+    }
+
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_not_update_a_field_by_auto_selection_and_ask_for_confirmation_when_cancelled() {
+        $yml = <<<YML
+field:
+    name: someName
+    handle: bar
+    label: [ label ]
+YML;
+
+        file_put_contents($this->file, $yml);
+
+        $command = $this->application->find('sf:update-field');
+        $commandTester = new CommandTester($command);
+
+        $this->fieldManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andReturn($this->givenAnArrayOfFields());
+
+        $this->fieldManager
+            ->shouldReceive('readByHandle')
+            ->once()
+            ->andReturn($this->givenAnArrayOfFields()[0]);
+
+        $this->fieldManager
+            ->shouldReceive('updateByConfig')
+            ->never();
+
+        $commandTester->setInputs(['n']);
+        $commandTester->execute(
+            [
+                'command' => $command->getName(),
+                'config' => $this->file
+            ]
+        );
+
+        $this->assertRegExp(
+            '/Do you want to update the field with id: 1/',
+            $commandTester->getDisplay()
+        );
+
+        $this->assertRegExp(
+            '/Cancelled, nothing updated/',
             $commandTester->getDisplay()
         );
     }
