@@ -11,6 +11,7 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Yaml\Yaml;
 use Tardigrades\Entity\Section;
+use Tardigrades\Entity\SectionHistory;
 use Tardigrades\SectionField\Service\SectionHistoryManagerInterface;
 use Tardigrades\SectionField\Service\SectionHistoryNotFoundException;
 use Tardigrades\SectionField\Service\SectionManagerInterface;
@@ -102,6 +103,146 @@ YML;
         );
     }
 
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_restore_all_sections()
+    {
+        $yml = <<<YML
+section:
+    name: foo
+    handle: bar
+    fields: []
+    default: Default
+    namespace: My\Namespace
+YML;
+
+        file_put_contents($this->file, $yml);
+
+        $command = $this->application->find('sf:restore-section');
+        $commandTester = new CommandTester($command);
+
+        $this->sectionManager
+            ->shouldReceive('readAll')
+            ->twice()
+            ->andReturn($this->givenAnArrayOfSections());
+
+        $this->sectionManager
+            ->shouldReceive('read')
+            ->never();
+
+        $this->sectionHistoryManager
+            ->shouldReceive('read')
+            ->twice()
+            ->andReturn($this->givenAnOldSection());
+
+        $this->sectionManager
+            ->shouldReceive('restoreFromHistory')
+            ->once();
+
+        $commandTester->setInputs(['all', 1, 'y', 2, 'n']);
+
+        $commandTester->execute(['command' => $command->getName()]);
+
+        $this->assertRegExp(
+            '/Record with id #1 will be restored/',
+            $commandTester->getDisplay()
+        );
+
+        $this->assertRegExp(
+            '/Config Restored/',
+            $commandTester->getDisplay()
+        );
+
+        $this->assertRegExp(
+            '/Record with id #3 will be restored/',
+            $commandTester->getDisplay()
+        );
+
+        $this->assertRegExp(
+            '/Cancelled, nothing restored/',
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_restore_comma_separated_sections()
+    {
+        $yml = <<<YML
+section:
+    name: foo
+    handle: bar
+    fields: []
+    default: Default
+    namespace: My\Namespace
+YML;
+
+        file_put_contents($this->file, $yml);
+
+        $command = $this->application->find('sf:restore-section');
+        $commandTester = new CommandTester($command);
+
+        $sections = $this->givenAnArrayOfSections();
+
+        $this->sectionManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andReturn($sections);
+
+        $this->sectionManager
+            ->shouldReceive('read')
+            ->once()
+            ->andReturn($sections[0]);
+
+        $this->sectionManager
+            ->shouldReceive('read')
+            ->once()
+            ->andReturn($sections[2]);
+
+        $this->sectionManager
+            ->shouldReceive('read')
+            ->once()
+            ->andReturn($sections[3]);
+
+        $this->sectionHistoryManager
+            ->shouldReceive('read')
+            ->twice()
+            ->andReturn($this->givenAnOldSection());
+
+        $this->sectionManager
+            ->shouldReceive('restoreFromHistory')
+            ->twice();
+
+        $commandTester->setInputs(['1,3,4', 1, 'y', 2, 'y']);
+
+        $commandTester->execute(['command' => $command->getName()]);
+
+        $this->assertRegExp(
+            '/Record with id #1 will be restored/',
+            $commandTester->getDisplay()
+        );
+
+        $this->assertRegExp(
+            '/Config Restored/',
+            $commandTester->getDisplay()
+        );
+
+        $this->assertRegExp(
+            '/Record with id #3 will be restored/',
+            $commandTester->getDisplay()
+        );
+
+        $this->assertRegExp(
+            '/Skipped, no records can be found in history/',
+            $commandTester->getDisplay()
+        );
+    }
     /**
      * @test
      * @covers ::configure
@@ -250,6 +391,7 @@ YML;
     {
         return [
             (new Section())
+                ->setId(1)
                 ->setName('Some name')
                 ->setHandle('someHandle')
                 ->setConfig(
@@ -260,6 +402,90 @@ YML;
                 ->setCreated(new \DateTime())
                 ->setUpdated(new \DateTime())
                 ->setVersion(2)
+                ->addHistory((new SectionHistory())
+                    ->setId(1)
+                    ->setCreated(new \DateTime())
+                    ->setUpdated(new \DateTime())
+                    ->setName('Some neem')
+                    ->setHandle('someHandle')
+                    ->setConfig(
+                        Yaml::parse(
+                            file_get_contents($this->file)
+                        )
+                    )
+                    ->setVersion(1))
+                ->addHistory((new SectionHistory())
+                    ->setId(2)
+                    ->setCreated(new \DateTime())
+                    ->setUpdated(new \DateTime())
+                    ->setName('Some name')
+                    ->setHandle('someHandle')
+                    ->setConfig(
+                        Yaml::parse(
+                            file_get_contents($this->file)
+                        )
+                    )
+                    ->setVersion(2)),
+            (new Section())
+                ->setId(2)
+                ->setName('Some other name')
+                ->setHandle('someOtherHandle')
+                ->setConfig(
+                    Yaml::parse(
+                        file_get_contents($this->file)
+                    )
+                )
+                ->setCreated(new \DateTime())
+                ->setUpdated(new \DateTime())
+                ->setVersion(1),
+            (new Section())
+                ->setId(3)
+                ->setName('Yet another name')
+                ->setHandle('yetAnotherHandle')
+                ->setConfig(
+                    Yaml::parse(
+                        file_get_contents($this->file)
+                    )
+                )
+                ->setCreated(new \DateTime())
+                ->setUpdated(new \DateTime())
+                ->setVersion(2)
+                ->addHistory((new SectionHistory())
+                    ->setId(3)
+                    ->setCreated(new \DateTime())
+                    ->setUpdated(new \DateTime())
+                    ->setName('Yet another naem')
+                    ->setHandle('yetAnotherHandle')
+                    ->setConfig(
+                        Yaml::parse(
+                            file_get_contents($this->file)
+                        )
+                    )
+                    ->setVersion(1))
+                ->addHistory((new SectionHistory())
+                    ->setId(4)
+                    ->setCreated(new \DateTime())
+                    ->setUpdated(new \DateTime())
+                    ->setName('Yet another name')
+                    ->setHandle('yetAnotherHandle')
+                    ->setConfig(
+                        Yaml::parse(
+                            file_get_contents($this->file)
+                        )
+                    )
+                    ->setVersion(2)),
+            (new Section())
+                ->setId(4)
+                ->setName('A different name')
+                ->setHandle('differentHandle')
+                ->setConfig(
+                    Yaml::parse(
+                        file_get_contents($this->file)
+                    )
+                )
+                ->setCreated(new \DateTime())
+                ->setUpdated(new \DateTime())
+                ->setVersion(1),
         ];
     }
 

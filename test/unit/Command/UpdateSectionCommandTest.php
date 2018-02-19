@@ -103,7 +103,7 @@ YML;
      * @covers ::configure
      * @covers ::execute
      */
-    public function it_should_update_all_sections()
+    public function it_should_not_be_possible_to_update_multiple_sections()
     {
         $yml = <<<YML
 section:
@@ -123,7 +123,7 @@ YML;
 
         $this->sectionManager
             ->shouldReceive('readAll')
-            ->times(3)
+            ->twice()
             ->andReturn($sections);
 
         $this->sectionManager
@@ -132,8 +132,7 @@ YML;
 
         $this->sectionManager
             ->shouldReceive('updateByConfig')
-            ->once()
-            ->andReturn($sections[0]);
+            ->never();
 
         $commandTester->setInputs([1]);
         $commandTester->setInputs(['all', 'y']);
@@ -145,7 +144,7 @@ YML;
         );
 
         $this->assertRegExp(
-            '/Section updated!/',
+            '/You cannot update multiple sections at once/',
             $commandTester->getDisplay()
         );
     }

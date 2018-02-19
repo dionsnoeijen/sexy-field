@@ -55,6 +55,13 @@ class UpdateSectionCommand extends SectionCommand
     private function updateWhatRecord(InputInterface $input, OutputInterface $output): void
     {
         $sections = $this->getSections($input, $output);
+
+        // because you need to match the section with the selected file, you cannot load multiple sections at once
+        if (count($sections) > 1) {
+            $output->writeln('<error>You cannot update multiple sections at once}</error>');
+            return;
+        }
+
         $config = $input->getArgument('config');
 
         foreach ($sections as $section) {

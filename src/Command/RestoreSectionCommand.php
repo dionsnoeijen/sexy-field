@@ -67,7 +67,15 @@ class RestoreSectionCommand extends SectionCommand
             $output->writeln('<info>Record with id #' . $section->getId() .
                 ' will be restored, select a record from history to restore the section with.</info>');
 
-            $this->renderTable($output, $section->getHistory()->toArray(), 'Section history');
+            $history = $section->getHistory()->toArray();
+
+            // no need to show a restore option, if there is nothing to restore
+            if (count($history) == 0) {
+                $output->writeln('<comment>Skipped, no records can be found in history...</comment>');
+                continue;
+            }
+
+            $this->renderTable($output, $history, 'Section history');
             $sectionFromHistory = $this->getSectionFromHistory($input, $output);
 
             $sure = new ConfirmationQuestion('<comment>Are you sure?</comment> (y/n) ', false);
