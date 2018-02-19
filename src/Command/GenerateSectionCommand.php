@@ -14,6 +14,7 @@ declare (strict_types = 1);
 namespace Tardigrades\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Tardigrades\SectionField\Generator\Writer\GeneratorFileWriter;
@@ -42,6 +43,12 @@ class GenerateSectionCommand extends SectionCommand
         $this
             ->setDescription('Generate a section.')
             ->setHelp('After creating a section, you can generate the accompanying files and tables (when using doctrine settings).')
+            ->addOption(
+                'yes-mode',
+                null,
+                InputOption::VALUE_NONE,
+                'Automatically say yes when a confirmation is asked'
+            );
         ;
         // @codingStandardsIgnoreEnd
     }
@@ -74,10 +81,12 @@ class GenerateSectionCommand extends SectionCommand
                 $output->writeln($writable->getTemplate());
             }
 
-            $sure = new ConfirmationQuestion('<comment>Are you sure?</comment> (y/n) ', false);
-            if (!$this->getHelper('question')->ask($input, $output, $sure)) {
-                $output->writeln('<comment>Cancelled, nothing generated.</comment>');
-                return;
+            if (!$input->getOption('yes-mode')) {
+                $sure = new ConfirmationQuestion('<comment>Are you sure?</comment> (y/n) ', false);
+                if (!$this->getHelper('question')->ask($input, $output, $sure)) {
+                    $output->writeln('<comment>Cancelled, nothing generated.</comment>');
+                    return;
+                }
             }
             foreach ($writables as $writable) {
                 GeneratorFileWriter::write($writable);
