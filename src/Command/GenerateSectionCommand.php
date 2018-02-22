@@ -14,6 +14,7 @@ declare (strict_types = 1);
 namespace Tardigrades\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Tardigrades\SectionField\Generator\Writer\GeneratorFileWriter;
@@ -42,6 +43,12 @@ class GenerateSectionCommand extends SectionCommand
         $this
             ->setDescription('Generate a section.')
             ->setHelp('After creating a section, you can generate the accompanying files and tables (when using doctrine settings).')
+            ->addOption(
+                'yes-mode',
+                null,
+                InputOption::VALUE_NONE,
+                'Automatically say yes when a confirmation is asked'
+            );
         ;
         // @codingStandardsIgnoreEnd
     }
@@ -59,29 +66,33 @@ class GenerateSectionCommand extends SectionCommand
 
     private function generateWhatSection(InputInterface $input, OutputInterface $output): void
     {
-        $section = $this->getSection($input, $output);
+        $sections = $this->getSections($input, $output);
 
-        $writables = $this->entityGenerator->generateBySection($section);
+        foreach ($sections as $section) {
+            $writables = $this->entityGenerator->generateBySection($section);
 
-        /** @var Writable $writable */
-        foreach ($writables as $writable) {
-            $output->writeln(
-                '<info>------------ * TEMPLATE: ' .
-                $writable->getNamespace() . $writable->getFilename() .
-                ' * ------------</info>'
-            );
-            $output->writeln($writable->getTemplate());
+            /** @var Writable $writable */
+            foreach ($writables as $writable) {
+                $output->writeln(
+                    '<info>------------ * TEMPLATE: ' .
+                    $writable->getNamespace() . $writable->getFilename() .
+                    ' * ------------</info>'
+                );
+                $output->writeln($writable->getTemplate());
+            }
+
+            if (!$input->getOption('yes-mode')) {
+                $sure = new ConfirmationQuestion('<comment>Are you sure?</comment> (y/n) ', false);
+                if (!$this->getHelper('question')->ask($input, $output, $sure)) {
+                    $output->writeln('<comment>Cancelled, nothing generated.</comment>');
+                    return;
+                }
+            }
+            foreach ($writables as $writable) {
+                GeneratorFileWriter::write($writable);
+            }
+
+            $output->writeln($this->entityGenerator->getBuildMessages());
         }
-
-        $sure = new ConfirmationQuestion('<comment>Are you sure?</comment> (y/n) ', false);
-        if (!$this->getHelper('question')->ask($input, $output, $sure)) {
-            $output->writeln('<comment>Cancelled, nothing generated.</comment>');
-            return;
-        }
-        foreach ($writables as $writable) {
-            GeneratorFileWriter::write($writable);
-        }
-
-        $output->writeln($this->entityGenerator->getBuildMessages());
     }
 }

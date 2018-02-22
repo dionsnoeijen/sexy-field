@@ -54,32 +54,41 @@ class UpdateSectionCommand extends SectionCommand
 
     private function updateWhatRecord(InputInterface $input, OutputInterface $output): void
     {
-        $section = $this->getSection($input, $output);
-        $config = $input->getArgument('config');
+        $sections = $this->getSections($input, $output);
 
-        try {
-            $sectionConfig = SectionConfig::fromArray(
-                Yaml::parse(
-                    file_get_contents($config)
-                )
-            );
-
-            $inHistory = $this->getHelper('question')->ask(
-                $input,
-                $output,
-                new ConfirmationQuestion(
-                    '<comment>Do you want to store the current version in history?</comment> (y/n) ',
-                    false
-                )
-            );
-
-            $this->sectionManager->updateByConfig($sectionConfig, $section, $inHistory);
-        } catch (\Exception $exception) {
-            $output->writeln("<error>Invalid configuration file.  {$exception->getMessage()}</error>");
+        // because you need to match the section with the selected file, you cannot load multiple sections at once
+        if (count($sections) > 1) {
+            $output->writeln('<error>You cannot update multiple sections at once}</error>');
             return;
         }
 
-        $sections = $this->sectionManager->readAll();
-        $this->renderTable($output, $sections, 'Section updated!');
+        $config = $input->getArgument('config');
+
+        foreach ($sections as $section) {
+            try {
+                $sectionConfig = SectionConfig::fromArray(
+                    Yaml::parse(
+                        file_get_contents($config)
+                    )
+                );
+
+                $inHistory = $this->getHelper('question')->ask(
+                    $input,
+                    $output,
+                    new ConfirmationQuestion(
+                        '<comment>Do you want to store the current version in history?</comment> (y/n) ',
+                        false
+                    )
+                );
+
+                $this->sectionManager->updateByConfig($sectionConfig, $section, $inHistory);
+            } catch (\Exception $exception) {
+                $output->writeln("<error>Invalid configuration file.  {$exception->getMessage()}</error>");
+                return;
+            }
+
+            $sections = $this->sectionManager->readAll();
+            $this->renderTable($output, $sections, 'Section updated!');
+        }
     }
 }

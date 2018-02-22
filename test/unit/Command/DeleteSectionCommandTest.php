@@ -28,7 +28,7 @@ final class DeleteSectionCommandTest extends TestCase
     /** @var SectionManagerInterface|Mockery\MockInterface */
     private $sectionManager;
 
-    /** @var DeleteSectionCommand */
+    /** @var DeleteSectionCommand|Mockery\MockInterface */
     private $deleteSectionCommand;
 
     /** @var Application */
@@ -86,6 +86,127 @@ YML;
 
         $commandTester->setInputs([1, 'y']);
         $commandTester->execute(['command' => $command->getName()]);
+
+        $this->assertRegExp(
+            '/Removed!/',
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_delete_all_sections()
+    {
+        $yml = <<<YML
+section:
+    name: foo
+    handle: bar
+    fields: []
+    default: Default
+    namespace: My\Namespace
+YML;
+
+        file_put_contents($this->file, $yml);
+
+        $command = $this->application->find('sf:delete-section');
+        $commandTester = new CommandTester($command);
+
+        $sections = $this->givenAnArrayOfSections();
+
+        $this->sectionManager
+            ->shouldReceive('readAll')
+            ->twice()
+            ->andReturn($sections);
+
+        $this->sectionManager
+            ->shouldReceive('read')
+            ->never();
+
+        $this->sectionManager
+            ->shouldReceive('delete')
+            ->times(3);
+
+        $commandTester->setInputs(['all', 'y', 'y', 'y']);
+        $commandTester->execute(['command' => $command->getName()]);
+
+        $this->assertRegExp(
+            '/Record with id #1 will be deleted/',
+            $commandTester->getDisplay()
+        );
+
+        $this->assertRegExp(
+            '/Record with id #2 will be deleted/',
+            $commandTester->getDisplay()
+        );
+
+        $this->assertRegExp(
+            '/Record with id #3 will be deleted/',
+            $commandTester->getDisplay()
+        );
+
+        $this->assertRegExp(
+            '/Removed!/',
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_delete_section_with_id_1_and_3()
+    {
+        $yml = <<<YML
+section:
+    name: foo
+    handle: bar
+    fields: []
+    default: Default
+    namespace: My\Namespace
+YML;
+
+        file_put_contents($this->file, $yml);
+
+        $command = $this->application->find('sf:delete-section');
+        $commandTester = new CommandTester($command);
+
+        $sections = $this->givenAnArrayOfSections();
+
+        $this->sectionManager
+            ->shouldReceive('readAll')
+            ->once()
+            ->andReturn($sections);
+
+        $this->sectionManager
+            ->shouldReceive('read')
+            ->andReturn($sections[0])
+            ->once();
+
+        $this->sectionManager
+            ->shouldReceive('read')
+            ->andReturn($sections[2])
+            ->once();
+
+        $this->sectionManager
+            ->shouldReceive('delete')
+            ->twice();
+
+        $commandTester->setInputs(['1,3', 'y', 'y']);
+        $commandTester->execute(['command' => $command->getName()]);
+
+        $this->assertRegExp(
+            '/Record with id #1 will be deleted/',
+            $commandTester->getDisplay()
+        );
+
+        $this->assertRegExp(
+            '/Record with id #3 will be deleted/',
+            $commandTester->getDisplay()
+        );
 
         $this->assertRegExp(
             '/Removed!/',
@@ -188,6 +309,7 @@ YML;
     {
         return [
             (new Section())
+                ->setId(1)
                 ->setName('Some name')
                 ->setHandle('someHandle')
                 ->setConfig(Yaml::parse(file_get_contents($this->file)))
@@ -195,8 +317,17 @@ YML;
                 ->setUpdated(new \DateTime())
                 ->setVersion(1),
             (new Section())
+                ->setId(2)
                 ->setName('Some other name')
                 ->setHandle('someOtherHandle')
+                ->setConfig(Yaml::parse(file_get_contents($this->file)))
+                ->setCreated(new \DateTime())
+                ->setUpdated(new \DateTime())
+                ->setVersion(1),
+            (new Section())
+                ->setId(3)
+                ->setName('Yet another name')
+                ->setHandle('AnotherHandle')
                 ->setConfig(Yaml::parse(file_get_contents($this->file)))
                 ->setCreated(new \DateTime())
                 ->setUpdated(new \DateTime())

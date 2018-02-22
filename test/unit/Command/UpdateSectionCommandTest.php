@@ -25,7 +25,7 @@ final class UpdateSectionCommandTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
-    /** @var SectionManagerInterface */
+    /** @var SectionManagerInterface|Mockery\MockInterface */
     private $sectionManager;
 
     /** @var UpdateSectionCommand */
@@ -94,6 +94,57 @@ YML;
 
         $this->assertRegExp(
             '/Section updated!/',
+            $commandTester->getDisplay()
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_not_be_possible_to_update_multiple_sections()
+    {
+        $yml = <<<YML
+section:
+    name: foo
+    handle: bar
+    fields: []
+    default: Default
+    namespace: My\Namespace
+YML;
+
+        file_put_contents($this->file, $yml);
+
+        $command = $this->application->find('sf:update-section');
+        $commandTester = new CommandTester($command);
+
+        $sections = $this->givenAnArrayOfSections();
+
+        $this->sectionManager
+            ->shouldReceive('readAll')
+            ->twice()
+            ->andReturn($sections);
+
+        $this->sectionManager
+            ->shouldReceive('read')
+            ->never();
+
+        $this->sectionManager
+            ->shouldReceive('updateByConfig')
+            ->never();
+
+        $commandTester->setInputs([1]);
+        $commandTester->setInputs(['all', 'y']);
+        $commandTester->execute(
+            [
+                'command' => $command->getName(),
+                'config' => $this->file
+            ]
+        );
+
+        $this->assertRegExp(
+            '/You cannot update multiple sections at once/',
             $commandTester->getDisplay()
         );
     }
@@ -198,6 +249,7 @@ YML;
     {
         return [
             (new Section())
+                ->setId(1)
                 ->setName('Some name')
                 ->setHandle('someHandle')
                 ->setConfig(
@@ -209,8 +261,21 @@ YML;
                 ->setUpdated(new \DateTime())
                 ->setVersion(1),
             (new Section())
+                ->setId(2)
                 ->setName('Some other name')
                 ->setHandle('someOtherHandle')
+                ->setConfig(
+                    Yaml::parse(
+                        file_get_contents($this->file)
+                    )
+                )
+                ->setCreated(new \DateTime())
+                ->setUpdated(new \DateTime())
+                ->setVersion(1),
+            (new Section())
+                ->setId(3)
+                ->setName('Yet another name')
+                ->setHandle('anotherHandle')
                 ->setConfig(
                     Yaml::parse(
                         file_get_contents($this->file)
