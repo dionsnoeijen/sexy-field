@@ -126,7 +126,7 @@ EOF
                     false
                 );
 
-                if (!$this->getHelper('question')->ask($input, $output, $sure)) {
+                if (!$this->questionHelper->ask($input, $output, $sure)) {
                     $output->writeln('<comment>Cancelled, nothing updated.</comment>', false);
                     return;
                 }

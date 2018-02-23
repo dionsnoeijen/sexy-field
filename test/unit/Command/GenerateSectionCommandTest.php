@@ -283,12 +283,9 @@ YML;
             ->andReturn($sections);
 
         $this->sectionManager
-            ->shouldReceive('read')
-            ->andReturn($sections[0]);
-
-        $this->sectionManager
-            ->shouldReceive('read')
-            ->andReturn($sections[2]);
+            ->shouldReceive('readByIds')
+            ->once()
+            ->andReturn([$sections[0], $sections[1]]);
 
         $this->entityGenerator
             ->shouldReceive('generateBySection')
@@ -296,7 +293,7 @@ YML;
 
         $this->entityGenerator
             ->shouldReceive('generateBySection')
-            ->with($sections[2]);
+            ->with($sections[1]);
 
         $this->entityGenerator
             ->shouldReceive('getBuildMessages')
