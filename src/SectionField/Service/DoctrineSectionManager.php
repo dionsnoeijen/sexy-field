@@ -373,6 +373,11 @@ class DoctrineSectionManager implements SectionManagerInterface
         foreach ($relationships as $sectionHandle => $relationshipFields) {
             if (count($relationshipFields)) {
                 foreach ($relationshipFields as $fieldHandle => $kindToFieldType) {
+                    # Unidirectional associations don't fill opposing relationships
+                    if (isset($kindToFieldType['relationship-type']) &&
+                        $kindToFieldType['relationship-type'] === 'unidirectional') {
+                        continue;
+                    }
                     // At this point, use two fields for the many to many relationship, one on each side.
                     // So ignore it here.
                     if ($kindToFieldType['kind'] !== 'many-to-many' && $kindToFieldType['kind'] !== 'one-to-one') {

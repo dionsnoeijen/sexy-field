@@ -79,7 +79,11 @@ final class FieldConfig
     {
         Assertion::keyExists($this->fieldConfig['field'], 'generator', 'No generator entity events found');
         Assertion::keyExists($this->fieldConfig['field']['generator'], 'entity', 'No generator entity events found');
-        Assertion::keyExists($this->fieldConfig['field']['generator']['entity'], 'event', 'No generator entity events found');
+        Assertion::keyExists(
+            $this->fieldConfig['field']['generator']['entity'],
+            'event',
+            'No generator entity events found'
+        );
 
         Assertion::isArray(
             $this->fieldConfig['field']['generator']['entity']['event'],

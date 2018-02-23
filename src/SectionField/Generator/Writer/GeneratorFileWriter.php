@@ -55,8 +55,11 @@ class GeneratorFileWriter
             if (is_array($namespaces)) {
                 foreach ($namespaces as $key => $value) {
                     if (strpos($key, $find) === 0) {
-                        return str_replace('\\', '/', $value[0] . str_replace(
-                            $find, '', $namespace));
+                        return str_replace(
+                            '\\',
+                            '/',
+                            $value[0] . str_replace($find, '', $namespace)
+                        );
                     }
                 }
             }
