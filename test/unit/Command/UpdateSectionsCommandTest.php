@@ -15,20 +15,20 @@ use Tardigrades\SectionField\Service\SectionManagerInterface;
 use Tardigrades\SectionField\Service\SectionNotFoundException;
 
 /**
- * @coversDefaultClass Tardigrades\Command\UpdateSectionCommand
+ * @coversDefaultClass Tardigrades\Command\UpdateSectionsCommand
  * @covers ::<private>
  * @covers ::<protected>
  * @covers ::__construct
  * @covers Tardigrades\Command\SectionCommand::__construct
  */
-final class UpdateSectionCommandTest extends TestCase
+final class UpdateSectionsCommandTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
     /** @var SectionManagerInterface|Mockery\MockInterface */
     private $sectionManager;
 
-    /** @var UpdateSectionCommand */
+    /** @var UpdateSectionsCommand */
     private $updateSectionCommand;
 
     /** @var Application */
@@ -42,7 +42,7 @@ final class UpdateSectionCommandTest extends TestCase
         vfsStream::setup('home');
         $this->file = vfsStream::url('home/some-config-file.yml');
         $this->sectionManager = Mockery::mock(SectionManagerInterface::class);
-        $this->updateSectionCommand = new UpdateSectionCommand($this->sectionManager);
+        $this->updateSectionCommand = new UpdateSectionsCommand($this->sectionManager);
         $this->application = new Application();
         $this->application->add($this->updateSectionCommand);
     }

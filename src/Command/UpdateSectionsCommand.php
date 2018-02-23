@@ -22,19 +22,19 @@ use Tardigrades\SectionField\Service\SectionManagerInterface;
 use Tardigrades\SectionField\Service\SectionNotFoundException;
 use Tardigrades\SectionField\ValueObject\SectionConfig;
 
-class UpdateSectionCommand extends SectionCommand
+class UpdateSectionsCommand extends SectionCommand
 {
     public function __construct(
         SectionManagerInterface $sectionManager
     ) {
-        parent::__construct($sectionManager, 'sf:update-section');
+        parent::__construct($sectionManager, 'sf:update-sections');
     }
 
     protected function configure(): void
     {
         // @codingStandardsIgnoreStart
         $this
-            ->setDescription('Updates an existing section.')
+            ->setDescription('Updates existing sections.')
             ->setHelp('This command allows you to update a section based on a yml section configuration. Pass along the path to a section configuration yml. Something like: section/blog.yml')
             ->addArgument('config', InputArgument::REQUIRED, 'The section configuration yml')
         ;
