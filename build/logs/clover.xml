@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1519385687">
-  <project timestamp="1519385687">
+<coverage generated="1519386844">
+  <project timestamp="1519386844">
     <package name="Tardigrades\Command">
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/ApplicationCommand.php">
         <class name="ApplicationCommand" namespace="Tardigrades\Command">
@@ -2372,13 +2372,13 @@
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/SectionField/Service/DoctrineSectionManager.php">
         <class name="DoctrineSectionManager" namespace="Tardigrades\SectionField\Service">
-          <metrics complexity="40" methods="17" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="144" coveredstatements="134" elements="161" coveredelements="150"/>
+          <metrics complexity="40" methods="17" coveredmethods="17" conditionals="0" coveredconditionals="0" statements="144" coveredstatements="144" elements="161" coveredelements="161"/>
         </class>
-        <line num="52" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="14"/>
-        <line num="57" type="stmt" count="14"/>
-        <line num="58" type="stmt" count="14"/>
-        <line num="59" type="stmt" count="14"/>
-        <line num="60" type="stmt" count="14"/>
+        <line num="52" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="16"/>
+        <line num="57" type="stmt" count="16"/>
+        <line num="58" type="stmt" count="16"/>
+        <line num="59" type="stmt" count="16"/>
+        <line num="60" type="stmt" count="16"/>
         <line num="62" type="method" name="create" visibility="public" complexity="1" crap="1" count="1"/>
         <line num="64" type="stmt" count="1"/>
         <line num="65" type="stmt" count="1"/>
@@ -2390,17 +2390,17 @@
         <line num="78" type="stmt" count="2"/>
         <line num="79" type="stmt" count="1"/>
         <line num="82" type="stmt" count="1"/>
-        <line num="85" type="method" name="readByIds" visibility="public" complexity="3" crap="12" count="0"/>
-        <line num="87" type="stmt" count="0"/>
-        <line num="88" type="stmt" count="0"/>
-        <line num="89" type="stmt" count="0"/>
-        <line num="91" type="stmt" count="0"/>
-        <line num="92" type="stmt" count="0"/>
-        <line num="93" type="stmt" count="0"/>
-        <line num="95" type="stmt" count="0"/>
-        <line num="96" type="stmt" count="0"/>
-        <line num="97" type="stmt" count="0"/>
-        <line num="100" type="stmt" count="0"/>
+        <line num="85" type="method" name="readByIds" visibility="public" complexity="3" crap="3" count="2"/>
+        <line num="87" type="stmt" count="2"/>
+        <line num="88" type="stmt" count="2"/>
+        <line num="89" type="stmt" count="2"/>
+        <line num="91" type="stmt" count="2"/>
+        <line num="92" type="stmt" count="2"/>
+        <line num="93" type="stmt" count="2"/>
+        <line num="95" type="stmt" count="2"/>
+        <line num="96" type="stmt" count="2"/>
+        <line num="97" type="stmt" count="1"/>
+        <line num="100" type="stmt" count="1"/>
         <line num="103" type="method" name="readAll" visibility="public" complexity="2" crap="2" count="2"/>
         <line num="105" type="stmt" count="2"/>
         <line num="106" type="stmt" count="2"/>
@@ -2535,7 +2535,7 @@
         <line num="385" type="stmt" count="1"/>
         <line num="386" type="stmt" count="1"/>
         <line num="393" type="stmt" count="1"/>
-        <metrics loc="395" ncloc="281" classes="1" methods="17" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="144" coveredstatements="134" elements="161" coveredelements="150"/>
+        <metrics loc="395" ncloc="281" classes="1" methods="17" coveredmethods="17" conditionals="0" coveredconditionals="0" statements="144" coveredstatements="144" elements="161" coveredelements="161"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/SectionField/Service/EntryNotFoundException.php">
         <class name="EntryNotFoundException" namespace="Tardigrades\SectionField\Service">
@@ -3506,6 +3506,6 @@
         <metrics loc="248" ncloc="143" classes="1" methods="16" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="0" elements="54" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="141" loc="9283" ncloc="7517" classes="119" methods="576" coveredmethods="552" conditionals="0" coveredconditionals="0" statements="2121" coveredstatements="2036" elements="2697" coveredelements="2588"/>
+    <metrics files="141" loc="9283" ncloc="7517" classes="119" methods="576" coveredmethods="553" conditionals="0" coveredconditionals="0" statements="2121" coveredstatements="2046" elements="2697" coveredelements="2599"/>
   </project>
 </coverage>
