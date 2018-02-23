@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1519379900">
-  <project timestamp="1519379900">
+<coverage generated="1519381365">
+  <project timestamp="1519381365">
     <package name="Tardigrades\Command">
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/ApplicationCommand.php">
         <class name="ApplicationCommand" namespace="Tardigrades\Command">
@@ -657,50 +657,60 @@
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/SectionCommand.php">
         <class name="SectionCommand" namespace="Tardigrades\Command">
-          <metrics complexity="14" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="33" elements="37" coveredelements="37"/>
+          <metrics complexity="18" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="42" coveredstatements="42" elements="47" coveredelements="47"/>
         </class>
-        <line num="33" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="26"/>
-        <line num="37" type="stmt" count="26"/>
-        <line num="39" type="stmt" count="26"/>
-        <line num="40" type="stmt" count="26"/>
-        <line num="42" type="method" name="renderTable" visibility="protected" complexity="2" crap="2" count="22"/>
-        <line num="44" type="stmt" count="22"/>
-        <line num="46" type="stmt" count="22"/>
-        <line num="48" type="stmt" count="22"/>
-        <line num="49" type="stmt" count="22"/>
-        <line num="50" type="stmt" count="22"/>
-        <line num="51" type="stmt" count="22"/>
-        <line num="52" type="stmt" count="22"/>
-        <line num="53" type="stmt" count="22"/>
-        <line num="54" type="stmt" count="22"/>
-        <line num="55" type="stmt" count="22"/>
-        <line num="59" type="stmt" count="22"/>
-        <line num="60" type="stmt" count="22"/>
-        <line num="61" type="stmt" count="22"/>
-        <line num="65" type="stmt" count="22"/>
-        <line num="66" type="stmt" count="22"/>
-        <line num="68" type="stmt" count="22"/>
-        <line num="69" type="stmt" count="22"/>
-        <line num="77" type="method" name="getSections" visibility="protected" complexity="6" crap="6" count="21"/>
-        <line num="79" type="stmt" count="21"/>
-        <line num="81" type="method" name="anonymous function" complexity="5" crap="5" count="21"/>
-        <line num="83" type="stmt" count="21"/>
-        <line num="84" type="stmt" count="5"/>
-        <line num="87" type="stmt" count="16"/>
-        <line num="88" type="stmt" count="3"/>
-        <line num="89" type="stmt" count="3"/>
-        <line num="90" type="stmt" count="3"/>
-        <line num="91" type="stmt" count="3"/>
-        <line num="93" type="stmt" count="3"/>
-        <line num="96" type="stmt" count="13"/>
-        <line num="97" type="stmt" count="4"/>
-        <line num="99" type="stmt" count="4"/>
+        <line num="33" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="32"/>
+        <line num="37" type="stmt" count="32"/>
+        <line num="39" type="stmt" count="32"/>
+        <line num="40" type="stmt" count="32"/>
+        <line num="42" type="method" name="renderTable" visibility="protected" complexity="2" crap="2" count="26"/>
+        <line num="44" type="stmt" count="26"/>
+        <line num="46" type="stmt" count="26"/>
+        <line num="48" type="stmt" count="26"/>
+        <line num="49" type="stmt" count="26"/>
+        <line num="50" type="stmt" count="26"/>
+        <line num="51" type="stmt" count="26"/>
+        <line num="52" type="stmt" count="26"/>
+        <line num="53" type="stmt" count="26"/>
+        <line num="54" type="stmt" count="26"/>
+        <line num="55" type="stmt" count="26"/>
+        <line num="59" type="stmt" count="26"/>
+        <line num="60" type="stmt" count="26"/>
+        <line num="61" type="stmt" count="26"/>
+        <line num="65" type="stmt" count="26"/>
+        <line num="66" type="stmt" count="26"/>
+        <line num="68" type="stmt" count="26"/>
+        <line num="69" type="stmt" count="26"/>
+        <line num="71" type="method" name="getSection" visibility="protected" complexity="4" crap="4" count="2"/>
+        <line num="73" type="stmt" count="2"/>
+        <line num="76" type="stmt" count="2"/>
+        <line num="77" type="stmt" count="1"/>
+        <line num="79" type="stmt" count="1"/>
+        <line num="81" type="stmt" count="2"/>
+        <line num="82" type="stmt" count="2"/>
+        <line num="83" type="stmt" count="2"/>
+        <line num="84" type="stmt" count="1"/>
+        <line num="86" type="stmt" count="1"/>
+        <line num="95" type="method" name="getSections" visibility="protected" complexity="6" crap="6" count="21"/>
+        <line num="97" type="stmt" count="21"/>
+        <line num="99" type="method" name="anonymous function" complexity="5" crap="5" count="21"/>
         <line num="101" type="stmt" count="21"/>
-        <line num="103" type="stmt" count="21"/>
-        <line num="104" type="stmt" count="21"/>
-        <line num="105" type="stmt" count="4"/>
-        <line num="107" type="stmt" count="17"/>
-        <metrics loc="109" ncloc="91" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="37" coveredstatements="37" elements="41" coveredelements="41"/>
+        <line num="102" type="stmt" count="5"/>
+        <line num="105" type="stmt" count="16"/>
+        <line num="106" type="stmt" count="3"/>
+        <line num="107" type="stmt" count="3"/>
+        <line num="108" type="stmt" count="3"/>
+        <line num="109" type="stmt" count="3"/>
+        <line num="111" type="stmt" count="3"/>
+        <line num="114" type="stmt" count="13"/>
+        <line num="115" type="stmt" count="4"/>
+        <line num="117" type="stmt" count="4"/>
+        <line num="119" type="stmt" count="21"/>
+        <line num="121" type="stmt" count="21"/>
+        <line num="122" type="stmt" count="21"/>
+        <line num="123" type="stmt" count="4"/>
+        <line num="125" type="stmt" count="17"/>
+        <metrics loc="127" ncloc="107" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="46" coveredstatements="46" elements="51" coveredelements="51"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/UpdateApplicationCommand.php">
         <class name="UpdateApplicationCommand" namespace="Tardigrades\Command">
@@ -916,6 +926,95 @@
         <line num="61" type="stmt" count="1"/>
         <line num="62" type="stmt" count="1"/>
         <metrics loc="63" ncloc="50" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="16" elements="19" coveredelements="19"/>
+      </file>
+      <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/UpdateSectionCommand.php">
+        <class name="UpdateSectionCommand" namespace="Tardigrades\Command">
+          <metrics complexity="20" methods="6" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="77" coveredstatements="72" elements="83" coveredelements="77"/>
+        </class>
+        <line num="32" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="6"/>
+        <line num="35" type="stmt" count="6"/>
+        <line num="36" type="stmt" count="6"/>
+        <line num="38" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="6"/>
+        <line num="42" type="stmt" count="6"/>
+        <line num="43" type="stmt" count="6"/>
+        <line num="44" type="stmt" count="6"/>
+        <line num="58" type="stmt" count="6"/>
+        <line num="59" type="stmt" count="6"/>
+        <line num="60" type="stmt" count="6"/>
+        <line num="61" type="stmt" count="6"/>
+        <line num="62" type="stmt" count="6"/>
+        <line num="63" type="stmt" count="6"/>
+        <line num="65" type="stmt" count="6"/>
+        <line num="66" type="stmt" count="6"/>
+        <line num="67" type="stmt" count="6"/>
+        <line num="68" type="stmt" count="6"/>
+        <line num="69" type="stmt" count="6"/>
+        <line num="71" type="stmt" count="6"/>
+        <line num="72" type="stmt" count="6"/>
+        <line num="73" type="stmt" count="6"/>
+        <line num="74" type="stmt" count="6"/>
+        <line num="75" type="stmt" count="6"/>
+        <line num="79" type="stmt" count="6"/>
+        <line num="81" type="method" name="execute" visibility="protected" complexity="2" crap="2" count="6"/>
+        <line num="84" type="stmt" count="6"/>
+        <line num="85" type="stmt" count="6"/>
+        <line num="86" type="stmt" count="1"/>
+        <line num="87" type="stmt" count="1"/>
+        <line num="89" type="stmt" count="6"/>
+        <line num="91" type="method" name="showInstalledSections" visibility="private" complexity="2" crap="2" count="6"/>
+        <line num="93" type="stmt" count="6"/>
+        <line num="94" type="stmt" count="4"/>
+        <line num="96" type="stmt" count="6"/>
+        <line num="97" type="stmt" count="5"/>
+        <line num="99" type="method" name="getConfig" visibility="private" complexity="3" crap="3" count="6"/>
+        <line num="102" type="stmt" count="6"/>
+        <line num="103" type="stmt" count="6"/>
+        <line num="104" type="stmt" count="6"/>
+        <line num="105" type="stmt" count="6"/>
+        <line num="108" type="stmt" count="5"/>
+        <line num="109" type="stmt" count="1"/>
+        <line num="110" type="stmt" count="1"/>
+        <line num="111" type="stmt" count="1"/>
+        <line num="115" type="method" name="updateWhatRecord" visibility="private" complexity="11" crap="11.28" count="6"/>
+        <line num="117" type="stmt" count="6"/>
+        <line num="118" type="stmt" count="1"/>
+        <line num="122" type="stmt" count="5"/>
+        <line num="123" type="stmt" count="3"/>
+        <line num="124" type="stmt" count="1"/>
+        <line num="125" type="stmt" count="1"/>
+        <line num="126" type="stmt" count="1"/>
+        <line num="129" type="stmt" count="1"/>
+        <line num="130" type="stmt" count="0"/>
+        <line num="131" type="stmt" count="3"/>
+        <line num="135" type="stmt" count="2"/>
+        <line num="136" type="stmt" count="2"/>
+        <line num="137" type="stmt" count="2"/>
+        <line num="138" type="stmt" count="2"/>
+        <line num="139" type="stmt" count="2"/>
+        <line num="142" type="stmt" count="2"/>
+        <line num="143" type="stmt" count="2"/>
+        <line num="146" type="stmt" count="2"/>
+        <line num="147" type="stmt" count="0"/>
+        <line num="148" type="stmt" count="0"/>
+        <line num="151" type="stmt" count="2"/>
+        <line num="154" type="stmt" count="4"/>
+        <line num="155" type="stmt" count="4"/>
+        <line num="157" type="stmt" count="4"/>
+        <line num="158" type="stmt" count="2"/>
+        <line num="159" type="stmt" count="0"/>
+        <line num="160" type="stmt" count="0"/>
+        <line num="161" type="stmt" count="2"/>
+        <line num="162" type="stmt" count="2"/>
+        <line num="163" type="stmt" count="2"/>
+        <line num="168" type="stmt" count="4"/>
+        <line num="169" type="stmt" count="1"/>
+        <line num="172" type="stmt" count="4"/>
+        <line num="173" type="stmt" count="4"/>
+        <line num="174" type="stmt" count="2"/>
+        <line num="176" type="stmt" count="2"/>
+        <line num="178" type="stmt" count="2"/>
+        <line num="181" type="stmt" count="4"/>
+        <metrics loc="182" ncloc="169" classes="1" methods="6" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="77" coveredstatements="72" elements="83" coveredelements="77"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/UpdateSectionsCommand.php">
         <class name="UpdateSectionsCommand" namespace="Tardigrades\Command">
@@ -3399,6 +3498,6 @@
         <metrics loc="248" ncloc="143" classes="1" methods="16" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="0" elements="54" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="140" loc="9067" ncloc="7316" classes="118" methods="568" coveredmethods="546" conditionals="0" coveredconditionals="0" statements="2028" coveredstatements="1958" elements="2596" coveredelements="2504"/>
+    <metrics files="141" loc="9267" ncloc="7501" classes="119" methods="575" coveredmethods="552" conditionals="0" coveredconditionals="0" statements="2114" coveredstatements="2039" elements="2689" coveredelements="2591"/>
   </project>
 </coverage>
