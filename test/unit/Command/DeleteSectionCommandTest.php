@@ -182,14 +182,9 @@ YML;
             ->andReturn($sections);
 
         $this->sectionManager
-            ->shouldReceive('read')
-            ->andReturn($sections[0])
-            ->once();
-
-        $this->sectionManager
-            ->shouldReceive('read')
-            ->andReturn($sections[2])
-            ->once();
+            ->shouldReceive('readByIds')
+            ->once()
+            ->andReturn([$sections[0], $sections[2]]);
 
         $this->sectionManager
             ->shouldReceive('delete')

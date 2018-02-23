@@ -27,6 +27,8 @@ use Tardigrades\SectionField\ValueObject\Id;
 
 abstract class SectionCommand extends Command
 {
+    const ALL = 'all';
+
     /** @var SectionManagerInterface */
     protected $sectionManager;
 
@@ -68,6 +70,24 @@ abstract class SectionCommand extends Command
         $table->render();
     }
 
+    protected function getSection(InputInterface $input, OutputInterface $output): ?SectionInterface
+    {
+        $question = new Question('<question>Choose record.</question> (#id): ');
+        $question->setValidator(function ($id) {
+            try {
+                return $this->sectionManager->read(Id::fromInt((int) $id));
+            } catch (SectionNotFoundException $exception) {
+                // Exceptions thrown from here seemingly can't be caught, so signal with a return value instead
+                return null;
+            }
+        });
+        $section = $this->getHelper('question')->ask($input, $output, $question);
+        if (!$section) {
+            throw new SectionNotFoundException();
+        }
+        return $section;
+    }
+
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
@@ -77,20 +97,15 @@ abstract class SectionCommand extends Command
     protected function getSections(InputInterface $input, OutputInterface $output): array
     {
         $question = new Question('<question>Choose record.</question> (#id): ');
-
         $question->setValidator(function ($id) {
             try {
-                if ($id === 'all') {
+                if ($id === self::ALL) {
                     return $this->sectionManager->readAll();
                 }
 
                 if (strpos($id, ',') !== false) {
                     $ids = explode(',', $id);
-                    $sections = [];
-                    foreach ($ids as $sectionId) {
-                        $sections[] = $this->sectionManager->read(Id::fromInt((int) $sectionId));
-                    }
-                    return $sections;
+                    return $this->sectionManager->readByIds($ids);
                 }
 
                 return [$this->sectionManager->read(Id::fromInt((int) $id))];

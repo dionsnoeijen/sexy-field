@@ -22,6 +22,7 @@ interface SectionManagerInterface
 {
     public function create(SectionInterface $entity): SectionInterface;
     public function read(Id $id): SectionInterface;
+    public function readByIds(array $ids): array;
     public function readAll(): array;
     public function update(SectionInterface $entity): void;
     public function delete(SectionInterface $entity): void;

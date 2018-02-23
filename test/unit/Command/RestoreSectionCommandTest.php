@@ -196,19 +196,10 @@ YML;
             ->andReturn($sections);
 
         $this->sectionManager
-            ->shouldReceive('read')
+            ->shouldReceive('readByIds')
             ->once()
-            ->andReturn($sections[0]);
-
-        $this->sectionManager
-            ->shouldReceive('read')
-            ->once()
-            ->andReturn($sections[2]);
-
-        $this->sectionManager
-            ->shouldReceive('read')
-            ->once()
-            ->andReturn($sections[3]);
+            ->with([1, 3, 4])
+            ->andReturn([$sections[0], $sections[2], $sections[3]]);
 
         $this->sectionHistoryManager
             ->shouldReceive('read')

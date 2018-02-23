@@ -82,6 +82,24 @@ class DoctrineSectionManager implements SectionManagerInterface
         return $section;
     }
 
+    public function readByIds(array $ids): array
+    {
+        $sectionIds = [];
+        foreach ($ids as $id) {
+            $sectionIds[] = '\'' . $id . '\'';
+        }
+        $whereIn = implode(',', $sectionIds);
+        $query = $this->entityManager->createQuery(
+            "SELECT section FROM Tardigrades\Entity\Section section WHERE section.id IN ({$whereIn})"
+        );
+        $results = $query->getResult();
+        if (empty($results)) {
+            throw new SectionNotFoundException();
+        }
+
+        return $results;
+    }
+
     public function readAll(): array
     {
         $sectionRepository = $this->entityManager->getRepository(SectionEntity::class);
