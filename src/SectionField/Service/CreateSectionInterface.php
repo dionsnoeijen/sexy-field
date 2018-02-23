@@ -38,4 +38,23 @@ interface CreateSectionInterface
      * @param array|null $jitRelationships
      */
     public function save(CommonSectionInterface $sectionEntryEntity, array $jitRelationships = null);
+
+    /**
+     * This method goes through all writers to persist a record, like save, but doesn't flush them.
+     *
+     * It's useful when many records have to be persisted. flush has to be called manually afterwards.
+     *
+     * No events are dispatched.
+     *
+     * @param CommonSectionInterface $sectionEntryEntity
+     * @param array|null $jitRelationships
+     */
+    public function persist(CommonSectionInterface $sectionEntryEntity, array $jitRelationships = null);
+
+    /**
+     * This method flushes all writers to store records that have been persisted.
+     *
+     * No events are dispatched.
+     */
+    public function flush();
 }

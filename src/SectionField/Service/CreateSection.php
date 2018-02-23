@@ -57,4 +57,26 @@ class CreateSection implements CreateSectionInterface
             new SectionEntryCreated($sectionEntryEntity, $update)
         );
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function persist(CommonSectionInterface $sectionEntryEntity, array $jitRelationships = null)
+    {
+        /** @var CreateSectionInterface $writer */
+        foreach ($this->creators as $writer) {
+            $writer->persist($sectionEntryEntity, $jitRelationships);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function flush()
+    {
+        /** @var CreateSectionInterface $writer */
+        foreach ($this->creators as $writer) {
+            $writer->flush();
+        }
+    }
 }

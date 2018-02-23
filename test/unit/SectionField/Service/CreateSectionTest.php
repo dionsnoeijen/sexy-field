@@ -132,4 +132,28 @@ final class CreateSectionTest extends TestCase
 
         $this->createSection->save($entry);
     }
+
+    /**
+     * @test
+     * @covers ::persist
+     */
+    public function it_should_persist_section()
+    {
+        $entry = Mockery::mock(CommonSectionInterface::class);
+        $this->creators[0]->shouldReceive('persist')->once();
+
+        $this->createSection->persist($entry);
+    }
+
+    /**
+     * @test
+     * @covers ::flush
+     */
+    public function it_should_flush_creators()
+    {
+        $entry = Mockery::mock(CommonSectionInterface::class);
+        $this->creators[0]->shouldReceive('flush')->once();
+
+        $this->createSection->flush($entry);
+    }
 }
