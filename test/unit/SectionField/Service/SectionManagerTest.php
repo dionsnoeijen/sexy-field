@@ -417,6 +417,48 @@ final class SectionManagerTest extends TestCase
 
     /**
      * @test
+     * @covers ::readByIds
+     */
+    public function it_should_read_by_ids()
+    {
+        $section = $this->givenASectionWithName('Sjaak');
+        $section2 = $this->givenASectionWithName('Van der Kwaak');
+        $sections = [$section, $section2];
+
+        $query = $this->givenAQueryWithResult($sections);
+
+        $this->entityManager
+            ->shouldReceive('createQuery')
+            ->once()
+            ->andReturn($query);
+
+        $result = $this->sectionManager->readByIds([1, 2]);
+        $this->assertSame($sections, $result);
+    }
+
+    /**
+     * @test
+     * @covers ::readByIds
+     */
+    public function it_should_throw_exception_when_section_not_found_when_reading_by_ids()
+    {
+        $this->expectException(SectionNotFoundException::class);
+        $section = $this->givenASectionWithName('Sjaak');
+        $section2 = $this->givenASectionWithName('Van der Kwaak');
+        $sections = [$section, $section2];
+
+        $query = $this->givenAQueryWithResult(null);
+
+        $this->entityManager
+            ->shouldReceive('createQuery')
+            ->once()
+            ->andReturn($query);
+
+        $this->sectionManager->readByIds([1, 2]);
+    }
+
+    /**
+     * @test
      * @covers ::readByHandles
      */
     public function it_should_throw_exception_when_section_not_found_when_reading_by_handles()
