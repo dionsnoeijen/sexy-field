@@ -131,7 +131,6 @@ EOF
                     return;
                 }
             }
-
         } catch (SectionNotFoundException $exception) {
             $output->writeln(
                 'You are trying to update a section with handle: ' . $sectionConfig->getHandle() . '. No field with ' .
@@ -140,7 +139,8 @@ EOF
             );
 
             $sure = new ConfirmationQuestion(
-                '<comment>Do you want to continue to select a section that will be overwritten?</comment> (y/n) ', false
+                '<comment>Do you want to continue to select a section that will be overwritten?</comment> (y/n) ',
+                false
             );
 
             if (!$this->getHelper('question')->ask($input, $output, $sure)) {

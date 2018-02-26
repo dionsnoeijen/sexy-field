@@ -107,7 +107,8 @@ YML;
      * @covers ::configure
      * @covers ::execute
      */
-    public function it_should_update_a_field_by_auto_selection_and_ask_for_confirmation() {
+    public function it_should_update_a_field_by_auto_selection_and_ask_for_confirmation()
+    {
         $yml = <<<YML
 section:
     name: foo
