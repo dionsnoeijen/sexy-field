@@ -1,40 +1,55 @@
 services:
-  section_field.manager.doctrine.application_manager:
-    class: Tardigrades\SectionField\Service\DoctrineApplicationManager
+  Tardigrades\SectionField\Service\DoctrineApplicationManager:
+    autowire: false
     arguments:
-      - '@doctrine.orm.entity_manager'
-      - '@section_field.manager.doctrine.language_manager'
+      $entityManager: '@doctrine.orm.entity_manager'
+      $languageManager: '@Tardigrades\SectionField\Service\DoctrineLanguageManager'
 
-  section_field.manager.doctrine.language_manager:
-    class: Tardigrades\SectionField\Service\DoctrineLanguageManager
+  section_field.manager.doctrine.application_manager: '@Tardigrades\SectionField\Service\DoctrineApplicationManager'
+
+  Tardigrades\SectionField\Service\DoctrineLanguageManager:
+    autowire: false
     arguments:
-      - '@doctrine.orm.entity_manager'
+      $entityManager: '@doctrine.orm.entity_manager'
 
-  section_field.manager.doctrine.section_manager:
-    class: Tardigrades\SectionField\Service\DoctrineSectionManager
+  section_field.manager.doctrine.language_manager: '@Tardigrades\SectionField\Service\DoctrineLanguageManager'
+
+  Tardigrades\SectionField\Service\DoctrineSectionManager:
+    autowire: false
     arguments:
-      - '@doctrine.orm.entity_manager'
-      - '@section_field.manager.doctrine.field_manager'
-      - '@section_field.manager.doctrine.section_history_manager'
+      $entityManager: '@doctrine.orm.entity_manager'
+      $fieldManager: '@Tardigrades\SectionField\Service\DoctrineFieldManager'
+      $sectionHistoryManager: '@Tardigrades\SectionField\Service\DoctrineSectionHistoryManager'
 
-  section_field.manager.doctrine.section_history_manager:
-    class: Tardigrades\SectionField\Service\DoctrineSectionHistoryManager
+  section_field.manager.doctrine.section_manager: '@Tardigrades\SectionField\Service\DoctrineSectionManager'
+
+  Tardigrades\SectionField\Service\DoctrineSectionHistoryManager:
+    autowire: false
     arguments:
-      - '@doctrine.orm.entity_manager'
+      $entityManager: '@doctrine.orm.entity_manager'
 
-  section_field.manager.doctrine.field_type_manager:
-    class: Tardigrades\SectionField\Service\DoctrineFieldTypeManager
+  section_field.manager.doctrine.section_history_manager: '@Tardigrades\SectionField\Service\DoctrineSectionHistoryManager'
+
+  Tardigrades\SectionField\Service\DoctrineFieldTypeManager:
+    autowire: false
     arguments:
-      - '@doctrine.orm.entity_manager'
+      $entityManager: '@doctrine.orm.entity_manager'
 
-  section_field.manager.doctrine.field_manager:
-    class: Tardigrades\SectionField\Service\DoctrineFieldManager
+  section_field.manager.doctrine.field_type_manager: '@Tardigrades\SectionField\Service\DoctrineFieldTypeManager'
+
+  Tardigrades\SectionField\Service\DoctrineFieldManager:
+    autowire: false
     arguments:
-      - '@doctrine.orm.entity_manager'
-      - '@section_field.manager.doctrine.field_type_manager'
+      $entityManager: '@doctrine.orm.entity_manager'
+      $fieldTypeManager: '@Tardigrades\SectionField\Service\DoctrineFieldTypeManager'
 
-  section_field.twig.section:
-    class: Tardigrades\Twig\SectionTwigExtension
+  section_field.manager.doctrine.field_manager: '@Tardigrades\SectionField\Service\DoctrineFieldManager'
+
+  Tardigrades\Twig\SectionTwigExtension:
+    autowire: false
     arguments:
       - '@section_field.read.section'
     tags: [twig.extension]
+
+  section_field.twig.section: '@Tardigrades\Twig\SectionTwigExtension'
+

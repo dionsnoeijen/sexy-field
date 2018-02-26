@@ -1,112 +1,94 @@
 services:
-  section_field.create.application.command:
-    class: Tardigrades\Command\CreateApplicationCommand
+  Tardigrades\Command\CreateApplicationCommand:
     arguments:
-      - '@section_field.manager.doctrine.application_manager'
+      $applicationManager: '@Tardigrades\SectionField\Service\DoctrineApplicationManager'
 
-  section_field.update.application.command:
-    class: Tardigrades\Command\UpdateApplicationCommand
+  Tardigrades\Command\UpdateApplicationCommand:
     arguments:
-      - '@section_field.manager.doctrine.application_manager'
+      $applicationManager: '@Tardigrades\SectionField\Service\DoctrineApplicationManager'
 
-  section_field.delete.application.command:
-    class: Tardigrades\Command\DeleteApplicationCommand
+  Tardigrades\Command\DeleteApplicationCommand:
     arguments:
-      - '@section_field.manager.doctrine.application_manager'
+      $applicationManager: '@Tardigrades\SectionField\Service\DoctrineApplicationManager'
 
-  section_field.list.application.command:
-    class: Tardigrades\Command\ListApplicationCommand
+  Tardigrades\Command\ListApplicationCommand:
     arguments:
-      - '@section_field.manager.doctrine.application_manager'
+      $applicationManager: '@Tardigrades\SectionField\Service\DoctrineApplicationManager'
 
-  section_field.create.language.command:
-    class: Tardigrades\Command\CreateLanguageCommand
+  Tardigrades\Command\CreateLanguageCommand:
     arguments:
-      - '@section_field.manager.doctrine.language_manager'
+      $languageManager: '@Tardigrades\SectionField\Service\DoctrineLanguageManager'
 
-  section_field.update.language.command:
-    class: Tardigrades\Command\UpdateLanguageCommand
+  Tardigrades\Command\UpdateLanguageCommand:
     arguments:
-      - '@section_field.manager.doctrine.language_manager'
+      $languageManager: '@Tardigrades\SectionField\Service\DoctrineLanguageManager'
 
-  section_field.delete.language.command:
-    class: Tardigrades\Command\DeleteLanguageCommand
+  Tardigrades\Command\DeleteLanguageCommand:
     arguments:
-      - '@section_field.manager.doctrine.language_manager'
+      $languageManager: '@Tardigrades\SectionField\Service\DoctrineLanguageManager'
 
-  section_field.list.language.command:
-    class: Tardigrades\Command\ListLanguageCommand
+  Tardigrades\Command\ListLanguageCommand:
     arguments:
-      - '@section_field.manager.doctrine.language_manager'
+      $languageManager: '@Tardigrades\SectionField\Service\DoctrineLanguageManager'
 
-  section_field.install.field.type.command:
-    class: Tardigrades\Command\InstallFieldTypeCommand
+  Tardigrades\Command\InstallFieldTypeCommand:
     arguments:
-      - '@section_field.manager.doctrine.field_type_manager'
+      $fieldTypeManager: '@Tardigrades\SectionField\Service\DoctrineFieldTypeManager'
 
-  section_field.update.field.type.command:
-    class: Tardigrades\Command\UpdateFieldTypeCommand
+  Tardigrades\Command\UpdateFieldTypeCommand:
     arguments:
-      - '@section_field.manager.doctrine.field_type_manager'
+      $fieldTypeManager: '@Tardigrades\SectionField\Service\DoctrineFieldTypeManager'
 
-  section_field.delete.field.type.command:
-    class: Tardigrades\Command\DeleteFieldTypeCommand
+  Tardigrades\Command\DeleteFieldTypeCommand:
     arguments:
-      - '@section_field.manager.doctrine.field_type_manager'
+      $fieldTypeManager: '@Tardigrades\SectionField\Service\DoctrineFieldTypeManager'
 
-  section_field.list.field.type.command:
-    class: Tardigrades\Command\ListFieldTypeCommand
+  Tardigrades\Command\ListFieldTypeCommand:
     arguments:
-      - '@section_field.manager.doctrine.field_type_manager'
+      $fieldTypeManager: '@Tardigrades\SectionField\Service\DoctrineFieldTypeManager'
 
-  section_field.create.section.command:
-    class: Tardigrades\Command\CreateSectionCommand
+  Tardigrades\Command\CreateSectionCommand:
     arguments:
-      - '@section_field.manager.doctrine.section_manager'
+      $sectionManager: '@Tardigrades\SectionField\Service\DoctrineSectionManager'
 
-  section_field.update.section.command:
-    class: Tardigrades\Command\UpdateSectionCommand
+  Tardigrades\Command\UpdateSectionCommand:
     arguments:
-      - '@section_field.manager.doctrine.section_manager'
+      $sectionManager: '@Tardigrades\SectionField\Service\DoctrineSectionManager'
 
-  section_field.restore.section.command:
-    class: Tardigrades\Command\RestoreSectionCommand
+  Tardigrades\Command\UpdateSectionsCommand:
     arguments:
-      - '@section_field.manager.doctrine.section_manager'
-      - '@section_field.manager.doctrine.section_history_manager'
+      $sectionManager: '@Tardigrades\SectionField\Service\DoctrineSectionManager'
 
-  section_field.delete.section.command:
-    class: Tardigrades\Command\DeleteSectionCommand
+  Tardigrades\Command\RestoreSectionCommand:
     arguments:
-      - '@section_field.manager.doctrine.section_manager'
+      $sectionManager: '@Tardigrades\SectionField\Service\DoctrineSectionManager'
+      $sectionHistoryManager: '@Tardigrades\SectionField\Service\DoctrineSectionHistoryManager'
 
-  section_field.list.section.command:
-    class: Tardigrades\Command\ListSectionCommand
+  Tardigrades\Command\DeleteSectionCommand:
     arguments:
-      - '@section_field.manager.doctrine.section_manager'
+      $sectionManager: '@Tardigrades\SectionField\Service\DoctrineSectionManager'
 
-  section_field.generate.section.command:
-    class: Tardigrades\Command\GenerateSectionCommand
+  Tardigrades\Command\ListSectionCommand:
     arguments:
-      - '@section_field.manager.doctrine.section_manager'
-      - '@section_field.generator'
+      $sectionManager: '@Tardigrades\SectionField\Service\DoctrineSectionManager'
 
-  section_field.create.field.command:
-    class: Tardigrades\Command\CreateFieldCommand
+  Tardigrades\Command\GenerateSectionCommand:
     arguments:
-      - '@section_field.manager.doctrine.field_manager'
+      $sectionManager: '@Tardigrades\SectionField\Service\DoctrineSectionManager'
+      $entityGenerator: '@section_field.generator'
 
-  section_field.update.field.command:
-    class: Tardigrades\Command\UpdateFieldCommand
+  Tardigrades\Command\CreateFieldCommand:
     arguments:
-      - '@section_field.manager.doctrine.field_manager'
+      $fieldManager: '@Tardigrades\SectionField\Service\DoctrineFieldManager'
 
-  section_field.delete.field.command:
-    class: Tardigrades\Command\DeleteFieldCommand
+  Tardigrades\Command\UpdateFieldCommand:
     arguments:
-      - '@section_field.manager.doctrine.field_manager'
+      $fieldManager: '@Tardigrades\SectionField\Service\DoctrineFieldManager'
 
-  section_field.list.field.command:
-    class: Tardigrades\Command\ListFieldCommand
+  Tardigrades\Command\DeleteFieldCommand:
     arguments:
-      - '@section_field.manager.doctrine.field_manager'
+      $fieldManager: '@Tardigrades\SectionField\Service\DoctrineFieldManager'
+
+  Tardigrades\Command\ListFieldCommand:
+    arguments:
+      $fieldManager: '@Tardigrades\SectionField\Service\DoctrineFieldManager'
