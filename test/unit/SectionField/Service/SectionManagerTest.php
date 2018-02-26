@@ -487,8 +487,90 @@ final class SectionManagerTest extends TestCase
         $sectionOne = $this->givenASectionWithName('One');
         $sectionTwo = $this->givenASectionWithName('Two');
 
-        $fieldOne = $this->givenAFieldWithNameKindAndTo('One', 'many-to-one', 'Two');
-        $fieldTwo = $this->givenAFieldWithNameKindAndTo('Two', 'one-to-many', 'One');
+        $fieldOne = $this->givenAFieldWithNameKindToAndType('One', 'many-to-one', 'Two', 'bidirectional');
+        $fieldTwo = $this->givenAFieldWithNameKindToAndType('Two', 'one-to-many', 'One', 'bidirectional');
+
+        $sectionRepository = Mockery::mock(ObjectRepository::class);
+        $sectionRepository
+            ->shouldReceive('findAll')
+            ->once()
+            ->andReturn([$sectionOne, $sectionTwo]);
+
+        $this->entityManager
+            ->shouldReceive('getRepository')
+            ->once()
+            ->with(Section::class)
+            ->andReturn($sectionRepository);
+
+        $this->fieldManager
+            ->shouldReceive('readByHandles')
+            ->once()
+            ->with(['title', 'body', 'created'])
+            ->andReturn([$fieldOne]);
+
+        $this->fieldManager
+            ->shouldReceive('readByHandles')
+            ->once()
+            ->with(['title', 'body', 'created'])
+            ->andReturn([$fieldTwo]);
+
+        $result = $this->sectionManager->getRelationshipsOfAll();
+
+        $expected = [
+            'sectionOne' => [
+                'fieldOne' => [
+                    'kind' => 'many-to-one',
+                    'to' => 'sectionTwo',
+                    'from' => 'sectionOne',
+                    'fullyQualifiedClassName' => FullyQualifiedClassName::fromString(
+                        '\\My\\Namespace\\FieldTypeClassOne'
+                    ),
+                    'relationship-type' => 'bidirectional'
+                ],
+                'fieldTwo-opposite' => [
+                    'kind' => 'many-to-one',
+                    'to' => 'sectionTwo',
+                    'fullyQualifiedClassName' => FullyQualifiedClassName::fromString(
+                        '\\My\\Namespace\\FieldTypeClassTwo'
+                    ),
+                    'relationship-type' => 'unidirectional'
+                ]
+            ],
+            'sectionTwo' => [
+                'fieldTwo' => [
+                    'kind' => 'one-to-many',
+                    'to' => 'sectionOne',
+                    'from' => 'sectionTwo',
+                    'fullyQualifiedClassName' => FullyQualifiedClassName::fromString(
+                        '\\My\\Namespace\\FieldTypeClassTwo'
+                    ),
+                    'relationship-type' => 'bidirectional'
+                ],
+                'fieldOne-opposite' => [
+                    'kind' => 'one-to-many',
+                    'to' => 'sectionOne',
+                    'fullyQualifiedClassName' => FullyQualifiedClassName::fromString(
+                        '\\My\\Namespace\\FieldTypeClassOne'
+                    ),
+                    'relationship-type' => 'unidirectional'
+                ]
+            ]
+        ];
+
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     * @covers ::getRelationshipsOfAll
+     */
+    public function it_should_not_get_unidirectional_relationships()
+    {
+        $sectionOne = $this->givenASectionWithName('One');
+        $sectionTwo = $this->givenASectionWithName('Two');
+
+        $fieldOne = $this->givenAFieldWithNameKindToAndType('One', 'many-to-one', 'Two', 'unidirectional');
+        $fieldTwo = $this->givenAFieldWithNameKindToAndType('Two', 'one-to-many', 'One', 'unidirectional');
 
         $sectionRepository = Mockery::mock(ObjectRepository::class);
         $sectionRepository
@@ -526,14 +608,6 @@ final class SectionManagerTest extends TestCase
                         '\\My\\Namespace\\FieldTypeClassOne'
                     ),
                     'relationship-type' => 'unidirectional'
-                ],
-                'fieldTwo-opposite' => [
-                    'kind' => 'many-to-one',
-                    'to' => 'sectionTwo',
-                    'fullyQualifiedClassName' => FullyQualifiedClassName::fromString(
-                        '\\My\\Namespace\\FieldTypeClassTwo'
-                    ),
-                    'relationship-type' => 'bidirectional'
                 ]
             ],
             'sectionTwo' => [
@@ -545,14 +619,6 @@ final class SectionManagerTest extends TestCase
                         '\\My\\Namespace\\FieldTypeClassTwo'
                     ),
                     'relationship-type' => 'unidirectional'
-                ],
-                'fieldOne-opposite' => [
-                    'kind' => 'one-to-many',
-                    'to' => 'sectionOne',
-                    'fullyQualifiedClassName' => FullyQualifiedClassName::fromString(
-                        '\\My\\Namespace\\FieldTypeClassOne'
-                    ),
-                    'relationship-type' => 'bidirectional'
                 ]
             ]
         ];
@@ -602,7 +668,7 @@ final class SectionManagerTest extends TestCase
         return $query;
     }
 
-    private function givenAFieldWithNameKindAndTo($name, $kind, $to)
+    private function givenAFieldWithNameKindToAndType($name, $kind, $to, $type)
     {
         $fieldName = 'Field ' . $name;
         $fieldHandle = 'field' . $name;
@@ -616,7 +682,7 @@ final class SectionManagerTest extends TestCase
                 'handle' => $fieldHandle,
                 'kind' => $kind,
                 'to' => 'section' . $to,
-                'relationship-type' => 'unidirectional'
+                'relationship-type' => $type
             ]
         ]);
 
