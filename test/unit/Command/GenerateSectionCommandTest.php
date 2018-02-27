@@ -195,7 +195,7 @@ YML;
 
         $this->entityGenerator
             ->shouldReceive('getBuildMessages')
-            ->times(3);
+            ->once();
 
         $commandTester->setInputs(['all', 'y', 'y', 'y']);
         $commandTester->execute(['command' => $command->getName()]);
@@ -248,7 +248,7 @@ YML;
 
         $this->entityGenerator
             ->shouldReceive('getBuildMessages')
-            ->times(3);
+            ->once();
 
         $commandTester->setInputs(['all']);
         $commandTester->execute(['command' => $command->getName(), '--yes-mode' => null]);
@@ -297,7 +297,7 @@ YML;
 
         $this->entityGenerator
             ->shouldReceive('getBuildMessages')
-            ->twice();
+            ->once();
 
         $commandTester->setInputs(['1, 2', 'y', 'y']);
         $commandTester->execute(['command' => $command->getName()]);

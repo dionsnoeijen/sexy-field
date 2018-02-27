@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1519655992">
-  <project timestamp="1519655992">
+<coverage generated="1519719779">
+  <project timestamp="1519719779">
     <package name="Tardigrades\Command">
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/ApplicationCommand.php">
         <class name="ApplicationCommand" namespace="Tardigrades\Command">
@@ -414,7 +414,7 @@
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/GenerateSectionCommand.php">
         <class name="GenerateSectionCommand" namespace="Tardigrades\Command">
-          <metrics complexity="10" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="34" coveredstatements="29" elements="38" coveredelements="32"/>
+          <metrics complexity="10" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="34" coveredstatements="30" elements="38" coveredelements="33"/>
         </class>
         <line num="31" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="6"/>
         <line num="35" type="stmt" count="6"/>
@@ -436,7 +436,7 @@
         <line num="62" type="stmt" count="1"/>
         <line num="63" type="stmt" count="1"/>
         <line num="65" type="stmt" count="6"/>
-        <line num="67" type="method" name="generateWhatSection" visibility="private" complexity="6" crap="6.92" count="6"/>
+        <line num="67" type="method" name="generateWhatSection" visibility="private" complexity="6" crap="6.47" count="6"/>
         <line num="69" type="stmt" count="6"/>
         <line num="71" type="stmt" count="5"/>
         <line num="72" type="stmt" count="5"/>
@@ -451,10 +451,10 @@
         <line num="87" type="stmt" count="1"/>
         <line num="88" type="stmt" count="1"/>
         <line num="91" type="stmt" count="4"/>
-        <line num="92" type="stmt" count="0"/>
-        <line num="95" type="stmt" count="4"/>
+        <line num="92" type="stmt" count="4"/>
+        <line num="96" type="stmt" count="4"/>
         <line num="97" type="stmt" count="4"/>
-        <metrics loc="98" ncloc="84" classes="1" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="34" coveredstatements="29" elements="38" coveredelements="32"/>
+        <metrics loc="98" ncloc="84" classes="1" methods="4" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="34" coveredstatements="30" elements="38" coveredelements="33"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/InstallFieldTypeCommand.php">
         <class name="InstallFieldTypeCommand" namespace="Tardigrades\Command">
@@ -3515,6 +3515,6 @@
         <metrics loc="248" ncloc="143" classes="1" methods="16" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="0" elements="54" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="141" loc="9295" ncloc="7527" classes="119" methods="576" coveredmethods="553" conditionals="0" coveredconditionals="0" statements="2130" coveredstatements="2055" elements="2706" coveredelements="2608"/>
+    <metrics files="141" loc="9295" ncloc="7527" classes="119" methods="576" coveredmethods="553" conditionals="0" coveredconditionals="0" statements="2130" coveredstatements="2056" elements="2706" coveredelements="2609"/>
   </project>
 </coverage>

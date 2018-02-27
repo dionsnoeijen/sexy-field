@@ -91,8 +91,8 @@ class GenerateSectionCommand extends SectionCommand
             foreach ($writables as $writable) {
                 GeneratorFileWriter::write($writable);
             }
-
-            $output->writeln($this->entityGenerator->getBuildMessages());
         }
+
+        $output->writeln($this->entityGenerator->getBuildMessages());
     }
 }
