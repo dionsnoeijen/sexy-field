@@ -239,6 +239,12 @@ class ReadOptions implements ReadOptionsInterface
     public function getField(): ?array
     {
         try {
+            Assertion::keyExists($this->options, ReadOptions::FIELD,
+                'The key field should exist'
+            );
+            Assertion::notEmpty($this->options[ReadOptions::FIELD],
+                'The field option must contain something.'
+            );
             Assertion::isArray(
                 $this->options[ReadOptions::FIELD],
                 'The field option must be an array. "fieldHandle" => "value"'
