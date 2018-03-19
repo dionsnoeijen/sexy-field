@@ -243,15 +243,11 @@ class ReadOptions implements ReadOptionsInterface
                 $this->options[ReadOptions::FIELD],
                 'The field option must be an array. "fieldHandle" => "value"'
             );
-            $field = [
-                Handle::fromString(key($this->options[ReadOptions::FIELD])),
-                $this->options[ReadOptions::FIELD][key($this->options[ReadOptions::FIELD])]
-            ];
         } catch (InvalidArgumentException $exception) {
             return null;
         }
 
-        return $field;
+        return $this->options[ReadOptions::FIELD];
     }
 
     public function getId(): ?Id

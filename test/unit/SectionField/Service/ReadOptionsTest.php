@@ -84,7 +84,7 @@ final class ReadOptionsTest extends TestCase
         $this->assertEquals(true, $result->getLocaleEnabled());
         $this->assertEquals('en_EN', $result->getLocale());
         $this->assertEquals(Search::fromString('search'), $result->getSearch());
-        $this->assertEquals([Handle::fromString('color'), 'purple'], $result->getField());
+        $this->assertEquals(['color' => 'purple'], $result->getField());
         $this->assertEquals($array, $result->toArray());
     }
 
