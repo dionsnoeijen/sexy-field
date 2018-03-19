@@ -38,7 +38,7 @@ class CreateSection implements CreateSectionInterface
     /**
      * {@inheritdoc}
      */
-    public function save(CommonSectionInterface $sectionEntryEntity, array $jitRelationships = null)
+    public function save(CommonSectionInterface $sectionEntryEntity)
     {
         $this->dispatcher->dispatch(
             SectionEntryBeforeCreate::NAME,
@@ -49,7 +49,7 @@ class CreateSection implements CreateSectionInterface
 
         /** @var CreateSectionInterface $writer */
         foreach ($this->creators as $writer) {
-            $writer->save($sectionEntryEntity, $jitRelationships);
+            $writer->save($sectionEntryEntity);
         }
 
         $this->dispatcher->dispatch(
@@ -61,11 +61,11 @@ class CreateSection implements CreateSectionInterface
     /**
      * {@inheritdoc}
      */
-    public function persist(CommonSectionInterface $sectionEntryEntity, array $jitRelationships = null)
+    public function persist(CommonSectionInterface $sectionEntryEntity)
     {
         /** @var CreateSectionInterface $writer */
         foreach ($this->creators as $writer) {
-            $writer->persist($sectionEntryEntity, $jitRelationships);
+            $writer->persist($sectionEntryEntity);
         }
     }
 

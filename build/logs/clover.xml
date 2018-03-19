@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1519719779">
-  <project timestamp="1519719779">
+<coverage generated="1521465506">
+  <project timestamp="1521465506">
     <package name="Tardigrades\Command">
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/ApplicationCommand.php">
         <class name="ApplicationCommand" namespace="Tardigrades\Command">
@@ -2772,7 +2772,7 @@
       </file>
     </package>
     <file name="/Users/Dion/www/sexy-field/sexy-field/src/SectionField/Service/CreateSectionInterface.php">
-      <metrics loc="60" ncloc="17" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      <metrics loc="58" ncloc="17" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/Users/Dion/www/sexy-field/sexy-field/src/SectionField/Service/DeleteSectionInterface.php">
       <metrics loc="34" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -3072,22 +3072,6 @@
         <line num="43" type="method" name="fromInt" visibility="public" complexity="1" crap="1" count="1"/>
         <line num="45" type="stmt" count="1"/>
         <metrics loc="47" ncloc="38" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="11" coveredelements="11"/>
-      </file>
-      <file name="/Users/Dion/www/sexy-field/sexy-field/src/SectionField/ValueObject/JitRelationship.php">
-        <class name="JitRelationship" namespace="Tardigrades\SectionField\ValueObject">
-          <metrics complexity="4" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="10" coveredelements="10"/>
-        </class>
-        <line num="24" type="method" name="__construct" visibility="private" complexity="1" crap="1" count="1"/>
-        <line num="28" type="stmt" count="1"/>
-        <line num="29" type="stmt" count="1"/>
-        <line num="30" type="stmt" count="1"/>
-        <line num="32" type="method" name="getFullyQualifiedClassName" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="34" type="stmt" count="1"/>
-        <line num="37" type="method" name="getId" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="39" type="stmt" count="1"/>
-        <line num="42" type="method" name="fromFullyQualifiedClassNameAndId" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="46" type="stmt" count="1"/>
-        <metrics loc="48" ncloc="38" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="10" coveredelements="10"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/SectionField/ValueObject/Label.php">
         <class name="Label" namespace="Tardigrades\SectionField\ValueObject">
@@ -3515,6 +3499,6 @@
         <metrics loc="248" ncloc="143" classes="1" methods="16" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="0" elements="54" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="141" loc="9295" ncloc="7527" classes="119" methods="576" coveredmethods="553" conditionals="0" coveredconditionals="0" statements="2130" coveredstatements="2056" elements="2706" coveredelements="2609"/>
+    <metrics files="140" loc="9245" ncloc="7489" classes="118" methods="572" coveredmethods="549" conditionals="0" coveredconditionals="0" statements="2124" coveredstatements="2050" elements="2696" coveredelements="2599"/>
   </project>
 </coverage>
