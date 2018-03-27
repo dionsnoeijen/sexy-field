@@ -313,7 +313,6 @@ class Project
     }
 }
 
-
 TXT;
 
         $result = PhpFormatter::format($inputText);
