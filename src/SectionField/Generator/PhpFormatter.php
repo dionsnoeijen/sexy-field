@@ -55,7 +55,6 @@ class PhpFormatter
                 $tabs++;
             }
         }
-        $result .= PHP_EOL;
 
         return $result;
     }
