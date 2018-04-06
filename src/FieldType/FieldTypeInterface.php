@@ -15,6 +15,7 @@ namespace Tardigrades\FieldType;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Tardigrades\Entity\SectionInterface;
+use Tardigrades\SectionField\Generator\CommonSectionInterface;
 use Tardigrades\SectionField\Service\ReadSectionInterface;
 use Tardigrades\SectionField\Service\SectionManagerInterface;
 use Tardigrades\SectionField\ValueObject\FieldConfig;
@@ -29,7 +30,7 @@ interface FieldTypeInterface
     /**
      * @param FormBuilderInterface $formBuilder
      * @param SectionInterface $section
-     * @param $sectionEntity This can be any entity generated for a section
+     * @param CommonSectionInterface $sectionEntity
      * @param SectionManagerInterface $sectionManager
      * @param ReadSectionInterface $readSection
      * @return FormBuilderInterface
@@ -37,7 +38,7 @@ interface FieldTypeInterface
     public function addToForm(
         FormBuilderInterface $formBuilder,
         SectionInterface $section,
-        $sectionEntity,
+        CommonSectionInterface $sectionEntity,
         SectionManagerInterface $sectionManager,
         ReadSectionInterface $readSection
     ): FormBuilderInterface;
