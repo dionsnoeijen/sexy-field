@@ -66,6 +66,24 @@ abstract class FieldType implements FieldTypeInterface
                 $options = array_merge($options, $fieldConfig['field']['form']['update']);
             }
         }
+
+        if (!empty($options['constraints'])) {
+            $options = $this->getFormConstraints($options);
+        }
+
+        return $options;
+    }
+
+    private function getFormConstraints(array $options): array
+    {
+        $buildConstraints = [];
+        foreach ($options['constraints'] as $validator => $parameters) {
+            $namespace = 'Symfony\\Component\\Validator\\Constraints\\' . $validator;
+            $buildConstraints[] = new $namespace($parameters);
+        }
+
+        $options['constraints'] = $buildConstraints;
+
         return $options;
     }
 

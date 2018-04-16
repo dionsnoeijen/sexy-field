@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1523000982">
-  <project timestamp="1523000982">
+<coverage generated="1523879396">
+  <project timestamp="1523879396">
     <package name="Tardigrades\Command">
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/ApplicationCommand.php">
         <class name="ApplicationCommand" namespace="Tardigrades\Command">
@@ -1501,7 +1501,7 @@
     <package name="Tardigrades\FieldType">
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/FieldType/FieldType.php">
         <class name="FieldType" namespace="Tardigrades\FieldType">
-          <metrics complexity="14" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="22" elements="29" coveredelements="29"/>
+          <metrics complexity="17" methods="8" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="23" elements="38" coveredelements="29"/>
         </class>
         <line num="33" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="4"/>
         <line num="35" type="stmt" count="4"/>
@@ -1513,7 +1513,7 @@
         <line num="47" type="stmt" count="2"/>
         <line num="50" type="method" name="getConfig" visibility="public" complexity="1" crap="1" count="2"/>
         <line num="52" type="stmt" count="2"/>
-        <line num="55" type="method" name="formOptions" visibility="public" complexity="6" crap="6" count="2"/>
+        <line num="55" type="method" name="formOptions" visibility="public" complexity="7" crap="7.03" count="2"/>
         <line num="57" type="stmt" count="2"/>
         <line num="58" type="stmt" count="2"/>
         <line num="59" type="stmt" count="2"/>
@@ -1523,16 +1523,25 @@
         <line num="63" type="stmt" count="1"/>
         <line num="65" type="stmt" count="2"/>
         <line num="66" type="stmt" count="1"/>
-        <line num="69" type="stmt" count="2"/>
-        <line num="72" type="method" name="hasEntityEvent" visibility="public" complexity="2" crap="2" count="1"/>
-        <line num="75" type="stmt" count="1"/>
-        <line num="76" type="stmt" count="1"/>
-        <line num="77" type="stmt" count="1"/>
-        <line num="80" type="stmt" count="1"/>
-        <line num="83" type="method" name="directory" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="85" type="stmt" count="1"/>
-        <line num="86" type="stmt" count="1"/>
-        <metrics loc="96" ncloc="86" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="22" elements="29" coveredelements="29"/>
+        <line num="70" type="stmt" count="2"/>
+        <line num="71" type="stmt" count="0"/>
+        <line num="74" type="stmt" count="2"/>
+        <line num="77" type="method" name="getFormConstraints" visibility="private" complexity="2" crap="6" count="0"/>
+        <line num="79" type="stmt" count="0"/>
+        <line num="80" type="stmt" count="0"/>
+        <line num="81" type="stmt" count="0"/>
+        <line num="82" type="stmt" count="0"/>
+        <line num="85" type="stmt" count="0"/>
+        <line num="87" type="stmt" count="0"/>
+        <line num="90" type="method" name="hasEntityEvent" visibility="public" complexity="2" crap="2" count="1"/>
+        <line num="93" type="stmt" count="1"/>
+        <line num="94" type="stmt" count="1"/>
+        <line num="95" type="stmt" count="1"/>
+        <line num="98" type="stmt" count="1"/>
+        <line num="101" type="method" name="directory" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="103" type="stmt" count="1"/>
+        <line num="104" type="stmt" count="1"/>
+        <metrics loc="114" ncloc="104" classes="1" methods="8" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="23" elements="38" coveredelements="29"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/FieldType/NoCustomGeneratorDefinedException.php">
         <class name="NoCustomGeneratorDefinedException" namespace="Tardigrades\FieldType">
@@ -3500,6 +3509,6 @@
         <metrics loc="248" ncloc="143" classes="1" methods="16" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="0" elements="54" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="140" loc="9248" ncloc="7492" classes="118" methods="572" coveredmethods="549" conditionals="0" coveredconditionals="0" statements="2125" coveredstatements="2051" elements="2697" coveredelements="2600"/>
+    <metrics files="140" loc="9266" ncloc="7510" classes="118" methods="573" coveredmethods="548" conditionals="0" coveredconditionals="0" statements="2133" coveredstatements="2052" elements="2706" coveredelements="2600"/>
   </project>
 </coverage>
