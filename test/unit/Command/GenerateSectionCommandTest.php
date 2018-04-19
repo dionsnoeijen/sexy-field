@@ -254,6 +254,58 @@ YML;
         $commandTester->execute(['command' => $command->getName(), '--yes-mode' => null]);
     }
 
+
+    /**
+     * @test
+     * @covers ::configure
+     * @covers ::execute
+     */
+    public function it_should_generate_all_sections_when_all_is_requested_with_a_flag()
+    {
+        $yml = <<<YML
+section:
+    name: foo
+    handle: bar
+    fields: []
+    default: Default
+    namespace: My\Namespace
+YML;
+
+        file_put_contents($this->file, $yml);
+
+        $command = $this->application->find('sf:generate-section');
+        $commandTester = new CommandTester($command);
+
+        $sections = $this->givenAnArrayOfSections();
+
+        $this->sectionManager
+            ->shouldReceive('readAll')
+            ->twice()
+            ->andReturn($sections);
+
+        $this->sectionManager
+            ->shouldReceive('read')
+            ->never();
+
+        $this->entityGenerator
+            ->shouldReceive('generateBySection')
+            ->with($sections[0]);
+
+        $this->entityGenerator
+            ->shouldReceive('generateBySection')
+            ->with($sections[1]);
+
+        $this->entityGenerator
+            ->shouldReceive('generateBySection')
+            ->with($sections[2]);
+
+        $this->entityGenerator
+            ->shouldReceive('getBuildMessages')
+            ->once();
+
+        $commandTester->execute(['command' => $command->getName(), '--yes-mode' => null, '--all' => null]);
+    }
+
     /**
      * @test
      * @covers ::configure

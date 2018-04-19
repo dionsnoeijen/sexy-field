@@ -48,7 +48,13 @@ class GenerateSectionCommand extends SectionCommand
                 null,
                 InputOption::VALUE_NONE,
                 'Automatically say yes when a confirmation is asked'
-            );
+            )
+            ->addOption(
+                'all',
+                'a',
+                InputOption::VALUE_NONE,
+                'Generate all available sections'
+            )
         ;
         // @codingStandardsIgnoreEnd
     }
@@ -66,7 +72,11 @@ class GenerateSectionCommand extends SectionCommand
 
     private function generateWhatSection(InputInterface $input, OutputInterface $output): void
     {
-        $sections = $this->getSections($input, $output);
+        if ($input->getOption('all')) {
+            $sections = $this->sectionManager->readAll();
+        } else {
+            $sections = $this->getSections($input, $output);
+        }
 
         foreach ($sections as $section) {
             $writables = $this->entityGenerator->generateBySection($section);
