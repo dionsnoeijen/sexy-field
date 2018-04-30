@@ -92,3 +92,11 @@ services:
   Tardigrades\Command\ListFieldCommand:
     arguments:
       $fieldManager: '@Tardigrades\SectionField\Service\DoctrineFieldManager'
+
+  Tardigrades\Command\InstallDirectoryCommand:
+    arguments:
+      $applicationManager: '@Tardigrades\SectionField\Service\DoctrineApplicationManager'
+      $languageManager: '@Tardigrades\SectionField\Service\DoctrineLanguageManager'
+      $sectionManager: '@Tardigrades\SectionField\Service\DoctrineSectionManager'
+      $fieldManager: '@Tardigrades\SectionField\Service\DoctrineFieldManager'
+      $fieldTypeManager: '@Tardigrades\SectionField\Service\DoctrineFieldTypeManager'
