@@ -139,8 +139,16 @@ class InstallDirectoryCommand extends Command
         }
 
         foreach ($fieldTypes as $fieldType) {
+            if ($fieldType === 'DateTimeField') {
+                // DateTime has "Field" at the end of its name to avoid confusion with \DateTime.
+                // All other field types follow Tardigrades\FieldType\{fieldType}\{fieldType}.
+                // This solution is unpleasant, but there's no good way to detect classes before they've been loaded.
+                $className = "Tardigrades\\FieldType\\DateTime\\$fieldType";
+            } else {
+                $className = "Tardigrades\\FieldType\\$fieldType\\$fieldType";
+            }
             $this->fieldTypeManager->createWithFullyQualifiedClassName(
-                FullyQualifiedClassName::fromString("Tardigrades\\FieldType\\$fieldType")
+                FullyQualifiedClassName::fromString($className)
             );
         }
 
