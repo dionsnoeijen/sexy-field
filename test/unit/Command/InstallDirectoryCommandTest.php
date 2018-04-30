@@ -1,0 +1,255 @@
+<?php
+declare(strict_types=1);
+
+namespace Tardigrades\Command;
+
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\vfsStreamFile;
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Tester\CommandTester;
+use Tardigrades\SectionField\Service\ApplicationManagerInterface;
+use Tardigrades\SectionField\Service\FieldManagerInterface;
+use Tardigrades\SectionField\Service\FieldTypeManagerInterface;
+use Tardigrades\SectionField\Service\LanguageManagerInterface;
+use Tardigrades\SectionField\Service\SectionManagerInterface;
+
+/**
+ * @coversDefaultClass Tardigrades\Command\InstallDirectoryCommand
+ * @covers ::__construct
+ */
+final class InstallDirectoryCommandTest extends TestCase
+{
+    use MockeryPHPUnitIntegration;
+
+    /** @var ApplicationManagerInterface */
+    private $applicationManager;
+
+    /** @var LanguageManagerInterface */
+    private $languageManager;
+
+    /** @var SectionManagerInterface */
+    private $sectionManager;
+
+    /** @var FieldManagerInterface */
+    private $fieldManager;
+
+    /** @var FieldTypeManagerInterface */
+    private $fieldTypeManager;
+
+    /** @var InstallDirectoryCommand */
+    private $installDirectoryCommand;
+
+    private $application;
+
+    public function setUp()
+    {
+        $this->applicationManager = \Mockery::mock(ApplicationManagerInterface::class);
+        $this->languageManager = \Mockery::mock(LanguageManagerInterface::class);
+        $this->sectionManager = \Mockery::mock(SectionManagerInterface::class);
+        $this->fieldManager = \Mockery::mock(FieldManagerInterface::class);
+        $this->fieldTypeManager = \Mockery::mock(FieldTypeManagerInterface::class);
+
+        $this->installDirectoryCommand = new InstallDirectoryCommand(
+            $this->applicationManager,
+            $this->languageManager,
+            $this->sectionManager,
+            $this->fieldManager,
+            $this->fieldTypeManager
+        );
+
+        $this->application = new Application();
+        $this->application->add($this->installDirectoryCommand);
+    }
+
+    /**
+     * @test
+     * @covers ::<private>
+     * @covers ::<protected>
+     */
+    public function it_installs_valid_config_correctly()
+    {
+        $this->fieldTypeManager->shouldReceive('createWithFullyQualifiedClassName')->twice();
+        $this->languageManager->shouldReceive('createByConfig')->once();
+        $this->applicationManager->shouldReceive('createByConfig')->once();
+        $this->fieldManager->shouldReceive('createByConfig')->twice();
+        $this->sectionManager->shouldReceive('createByConfig')->once();
+
+        $commandTester = $this->runWithFilesystem($this->setupFilesystem());
+
+        $expectedOutput = <<<EOF
+Languages created!
+1 applications created!
+2 field types installed!
+2 fields created!
+1 sections created!
+
+EOF;
+
+        $this->assertSame($expectedOutput, $commandTester->getDisplay());
+    }
+
+    /**
+     * @test
+     * @covers ::verifyConfig
+     * @expectedException \Exception
+     * @expectedExceptionMessage Could not find any application config files
+     */
+    public function it_fails_without_an_application()
+    {
+        $fileSystem = $this->setupFilesystem();
+        $fileSystem->removeChild('application.yml');
+
+        $this->runWithFilesystem($fileSystem);
+    }
+
+    /**
+     * @test
+     * @covers ::verifyConfig
+     * @expectedException \Exception
+     * @expectedExceptionMessage Could not find a language config file
+     */
+    public function it_fails_without_languages()
+    {
+        $fileSystem = $this->setupFilesystem();
+        $fileSystem->removeChild('language.yml');
+
+        $this->runWithFilesystem($fileSystem);
+    }
+
+    /**
+     * @test
+     * @covers ::classifyFile
+     * @expectedException \Exception
+     * @expectedExceptionMessage Found multiple language config files
+     */
+    public function it_fails_with_multiple_language_files()
+    {
+        $fileSystem = $this->setupFilesystem();
+        $extraFile = new vfsStreamFile("extra.yml");
+        $extraFile->setContent("language: ~");
+        $fileSystem->addChild($extraFile);
+
+        $this->runWithFilesystem($fileSystem);
+    }
+
+    /**
+     * @test
+     * @covers ::classifyFile
+     * @expectedException \Exception
+     * @expectedExceptionMessage Malformed file vfs://config/extra.yml
+     */
+    public function it_fails_with_a_non_array_file()
+    {
+        $fileSystem = $this->setupFilesystem();
+        $extraFile = new vfsStreamFile("extra.yml");
+        $extraFile->setContent("~");
+        $fileSystem->addChild($extraFile);
+
+        $this->runWithFilesystem($fileSystem);
+    }
+
+    /**
+     * @test
+     * @covers ::classifyFile
+     * @expectedException \Exception
+     * @expectedExceptionMessage Malformed file vfs://config/extra.yml
+     */
+    public function it_fails_with_a_file_with_multiple_keys()
+    {
+        $fileSystem = $this->setupFilesystem();
+        $extraFile = new vfsStreamFile("extra.yml");
+        $extraFile->setContent("language: ~\nfoo: ~");
+        $fileSystem->addChild($extraFile);
+
+        $this->runWithFilesystem($fileSystem);
+    }
+
+    /**
+     * @test
+     * @covers ::classifyFile
+     * @expectedException \Exception
+     * @expectedExceptionMessage Could not identify file vfs://config/extra.yml with key foo
+     */
+    public function it_fails_with_a_file_with_an_unknown_type()
+    {
+        $fileSystem = $this->setupFilesystem();
+        $extraFile = new vfsStreamFile("extra.yml");
+        $extraFile->setContent("foo: ~");
+        $fileSystem->addChild($extraFile);
+
+        $this->runWithFilesystem($fileSystem);
+    }
+
+    private function runWithFilesystem(vfsStreamDirectory $fileSystem): CommandTester
+    {
+        $commandTester = new CommandTester($this->installDirectoryCommand);
+        $commandTester->execute(
+            [
+                'command' => $this->installDirectoryCommand->getName(),
+                'directory' => $fileSystem->url()
+            ]
+        );
+        return $commandTester;
+    }
+
+    private function setupFilesystem(): vfsStreamDirectory
+    {
+        $application = <<<EOF
+application:
+    name: MyApplication
+    handle: AppHandle
+    languages:
+        - nl_NL
+        - en_EN
+EOF;
+
+        $language = <<<EOF
+language:
+    - nl_NL
+    - en_EN
+EOF;
+
+        $sectionFoo = <<<EOF
+section:
+    name: Foo
+    handle: foo
+    fields:
+        - foofield
+        - fieldfoo
+    default:
+        - foofield
+    namespace: Somewhere
+EOF;
+
+        $fieldFoo = <<<EOF
+field:
+    name: Field foo
+    handle: fieldfoo
+    type: TextInput
+EOF;
+
+        $fooField = <<<EOF
+field:
+    name: Foo field
+    handle: foofield
+    type: Number
+EOF;
+
+
+        return vfsStream::setup('config', 444, [
+            'application.yml' => $application,
+            'language.yml' => $language,
+            'foo' => [
+                'foo.yml' => $sectionFoo,
+                'fields' => [
+                    'fieldfoo.yml' => $fieldFoo,
+                    'foofield.yml' => $fooField
+                ]
+            ],
+            'README' => "I am not a yml, please ignore me"
+        ]);
+    }
+}
