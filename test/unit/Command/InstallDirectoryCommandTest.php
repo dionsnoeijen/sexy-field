@@ -235,7 +235,7 @@ EOF;
 field:
     name: Foo field
     handle: foofield
-    type: Number
+    type: DateTimeField
 EOF;
 
 
