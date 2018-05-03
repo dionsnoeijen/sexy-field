@@ -44,7 +44,7 @@ interface FieldTypeInterface
         CommonSectionInterface $sectionEntity,
         SectionManagerInterface $sectionManager,
         ReadSectionInterface $readSection,
-        Request $request = null
+        Request $request
     ): FormBuilderInterface;
 
     public function directory(): string;

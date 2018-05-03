@@ -115,6 +115,6 @@ abstract class FieldType implements FieldTypeInterface
         CommonSectionInterface $sectionEntity,
         SectionManagerInterface $sectionManager,
         ReadSectionInterface $readSection,
-        Request $request = null
+        Request $request
     ): FormBuilderInterface;
 }
