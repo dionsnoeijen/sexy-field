@@ -15,6 +15,7 @@ namespace Tardigrades\FieldType;
 
 use ReflectionClass;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Tardigrades\Entity\SectionInterface;
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
 use Tardigrades\SectionField\Service\ReadSectionInterface;
@@ -100,8 +101,12 @@ abstract class FieldType implements FieldTypeInterface
 
     public function directory(): string
     {
-        $fieldType = new ReflectionClass($this);
-        return pathinfo($fieldType->getFilename(), PATHINFO_DIRNAME);
+        try {
+            $fieldType = new ReflectionClass($this);
+            return pathinfo($fieldType->getFilename(), PATHINFO_DIRNAME);
+        } catch (\ReflectionException $exception) {
+            // No need
+        }
     }
 
     abstract public function addToForm(
@@ -109,6 +114,7 @@ abstract class FieldType implements FieldTypeInterface
         SectionInterface $section,
         CommonSectionInterface $sectionEntity,
         SectionManagerInterface $sectionManager,
-        ReadSectionInterface $readSection
+        ReadSectionInterface $readSection,
+        Request $request = null
     ): FormBuilderInterface;
 }

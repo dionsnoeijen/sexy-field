@@ -14,6 +14,7 @@ declare (strict_types = 1);
 namespace Tardigrades\FieldType;
 
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Tardigrades\Entity\SectionInterface;
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
 use Tardigrades\SectionField\Service\ReadSectionInterface;
@@ -33,6 +34,8 @@ interface FieldTypeInterface
      * @param CommonSectionInterface $sectionEntity
      * @param SectionManagerInterface $sectionManager
      * @param ReadSectionInterface $readSection
+     * @param Request $request
+     *
      * @return FormBuilderInterface
      */
     public function addToForm(
@@ -40,7 +43,8 @@ interface FieldTypeInterface
         SectionInterface $section,
         CommonSectionInterface $sectionEntity,
         SectionManagerInterface $sectionManager,
-        ReadSectionInterface $readSection
+        ReadSectionInterface $readSection,
+        Request $request = null
     ): FormBuilderInterface;
 
     public function directory(): string;
