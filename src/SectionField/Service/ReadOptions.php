@@ -14,6 +14,7 @@ declare (strict_types = 1);
 namespace Tardigrades\SectionField\Service;
 
 use Assert\Assertion;
+use Assert\AssertionFailedException;
 use Assert\InvalidArgumentException;
 use Tardigrades\SectionField\ValueObject\Slug;
 use Tardigrades\SectionField\ValueObject\After;
@@ -44,6 +45,18 @@ class ReadOptions implements ReadOptionsInterface
     const LOCALE = 'locale';
     const SEARCH = 'search';
     const FIELD = 'field';
+
+    /**
+     * @var string If you know in advance what fields you are going to need
+     * use the fetchFields option. That way a custom DQL query will be built
+     * and greatly improve performance because we are bypassing the default
+     * LAZY_LOADING setup of doctrine.
+     *
+     * A string like that should be comma separated. If you need fields that are
+     * in a relationship, add the entity property name that would return the relationship.
+     * title,subTitle,someRelation,someRelationTitle
+     */
+    const FETCH_FIELDS = 'fetchFields';
 
     /** @var array */
     protected $options;
@@ -109,7 +122,7 @@ class ReadOptions implements ReadOptionsInterface
                 $this->options[ReadOptions::SECTION_ID],
                 'The sectionId needs to be an integer'
             );
-        } catch (InvalidArgumentException $exception) {
+        } catch (AssertionFailedException $exception) {
             return null;
         }
 
@@ -128,7 +141,7 @@ class ReadOptions implements ReadOptionsInterface
                 $this->options[ReadOptions::OFFSET],
                 'The offset needs to be an integer.'
             );
-        } catch (InvalidArgumentException $exception) {
+        } catch (AssertionFailedException $exception) {
             return null;
         }
 
@@ -147,7 +160,7 @@ class ReadOptions implements ReadOptionsInterface
                 $this->options[ReadOptions::LIMIT],
                 'The limit needs to be an integer.'
             );
-        } catch (InvalidArgumentException $exception) {
+        } catch (AssertionFailedException $exception) {
             return null;
         }
 
@@ -169,7 +182,7 @@ class ReadOptions implements ReadOptionsInterface
             $handle = Handle::fromString(key($this->options[ReadOptions::ORDER_BY]));
             $sort = Sort::fromString(array_values($this->options[ReadOptions::ORDER_BY])[0]);
             $orderBy = OrderBy::fromHandleAndSort($handle, $sort);
-        } catch (InvalidArgumentException $exception) {
+        } catch (AssertionFailedException $exception) {
             return null;
         }
 
@@ -181,7 +194,7 @@ class ReadOptions implements ReadOptionsInterface
         try {
             Assertion::keyIsset($this->options, ReadOptions::BEFORE, 'Before is not defined');
             Assertion::string($this->options[ReadOptions::BEFORE]);
-        } catch (InvalidArgumentException $exception) {
+        } catch (AssertionFailedException $exception) {
             return null;
         }
 
@@ -193,7 +206,7 @@ class ReadOptions implements ReadOptionsInterface
         try {
             Assertion::keyIsset($this->options, ReadOptions::AFTER, 'After is not defined');
             Assertion::string($this->options[ReadOptions::AFTER]);
-        } catch (InvalidArgumentException $exception) {
+        } catch (AssertionFailedException $exception) {
             return null;
         }
 
@@ -205,7 +218,7 @@ class ReadOptions implements ReadOptionsInterface
         try {
             Assertion::keyIsset($this->options, ReadOptions::LOCALE_ENABLED, 'localeEnabled is not set');
             Assertion::boolean($this->options[ReadOptions::LOCALE_ENABLED]);
-        } catch (InvalidArgumentException $exception) {
+        } catch (AssertionFailedException $exception) {
             return null;
         }
 
@@ -217,7 +230,7 @@ class ReadOptions implements ReadOptionsInterface
         try {
             Assertion::keyIsset($this->options, ReadOptions::LOCALE, 'No locale defined');
             Assertion::string($this->options[ReadOptions::LOCALE], 'Locale is supposed to be a string like en_EN');
-        } catch (InvalidArgumentException $exception) {
+        } catch (AssertionFailedException $exception) {
             return null;
         }
 
@@ -229,7 +242,7 @@ class ReadOptions implements ReadOptionsInterface
         try {
             Assertion::keyIsset($this->options, ReadOptions::SEARCH, 'No search defined');
             Assertion::string($this->options[ReadOptions::SEARCH], 'The search term must be a string');
-        } catch (InvalidArgumentException $exception) {
+        } catch (AssertionFailedException $exception) {
             return null;
         }
 
@@ -249,7 +262,7 @@ class ReadOptions implements ReadOptionsInterface
                 $this->options[ReadOptions::FIELD],
                 'The field option must be an array. "fieldHandle" => "value"'
             );
-        } catch (InvalidArgumentException $exception) {
+        } catch (AssertionFailedException $exception) {
             return null;
         }
 
@@ -261,7 +274,7 @@ class ReadOptions implements ReadOptionsInterface
         try {
             Assertion::keyIsset($this->options, ReadOptions::ID, 'This id is not set');
             Assertion::digit($this->options[ReadOptions::ID], 'The id is not numeric');
-        } catch (InvalidArgumentException $exception) {
+        } catch (AssertionFailedException $exception) {
             return null;
         }
 
@@ -282,9 +295,24 @@ class ReadOptions implements ReadOptionsInterface
             }
 
             return Slug::fromString((string) $this->options[ReadOptions::SLUG]);
-        } catch (InvalidArgumentException $exception) {
+        } catch (AssertionFailedException $exception) {
             return null;
         }
+    }
+
+    public function getFetchFields(): array
+    {
+        try {
+            Assertion::keyIsset($this->options, ReadOptions::FETCH_FIELDS, 'No fetch fields');
+            Assertion::notEmpty($this->options[ReadOptions::FETCH_FIELDS],
+                'The fetch fields are empty.'
+            );
+            Assertion::string($this->options[ReadOptions::FETCH_FIELDS], 'Fetch fields must be a string');
+        } catch (AssertionFailedException $exception) {
+            return null;
+        }
+
+        return explode(',', $this->options[ReadOptions::FETCH_FIELDS]);
     }
 
     public static function fromArray(array $options): ReadOptionsInterface

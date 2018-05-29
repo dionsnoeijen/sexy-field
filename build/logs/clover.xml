@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1525348155">
-  <project timestamp="1525348155">
+<coverage generated="1527600447">
+  <project timestamp="1527600447">
     <package name="Tardigrades\Command">
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/ApplicationCommand.php">
         <class name="ApplicationCommand" namespace="Tardigrades\Command">
@@ -2700,141 +2700,149 @@
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/SectionField/Service/ReadOptions.php">
         <class name="ReadOptions" namespace="Tardigrades\SectionField\Service">
-          <metrics complexity="49" methods="16" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="116" coveredstatements="116" elements="132" coveredelements="132"/>
+          <metrics complexity="51" methods="17" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="123" coveredstatements="116" elements="140" coveredelements="132"/>
         </class>
-        <line num="51" type="method" name="__construct" visibility="private" complexity="5" crap="5" count="6"/>
-        <line num="54" type="stmt" count="6"/>
-        <line num="55" type="stmt" count="6"/>
-        <line num="56" type="stmt" count="3"/>
-        <line num="59" type="stmt" count="6"/>
-        <line num="60" type="stmt" count="1"/>
-        <line num="63" type="stmt" count="6"/>
-        <line num="64" type="stmt" count="1"/>
+        <line num="64" type="method" name="__construct" visibility="private" complexity="5" crap="5" count="6"/>
         <line num="67" type="stmt" count="6"/>
-        <line num="68" type="stmt" count="1"/>
-        <line num="69" type="stmt" count="1"/>
-        <line num="70" type="stmt" count="1"/>
-        <line num="71" type="stmt" count="1"/>
-        <line num="72" type="stmt" count="1"/>
-        <line num="76" type="stmt" count="5"/>
-        <line num="77" type="stmt" count="5"/>
-        <line num="79" type="method" name="getSection" visibility="public" complexity="5" crap="5" count="5"/>
-        <line num="81" type="stmt" count="5"/>
-        <line num="83" type="stmt" count="5"/>
+        <line num="68" type="stmt" count="6"/>
+        <line num="69" type="stmt" count="3"/>
+        <line num="72" type="stmt" count="6"/>
+        <line num="73" type="stmt" count="1"/>
+        <line num="76" type="stmt" count="6"/>
+        <line num="77" type="stmt" count="1"/>
+        <line num="80" type="stmt" count="6"/>
+        <line num="81" type="stmt" count="1"/>
+        <line num="82" type="stmt" count="1"/>
+        <line num="83" type="stmt" count="1"/>
         <line num="84" type="stmt" count="1"/>
-        <line num="87" type="stmt" count="5"/>
-        <line num="88" type="stmt" count="1"/>
-        <line num="91" type="stmt" count="5"/>
-        <line num="92" type="stmt" count="3"/>
-        <line num="93" type="stmt" count="3"/>
-        <line num="97" type="stmt" count="5"/>
-        <line num="100" type="method" name="getSectionId" visibility="public" complexity="3" crap="3" count="2"/>
-        <line num="103" type="stmt" count="2"/>
-        <line num="104" type="stmt" count="2"/>
-        <line num="105" type="stmt" count="2"/>
-        <line num="106" type="stmt" count="2"/>
-        <line num="108" type="stmt" count="2"/>
-        <line num="109" type="stmt" count="2"/>
-        <line num="110" type="stmt" count="2"/>
-        <line num="112" type="stmt" count="1"/>
-        <line num="113" type="stmt" count="1"/>
-        <line num="116" type="stmt" count="1"/>
-        <line num="119" type="method" name="getOffset" visibility="public" complexity="3" crap="3" count="2"/>
+        <line num="85" type="stmt" count="1"/>
+        <line num="89" type="stmt" count="5"/>
+        <line num="90" type="stmt" count="5"/>
+        <line num="92" type="method" name="getSection" visibility="public" complexity="5" crap="5" count="5"/>
+        <line num="94" type="stmt" count="5"/>
+        <line num="96" type="stmt" count="5"/>
+        <line num="97" type="stmt" count="1"/>
+        <line num="100" type="stmt" count="5"/>
+        <line num="101" type="stmt" count="1"/>
+        <line num="104" type="stmt" count="5"/>
+        <line num="105" type="stmt" count="3"/>
+        <line num="106" type="stmt" count="3"/>
+        <line num="110" type="stmt" count="5"/>
+        <line num="113" type="method" name="getSectionId" visibility="public" complexity="3" crap="3" count="2"/>
+        <line num="116" type="stmt" count="2"/>
+        <line num="117" type="stmt" count="2"/>
+        <line num="118" type="stmt" count="2"/>
+        <line num="119" type="stmt" count="2"/>
+        <line num="121" type="stmt" count="2"/>
         <line num="122" type="stmt" count="2"/>
         <line num="123" type="stmt" count="2"/>
-        <line num="124" type="stmt" count="2"/>
-        <line num="125" type="stmt" count="2"/>
-        <line num="127" type="stmt" count="2"/>
-        <line num="128" type="stmt" count="2"/>
-        <line num="129" type="stmt" count="2"/>
-        <line num="131" type="stmt" count="1"/>
-        <line num="132" type="stmt" count="1"/>
-        <line num="135" type="stmt" count="1"/>
-        <line num="138" type="method" name="getLimit" visibility="public" complexity="3" crap="3" count="2"/>
+        <line num="125" type="stmt" count="1"/>
+        <line num="126" type="stmt" count="1"/>
+        <line num="129" type="stmt" count="1"/>
+        <line num="132" type="method" name="getOffset" visibility="public" complexity="3" crap="3" count="2"/>
+        <line num="135" type="stmt" count="2"/>
+        <line num="136" type="stmt" count="2"/>
+        <line num="137" type="stmt" count="2"/>
+        <line num="138" type="stmt" count="2"/>
+        <line num="140" type="stmt" count="2"/>
         <line num="141" type="stmt" count="2"/>
         <line num="142" type="stmt" count="2"/>
-        <line num="143" type="stmt" count="2"/>
-        <line num="144" type="stmt" count="2"/>
-        <line num="146" type="stmt" count="2"/>
-        <line num="147" type="stmt" count="2"/>
-        <line num="148" type="stmt" count="2"/>
-        <line num="150" type="stmt" count="1"/>
-        <line num="151" type="stmt" count="1"/>
-        <line num="154" type="stmt" count="1"/>
-        <line num="157" type="method" name="getOrderBy" visibility="public" complexity="3" crap="3" count="2"/>
+        <line num="144" type="stmt" count="1"/>
+        <line num="145" type="stmt" count="1"/>
+        <line num="148" type="stmt" count="1"/>
+        <line num="151" type="method" name="getLimit" visibility="public" complexity="3" crap="3" count="2"/>
+        <line num="154" type="stmt" count="2"/>
+        <line num="155" type="stmt" count="2"/>
+        <line num="156" type="stmt" count="2"/>
+        <line num="157" type="stmt" count="2"/>
+        <line num="159" type="stmt" count="2"/>
         <line num="160" type="stmt" count="2"/>
         <line num="161" type="stmt" count="2"/>
-        <line num="162" type="stmt" count="2"/>
-        <line num="163" type="stmt" count="2"/>
-        <line num="165" type="stmt" count="2"/>
-        <line num="166" type="stmt" count="2"/>
-        <line num="167" type="stmt" count="2"/>
-        <line num="169" type="stmt" count="1"/>
-        <line num="170" type="stmt" count="1"/>
-        <line num="171" type="stmt" count="1"/>
-        <line num="172" type="stmt" count="1"/>
-        <line num="173" type="stmt" count="1"/>
-        <line num="176" type="stmt" count="1"/>
-        <line num="179" type="method" name="getBefore" visibility="public" complexity="3" crap="3" count="2"/>
-        <line num="182" type="stmt" count="2"/>
-        <line num="183" type="stmt" count="2"/>
+        <line num="163" type="stmt" count="1"/>
+        <line num="164" type="stmt" count="1"/>
+        <line num="167" type="stmt" count="1"/>
+        <line num="170" type="method" name="getOrderBy" visibility="public" complexity="3" crap="3" count="2"/>
+        <line num="173" type="stmt" count="2"/>
+        <line num="174" type="stmt" count="2"/>
+        <line num="175" type="stmt" count="2"/>
+        <line num="176" type="stmt" count="2"/>
+        <line num="178" type="stmt" count="2"/>
+        <line num="179" type="stmt" count="2"/>
+        <line num="180" type="stmt" count="2"/>
+        <line num="182" type="stmt" count="1"/>
+        <line num="183" type="stmt" count="1"/>
         <line num="184" type="stmt" count="1"/>
         <line num="185" type="stmt" count="1"/>
-        <line num="188" type="stmt" count="1"/>
-        <line num="191" type="method" name="getAfter" visibility="public" complexity="3" crap="3" count="2"/>
-        <line num="194" type="stmt" count="2"/>
+        <line num="186" type="stmt" count="1"/>
+        <line num="189" type="stmt" count="1"/>
+        <line num="192" type="method" name="getBefore" visibility="public" complexity="3" crap="3" count="2"/>
         <line num="195" type="stmt" count="2"/>
-        <line num="196" type="stmt" count="1"/>
+        <line num="196" type="stmt" count="2"/>
         <line num="197" type="stmt" count="1"/>
-        <line num="200" type="stmt" count="1"/>
-        <line num="203" type="method" name="getLocaleEnabled" visibility="public" complexity="3" crap="3" count="2"/>
-        <line num="206" type="stmt" count="2"/>
+        <line num="198" type="stmt" count="1"/>
+        <line num="201" type="stmt" count="1"/>
+        <line num="204" type="method" name="getAfter" visibility="public" complexity="3" crap="3" count="2"/>
         <line num="207" type="stmt" count="2"/>
-        <line num="208" type="stmt" count="1"/>
+        <line num="208" type="stmt" count="2"/>
         <line num="209" type="stmt" count="1"/>
-        <line num="212" type="stmt" count="1"/>
-        <line num="215" type="method" name="getLocale" visibility="public" complexity="3" crap="3" count="2"/>
-        <line num="218" type="stmt" count="2"/>
+        <line num="210" type="stmt" count="1"/>
+        <line num="213" type="stmt" count="1"/>
+        <line num="216" type="method" name="getLocaleEnabled" visibility="public" complexity="3" crap="3" count="2"/>
         <line num="219" type="stmt" count="2"/>
-        <line num="220" type="stmt" count="1"/>
+        <line num="220" type="stmt" count="2"/>
         <line num="221" type="stmt" count="1"/>
-        <line num="224" type="stmt" count="1"/>
-        <line num="227" type="method" name="getSearch" visibility="public" complexity="3" crap="3" count="2"/>
-        <line num="230" type="stmt" count="2"/>
+        <line num="222" type="stmt" count="1"/>
+        <line num="225" type="stmt" count="1"/>
+        <line num="228" type="method" name="getLocale" visibility="public" complexity="3" crap="3" count="2"/>
         <line num="231" type="stmt" count="2"/>
-        <line num="232" type="stmt" count="1"/>
+        <line num="232" type="stmt" count="2"/>
         <line num="233" type="stmt" count="1"/>
-        <line num="236" type="stmt" count="1"/>
-        <line num="239" type="method" name="getField" visibility="public" complexity="3" crap="3" count="2"/>
-        <line num="242" type="stmt" count="2"/>
+        <line num="234" type="stmt" count="1"/>
+        <line num="237" type="stmt" count="1"/>
+        <line num="240" type="method" name="getSearch" visibility="public" complexity="3" crap="3" count="2"/>
         <line num="243" type="stmt" count="2"/>
-        <line num="245" type="stmt" count="2"/>
-        <line num="246" type="stmt" count="2"/>
-        <line num="248" type="stmt" count="2"/>
-        <line num="249" type="stmt" count="2"/>
-        <line num="250" type="stmt" count="2"/>
-        <line num="252" type="stmt" count="1"/>
-        <line num="253" type="stmt" count="1"/>
-        <line num="256" type="stmt" count="1"/>
-        <line num="259" type="method" name="getId" visibility="public" complexity="3" crap="3" count="2"/>
+        <line num="244" type="stmt" count="2"/>
+        <line num="245" type="stmt" count="1"/>
+        <line num="246" type="stmt" count="1"/>
+        <line num="249" type="stmt" count="1"/>
+        <line num="252" type="method" name="getField" visibility="public" complexity="3" crap="3" count="2"/>
+        <line num="255" type="stmt" count="2"/>
+        <line num="256" type="stmt" count="2"/>
+        <line num="258" type="stmt" count="2"/>
+        <line num="259" type="stmt" count="2"/>
+        <line num="261" type="stmt" count="2"/>
         <line num="262" type="stmt" count="2"/>
         <line num="263" type="stmt" count="2"/>
-        <line num="264" type="stmt" count="1"/>
         <line num="265" type="stmt" count="1"/>
-        <line num="268" type="stmt" count="1"/>
-        <line num="271" type="method" name="getSlug" visibility="public" complexity="4" crap="4" count="3"/>
-        <line num="274" type="stmt" count="3"/>
-        <line num="278" type="stmt" count="3"/>
-        <line num="279" type="stmt" count="1"/>
-        <line num="281" type="stmt" count="2"/>
-        <line num="284" type="stmt" count="2"/>
-        <line num="285" type="stmt" count="1"/>
-        <line num="286" type="stmt" count="1"/>
-        <line num="290" type="method" name="fromArray" visibility="public" complexity="1" crap="1" count="6"/>
-        <line num="292" type="stmt" count="6"/>
-        <line num="295" type="method" name="toArray" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="297" type="stmt" count="1"/>
-        <metrics loc="299" ncloc="285" classes="1" methods="16" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="116" coveredstatements="116" elements="132" coveredelements="132"/>
+        <line num="266" type="stmt" count="1"/>
+        <line num="269" type="stmt" count="1"/>
+        <line num="272" type="method" name="getId" visibility="public" complexity="3" crap="3" count="2"/>
+        <line num="275" type="stmt" count="2"/>
+        <line num="276" type="stmt" count="2"/>
+        <line num="277" type="stmt" count="1"/>
+        <line num="278" type="stmt" count="1"/>
+        <line num="281" type="stmt" count="1"/>
+        <line num="284" type="method" name="getSlug" visibility="public" complexity="4" crap="4" count="3"/>
+        <line num="287" type="stmt" count="3"/>
+        <line num="291" type="stmt" count="3"/>
+        <line num="292" type="stmt" count="1"/>
+        <line num="294" type="stmt" count="2"/>
+        <line num="297" type="stmt" count="2"/>
+        <line num="298" type="stmt" count="1"/>
+        <line num="299" type="stmt" count="1"/>
+        <line num="303" type="method" name="getFetchFields" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="306" type="stmt" count="0"/>
+        <line num="307" type="stmt" count="0"/>
+        <line num="308" type="stmt" count="0"/>
+        <line num="310" type="stmt" count="0"/>
+        <line num="311" type="stmt" count="0"/>
+        <line num="312" type="stmt" count="0"/>
+        <line num="315" type="stmt" count="0"/>
+        <line num="318" type="method" name="fromArray" visibility="public" complexity="1" crap="1" count="6"/>
+        <line num="320" type="stmt" count="6"/>
+        <line num="323" type="method" name="toArray" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="325" type="stmt" count="1"/>
+        <metrics loc="327" ncloc="303" classes="1" methods="17" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="123" coveredstatements="116" elements="140" coveredelements="132"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/SectionField/Service/ReadSection.php">
         <class name="ReadSection" namespace="Tardigrades\SectionField\Service">
@@ -3616,6 +3624,6 @@
         <metrics loc="248" ncloc="143" classes="1" methods="16" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="0" elements="54" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="141" loc="9539" ncloc="7718" classes="119" methods="584" coveredmethods="558" conditionals="0" coveredconditionals="0" statements="2223" coveredstatements="2140" elements="2807" coveredelements="2698"/>
+    <metrics files="141" loc="9567" ncloc="7736" classes="119" methods="585" coveredmethods="558" conditionals="0" coveredconditionals="0" statements="2230" coveredstatements="2140" elements="2815" coveredelements="2698"/>
   </project>
 </coverage>
