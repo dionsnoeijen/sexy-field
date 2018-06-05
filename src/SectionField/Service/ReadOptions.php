@@ -300,7 +300,7 @@ class ReadOptions implements ReadOptionsInterface
         }
     }
 
-    public function getFetchFields(): array
+    public function getFetchFields(): ?array
     {
         try {
             Assertion::keyIsset($this->options, ReadOptions::FETCH_FIELDS, 'No fetch fields');
