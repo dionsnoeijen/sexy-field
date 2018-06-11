@@ -16,6 +16,7 @@ namespace Tardigrades\SectionField\Service;
 use Tardigrades\Entity\Application;
 use Tardigrades\Entity\ApplicationInterface;
 use Tardigrades\SectionField\ValueObject\ApplicationConfig;
+use Tardigrades\SectionField\ValueObject\Handle;
 use Tardigrades\SectionField\ValueObject\Id;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -53,6 +54,20 @@ class DoctrineApplicationManager implements ApplicationManagerInterface
 
         /** @var $application Application */
         $application = $applicationRepository->find($id->toInt());
+
+        if (empty($application)) {
+            throw new ApplicationNotFoundException();
+        }
+
+        return $application;
+    }
+
+    public function readByHandle(Handle $handle): ApplicationInterface
+    {
+        $applicationRepository = $this->entityManager->getRepository(Application::class);
+
+        /** @var $application Application */
+        $application = $applicationRepository->findOneBy(['handle' => (string)$handle]);
 
         if (empty($application)) {
             throw new ApplicationNotFoundException();

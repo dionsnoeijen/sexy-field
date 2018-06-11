@@ -16,7 +16,7 @@ namespace Tardigrades\SectionField\ValueObject;
 use Assert\Assertion;
 use Tardigrades\Helper\ArrayConverter;
 
-final class GeneratorConfig
+final class GeneratorConfig implements ConfigInterface
 {
     /** @var array */
     private $sectionGeneratorConfig;

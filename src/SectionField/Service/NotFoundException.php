@@ -13,13 +13,9 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\Service;
 
-class FieldTypeNotFoundException extends NotFoundException
+class NotFoundException extends \Exception
 {
-    public function __construct(
-        $message = 'Field type not found, install the accompanying field type first.',
-        $code = 404,
-        \Throwable $previous = null
-    )
+    public function __construct($message = 'Not found', $code = 404, \Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }

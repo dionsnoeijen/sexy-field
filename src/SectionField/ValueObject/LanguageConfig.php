@@ -16,7 +16,7 @@ namespace Tardigrades\SectionField\ValueObject;
 use Assert\Assertion;
 use Tardigrades\Helper\ArrayConverter;
 
-final class LanguageConfig
+final class LanguageConfig implements ConfigInterface
 {
     /** @var array */
     private $languageConfig;

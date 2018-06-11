@@ -17,7 +17,7 @@ use Assert\Assertion;
 use Assert\InvalidArgumentException;
 use Tardigrades\Helper\ArrayConverter;
 
-final class SectionConfig
+final class SectionConfig implements ConfigWithHandleInterface
 {
     /** @var array */
     private $sectionConfig;
