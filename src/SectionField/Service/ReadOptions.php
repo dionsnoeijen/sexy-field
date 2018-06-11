@@ -16,6 +16,7 @@ namespace Tardigrades\SectionField\Service;
 use Assert\Assertion;
 use Assert\AssertionFailedException;
 use Assert\InvalidArgumentException;
+use PHPUnit\Framework\AssertionFailedError;
 use Tardigrades\SectionField\ValueObject\Slug;
 use Tardigrades\SectionField\ValueObject\After;
 use Tardigrades\SectionField\ValueObject\Before;
@@ -45,6 +46,7 @@ class ReadOptions implements ReadOptionsInterface
     const LOCALE = 'locale';
     const SEARCH = 'search';
     const FIELD = 'field';
+    const JOIN = 'join';
 
     /**
      * @var string If you know in advance what fields you are going to need
@@ -267,6 +269,24 @@ class ReadOptions implements ReadOptionsInterface
         }
 
         return $this->options[ReadOptions::FIELD];
+    }
+
+    public function getJoin(): ?array
+    {
+        try {
+            Assertion::keyExists($this->options, ReadOptions::JOIN, 'The key join should exist');
+            Assertion::notEmpty($this->options[ReadOptions::JOIN],
+                'The join option must contain something.'
+            );
+            Assertion::isArray(
+                $this->options[ReadOptions::JOIN],
+                'The join option must be an array. "fieldHandle" => "value"'
+            );
+        } catch (AssertionFailedException $exception) {
+            return null;
+        }
+
+        return $this->options[ReadOptions::JOIN];
     }
 
     public function getId(): ?Id
