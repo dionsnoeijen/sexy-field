@@ -5,12 +5,14 @@ namespace Tardigrades\SectionField\Service;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use Mockery;
+use Mockery\Mock;
 use Doctrine\ORM\EntityManagerInterface;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
 use Tardigrades\Entity\Application;
 use Tardigrades\Entity\Language;
 use Tardigrades\SectionField\ValueObject\ApplicationConfig;
+use Tardigrades\SectionField\ValueObject\Handle;
 use Tardigrades\SectionField\ValueObject\Id;
 use Tardigrades\SectionField\Service\LanguageManagerInterface;
 
@@ -26,10 +28,10 @@ final class ApplicationManagerTest extends TestCase
     /** @var DoctrineApplicationManager */
     private $applicationManager;
 
-    /** @var EntityManagerInterface|Mockery\MockInterface */
+    /** @var Mock|EntityManagerInterface */
     private $entityManager;
 
-    /** @var LanguageManagerInterface|Mockery\MockInterface */
+    /** @var Mock|LanguageManagerInterface */
     private $languageManager;
 
     public function setUp()
@@ -89,6 +91,55 @@ final class ApplicationManagerTest extends TestCase
         $application = $this->applicationManager->read($id);
 
         $this->assertEquals($application, $entity);
+    }
+
+    /**
+     * @test
+     * @covers ::readByHandle
+     */
+    public function it_should_read_by_handle()
+    {
+        $application = new Application;
+        $applicationRepository = Mockery::mock(ObjectRepository::class);
+
+        $this->entityManager
+            ->shouldReceive('getRepository')
+            ->once()
+            ->with(Application::class)
+            ->andReturn($applicationRepository);
+
+        $applicationRepository
+            ->shouldReceive('findOneBy')
+            ->once()
+            ->with(['handle' => 'foo'])
+            ->andReturn($application);
+
+        $this->assertSame($application, $this->applicationManager->readByHandle(Handle::fromString('foo')));
+    }
+
+    /**
+     * @test
+     * @covers ::readByHandle
+     */
+    public function it_should_be_able_to_fail_when_reading_by_handle()
+    {
+        $this->expectException(ApplicationNotFoundException::class);
+
+        $applicationRepository = Mockery::mock(ObjectRepository::class);
+
+        $this->entityManager
+            ->shouldReceive('getRepository')
+            ->once()
+            ->with(Application::class)
+            ->andReturn($applicationRepository);
+
+        $applicationRepository
+            ->shouldReceive('findOneBy')
+            ->once()
+            ->with(['handle' => 'foo'])
+            ->andReturnNull();
+
+        $this->applicationManager->readByHandle(Handle::fromString('foo'));
     }
 
     /**
