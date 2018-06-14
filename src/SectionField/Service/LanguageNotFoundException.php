@@ -15,7 +15,7 @@ namespace Tardigrades\SectionField\Service;
 
 class LanguageNotFoundException extends NotFoundException
 {
-    public function __construct($message = 'Language not found', $code = 404, \Throwable $previous = null)
+    public function __construct($message = 'Language not found.', $code = 404, \Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }

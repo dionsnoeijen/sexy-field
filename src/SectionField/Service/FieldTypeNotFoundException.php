@@ -19,8 +19,7 @@ class FieldTypeNotFoundException extends NotFoundException
         $message = 'Field type not found, install the accompanying field type first.',
         $code = 404,
         \Throwable $previous = null
-    )
-    {
+    ) {
         parent::__construct($message, $code, $previous);
     }
 }

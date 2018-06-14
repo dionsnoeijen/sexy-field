@@ -281,9 +281,9 @@ final class FieldManagerTest extends TestCase
             ->with(['handle' => $handle])
             ->andReturn([new Field()]);
 
-        $fields = $this->fieldManager->readByHandle($handle);
+        $field = $this->fieldManager->readByHandle($handle);
 
-        $this->assertSame(count($fields), 1);
+        $this->assertInstanceOf(Field::class, $field);
     }
 
     /**
