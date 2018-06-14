@@ -16,7 +16,7 @@ namespace Tardigrades\SectionField\ValueObject;
 use Assert\Assertion;
 use Tardigrades\Helper\ArrayConverter;
 
-final class FieldConfig
+final class FieldConfig implements ConfigWithHandleInterface
 {
     /** @var array */
     private $fieldConfig;

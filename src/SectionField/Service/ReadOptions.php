@@ -254,10 +254,13 @@ class ReadOptions implements ReadOptionsInterface
     public function getField(): ?array
     {
         try {
-            Assertion::keyExists($this->options, ReadOptions::FIELD,
+            Assertion::keyExists(
+                $this->options,
+                ReadOptions::FIELD,
                 'The key field should exist'
             );
-            Assertion::notEmpty($this->options[ReadOptions::FIELD],
+            Assertion::notEmpty(
+                $this->options[ReadOptions::FIELD],
                 'The field option must contain something.'
             );
             Assertion::isArray(
@@ -275,7 +278,8 @@ class ReadOptions implements ReadOptionsInterface
     {
         try {
             Assertion::keyExists($this->options, ReadOptions::JOIN, 'The key join should exist');
-            Assertion::notEmpty($this->options[ReadOptions::JOIN],
+            Assertion::notEmpty(
+                $this->options[ReadOptions::JOIN],
                 'The join option must contain something.'
             );
             Assertion::isArray(
@@ -324,7 +328,8 @@ class ReadOptions implements ReadOptionsInterface
     {
         try {
             Assertion::keyIsset($this->options, ReadOptions::FETCH_FIELDS, 'No fetch fields');
-            Assertion::notEmpty($this->options[ReadOptions::FETCH_FIELDS],
+            Assertion::notEmpty(
+                $this->options[ReadOptions::FETCH_FIELDS],
                 'The fetch fields are empty.'
             );
             Assertion::string($this->options[ReadOptions::FETCH_FIELDS], 'Fetch fields must be a string');

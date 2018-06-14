@@ -11,12 +11,10 @@
 
 namespace Tardigrades\SectionField\Service;
 
-class SectionHistoryNotFoundException extends \Exception
+class SectionHistoryNotFoundException extends NotFoundException
 {
-    public function __construct($message = "", $code = 404, \Throwable $previous = null)
+    public function __construct($message = 'Section history not found', $code = 404, \Throwable $previous = null)
     {
-        $message = !empty($message) ? $message : 'Section history not found';
-
         parent::__construct($message, $code, $previous);
     }
 }

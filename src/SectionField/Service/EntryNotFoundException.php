@@ -13,14 +13,10 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\Service;
 
-use Throwable;
-
-class EntryNotFoundException extends \Exception
+class EntryNotFoundException extends NotFoundException
 {
-    public function __construct($message = '', $code = 404, Throwable $previous = null)
+    public function __construct($message = 'Entry not found', $code = 404, \Throwable $previous = null)
     {
-        $message = empty($message) ? 'Entry not found' : $message;
-
         parent::__construct($message, $code, $previous);
     }
 }

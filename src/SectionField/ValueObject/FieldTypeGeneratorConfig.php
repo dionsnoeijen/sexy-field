@@ -16,7 +16,7 @@ namespace Tardigrades\SectionField\ValueObject;
 use Assert\Assertion;
 use Tardigrades\Helper\ArrayConverter;
 
-final class FieldTypeGeneratorConfig
+final class FieldTypeGeneratorConfig implements ConfigInterface
 {
     /** @var array */
     private $config;

@@ -13,11 +13,10 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\Service;
 
-class FieldNotFoundException extends \Exception
+class FieldNotFoundException extends NotFoundException
 {
-    public function __construct($message = '', $code = 404, \Throwable $previous = null)
+    public function __construct($message = 'Field not found', $code = 404, \Throwable $previous = null)
     {
-        $message = !empty($message) ? $message : 'Field not found';
         parent::__construct($message, $code, $previous);
     }
 }

@@ -21,13 +21,17 @@ use Symfony\Component\Yaml\Yaml;
 use Tardigrades\SectionField\Service\ApplicationManagerInterface;
 use Tardigrades\SectionField\Service\FieldManagerInterface;
 use Tardigrades\SectionField\Service\FieldTypeManagerInterface;
+use Tardigrades\SectionField\Service\FieldTypeNotFoundException;
 use Tardigrades\SectionField\Service\LanguageManagerInterface;
+use Tardigrades\SectionField\Service\NotFoundException;
 use Tardigrades\SectionField\Service\SectionManagerInterface;
 use Tardigrades\SectionField\ValueObject\ApplicationConfig;
+use Tardigrades\SectionField\ValueObject\ConfigWithHandleInterface;
 use Tardigrades\SectionField\ValueObject\FieldConfig;
 use Tardigrades\SectionField\ValueObject\FullyQualifiedClassName;
 use Tardigrades\SectionField\ValueObject\LanguageConfig;
 use Tardigrades\SectionField\ValueObject\SectionConfig;
+use Tardigrades\SectionField\ValueObject\Type;
 
 class InstallDirectoryCommand extends Command
 {
@@ -139,32 +143,36 @@ class InstallDirectoryCommand extends Command
         }
 
         foreach ($fieldTypes as $fieldType) {
-            if ($fieldType === 'DateTimeField') {
-                // DateTime has "Field" at the end of its name to avoid confusion with \DateTime.
-                // All other field types follow Tardigrades\FieldType\{fieldType}\{fieldType}.
-                // This solution is unpleasant, but there's no good way to detect classes before they've been loaded.
-                $className = "Tardigrades\\FieldType\\DateTime\\$fieldType";
-            } else {
-                $className = "Tardigrades\\FieldType\\$fieldType\\$fieldType";
+            try {
+                $this->fieldTypeManager->readByType(Type::fromString($fieldType));
+                // Already installed, so continue
+                // There's no clean way of updating field types
+            } catch (FieldTypeNotFoundException $exception) {
+                // Not installed, so install
+                if ($fieldType === 'DateTimeField') {
+                    // DateTime has "Field" at the end of its name to avoid confusion with \DateTime.
+                    // All other field types follow Tardigrades\FieldType\{fieldType}\{fieldType}.
+                    // This solution is hacky, but there's no good way to detect classes before they've been loaded.
+                    $className = "Tardigrades\\FieldType\\DateTime\\$fieldType";
+                } else {
+                    $className = "Tardigrades\\FieldType\\$fieldType\\$fieldType";
+                }
+                $this->fieldTypeManager->createWithFullyQualifiedClassName(
+                    FullyQualifiedClassName::fromString($className)
+                );
             }
-            $this->fieldTypeManager->createWithFullyQualifiedClassName(
-                FullyQualifiedClassName::fromString($className)
-            );
         }
 
         return count($fieldTypes);
     }
 
     /**
-     * @param array $sections
+     * @param SectionConfig[] $sections
      * @return int the number of sections created
      */
     private function createSections(array $sections): int
     {
-        foreach ($sections as $section) {
-            $this->sectionManager->createByConfig($section);
-        }
-        return count($sections);
+        return $this->createOrUpdateConfigs($sections, $this->sectionManager);
     }
 
     /**
@@ -173,10 +181,7 @@ class InstallDirectoryCommand extends Command
      */
     private function createFields(array $fields): int
     {
-        foreach ($fields as $fieldConfig) {
-            $this->fieldManager->createByConfig($fieldConfig);
-        }
-        return count($fields);
+        return $this->createOrUpdateConfigs($fields, $this->fieldManager);
     }
 
     /**
@@ -185,10 +190,26 @@ class InstallDirectoryCommand extends Command
      */
     private function createApplications(array $applications): int
     {
-        foreach ($applications as $applicationConfig) {
-            $this->applicationManager->createByConfig($applicationConfig);
+        return $this->createOrUpdateConfigs($applications, $this->applicationManager);
+    }
+
+    /**
+     * @param ConfigWithHandleInterface[] $configs
+     * @param ApplicationManagerInterface|FieldManagerInterface|SectionManagerInterface $manager
+     * @return int
+     */
+    private function createOrUpdateConfigs(array $configs, $manager): int
+    {
+        foreach ($configs as $config) {
+            try {
+                $handle = $config->getHandle();
+                $object = $manager->readByHandle($handle);
+                $manager->updateByConfig($config, $object);
+            } catch (NotFoundException $exception) {
+                $manager->createByConfig($config);
+            }
         }
-        return count($applications);
+        return count($configs);
     }
 
     /**

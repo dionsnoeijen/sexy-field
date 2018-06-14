@@ -16,7 +16,7 @@ namespace Tardigrades\SectionField\ValueObject;
 use Assert\Assertion;
 use Tardigrades\Helper\ArrayConverter;
 
-final class ApplicationConfig
+final class ApplicationConfig implements ConfigWithHandleInterface
 {
     /** @var array */
     private $applicationConfig;
@@ -30,6 +30,11 @@ final class ApplicationConfig
         Assertion::isArray($applicationConfig['application']['languages'], 'Languages should contain an array');
 
         $this->applicationConfig = $applicationConfig;
+    }
+
+    public function getHandle(): Handle
+    {
+        return Handle::fromString($this->applicationConfig['application']['handle']);
     }
 
     public function toArray(): array
