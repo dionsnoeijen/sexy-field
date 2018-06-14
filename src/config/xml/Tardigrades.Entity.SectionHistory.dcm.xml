@@ -11,7 +11,7 @@
         <field name="updated" type="datetime" />
         <field name="versioned" type="datetime" />
         <field name="name" type="string" />
-        <field name="config" type="json_array" />
+        <field name="config" type="array" />
         <field name="version" type="integer" />
         <many-to-one
             target-entity="Tardigrades\Entity\Section"

@@ -14,7 +14,7 @@
         </id>
         <field name="name" type="string" />
         <field name="handle" type="string" unique="true" />
-        <field name="config" type="json_array" />
+        <field name="config" type="array" />
         <field name="created" type="datetime" />
         <field name="updated" type="datetime" />
         <many-to-one

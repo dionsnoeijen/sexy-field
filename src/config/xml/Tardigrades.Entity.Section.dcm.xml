@@ -15,7 +15,7 @@
         <field name="created" type="datetime" />
         <field name="updated" type="datetime" />
         <field name="name" type="string" />
-        <field name="config" type="json_array" />
+        <field name="config" type="array" />
         <field name="version" type="integer" />
         <one-to-many
             target-entity="Tardigrades\Entity\SectionHistory"
