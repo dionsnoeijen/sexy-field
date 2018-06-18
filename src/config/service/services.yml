@@ -55,7 +55,7 @@ services:
 
   # override this service with true as the second parameter to enable caching
   # at this point caching is for GET calls on the REST Api (sexy-field-api)
-  Tardigrades\SectionField\Api\Service\DefaultCache:
+  Tardigrades\SectionField\Service\DefaultCache:
     public: false
     arguments:
       - '@Symfony\Component\Cache\Adapter\TagAwareAdapter'
