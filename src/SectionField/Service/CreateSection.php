@@ -47,7 +47,7 @@ class CreateSection implements CreateSectionInterface
     /**
      * {@inheritdoc}
      */
-    public function save(CommonSectionInterface $sectionEntryEntity)
+    public function save(CommonSectionInterface $sectionEntryEntity): void
     {
         $this->dispatcher->dispatch(
             SectionEntryBeforeCreate::NAME,
@@ -74,7 +74,7 @@ class CreateSection implements CreateSectionInterface
     /**
      * {@inheritdoc}
      */
-    public function persist(CommonSectionInterface $sectionEntryEntity)
+    public function persist(CommonSectionInterface $sectionEntryEntity): void
     {
         /** @var CreateSectionInterface $writer */
         foreach ($this->creators as $writer) {
@@ -89,7 +89,7 @@ class CreateSection implements CreateSectionInterface
     /**
      * {@inheritdoc}
      */
-    public function flush()
+    public function flush(): void
     {
         /** @var CreateSectionInterface $writer */
         foreach ($this->creators as $writer) {

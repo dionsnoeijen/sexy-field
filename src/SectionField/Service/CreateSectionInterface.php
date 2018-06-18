@@ -37,7 +37,7 @@ interface CreateSectionInterface
      * @param CommonSectionInterface $sectionEntryEntity
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function save(CommonSectionInterface $sectionEntryEntity);
+    public function save(CommonSectionInterface $sectionEntryEntity): void;
 
     /**
      * This method goes through all writers to persist a record, like save, but doesn't flush them.
@@ -49,12 +49,12 @@ interface CreateSectionInterface
      * @param CommonSectionInterface $sectionEntryEntity
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function persist(CommonSectionInterface $sectionEntryEntity);
+    public function persist(CommonSectionInterface $sectionEntryEntity): void;
 
     /**
      * This method flushes all writers to store records that have been persisted.
      *
      * No events are dispatched.
      */
-    public function flush();
+    public function flush(): void;
 }
