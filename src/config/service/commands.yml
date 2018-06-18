@@ -100,3 +100,7 @@ services:
       $sectionManager: '@Tardigrades\SectionField\Service\DoctrineSectionManager'
       $fieldManager: '@Tardigrades\SectionField\Service\DoctrineFieldManager'
       $fieldTypeManager: '@Tardigrades\SectionField\Service\DoctrineFieldTypeManager'
+
+  Tardigrades\Command\EnsureCacheCommand:
+    arguments:
+      $adapter: '@Symfony\Component\Cache\Adapter\PdoAdapter'
