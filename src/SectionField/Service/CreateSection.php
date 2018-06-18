@@ -14,7 +14,6 @@ declare (strict_types = 1);
 namespace Tardigrades\SectionField\Service;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Tardigrades\SectionField\Api\Service\ApiCacheInterface;
 use Tardigrades\SectionField\Event\SectionEntryBeforeCreate;
 use Tardigrades\SectionField\Event\SectionEntryCreated;
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
