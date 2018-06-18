@@ -35,6 +35,7 @@ interface CreateSectionInterface
      * There is a success true, boolean. This will be enhanced later on.
      *
      * @param CommonSectionInterface $sectionEntryEntity
+     * @throws \Psr\Cache\InvalidArgumentException
      */
     public function save(CommonSectionInterface $sectionEntryEntity);
 
@@ -46,6 +47,7 @@ interface CreateSectionInterface
      * No events are dispatched.
      *
      * @param CommonSectionInterface $sectionEntryEntity
+     * @throws \Psr\Cache\InvalidArgumentException
      */
     public function persist(CommonSectionInterface $sectionEntryEntity);
 

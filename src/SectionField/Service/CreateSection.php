@@ -14,9 +14,11 @@ declare (strict_types = 1);
 namespace Tardigrades\SectionField\Service;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Tardigrades\SectionField\Api\Service\ApiCacheInterface;
 use Tardigrades\SectionField\Event\SectionEntryBeforeCreate;
 use Tardigrades\SectionField\Event\SectionEntryCreated;
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
+use Tardigrades\SectionField\ValueObject\FullyQualifiedClassName;
 
 /**
  * {@inheritdoc}
@@ -29,10 +31,17 @@ class CreateSection implements CreateSectionInterface
     /** @var EventDispatcherInterface */
     private $dispatcher;
 
-    public function __construct(array $creators, EventDispatcherInterface $dispatcher)
-    {
+    /** @var CacheInterface */
+    private $cache;
+
+    public function __construct(
+        array $creators,
+        EventDispatcherInterface $dispatcher,
+        CacheInterface $cache
+    ) {
         $this->creators = $creators;
         $this->dispatcher = $dispatcher;
+        $this->cache = $cache;
     }
 
     /**
@@ -52,6 +61,10 @@ class CreateSection implements CreateSectionInterface
             $writer->save($sectionEntryEntity);
         }
 
+        $this->cache->invalidateForSection(
+            FullyQualifiedClassName::fromString(get_class($sectionEntryEntity))
+        );
+
         $this->dispatcher->dispatch(
             SectionEntryCreated::NAME,
             new SectionEntryCreated($sectionEntryEntity, $update)
@@ -67,6 +80,10 @@ class CreateSection implements CreateSectionInterface
         foreach ($this->creators as $writer) {
             $writer->persist($sectionEntryEntity);
         }
+
+        $this->cache->invalidateForSection(
+            FullyQualifiedClassName::fromString(get_class($sectionEntryEntity))
+        );
     }
 
     /**
