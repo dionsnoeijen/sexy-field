@@ -36,7 +36,7 @@ interface CreateSectionInterface
      *
      * @param CommonSectionInterface $sectionEntryEntity
      */
-    public function save(CommonSectionInterface $sectionEntryEntity): void;
+    public function save(CommonSectionInterface $sectionEntryEntity);
 
     /**
      * This method goes through all writers to persist a record, like save, but doesn't flush them.
@@ -47,12 +47,12 @@ interface CreateSectionInterface
      *
      * @param CommonSectionInterface $sectionEntryEntity
      */
-    public function persist(CommonSectionInterface $sectionEntryEntity): void;
+    public function persist(CommonSectionInterface $sectionEntryEntity);
 
     /**
      * This method flushes all writers to store records that have been persisted.
      *
      * No events are dispatched.
      */
-    public function flush(): void;
+    public function flush();
 }
