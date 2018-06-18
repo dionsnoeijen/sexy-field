@@ -60,9 +60,13 @@ class CreateSection implements CreateSectionInterface
             $writer->save($sectionEntryEntity);
         }
 
-        $this->cache->invalidateForSection(
-            FullyQualifiedClassName::fromString(get_class($sectionEntryEntity))
-        );
+        try {
+            $this->cache->invalidateForSection(
+                FullyQualifiedClassName::fromString(get_class($sectionEntryEntity))
+            );
+        } catch (\Psr\Cache\InvalidArgumentException $exception) {
+            //
+        }
 
         $this->dispatcher->dispatch(
             SectionEntryCreated::NAME,
@@ -80,9 +84,13 @@ class CreateSection implements CreateSectionInterface
             $writer->persist($sectionEntryEntity);
         }
 
-        $this->cache->invalidateForSection(
-            FullyQualifiedClassName::fromString(get_class($sectionEntryEntity))
-        );
+        try {
+            $this->cache->invalidateForSection(
+                FullyQualifiedClassName::fromString(get_class($sectionEntryEntity))
+            );
+        } catch (\Psr\Cache\InvalidArgumentException $exception) {
+            //
+        }
     }
 
     /**
