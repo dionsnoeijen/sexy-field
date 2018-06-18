@@ -53,3 +53,24 @@ services:
 
   section_field.twig.section: '@Tardigrades\Twig\SectionTwigExtension'
 
+  # override this service with true as the second parameter to enable caching
+  # at this point caching is for GET calls on the REST Api (sexy-field-api)
+  Tardigrades\SectionField\Api\Service\DefaultCache:
+    public: false
+    arguments:
+      - '@Symfony\Component\Cache\Adapter\TagAwareAdapter'
+      - false
+
+  default.cache: '@Tardigrades\SectionField\Service\DefaultCache'
+
+  Symfony\Component\Cache\Adapter\PdoAdapter:
+    public: false
+    arguments:
+      - '@doctrine.dbal.default_connection'
+
+  Symfony\Component\Cache\Adapter\TagAwareAdapter:
+    public: false
+    arguments:
+      - '@Symfony\Component\Cache\Adapter\PdoAdapter'
+
+
