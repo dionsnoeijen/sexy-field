@@ -29,13 +29,19 @@ final class CreateSectionTest extends TestCase
     /** @var CreateSection */
     private $createSection;
 
+    /** @var CacheInterface|Mockery\MockInterface */
+    private $cache;
+
     public function setUp()
     {
         $this->creators = [Mockery::mock(CreateSectionInterface::class)];
         $this->dispatcher = Mockery::mock(EventDispatcherInterface::class);
+        $this->cache = Mockery::mock(CacheInterface::class);
+
         $this->createSection = new CreateSection(
             $this->creators,
-            $this->dispatcher
+            $this->dispatcher,
+            $this->cache
         );
     }
 
@@ -48,6 +54,8 @@ final class CreateSectionTest extends TestCase
         $entry = Mockery::mock(CommonSectionInterface::class);
         $entry->shouldReceive('getId')->once()->andReturn(null);
         $this->creators[0]->shouldReceive('save')->once();
+
+        $this->cache->shouldReceive('invalidateForSection')->once();
 
         $this->dispatcher
             ->shouldReceive('dispatch')
@@ -96,6 +104,8 @@ final class CreateSectionTest extends TestCase
         $entry->shouldReceive('getId')->once()->andReturn(1);
         $this->creators[0]->shouldReceive('save')->once();
 
+        $this->cache->shouldReceive('invalidateForSection')->once();
+
         $this->dispatcher
             ->shouldReceive('dispatch')
             ->once()
@@ -141,6 +151,8 @@ final class CreateSectionTest extends TestCase
     {
         $entry = Mockery::mock(CommonSectionInterface::class);
         $this->creators[0]->shouldReceive('persist')->once();
+
+        $this->cache->shouldReceive('invalidateForSection')->once();
 
         $this->createSection->persist($entry);
     }

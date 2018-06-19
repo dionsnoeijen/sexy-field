@@ -11,7 +11,7 @@ use Tardigrades\SectionField\ValueObject\FullyQualifiedClassName;
 
 /**
  * Class DefaultCache
- * @package Tardigrades\SectionField\Api\Service
+ * @package Tardigrades\SectionField\Service
  */
 class DefaultCache implements CacheInterface
 {
