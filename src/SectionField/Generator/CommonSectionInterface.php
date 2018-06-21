@@ -17,6 +17,7 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 interface CommonSectionInterface
 {
+    const FIELDS = [];
     public function getId(): ?int;
     public static function loadValidatorMetadata(ClassMetadata $metadata): void;
     public function onPrePersist(): void;
