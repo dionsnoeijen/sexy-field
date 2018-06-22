@@ -155,14 +155,16 @@ EOF
         $notInHistory = $input->getOption('not-in-history');
 
         if (!$inHistory && !$notInHistory) {
-            $inHistory = $this->getHelper('question')->ask(
-                $input,
-                $output,
-                new ConfirmationQuestion(
-                    '<comment>Do you want to store the current version in history?</comment> (y/n) ',
-                    false
-                )
-            );
+            $inHistory = false;
+            // @todo: Make it a section config (if it can be manually told to go to history)
+//            $inHistory = $this->getHelper('question')->ask(
+//                $input,
+//                $output,
+//                new ConfirmationQuestion(
+//                    '<comment>Do you want to store the current version in history?</comment> (y/n) ',
+//                    false
+//                )
+//            );
         }
 
         if ($notInHistory) {
