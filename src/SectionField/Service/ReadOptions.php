@@ -16,7 +16,6 @@ namespace Tardigrades\SectionField\Service;
 use Assert\Assertion;
 use Assert\AssertionFailedException;
 use Assert\InvalidArgumentException;
-use PHPUnit\Framework\AssertionFailedError;
 use Tardigrades\SectionField\ValueObject\Slug;
 use Tardigrades\SectionField\ValueObject\After;
 use Tardigrades\SectionField\ValueObject\Before;
@@ -37,6 +36,7 @@ class ReadOptions implements ReadOptionsInterface
     const SECTION = 'section';
     const SECTION_ID = 'sectionId';
     const LIMIT = 'limit';
+    const RELATE = 'relate';
     const OFFSET = 'offset';
     const ORDER_BY = 'orderBy';
     const SORT = 'sort';
@@ -291,6 +291,25 @@ class ReadOptions implements ReadOptionsInterface
         }
 
         return $this->options[ReadOptions::JOIN];
+    }
+
+    public function getRelate(): ?array
+    {
+        try {
+            Assertion::keyExists($this->options, ReadOptions::RELATE, 'The key relate should exist');
+            Assertion::notEmpty(
+                $this->options[ReadOptions::RELATE],
+                'The relate option must contain something.'
+            );
+            Assertion::isArray(
+                $this->options[ReadOptions::RELATE],
+                'The relate option must be an array. ["relateProperty", "relateProperty"]'
+            );
+        } catch (AssertionFailedException $exception) {
+            return null;
+        }
+
+        return $this->options[ReadOptions::RELATE];
     }
 
     public function getId(): ?Id

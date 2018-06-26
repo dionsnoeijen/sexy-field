@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1529652343">
-  <project timestamp="1529652343">
+<coverage generated="1530014011">
+  <project timestamp="1530014011">
     <package name="Tardigrades\Command">
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/ApplicationCommand.php">
         <class name="ApplicationCommand" namespace="Tardigrades\Command">
@@ -1108,15 +1108,15 @@
         <line num="155" type="stmt" count="4"/>
         <line num="157" type="stmt" count="4"/>
         <line num="158" type="stmt" count="2"/>
-        <line num="169" type="stmt" count="4"/>
-        <line num="170" type="stmt" count="1"/>
-        <line num="173" type="stmt" count="4"/>
+        <line num="170" type="stmt" count="4"/>
+        <line num="171" type="stmt" count="1"/>
         <line num="174" type="stmt" count="4"/>
-        <line num="175" type="stmt" count="2"/>
-        <line num="177" type="stmt" count="2"/>
-        <line num="179" type="stmt" count="2"/>
-        <line num="182" type="stmt" count="4"/>
-        <metrics loc="183" ncloc="154" classes="1" methods="6" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="73" coveredstatements="70" elements="79" coveredelements="75"/>
+        <line num="175" type="stmt" count="4"/>
+        <line num="176" type="stmt" count="2"/>
+        <line num="178" type="stmt" count="2"/>
+        <line num="180" type="stmt" count="2"/>
+        <line num="183" type="stmt" count="4"/>
+        <metrics loc="184" ncloc="153" classes="1" methods="6" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="73" coveredstatements="70" elements="79" coveredelements="75"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/UpdateSectionsCommand.php">
         <class name="UpdateSectionsCommand" namespace="Tardigrades\Command">
@@ -1913,7 +1913,7 @@
       </file>
     </package>
     <file name="/Users/Dion/www/sexy-field/sexy-field/src/SectionField/Generator/CommonSectionInterface.php">
-      <metrics loc="25" ncloc="17" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      <metrics loc="24" ncloc="16" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <package name="Tardigrades\SectionField\Generator">
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/SectionField/Generator/FieldTypeDoesNotExistException.php">
@@ -2795,7 +2795,7 @@
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/SectionField/Service/ReadOptions.php">
         <class name="ReadOptions" namespace="Tardigrades\SectionField\Service">
-          <metrics complexity="55" methods="18" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="137" coveredstatements="119" elements="155" coveredelements="135"/>
+          <metrics complexity="58" methods="19" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="147" coveredstatements="119" elements="166" coveredelements="135"/>
         </class>
         <line num="66" type="method" name="__construct" visibility="private" complexity="5" crap="5" count="6"/>
         <line num="69" type="stmt" count="6"/>
@@ -2925,34 +2925,45 @@
         <line num="289" type="stmt" count="0"/>
         <line num="290" type="stmt" count="0"/>
         <line num="293" type="stmt" count="0"/>
-        <line num="296" type="method" name="getId" visibility="public" complexity="3" crap="3" count="2"/>
-        <line num="299" type="stmt" count="2"/>
-        <line num="300" type="stmt" count="2"/>
-        <line num="301" type="stmt" count="1"/>
-        <line num="302" type="stmt" count="1"/>
-        <line num="305" type="stmt" count="1"/>
-        <line num="308" type="method" name="getSlug" visibility="public" complexity="4" crap="4" count="3"/>
-        <line num="311" type="stmt" count="3"/>
-        <line num="315" type="stmt" count="3"/>
-        <line num="316" type="stmt" count="1"/>
+        <line num="296" type="method" name="getRelate" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="299" type="stmt" count="0"/>
+        <line num="300" type="stmt" count="0"/>
+        <line num="301" type="stmt" count="0"/>
+        <line num="302" type="stmt" count="0"/>
+        <line num="304" type="stmt" count="0"/>
+        <line num="305" type="stmt" count="0"/>
+        <line num="306" type="stmt" count="0"/>
+        <line num="308" type="stmt" count="0"/>
+        <line num="309" type="stmt" count="0"/>
+        <line num="312" type="stmt" count="0"/>
+        <line num="315" type="method" name="getId" visibility="public" complexity="3" crap="3" count="2"/>
         <line num="318" type="stmt" count="2"/>
-        <line num="321" type="stmt" count="2"/>
-        <line num="322" type="stmt" count="1"/>
-        <line num="323" type="stmt" count="1"/>
-        <line num="327" type="method" name="getFetchFields" visibility="public" complexity="3" crap="12" count="0"/>
-        <line num="330" type="stmt" count="0"/>
-        <line num="331" type="stmt" count="0"/>
-        <line num="332" type="stmt" count="0"/>
-        <line num="333" type="stmt" count="0"/>
-        <line num="335" type="stmt" count="0"/>
-        <line num="336" type="stmt" count="0"/>
-        <line num="337" type="stmt" count="0"/>
-        <line num="340" type="stmt" count="0"/>
-        <line num="343" type="method" name="fromArray" visibility="public" complexity="1" crap="1" count="6"/>
-        <line num="345" type="stmt" count="6"/>
-        <line num="348" type="method" name="toArray" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="350" type="stmt" count="1"/>
-        <metrics loc="352" ncloc="328" classes="1" methods="18" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="137" coveredstatements="119" elements="155" coveredelements="135"/>
+        <line num="319" type="stmt" count="2"/>
+        <line num="320" type="stmt" count="1"/>
+        <line num="321" type="stmt" count="1"/>
+        <line num="324" type="stmt" count="1"/>
+        <line num="327" type="method" name="getSlug" visibility="public" complexity="4" crap="4" count="3"/>
+        <line num="330" type="stmt" count="3"/>
+        <line num="334" type="stmt" count="3"/>
+        <line num="335" type="stmt" count="1"/>
+        <line num="337" type="stmt" count="2"/>
+        <line num="340" type="stmt" count="2"/>
+        <line num="341" type="stmt" count="1"/>
+        <line num="342" type="stmt" count="1"/>
+        <line num="346" type="method" name="getFetchFields" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="349" type="stmt" count="0"/>
+        <line num="350" type="stmt" count="0"/>
+        <line num="351" type="stmt" count="0"/>
+        <line num="352" type="stmt" count="0"/>
+        <line num="354" type="stmt" count="0"/>
+        <line num="355" type="stmt" count="0"/>
+        <line num="356" type="stmt" count="0"/>
+        <line num="359" type="stmt" count="0"/>
+        <line num="362" type="method" name="fromArray" visibility="public" complexity="1" crap="1" count="6"/>
+        <line num="364" type="stmt" count="6"/>
+        <line num="367" type="method" name="toArray" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="369" type="stmt" count="1"/>
+        <metrics loc="371" ncloc="347" classes="1" methods="19" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="147" coveredstatements="119" elements="166" coveredelements="135"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/SectionField/Service/ReadSection.php">
         <class name="ReadSection" namespace="Tardigrades\SectionField\Service">
@@ -3753,6 +3764,6 @@
         <metrics loc="248" ncloc="143" classes="1" methods="16" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="0" elements="54" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="147" loc="10028" ncloc="8019" classes="122" methods="603" coveredmethods="559" conditionals="0" coveredconditionals="0" statements="2314" coveredstatements="2148" elements="2917" coveredelements="2707"/>
+    <metrics files="147" loc="10047" ncloc="8036" classes="122" methods="604" coveredmethods="559" conditionals="0" coveredconditionals="0" statements="2324" coveredstatements="2148" elements="2928" coveredelements="2707"/>
   </project>
 </coverage>
