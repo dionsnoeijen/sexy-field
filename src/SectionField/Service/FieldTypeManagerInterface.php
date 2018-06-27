@@ -28,7 +28,19 @@ interface FieldTypeManagerInterface
     public function createWithFullyQualifiedClassName(
         FullyQualifiedClassName $fullyQualifiedClassName
     ): FieldTypeInterface;
+
+    /**
+     * @param Type $type
+     * @return FieldTypeInterface
+     * @throws FieldTypeNotFoundException
+     */
     public function readByType(Type $type): FieldTypeInterface;
+
+    /**
+     * @param FullyQualifiedClassName $fullyQualifiedClassName
+     * @return FieldTypeInterface
+     * @throws FieldTypeNotFoundException
+     */
     public function readByFullyQualifiedClassName(
         FullyQualifiedClassName $fullyQualifiedClassName
     ): FieldTypeInterface;

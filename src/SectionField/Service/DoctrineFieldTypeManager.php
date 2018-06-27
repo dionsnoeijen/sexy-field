@@ -82,6 +82,9 @@ class DoctrineFieldTypeManager implements FieldTypeManagerInterface
         return $fieldType;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function readByType(Type $type): FieldTypeInterface
     {
         $fieldTypeRepository = $this->entityManager->getRepository(FieldType::class);
@@ -95,6 +98,9 @@ class DoctrineFieldTypeManager implements FieldTypeManagerInterface
         return $fieldType;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function readByFullyQualifiedClassName(FullyQualifiedClassName $fullyQualifiedClassName): FieldTypeInterface
     {
         $fieldTypeRepository = $this->entityManager->getRepository(FieldType::class);

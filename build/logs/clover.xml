@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1530095468">
-  <project timestamp="1530095468">
+<coverage generated="1530099593">
+  <project timestamp="1530099593">
     <package name="Tardigrades\Command">
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/ApplicationCommand.php">
         <class name="ApplicationCommand" namespace="Tardigrades\Command">
@@ -590,24 +590,27 @@
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/InstallFieldTypeCommand.php">
         <class name="InstallFieldTypeCommand" namespace="Tardigrades\Command">
-          <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="15" coveredelements="15"/>
+          <metrics complexity="4" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="14" elements="18" coveredelements="16"/>
         </class>
-        <line num="27" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="30" type="stmt" count="1"/>
+        <line num="29" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
         <line num="32" type="stmt" count="1"/>
         <line num="33" type="stmt" count="1"/>
-        <line num="35" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="1"/>
-        <line num="38" type="stmt" count="1"/>
+        <line num="34" type="stmt" count="1"/>
+        <line num="36" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="1"/>
         <line num="39" type="stmt" count="1"/>
         <line num="40" type="stmt" count="1"/>
-        <line num="42" type="stmt" count="1"/>
-        <line num="44" type="method" name="execute" visibility="protected" complexity="1" crap="1" count="1"/>
-        <line num="46" type="stmt" count="1"/>
+        <line num="41" type="stmt" count="1"/>
+        <line num="43" type="stmt" count="1"/>
+        <line num="45" type="method" name="execute" visibility="protected" complexity="2" crap="2.01" count="1"/>
         <line num="47" type="stmt" count="1"/>
         <line num="48" type="stmt" count="1"/>
         <line num="51" type="stmt" count="1"/>
-        <line num="52" type="stmt" count="1"/>
-        <metrics loc="53" ncloc="44" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="15" coveredelements="15"/>
+        <line num="52" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="1"/>
+        <line num="54" type="stmt" count="1"/>
+        <line num="55" type="stmt" count="1"/>
+        <line num="57" type="stmt" count="1"/>
+        <metrics loc="58" ncloc="49" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="14" elements="18" coveredelements="16"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/LanguageCommand.php">
         <class name="LanguageCommand" namespace="Tardigrades\Command">
@@ -2471,21 +2474,21 @@
         <line num="78" type="stmt" count="1"/>
         <line num="81" type="stmt" count="1"/>
         <line num="82" type="stmt" count="1"/>
-        <line num="85" type="method" name="readByType" visibility="public" complexity="2" crap="2" count="2"/>
-        <line num="87" type="stmt" count="2"/>
-        <line num="89" type="stmt" count="2"/>
+        <line num="88" type="method" name="readByType" visibility="public" complexity="2" crap="2" count="2"/>
         <line num="90" type="stmt" count="2"/>
         <line num="92" type="stmt" count="2"/>
-        <line num="93" type="stmt" count="1"/>
-        <line num="95" type="stmt" count="1"/>
-        <line num="98" type="method" name="readByFullyQualifiedClassName" visibility="public" complexity="2" crap="2" count="2"/>
-        <line num="100" type="stmt" count="2"/>
-        <line num="102" type="stmt" count="2"/>
-        <line num="103" type="stmt" count="2"/>
-        <line num="105" type="stmt" count="2"/>
-        <line num="106" type="stmt" count="1"/>
-        <line num="108" type="stmt" count="1"/>
-        <metrics loc="110" ncloc="97" classes="1" methods="9" coveredmethods="9" conditionals="0" coveredconditionals="0" statements="37" coveredstatements="37" elements="46" coveredelements="46"/>
+        <line num="93" type="stmt" count="2"/>
+        <line num="95" type="stmt" count="2"/>
+        <line num="96" type="stmt" count="1"/>
+        <line num="98" type="stmt" count="1"/>
+        <line num="104" type="method" name="readByFullyQualifiedClassName" visibility="public" complexity="2" crap="2" count="2"/>
+        <line num="106" type="stmt" count="2"/>
+        <line num="108" type="stmt" count="2"/>
+        <line num="109" type="stmt" count="2"/>
+        <line num="111" type="stmt" count="2"/>
+        <line num="112" type="stmt" count="1"/>
+        <line num="114" type="stmt" count="1"/>
+        <metrics loc="116" ncloc="97" classes="1" methods="9" coveredmethods="9" conditionals="0" coveredconditionals="0" statements="37" coveredstatements="37" elements="46" coveredelements="46"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/SectionField/Service/DoctrineLanguageManager.php">
         <class name="DoctrineLanguageManager" namespace="Tardigrades\SectionField\Service">
@@ -3061,7 +3064,7 @@
       <metrics loc="32" ncloc="24" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/Users/Dion/www/sexy-field/sexy-field/src/SectionField/Service/FieldTypeManagerInterface.php">
-      <metrics loc="35" ncloc="27" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      <metrics loc="47" ncloc="29" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/Users/Dion/www/sexy-field/sexy-field/src/SectionField/Service/LanguageManagerInterface.php">
       <metrics loc="32" ncloc="24" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -3787,6 +3790,6 @@
         <metrics loc="248" ncloc="143" classes="1" methods="16" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="0" elements="54" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="148" loc="10091" ncloc="8079" classes="123" methods="607" coveredmethods="561" conditionals="0" coveredconditionals="0" statements="2338" coveredstatements="2161" elements="2945" coveredelements="2722"/>
+    <metrics files="148" loc="10114" ncloc="8086" classes="123" methods="607" coveredmethods="560" conditionals="0" coveredconditionals="0" statements="2341" coveredstatements="2163" elements="2948" coveredelements="2723"/>
   </project>
 </coverage>

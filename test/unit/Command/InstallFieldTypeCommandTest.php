@@ -10,6 +10,7 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tardigrades\Entity\FieldType;
 use Tardigrades\SectionField\Service\FieldTypeManagerInterface;
+use Tardigrades\SectionField\Service\FieldTypeNotFoundException;
 
 /**
  * @coversDefaultClass Tardigrades\Command\InstallFieldTypeCommand
@@ -20,10 +21,10 @@ final class InstallFieldTypeCommandTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
-    /** @var FieldTypeManagerInterface */
+    /** @var FieldTypeManagerInterface|Mockery\MockInterface */
     private $fieldTypeManager;
 
-    /** @var InstallFieldTypeCommand */
+    /** @var InstallFieldTypeCommand|Mockery\MockInterface */
     private $installFieldTypeCommand;
 
     /** @var Application */
@@ -46,6 +47,11 @@ final class InstallFieldTypeCommandTest extends TestCase
     {
         $command = $this->application->find('sf:install-field-type');
         $commandTester = new CommandTester($command);
+
+        $this->fieldTypeManager
+            ->shouldReceive('readByFullyQualifiedClassName')
+            ->once()
+            ->andThrow(FieldTypeNotFoundException::class);
 
         $this->fieldTypeManager
             ->shouldReceive('createWithFullyQualifiedClassName')

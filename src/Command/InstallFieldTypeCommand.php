@@ -16,7 +16,9 @@ namespace Tardigrades\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Tardigrades\SectionField\Service\FieldNotFoundException;
 use Tardigrades\SectionField\Service\FieldTypeManagerInterface;
+use Tardigrades\SectionField\Service\FieldTypeNotFoundException;
 use Tardigrades\SectionField\ValueObject\FullyQualifiedClassName;
 
 class InstallFieldTypeCommand extends FieldTypeCommand
@@ -28,7 +30,6 @@ class InstallFieldTypeCommand extends FieldTypeCommand
         FieldTypeManagerInterface $fieldTypeManager
     ) {
         $this->fieldTypeManager = $fieldTypeManager;
-
         parent::__construct('sf:install-field-type');
     }
 
@@ -44,10 +45,14 @@ class InstallFieldTypeCommand extends FieldTypeCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $namespace = $input->getArgument('namespace');
-        $fieldType = $this->fieldTypeManager->createWithFullyQualifiedClassName(
-            FullyQualifiedClassName::fromString($namespace)
-        );
+        $fullyQualifiedClassName = FullyQualifiedClassName::fromString($namespace);
 
-        $this->renderTable($output, [$fieldType], 'FieldTypeInterface installed!');
+        try {
+            $this->fieldTypeManager->readByFullyQualifiedClassName($fullyQualifiedClassName);
+            $output->writeln('<info>FieldType already installed</info>');
+        } catch (FieldTypeNotFoundException $exception) {
+            $fieldType = $this->fieldTypeManager->createWithFullyQualifiedClassName($fullyQualifiedClassName);
+            $this->renderTable($output, [$fieldType], 'FieldTypeInterface installed!');
+        }
     }
 }
