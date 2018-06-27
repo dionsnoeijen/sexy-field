@@ -11,6 +11,7 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tardigrades\Entity\Field;
 use Tardigrades\SectionField\Service\FieldManagerInterface;
+use Tardigrades\SectionField\Service\FieldNotFoundException;
 
 /**
  * @coversDefaultClass Tardigrades\Command\CreateFieldCommand
@@ -21,7 +22,7 @@ final class CreateFieldCommandTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
-    /** @var FieldManagerInterface */
+    /** @var FieldManagerInterface|Mockery\MockInterface */
     private $fieldManager;
 
     /** @var CreateFieldCommand */
@@ -60,6 +61,11 @@ YML;
 
         $command = $this->application->find('sf:create-field');
         $commandTester = new CommandTester($command);
+
+        $this->fieldManager
+            ->shouldReceive('readByHandle')
+            ->once()
+            ->andThrow(FieldNotFoundException::class);
 
         $this->fieldManager
             ->shouldReceive('createByConfig')

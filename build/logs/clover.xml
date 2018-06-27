@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1530014011">
-  <project timestamp="1530014011">
+<coverage generated="1530095468">
+  <project timestamp="1530095468">
     <package name="Tardigrades\Command">
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/ApplicationCommand.php">
         <class name="ApplicationCommand" namespace="Tardigrades\Command">
@@ -61,31 +61,34 @@
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/CreateFieldCommand.php">
         <class name="CreateFieldCommand" namespace="Tardigrades\Command">
-          <metrics complexity="6" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="19" elements="22" coveredelements="22"/>
+          <metrics complexity="7" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="21" elements="25" coveredelements="23"/>
         </class>
-        <line num="29" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
-        <line num="32" type="stmt" count="3"/>
-        <line num="34" type="stmt" count="3"/>
+        <line num="30" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="33" type="stmt" count="3"/>
         <line num="35" type="stmt" count="3"/>
-        <line num="37" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="3"/>
-        <line num="40" type="stmt" count="3"/>
+        <line num="36" type="stmt" count="3"/>
+        <line num="38" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="3"/>
         <line num="41" type="stmt" count="3"/>
         <line num="42" type="stmt" count="3"/>
-        <line num="44" type="stmt" count="3"/>
-        <line num="46" type="method" name="execute" visibility="protected" complexity="4" crap="4" count="3"/>
-        <line num="48" type="stmt" count="3"/>
-        <line num="51" type="stmt" count="3"/>
-        <line num="52" type="stmt" count="1"/>
+        <line num="43" type="stmt" count="3"/>
+        <line num="45" type="stmt" count="3"/>
+        <line num="47" type="method" name="execute" visibility="protected" complexity="5" crap="5.01" count="3"/>
+        <line num="49" type="stmt" count="3"/>
+        <line num="52" type="stmt" count="3"/>
         <line num="53" type="stmt" count="1"/>
         <line num="54" type="stmt" count="1"/>
         <line num="55" type="stmt" count="1"/>
-        <line num="56" type="stmt" count="1"/>
         <line num="57" type="stmt" count="1"/>
-        <line num="60" type="stmt" count="2"/>
-        <line num="61" type="stmt" count="2"/>
-        <line num="62" type="stmt" count="2"/>
-        <line num="64" type="stmt" count="2"/>
-        <metrics loc="65" ncloc="56" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="19" elements="22" coveredelements="22"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="59" type="stmt" count="1"/>
+        <line num="60" type="stmt" count="1"/>
+        <line num="61" type="stmt" count="1"/>
+        <line num="63" type="stmt" count="1"/>
+        <line num="66" type="stmt" count="2"/>
+        <line num="67" type="stmt" count="2"/>
+        <line num="68" type="stmt" count="2"/>
+        <line num="70" type="stmt" count="2"/>
+        <metrics loc="71" ncloc="62" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="21" elements="25" coveredelements="23"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/CreateLanguageCommand.php">
         <class name="CreateLanguageCommand" namespace="Tardigrades\Command">
@@ -363,6 +366,26 @@
         <line num="67" type="stmt" count="3"/>
         <line num="69" type="stmt" count="3"/>
         <metrics loc="70" ncloc="61" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="21" elements="25" coveredelements="25"/>
+      </file>
+      <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/EnsureCacheCommand.php">
+        <class name="EnsureCacheCommand" namespace="Tardigrades\Command">
+          <metrics complexity="4" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="14" coveredelements="14"/>
+        </class>
+        <line num="17" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
+        <line num="19" type="stmt" count="3"/>
+        <line num="20" type="stmt" count="3"/>
+        <line num="21" type="stmt" count="3"/>
+        <line num="23" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="3"/>
+        <line num="25" type="stmt" count="3"/>
+        <line num="26" type="stmt" count="3"/>
+        <line num="28" type="method" name="execute" visibility="protected" complexity="2" crap="2" count="3"/>
+        <line num="31" type="stmt" count="3"/>
+        <line num="32" type="stmt" count="1"/>
+        <line num="33" type="stmt" count="2"/>
+        <line num="34" type="stmt" count="2"/>
+        <line num="35" type="stmt" count="2"/>
+        <line num="37" type="stmt" count="3"/>
+        <metrics loc="38" ncloc="37" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="14" coveredelements="14"/>
       </file>
       <file name="/Users/Dion/www/sexy-field/sexy-field/src/Command/FieldCommand.php">
         <class name="FieldCommand" namespace="Tardigrades\Command">
@@ -3764,6 +3787,6 @@
         <metrics loc="248" ncloc="143" classes="1" methods="16" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="0" elements="54" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="147" loc="10047" ncloc="8036" classes="122" methods="604" coveredmethods="559" conditionals="0" coveredconditionals="0" statements="2324" coveredstatements="2148" elements="2928" coveredelements="2707"/>
+    <metrics files="148" loc="10091" ncloc="8079" classes="123" methods="607" coveredmethods="561" conditionals="0" coveredconditionals="0" statements="2338" coveredstatements="2161" elements="2945" coveredelements="2722"/>
   </project>
 </coverage>

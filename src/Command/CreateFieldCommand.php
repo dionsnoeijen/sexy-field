@@ -19,6 +19,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Yaml\Yaml;
 use Tardigrades\SectionField\Service\FieldManagerInterface;
+use Tardigrades\SectionField\Service\FieldNotFoundException;
 use Tardigrades\SectionField\ValueObject\FieldConfig;
 
 class CreateFieldCommand extends FieldCommand
@@ -52,8 +53,13 @@ class CreateFieldCommand extends FieldCommand
                 $parsed = Yaml::parse(file_get_contents($config));
                 if (is_array($parsed)) {
                     $fieldConfig = FieldConfig::fromArray($parsed);
-                    $this->fieldManager->createByConfig($fieldConfig);
-                    $output->writeln('<info>Field created!</info>');
+                    try {
+                        $this->fieldManager->readByHandle($fieldConfig->getHandle());
+                        $output->writeln('<info>This field already exists</info>');
+                    } catch (FieldNotFoundException $exception) {
+                        $this->fieldManager->createByConfig($fieldConfig);
+                        $output->writeln('<info>Field created!</info>');
+                    }
                     return;
                 }
             }
