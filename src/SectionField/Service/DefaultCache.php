@@ -157,8 +157,7 @@ class DefaultCache implements CacheInterface
         array $requestedFields = null,
         string $context = null,
         string $id = null
-    ): string
-    {
+    ): string {
         return sha1($sectionHandle) .
             $this->getFieldKey($requestedFields) .
             $this->getContextKey($context) .
