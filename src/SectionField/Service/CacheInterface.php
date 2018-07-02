@@ -5,7 +5,8 @@ namespace Tardigrades\SectionField\Service;
 
 use Tardigrades\SectionField\ValueObject\FullyQualifiedClassName;
 
-interface CacheInterface {
+interface CacheInterface
+{
 
     /**
      * Start a cache item, it can be called even if it's not enabled
