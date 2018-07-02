@@ -38,6 +38,13 @@ final class FullyQualifiedClassName
         return $this->fullyQualifiedClassName;
     }
 
+    public function toHandle(): Handle
+    {
+        $handle = explode('\\', $this->fullyQualifiedClassName);
+        $handle = end($handle);
+        return Handle::fromString(lcfirst($handle));
+    }
+
     public static function fromNamespaceAndClassName(SectionNamespace $namespace, ClassName $className)
     {
         return new self((string) $namespace . '\\Entity\\' . (string) $className);

@@ -14,7 +14,6 @@ declare (strict_types = 1);
 namespace Tardigrades\SectionField\Service;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Tardigrades\Helper\FullyQualifiedClassNameConverter;
 use Tardigrades\SectionField\Event\SectionBeforeRead;
 use Tardigrades\SectionField\Event\SectionDataRead;
 use Tardigrades\SectionField\ValueObject\SectionConfig;
@@ -60,9 +59,7 @@ class ReadSection implements ReadSectionInterface
 
         if ($sectionConfig === null) {
             $sectionConfig = $this->sectionManager->readByHandle(
-                FullyQualifiedClassNameConverter::toHandle(
-                    $options->getSection()[0]
-                )
+                $options->getSection()[0]->toHandle()
             )->getConfig();
         }
 
