@@ -17,8 +17,6 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 interface CommonSectionInterface
 {
-    const FIELDS = [];
-
     public function getId(): ?int;
     public static function loadValidatorMetadata(ClassMetadata $metadata): void;
     public function onPrePersist(): void;
@@ -27,4 +25,5 @@ interface CommonSectionInterface
     public function getUpdated(): ?\DateTime;
     public function getSlug(): \Tardigrades\SectionField\ValueObject\Slug;
     public function getDefault(): string;
+    public static function fieldInfo(): array;
 }
