@@ -152,20 +152,30 @@ final class CreateSectionTest extends TestCase
         $entry = Mockery::mock(CommonSectionInterface::class);
         $this->creators[0]->shouldReceive('persist')->once();
 
-        $this->cache->shouldReceive('invalidateForSection')->once();
-
         $this->createSection->persist($entry);
     }
 
     /**
      * @test
+     * @covers ::persist
      * @covers ::flush
      */
     public function it_should_flush_creators()
     {
+        // We persist three entities of two different classes
+        // So there should be three persists (for each entity), one flush, and two invalidations (for each class)
         $entry = Mockery::mock(CommonSectionInterface::class);
+        $otherEntry = Mockery::mock(CommonerSectionInterface::class);
+        $thirdEntry = Mockery::mock(CommonSectionInterface::class);
+        $this->creators[0]->shouldReceive('persist')->times(3);
         $this->creators[0]->shouldReceive('flush')->once();
+        $this->cache->shouldReceive('invalidateForSection')->twice();
 
-        $this->createSection->flush($entry);
+        $this->createSection->persist($entry);
+        $this->createSection->persist($otherEntry);
+        $this->createSection->persist($thirdEntry);
+        $this->createSection->flush();
     }
 }
+
+interface CommonerSectionInterface extends CommonSectionInterface {}
