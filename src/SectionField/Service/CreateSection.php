@@ -33,6 +33,9 @@ class CreateSection implements CreateSectionInterface
     /** @var CacheInterface */
     private $cache;
 
+    /** @var string[] */
+    private $invalidatedCaches = [];
+
     public function __construct(
         array $creators,
         EventDispatcherInterface $dispatcher,
@@ -84,12 +87,9 @@ class CreateSection implements CreateSectionInterface
             $writer->persist($sectionEntryEntity);
         }
 
-        try {
-            $this->cache->invalidateForSection(
-                FullyQualifiedClassName::fromString(get_class($sectionEntryEntity))
-            );
-        } catch (\Psr\Cache\InvalidArgumentException $exception) {
-            //
+        $class = get_class($sectionEntryEntity);
+        if (!in_array($class, $this->invalidatedCaches)) {
+            $this->invalidatedCaches[] = $class;
         }
     }
 
@@ -102,5 +102,16 @@ class CreateSection implements CreateSectionInterface
         foreach ($this->creators as $writer) {
             $writer->flush();
         }
+
+        foreach ($this->invalidatedCaches as $class) {
+            try {
+                $this->cache->invalidateForSection(
+                    FullyQualifiedClassName::fromString($class)
+                );
+            } catch (\Psr\Cache\InvalidArgumentException $exception) {
+                //
+            }
+        }
+        $this->invalidatedCaches = [];
     }
 }
