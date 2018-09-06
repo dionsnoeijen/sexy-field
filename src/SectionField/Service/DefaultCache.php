@@ -44,10 +44,10 @@ class DefaultCache implements CacheInterface
      */
     public function __construct(
         TagAwareAdapterInterface $cache,
-        bool $enabled = false
+        string $enabled = 'false'
     ) {
         $this->cache = $cache;
-        $this->enabled = $enabled;
+        $this->enabled = $enabled === 'false' ? false : true ;
         $this->item = null;
         $this->sectionHandle = null;
         $this->fieldKey = null;
