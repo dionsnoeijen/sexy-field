@@ -16,7 +16,6 @@ namespace Tardigrades\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Tardigrades\SectionField\Service\FieldNotFoundException;
 use Tardigrades\SectionField\Service\FieldTypeManagerInterface;
 use Tardigrades\SectionField\Service\FieldTypeNotFoundException;
 use Tardigrades\SectionField\ValueObject\FullyQualifiedClassName;

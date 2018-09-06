@@ -23,6 +23,7 @@ final class FullyQualifiedClassName
     private function __construct(string $fullyQualifiedClassName)
     {
         $this->fullyQualifiedClassName = str_replace('.', '\\', $fullyQualifiedClassName);
+        $this->fullyQualifiedClassName = str_replace('Proxies\\__CG__\\', '', $this->fullyQualifiedClassName);
     }
 
     public function getClassName()
