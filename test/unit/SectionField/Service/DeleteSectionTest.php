@@ -102,4 +102,25 @@ final class DeleteSectionTest extends TestCase
         $result = $this->deleteSection->delete($entry);
         $this->assertFalse($result);
     }
+
+    /**
+     * @test
+     * @covers ::remove
+     */
+    public function it_should_remove_successfully()
+    {
+        $entry = Mockery::mock(CommonSectionInterface::class);
+        $this->deleters[0]->shouldReceive('remove')->once()->with($entry);
+        $this->deleteSection->remove($entry);
+    }
+
+    /**
+     * @test
+     * @covers ::flush
+     */
+    public function it_should_flush_successfully()
+    {
+        $this->deleters[0]->shouldReceive('flush')->once();
+        $this->deleteSection->flush();
+    }
 }

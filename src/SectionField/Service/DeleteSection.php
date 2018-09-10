@@ -54,4 +54,18 @@ class DeleteSection implements DeleteSectionInterface
 
         return $success;
     }
+
+    public function remove(CommonSectionInterface $sectionEntryEntity): void
+    {
+        foreach ($this->deleters as $deleter) {
+            $deleter->remove($sectionEntryEntity);
+        }
+    }
+
+    public function flush(): void
+    {
+        foreach ($this->deleters as $deleter) {
+            $deleter->flush();
+        }
+    }
 }
