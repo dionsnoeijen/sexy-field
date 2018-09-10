@@ -31,4 +31,8 @@ interface DeleteSectionInterface
      * @return bool
      */
     public function delete(CommonSectionInterface $sectionEntryEntity): bool;
+
+    public function remove(CommonSectionInterface $sectionEntryEntity): void;
+
+    public function flush(): void;
 }
