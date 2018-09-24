@@ -21,4 +21,9 @@ interface CommonSectionInterface
     public static function loadValidatorMetadata(ClassMetadata $metadata): void;
     public function onPrePersist(): void;
     public function onPreUpdate(): void;
+    public function getCreated(): ?\DateTime;
+    public function getUpdated(): ?\DateTime;
+    public function getSlug(): \Tardigrades\SectionField\ValueObject\Slug;
+    public function getDefault(): string;
+    public static function fieldInfo(): array;
 }

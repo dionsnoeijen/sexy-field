@@ -7,6 +7,7 @@ namespace Tardigrades\SectionField\Service;
 use Psr\Cache\CacheItemInterface;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
+use Tardigrades\SectionField\Generator\CommonSectionInterface;
 use Tardigrades\SectionField\ValueObject\FullyQualifiedClassName;
 
 /**
@@ -32,7 +33,7 @@ class DefaultCache implements CacheInterface
 
     /** @var string */
     private $context;
-    
+
     /** @var string[] */
     private $relationships;
 
@@ -208,27 +209,21 @@ class DefaultCache implements CacheInterface
      *
      * @param FullyQualifiedClassName $fullyQualifiedClassName
      * @return array
-     * @throws UnableToGetEntityMetadataException
+     * @throws NotASexyFieldEntityException
      */
     private function getRelationships(FullyQualifiedClassName $fullyQualifiedClassName): array
     {
-        try {
-            $fields = (string)$fullyQualifiedClassName;
-            $relationships = [];
-            foreach ($fields::FIELDS as $field) {
-                try {
-                    if (!is_null($field['relationship']['class'])) {
-                        $relationships[] = $field['relationship']['class'];
-                    }
-                } catch (\Exception $exception) {
-                    // Just go on
-                }
-            }
-            return $relationships;
-        } catch (\Exception $exception) {
-            throw new UnableToGetEntityMetadataException(
-                'Cannot get ::FIELDS' . $exception->getMessage()
-            );
+        $fields = (string)$fullyQualifiedClassName;
+        if (!is_subclass_of($fields, CommonSectionInterface::class)) {
+            throw new NotASexyFieldEntityException;
         }
+        /** @var CommonSectionInterface $fields */
+        $relationships = [];
+        foreach ($fields::fieldInfo() as $field) {
+            if (!is_null($field['relationship'])) {
+                $relationships[] = $field['relationship']['class'];
+            }
+        }
+        return $relationships;
     }
 }

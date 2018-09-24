@@ -9,14 +9,17 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Tardigrades\SectionField\Service;
 
-class UnableToGetEntityMetadataException extends \Exception
+class NotASexyFieldEntityException extends \UnexpectedValueException
 {
-    public function __construct($message = "", $code = 404, \Throwable $previous = null)
-    {
-        $message = !empty($message) ? $message : 'This entity does not seem to have metadata (::FIELDS)';
-
+    public function __construct(
+        $message = "This entity does not seem to belong to SexyField",
+        $code = 404,
+        \Throwable $previous = null
+    ) {
         parent::__construct($message, $code, $previous);
     }
 }
