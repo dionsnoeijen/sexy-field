@@ -115,7 +115,10 @@ final class ReadSectionTest extends TestCase
         $this->assertEquals(new \ArrayIterator(), $result);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @covers ::flush
+     */
     public function it_should_flush()
     {
         $this->readers[0]->shouldReceive('flush')->once();
