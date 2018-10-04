@@ -115,6 +115,13 @@ final class ReadSectionTest extends TestCase
         $this->assertEquals(new \ArrayIterator(), $result);
     }
 
+    /** @test */
+    public function it_should_flush()
+    {
+        $this->readers[0]->shouldReceive('flush')->once();
+        $this->readSection->flush();
+    }
+
     private function givenASectionWithName($name)
     {
         $sectionName = 'Section ' . $name;
