@@ -20,7 +20,7 @@ use Tardigrades\SectionField\ValueObject\SectionConfig;
 
 class ReadSection implements ReadSectionInterface
 {
-    /** @var array */
+    /** @var ReadSectionInterface[] */
     private $readers;
 
     /** @var SectionManagerInterface */
@@ -82,5 +82,12 @@ class ReadSection implements ReadSectionInterface
         );
 
         return $sectionData;
+    }
+
+    public function flush(): void
+    {
+        foreach ($this->readers as $reader) {
+            $reader->flush();
+        }
     }
 }

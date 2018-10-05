@@ -18,4 +18,6 @@ use Tardigrades\SectionField\ValueObject\SectionConfig;
 interface ReadSectionInterface
 {
     public function read(ReadOptionsInterface $options, SectionConfig $sectionConfig = null): \ArrayIterator;
+
+    public function flush(): void;
 }
