@@ -48,4 +48,11 @@ interface FieldTypeInterface
     ): FormBuilderInterface;
 
     public function directory(): string;
+
+    /**
+     * Return handles of additional fields that will be generated as part of the type.
+     * @param string $handle
+     * @return string[]
+     */
+    public static function getCofields(string $handle): array;
 }
