@@ -109,6 +109,11 @@ abstract class FieldType implements FieldTypeInterface
         }
     }
 
+    public static function getCofields(string $handle): array
+    {
+        return [];
+    }
+
     abstract public function addToForm(
         FormBuilderInterface $formBuilder,
         SectionInterface $section,
