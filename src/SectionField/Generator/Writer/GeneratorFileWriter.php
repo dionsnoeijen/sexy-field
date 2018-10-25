@@ -24,7 +24,9 @@ class GeneratorFileWriter
         $path = self::getPsr4AutoloadDirectoryForNamespace($writable->getNamespace());
         $store = $path . $writable->getFilename();
 
-        \mkdir($path, 0755, true);
+        if (!\file_exists($path)) {
+            \mkdir($path, 0755, true);
+        }
 
         try {
             if (\file_exists($store)) {
