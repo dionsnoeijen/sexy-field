@@ -94,6 +94,40 @@ abstract class Generator implements GeneratorInterface
         return $fields;
     }
 
+    /**
+     * There are scenario's in which a field should be ignored by a generator
+     *
+     * @param FieldInterface $field
+     * @return bool
+     */
+    protected function shouldIgnore(FieldInterface $field): bool
+    {
+        $fieldType = $this->container->get(
+            (string) $field->getFieldType()->getFullyQualifiedClassName()
+        );
+        // The field type generator config refers to how the field type itself is defined
+        // as a service. You can see that in the services.yml
+        $fieldTypeGeneratorConfig = $fieldType->getFieldTypeGeneratorConfig()->toArray();
+        if (!key_exists(static::GENERATE_FOR, $fieldTypeGeneratorConfig)) {
+            return true;
+        }
+
+        // See if this field is to be ignored by this generator because it's explicitly
+        // set to ignore === true
+        try {
+            // The field generator config refers to how the field instructs the generator
+            // You see that in the field configuration yml
+            $fieldGeneratorConfig = $field->getConfig()->getGeneratorConfig()->toArray();
+            if (!empty($fieldGeneratorConfig[static::GENERATE_FOR]['ignore']) &&
+                $fieldGeneratorConfig[static::GENERATE_FOR]['ignore']
+            ) {
+                return true;
+            }
+        } catch (\Exception $exception) {}
+
+        return false;
+    }
+
     protected function getFieldTypeGeneratorConfig(FieldInterface $field, string $generateFor): array
     {
         $fieldType = $this->container->get((string) $field->getFieldType()->getFullyQualifiedClassName());
