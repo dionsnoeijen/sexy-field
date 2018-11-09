@@ -17,6 +17,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\Validator\Tests\Fixtures\Reference;
 
 class SexyFieldExtension extends Extension
 {
@@ -31,5 +32,13 @@ class SexyFieldExtension extends Extension
 
         $loader->load('commands.yml');
         $loader->load('services.yml');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAlias(): string
+    {
+        return 'sexy_field';
     }
 }
