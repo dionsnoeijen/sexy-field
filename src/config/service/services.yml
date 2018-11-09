@@ -73,4 +73,14 @@ services:
     arguments:
       - '@Symfony\Component\Cache\Adapter\PdoAdapter'
 
+  HTMLPurifier:
+    class: \HTMLPurifier
+
+  Tardigrades\SectionField\Purifier\CacheWarmer\SerializerCacheWarmer:
+    public: false
+    arguments:
+      - [ '%kernel.cache_dir%/htmlpurifier' ]
+      - '@HTMLPurifier'
+    tags: [ kernel.cache_warmer ]
+
 
