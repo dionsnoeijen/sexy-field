@@ -47,6 +47,7 @@ class ReadOptions implements ReadOptionsInterface
     const SEARCH = 'search';
     const FIELD = 'field';
     const JOIN = 'join';
+    const QUERY = 'query';
 
     /**
      * @var string If you know in advance what fields you are going to need
@@ -357,6 +358,19 @@ class ReadOptions implements ReadOptionsInterface
         }
 
         return explode(',', $this->options[ReadOptions::FETCH_FIELDS]);
+    }
+
+    public function getQuery(): ?string
+    {
+        try {
+            Assertion::keyIsset($this->options, ReadOptions::QUERY, 'No query');
+            Assertion::notEmpty($this->options[ReadOptions::QUERY], 'The query is empty');
+            Assertion::string($this->options[ReadOptions::QUERY], 'Query must be a string');
+        } catch (AssertionFailedException $exception) {
+            return null;
+        }
+
+        return $this->options[ReadOptions::QUERY];
     }
 
     public static function fromArray(array $options): ReadOptionsInterface
