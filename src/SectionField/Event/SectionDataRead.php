@@ -37,7 +37,7 @@ class SectionDataRead extends Event
     /** @var ReadOptionsInterface */
     private $readOptions;
 
-    /** @var SectionConfig */
+    /** @var ?SectionConfig */
     private $sectionConfig;
 
     /**
@@ -46,8 +46,11 @@ class SectionDataRead extends Event
      * @param ReadOptionsInterface $readOptions
      * @param SectionConfig $sectionConfig
      */
-    public function __construct(\ArrayIterator $data, ReadOptionsInterface $readOptions, SectionConfig $sectionConfig)
-    {
+    public function __construct(
+        \ArrayIterator $data,
+        ReadOptionsInterface $readOptions,
+        SectionConfig $sectionConfig = null
+    ) {
         $this->data = $data;
         $this->readOptions = $readOptions;
         $this->sectionConfig = $sectionConfig;
@@ -76,9 +79,9 @@ class SectionDataRead extends Event
     /**
      * Get section config for manipulation or other actions
      *
-     * @return SectionConfig
+     * @return null|SectionConfig
      */
-    public function getSectionConfig(): SectionConfig
+    public function getSectionConfig(): ?SectionConfig
     {
         return $this->sectionConfig;
     }

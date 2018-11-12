@@ -48,6 +48,7 @@ class ReadOptions implements ReadOptionsInterface
     const FIELD = 'field';
     const JOIN = 'join';
     const QUERY = 'query';
+    const QUERY_PARAMETERS = 'queryParameters';
 
     /**
      * @var string If you know in advance what fields you are going to need
@@ -68,16 +69,22 @@ class ReadOptions implements ReadOptionsInterface
         array $options
     ) {
         $valid = false;
-        if (is_array($options[ReadOptions::SECTION])) {
-            $valid = true;
-        }
 
-        if (is_string($options[ReadOptions::SECTION])) {
+        if (key_exists(ReadOptions::QUERY, $options)) {
             $valid = true;
-        }
+        } else {
 
-        if ($options[ReadOptions::SECTION] instanceof FullyQualifiedClassName) {
-            $valid = true;
+            if (is_array($options[ReadOptions::SECTION])) {
+                $valid = true;
+            }
+
+            if (is_string($options[ReadOptions::SECTION])) {
+                $valid = true;
+            }
+
+            if ($options[ReadOptions::SECTION] instanceof FullyQualifiedClassName) {
+                $valid = true;
+            }
         }
 
         if (!$valid) {
@@ -95,6 +102,10 @@ class ReadOptions implements ReadOptionsInterface
     public function getSection(): array
     {
         $sectionEntities = [];
+
+        if (!key_exists(ReadOptions::SECTION, $this->options)) {
+            return $sectionEntities;
+        }
 
         if ($this->options[ReadOptions::SECTION] instanceof FullyQualifiedClassName) {
             $sectionEntities = [$this->options[ReadOptions::SECTION]];
@@ -371,6 +382,22 @@ class ReadOptions implements ReadOptionsInterface
         }
 
         return $this->options[ReadOptions::QUERY];
+    }
+
+    public function getQueryParameters(): ?array
+    {
+        try {
+            Assertion::keyIsset($this->options, ReadOptions::QUERY_PARAMETERS, 'No query parameters');
+            Assertion::notEmpty(
+                $this->options[ReadOptions::QUERY_PARAMETERS],
+                'The query parameters empty.'
+            );
+            Assertion::isArray($this->options[ReadOptions::QUERY_PARAMETERS]);
+        } catch (AssertionFailedException $exception) {
+            return null;
+        }
+
+        return $this->options[ReadOptions::QUERY_PARAMETERS];
     }
 
     public static function fromArray(array $options): ReadOptionsInterface

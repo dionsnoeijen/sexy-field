@@ -57,17 +57,18 @@ class ReadSection implements ReadSectionInterface
             new SectionBeforeRead($sectionData, $options, $sectionConfig)
         );
 
-        if ($sectionConfig === null) {
+        if ($sectionConfig === null && count($options->getSection()) > 0) {
             $sectionConfig = $this->sectionManager->readByHandle(
                 $options->getSection()[0]->toHandle()
             )->getConfig();
         }
 
         // Make sure we are passing the fully qualified class name as the section
-        $optionsArray = $options->toArray();
-        $optionsArray[ReadOptions::SECTION] = (string) $sectionConfig->getFullyQualifiedClassName();
-        // For now, we call DoctrineRead options, this will of course be fixed in a later release.
-        $options = ReadOptions::fromArray($optionsArray);
+        if (count($options->getSection()) > 0) {
+            $optionsArray = $options->toArray();
+            $optionsArray[ReadOptions::SECTION] = (string)$sectionConfig->getFullyQualifiedClassName();
+            $options = ReadOptions::fromArray($optionsArray);
+        }
 
         /** @var ReadSectionInterface $reader */
         foreach ($this->readers as $reader) {
