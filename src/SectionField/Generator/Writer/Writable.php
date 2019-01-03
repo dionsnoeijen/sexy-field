@@ -24,14 +24,19 @@ class Writable
     /** @var string */
     private $filename;
 
+    /** @var bool */
+    private $clobber;
+
     private function __construct(
         string $template,
         string $namespace,
-        string $filename
+        string $filename,
+        bool $clobber = true
     ) {
         $this->template = $template;
         $this->namespace = $namespace;
         $this->filename = $filename;
+        $this->clobber = $clobber;
     }
 
     public function getTemplate(): string
@@ -49,11 +54,17 @@ class Writable
         return $this->filename;
     }
 
+    public function shouldClobber(): bool
+    {
+        return $this->clobber;
+    }
+
     public static function create(
         string $template,
         string $namespace,
-        string $filename
+        string $filename,
+        bool $clobber = true
     ): self {
-        return new self($template, $namespace, $filename);
+        return new static($template, $namespace, $filename, $clobber);
     }
 }

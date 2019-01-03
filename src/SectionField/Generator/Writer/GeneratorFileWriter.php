@@ -30,6 +30,9 @@ class GeneratorFileWriter
 
         try {
             if (\file_exists($store)) {
+                if (!$writable->shouldClobber()) {
+                    return;
+                }
                 $segments = explode(
                     '/',
                     $store
