@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tardigrades\Command;
 
+use function Psy\debug;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -141,7 +142,8 @@ class InstallDirectoryCommand extends Command
                 $fieldTypes[] = $fieldType;
             }
         }
-
+        // All custom fieldtypes are public services, therefore we can find its namespace through its classname.
+        $debugString =  `bin/console debug:container`;
         foreach ($fieldTypes as $fieldType) {
             try {
                 $this->fieldTypeManager->readByType(Type::fromString($fieldType));
@@ -155,7 +157,24 @@ class InstallDirectoryCommand extends Command
                     // This solution is hacky, but there's no good way to detect classes before they've been loaded.
                     $className = "Tardigrades\\FieldType\\DateTime\\$fieldType";
                 } else {
-                    $className = "Tardigrades\\FieldType\\$fieldType\\$fieldType";
+                    // 2 steps to prepare the data. First all the characters between words are reduced to ' ',
+                    // then all the words are extracted to an array.
+                    $workingString = trim(preg_replace('!\s+!', ' ', $debugString));
+                    $arrayOfWords = explode(' ', $workingString);
+                    foreach ($arrayOfWords as $word) {
+                        if (strpos($word, $fieldType) !== false) {
+                            // We still need to make sure it's an exact match.
+                            $items = explode('\\', $word);
+                            foreach ($items as $item) {
+                                if ($item === $fieldType) {
+                                    $className = $word;
+                                    break;
+                                }
+                            }
+                        } else {
+                            $className = "Tardigrades\\FieldType\\$fieldType\\$fieldType";
+                        }
+                    }
                 }
                 $this->fieldTypeManager->createWithFullyQualifiedClassName(
                     FullyQualifiedClassName::fromString($className)
