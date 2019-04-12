@@ -80,7 +80,9 @@ abstract class FieldType implements FieldTypeInterface
         $buildConstraints = [];
         foreach ($options['constraints'] as $validator => $parameters) {
             $namespace = 'Symfony\\Component\\Validator\\Constraints\\' . $validator;
-            $buildConstraints[] = new $namespace($parameters);
+            if (class_exists($namespace)) {
+                $buildConstraints[] = new $namespace($parameters);
+            }
         }
 
         $options['constraints'] = $buildConstraints;
