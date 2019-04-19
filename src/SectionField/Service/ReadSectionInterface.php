@@ -17,7 +17,13 @@ use Tardigrades\SectionField\ValueObject\SectionConfig;
 
 interface ReadSectionInterface
 {
-    public function read(ReadOptionsInterface $options, SectionConfig $sectionConfig = null): \ArrayIterator;
+    /**
+     * @param ReadOptionsInterface $readOptions
+     * @param SectionConfig|null $sectionConfig
+     * @return \ArrayIterator
+     * @throws EntryNotFoundException
+     */
+    public function read(ReadOptionsInterface $readOptions, SectionConfig $sectionConfig = null): \ArrayIterator;
 
     public function flush(): void;
 }
