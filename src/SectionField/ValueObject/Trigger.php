@@ -20,19 +20,19 @@ final class Trigger
     /** @var string */
     private $name;
 
-    /** @var array */
-    private $arguments;
+    /** @var FullyQualifiedClassName */
+    private $service;
 
     /** @var CommonSectionInterface */
     private $entry;
 
     private function __construct(
         string $name,
-        array $arguments,
+        FullyQualifiedClassName $service,
         CommonSectionInterface $entry
     ) {
         $this->name = $name;
-        $this->arguments = $arguments;
+        $this->service = $service;
         $this->entry = $entry;
     }
 
@@ -41,9 +41,9 @@ final class Trigger
         return $this->name;
     }
 
-    public function getArguments(): array
+    public function getService(): FullyQualifiedClassName
     {
-        return $this->arguments;
+        return $this->service;
     }
 
     public function getEntry(): CommonSectionInterface
@@ -56,11 +56,11 @@ final class Trigger
         return $this->name;
     }
 
-    public static function fromNameAndArguments(
+    public static function fromNameAndService(
         string $name,
-        array $arguments,
+        FullyQualifiedClassName $service,
         CommonSectionInterface $entry
     ): self {
-        return new self($name, $arguments, $entry);
+        return new self($name, $service, $entry);
     }
 }
