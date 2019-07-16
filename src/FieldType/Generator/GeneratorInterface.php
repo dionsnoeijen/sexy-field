@@ -19,5 +19,5 @@ use Tardigrades\FieldType\ValueObject\TemplateDir;
 
 interface GeneratorInterface
 {
-    public static function generate(FieldInterface $field, TemplateDir $templateDir): Template;
+    public static function generate(FieldInterface $field, TemplateDir $templateDir, ...$options): Template;
 }
