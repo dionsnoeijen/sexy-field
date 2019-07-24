@@ -1,99 +1,123 @@
 services:
   Tardigrades\Command\CreateApplicationCommand:
+    public: true
     arguments:
       $applicationManager: '@Tardigrades\SectionField\Service\DoctrineApplicationManager'
 
   Tardigrades\Command\UpdateApplicationCommand:
+    public: true
     arguments:
       $applicationManager: '@Tardigrades\SectionField\Service\DoctrineApplicationManager'
 
   Tardigrades\Command\DeleteApplicationCommand:
+    public: true
     arguments:
       $applicationManager: '@Tardigrades\SectionField\Service\DoctrineApplicationManager'
 
   Tardigrades\Command\ListApplicationCommand:
+    public: true
     arguments:
       $applicationManager: '@Tardigrades\SectionField\Service\DoctrineApplicationManager'
 
   Tardigrades\Command\CreateLanguageCommand:
+    public: true
     arguments:
       $languageManager: '@Tardigrades\SectionField\Service\DoctrineLanguageManager'
 
   Tardigrades\Command\UpdateLanguageCommand:
+    public: true
     arguments:
       $languageManager: '@Tardigrades\SectionField\Service\DoctrineLanguageManager'
 
   Tardigrades\Command\DeleteLanguageCommand:
+    public: true
     arguments:
       $languageManager: '@Tardigrades\SectionField\Service\DoctrineLanguageManager'
 
   Tardigrades\Command\ListLanguageCommand:
+    public: true
     arguments:
       $languageManager: '@Tardigrades\SectionField\Service\DoctrineLanguageManager'
 
   Tardigrades\Command\InstallFieldTypeCommand:
+    public: true
     arguments:
       $fieldTypeManager: '@Tardigrades\SectionField\Service\DoctrineFieldTypeManager'
 
   Tardigrades\Command\UpdateFieldTypeCommand:
+    public: true
     arguments:
       $fieldTypeManager: '@Tardigrades\SectionField\Service\DoctrineFieldTypeManager'
 
   Tardigrades\Command\DeleteFieldTypeCommand:
+    public: true
     arguments:
       $fieldTypeManager: '@Tardigrades\SectionField\Service\DoctrineFieldTypeManager'
 
   Tardigrades\Command\ListFieldTypeCommand:
+    public: true
     arguments:
       $fieldTypeManager: '@Tardigrades\SectionField\Service\DoctrineFieldTypeManager'
 
   Tardigrades\Command\CreateSectionCommand:
+    public: true
     arguments:
       $sectionManager: '@Tardigrades\SectionField\Service\DoctrineSectionManager'
 
   Tardigrades\Command\UpdateSectionCommand:
+    public: true
     arguments:
       $sectionManager: '@Tardigrades\SectionField\Service\DoctrineSectionManager'
 
   Tardigrades\Command\UpdateSectionsCommand:
+    public: true
     arguments:
       $sectionManager: '@Tardigrades\SectionField\Service\DoctrineSectionManager'
 
   Tardigrades\Command\RestoreSectionCommand:
+    public: true
     arguments:
       $sectionManager: '@Tardigrades\SectionField\Service\DoctrineSectionManager'
       $sectionHistoryManager: '@Tardigrades\SectionField\Service\DoctrineSectionHistoryManager'
 
   Tardigrades\Command\DeleteSectionCommand:
+    public: true
     arguments:
       $sectionManager: '@Tardigrades\SectionField\Service\DoctrineSectionManager'
 
   Tardigrades\Command\ListSectionCommand:
+    public: true
     arguments:
       $sectionManager: '@Tardigrades\SectionField\Service\DoctrineSectionManager'
 
   Tardigrades\Command\GenerateSectionCommand:
+    public: true
     arguments:
       $sectionManager: '@Tardigrades\SectionField\Service\DoctrineSectionManager'
       $entityGenerator: '@section_field.generator'
 
   Tardigrades\Command\CreateFieldCommand:
+    public: true
     arguments:
       $fieldManager: '@Tardigrades\SectionField\Service\DoctrineFieldManager'
 
   Tardigrades\Command\UpdateFieldCommand:
+    public: true
     arguments:
       $fieldManager: '@Tardigrades\SectionField\Service\DoctrineFieldManager'
 
   Tardigrades\Command\DeleteFieldCommand:
+    public: true
     arguments:
       $fieldManager: '@Tardigrades\SectionField\Service\DoctrineFieldManager'
 
   Tardigrades\Command\ListFieldCommand:
+    public: true
     arguments:
       $fieldManager: '@Tardigrades\SectionField\Service\DoctrineFieldManager'
 
   Tardigrades\Command\InstallDirectoryCommand:
+    public: true
     arguments:
       $applicationManager: '@Tardigrades\SectionField\Service\DoctrineApplicationManager'
       $languageManager: '@Tardigrades\SectionField\Service\DoctrineLanguageManager'
@@ -102,5 +126,6 @@ services:
       $fieldTypeManager: '@Tardigrades\SectionField\Service\DoctrineFieldTypeManager'
 
   Tardigrades\Command\EnsureCacheCommand:
+    public: true
     arguments:
       $adapter: '@Symfony\Component\Cache\Adapter\PdoAdapter'
