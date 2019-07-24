@@ -54,6 +54,7 @@ class GeneratorFileWriter
     public static function getPsr4AutoloadDirectoryForNamespace(string $namespace)
     {
         $find = explode('\\', $namespace)[0];
+        $candidate = null;
         $reflector = new \ReflectionClass(ClassLoader::class);
         $vendorDir = \dirname(\dirname($reflector->getFileName()));
         $vendorFile = $vendorDir . '/composer/autoload_psr4.php';
@@ -61,7 +62,7 @@ class GeneratorFileWriter
             $namespaces = include $vendorFile;
             if (is_array($namespaces)) {
                 foreach ($namespaces as $key => $value) {
-                    if (strpos($key, $find) === 0) {
+                    if ($key === $find . '\\') {
                         return str_replace(
                             '\\',
                             '/',
@@ -70,9 +71,9 @@ class GeneratorFileWriter
                     }
                 }
             }
-
             throw new \InvalidArgumentException('No path found for ' . $namespace);
         }
+
         throw new FileNotFoundException();
     }
 }
