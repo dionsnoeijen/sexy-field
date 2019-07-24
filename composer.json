@@ -17,7 +17,7 @@
     "symfony/form": "^3.3.2",
     "symfony/validator": "^3.3.2",
     "symfony/security": "^3.3.2",
-    "symfony/dependency-injection": "^3.3.2",
+    "symfony/dependency-injection": "^4",
     "symfony/inflector": "^3.3.2",
     "symfony/yaml": "^3.3.2",
     "symfony/config": "^3.3.2",
