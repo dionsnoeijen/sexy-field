@@ -53,8 +53,8 @@ class ReadSection implements ReadSectionInterface
         $sectionData = new \ArrayIterator();
 
         $this->dispatcher->dispatch(
-            SectionBeforeRead::NAME,
-            new SectionBeforeRead($sectionData, $options, $sectionConfig)
+            new SectionBeforeRead($sectionData, $options, $sectionConfig),
+            SectionBeforeRead::NAME
         );
 
         if ($sectionConfig === null && count($options->getSection()) > 0) {
@@ -78,8 +78,8 @@ class ReadSection implements ReadSectionInterface
         }
 
         $this->dispatcher->dispatch(
-            SectionDataRead::NAME,
-            new SectionDataRead($sectionData, $options, $sectionConfig)
+            new SectionDataRead($sectionData, $options, $sectionConfig),
+            SectionDataRead::NAME
         );
 
         return $sectionData;

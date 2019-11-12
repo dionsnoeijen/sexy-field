@@ -57,7 +57,6 @@ final class DeleteSectionTest extends TestCase
             ->shouldReceive('dispatch')
             ->once()
             ->withArgs([
-                'section.entry.deleted',
                 Mockery::on(
                     function ($sectionEntryDeleted) {
                         if (!$sectionEntryDeleted instanceof SectionEntryDeleted) {
@@ -67,7 +66,8 @@ final class DeleteSectionTest extends TestCase
                         $this->assertTrue($sectionEntryDeleted->getSuccess());
                         return true;
                     }
-                )
+                ),
+                'section.entry.deleted'
             ]);
 
         $result = $this->deleteSection->delete($entry);
@@ -86,7 +86,6 @@ final class DeleteSectionTest extends TestCase
             ->shouldReceive('dispatch')
             ->once()
             ->withArgs([
-                'section.entry.deleted',
                 Mockery::on(
                     function ($sectionEntryDeleted) {
                         if (!$sectionEntryDeleted instanceof SectionEntryDeleted) {
@@ -96,7 +95,8 @@ final class DeleteSectionTest extends TestCase
                         $this->assertFalse($sectionEntryDeleted->getSuccess());
                         return true;
                     }
-                )
+                ),
+                'section.entry.deleted'
             ]);
 
         $result = $this->deleteSection->delete($entry);

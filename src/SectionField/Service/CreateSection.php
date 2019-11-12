@@ -52,8 +52,8 @@ class CreateSection implements CreateSectionInterface
     public function save(CommonSectionInterface $sectionEntryEntity)
     {
         $this->dispatcher->dispatch(
-            SectionEntryBeforeCreate::NAME,
-            new SectionEntryBeforeCreate($sectionEntryEntity)
+            new SectionEntryBeforeCreate($sectionEntryEntity),
+            SectionEntryBeforeCreate::NAME
         );
 
         $update = !empty($sectionEntryEntity->getId());
@@ -72,8 +72,8 @@ class CreateSection implements CreateSectionInterface
         }
 
         $this->dispatcher->dispatch(
-            SectionEntryCreated::NAME,
-            new SectionEntryCreated($sectionEntryEntity, $update)
+            new SectionEntryCreated($sectionEntryEntity, $update),
+            SectionEntryCreated::NAME
         );
     }
 

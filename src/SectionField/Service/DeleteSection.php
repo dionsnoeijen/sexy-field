@@ -48,8 +48,8 @@ class DeleteSection implements DeleteSectionInterface
         }
 
         $this->dispatcher->dispatch(
-            SectionEntryDeleted::NAME,
-            new SectionEntryDeleted($sectionEntryEntity, $success)
+            new SectionEntryDeleted($sectionEntryEntity, $success),
+            SectionEntryDeleted::NAME
         );
 
         return $success;

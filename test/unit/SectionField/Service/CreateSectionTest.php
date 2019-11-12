@@ -61,7 +61,6 @@ final class CreateSectionTest extends TestCase
             ->shouldReceive('dispatch')
             ->once()
             ->withArgs([
-                'section.entry.before.create',
                 Mockery::on(
                     function ($sectionEntryBeforeCreate) {
                         if (!$sectionEntryBeforeCreate instanceof SectionEntryBeforeCreate) {
@@ -70,14 +69,14 @@ final class CreateSectionTest extends TestCase
 
                         return true;
                     }
-                )
+                ),
+                'section.entry.before.create'
             ]);
 
         $this->dispatcher
             ->shouldReceive('dispatch')
             ->once()
             ->withArgs([
-                'section.entry.created',
                 Mockery::on(
                     function ($sectionEntryCreated) {
                         if (!$sectionEntryCreated instanceof SectionEntryCreated) {
@@ -88,7 +87,8 @@ final class CreateSectionTest extends TestCase
 
                         return true;
                     }
-                )
+                ),
+                'section.entry.created'
             ]);
 
         $this->createSection->save($entry);
@@ -110,7 +110,6 @@ final class CreateSectionTest extends TestCase
             ->shouldReceive('dispatch')
             ->once()
             ->withArgs([
-                'section.entry.before.create',
                 Mockery::on(
                     function ($sectionEntryBeforeCreate) {
                         if (!$sectionEntryBeforeCreate instanceof SectionEntryBeforeCreate) {
@@ -119,14 +118,14 @@ final class CreateSectionTest extends TestCase
 
                         return true;
                     }
-                )
+                ),
+                'section.entry.before.create'
             ]);
 
         $this->dispatcher
             ->shouldReceive('dispatch')
             ->once()
             ->withArgs([
-                'section.entry.created',
                 Mockery::on(
                     function ($sectionEntryCreated) {
                         if (!$sectionEntryCreated instanceof SectionEntryCreated) {
@@ -137,7 +136,8 @@ final class CreateSectionTest extends TestCase
 
                         return true;
                     }
-                )
+                ),
+                'section.entry.created'
             ]);
 
         $this->createSection->save($entry);
