@@ -454,4 +454,55 @@ class SectionConfigTest extends TestCase
         $sexyConfigArrayString = (string)SectionConfig::fromArray($sexyConfigArray);
         $this->assertEquals($expected, $sexyConfigArrayString);
     }
+
+    /**
+     * @test
+     * @covers ::getEntityInterfaces
+     */
+    public function it_should_return_entity_interfaces_when_defined()
+    {
+        $sexyConfigArray = [
+            'section' => [
+                'name' => 'sexyName',
+                'handle' => 'sexyHandles',
+                'fields' => [
+                    's' => 'e',
+                    'x' => 'y'
+                ],
+                'default' => 'Sexy per Default',
+                'namespace' => 'sexy space',
+                'entityInterfaces' => ['Namespace\OneInterface', 'Namespace\SecondInterface'],
+                'generator' => 'Generator of awesome sexyness'
+            ]
+        ];
+
+        $sectionConfig = SectionConfig::fromArray($sexyConfigArray);
+
+        $this->assertEquals(['Namespace\OneInterface', 'Namespace\SecondInterface'], $sectionConfig->getEntityInterfaces());
+    }
+
+    /**
+     * @test
+     * @covers ::getEntityInterfaces
+     */
+    public function it_should_return_entity_interfaces_when_not_defined()
+    {
+        $sexyConfigArray = [
+            'section' => [
+                'name' => 'sexyName',
+                'handle' => 'sexyHandles',
+                'fields' => [
+                    's' => 'e',
+                    'x' => 'y'
+                ],
+                'default' => 'Sexy per Default',
+                'namespace' => 'sexy space',
+                'generator' => 'Generator of awesome sexyness'
+            ]
+        ];
+
+        $sectionConfig = SectionConfig::fromArray($sexyConfigArray);
+
+        $this->assertEquals([], $sectionConfig->getEntityInterfaces());
+    }
 }

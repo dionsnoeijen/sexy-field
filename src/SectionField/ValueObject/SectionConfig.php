@@ -117,6 +117,15 @@ final class SectionConfig implements ConfigWithHandleInterface
         return SectionNamespace::fromString($this->sectionConfig['section']['namespace']);
     }
 
+    public function getEntityInterfaces(): array
+    {
+        if (!empty($this->sectionConfig['section']['entityInterfaces'])) {
+            return $this->sectionConfig['section']['entityInterfaces'];
+        }
+
+        return [];
+    }
+
     public function getFullyQualifiedClassName(): FullyQualifiedClassName
     {
         return FullyQualifiedClassName::fromNamespaceAndClassName(
