@@ -10,11 +10,11 @@ use Tardigrades\SectionField\Service\ReadOptionsInterface;
 use Tardigrades\SectionField\ValueObject\SectionConfig;
 
 /**
- * @coversDefaultClass Tardigrades\SectionField\Event\SectionBeforeRead
+ * @coversDefaultClass Tardigrades\SectionField\Event\SectionEntryBeforeRead
  * @covers ::<private>
  * @covers ::__construct
  */
-final class SectionBeforeReadTest extends TestCase
+final class SectionEntryBeforeReadTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
