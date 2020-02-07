@@ -95,8 +95,7 @@ final class DeleteSectionTest extends TestCase
                         $this->assertFalse($sectionEntryDeleted->getSuccess());
                         return true;
                     }
-                ),
-                'section.entry.deleted'
+                )
             ]);
 
         $result = $this->deleteSection->delete($entry);

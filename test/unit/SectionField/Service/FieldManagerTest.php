@@ -43,8 +43,7 @@ final class FieldManagerTest extends TestCase
         $this->languageManager = Mockery::mock(LanguageManagerInterface::class);
         $this->fieldManager = new DoctrineFieldManager(
             $this->entityManager,
-            $this->fieldTypeManager,
-            $this->languageManager
+            $this->fieldTypeManager
         );
     }
 

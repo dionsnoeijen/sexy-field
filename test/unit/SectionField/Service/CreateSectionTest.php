@@ -69,8 +69,7 @@ final class CreateSectionTest extends TestCase
 
                         return true;
                     }
-                ),
-                'section.entry.before.create'
+                )
             ]);
 
         $this->dispatcher
@@ -87,8 +86,7 @@ final class CreateSectionTest extends TestCase
 
                         return true;
                     }
-                ),
-                'section.entry.created'
+                )
             ]);
 
         $this->createSection->save($entry);
@@ -118,8 +116,7 @@ final class CreateSectionTest extends TestCase
 
                         return true;
                     }
-                ),
-                'section.entry.before.create'
+                )
             ]);
 
         $this->dispatcher
@@ -136,8 +133,7 @@ final class CreateSectionTest extends TestCase
 
                         return true;
                     }
-                ),
-                'section.entry.created'
+                )
             ]);
 
         $this->createSection->save($entry);
