@@ -15,8 +15,9 @@ namespace Tardigrades\SectionField\Service;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Tardigrades\SectionField\Event\BeforeReadAbortedException;
+use Tardigrades\SectionField\Event\ReadAbortedException;
 use Tardigrades\SectionField\Event\SectionEntryBeforeRead;
-use Tardigrades\SectionField\Event\SectionDataRead;
+use Tardigrades\SectionField\Event\SectionEntryDataRead;
 use Tardigrades\SectionField\ValueObject\FullyQualifiedClassName;
 use Tardigrades\SectionField\ValueObject\SectionConfig;
 
@@ -82,9 +83,11 @@ class ReadSection implements ReadSectionInterface
             }
         }
 
-        $this->dispatcher->dispatch(
-            new SectionDataRead($sectionData, $readOptions, $sectionConfig)
-        );
+        $sectionDataRead = new SectionEntryDataRead($sectionData, $readOptions, $sectionConfig);
+        $this->dispatcher->dispatch($sectionDataRead);
+        if ($sectionDataRead->aborted()) {
+            throw new ReadAbortedException();
+        }
 
         return $sectionData;
     }
