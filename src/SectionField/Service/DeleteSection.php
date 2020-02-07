@@ -64,6 +64,9 @@ class DeleteSection implements DeleteSectionInterface
         return $success;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function remove(CommonSectionInterface $sectionEntryEntity): void
     {
         $sectionEntryBeforeDelete = new SectionEntryBeforeDelete(
