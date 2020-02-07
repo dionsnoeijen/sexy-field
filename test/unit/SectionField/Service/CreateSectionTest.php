@@ -8,6 +8,7 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Tardigrades\SectionField\Event\SectionEntryBeforeCreate;
+use Tardigrades\SectionField\Event\SectionEntryBeforeUpdate;
 use Tardigrades\SectionField\Event\SectionEntryCreated;
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
 
@@ -54,7 +55,6 @@ final class CreateSectionTest extends TestCase
         $entry = Mockery::mock(CommonSectionInterface::class);
         $entry->shouldReceive('getId')->once()->andReturn(null);
         $this->creators[0]->shouldReceive('save')->once();
-
         $this->cache->shouldReceive('invalidateForSection')->once();
 
         $this->dispatcher
@@ -66,7 +66,6 @@ final class CreateSectionTest extends TestCase
                         if (!$sectionEntryBeforeCreate instanceof SectionEntryBeforeCreate) {
                             return false;
                         }
-
                         return true;
                     }
                 )
@@ -81,9 +80,7 @@ final class CreateSectionTest extends TestCase
                         if (!$sectionEntryCreated instanceof SectionEntryCreated) {
                             return false;
                         }
-
                         $this->assertFalse($sectionEntryCreated->getUpdate());
-
                         return true;
                     }
                 )
@@ -109,11 +106,10 @@ final class CreateSectionTest extends TestCase
             ->once()
             ->withArgs([
                 Mockery::on(
-                    function ($sectionEntryBeforeCreate) {
-                        if (!$sectionEntryBeforeCreate instanceof SectionEntryBeforeCreate) {
+                    function ($sectionEntryBeforeUpdate) {
+                        if (!$sectionEntryBeforeUpdate instanceof SectionEntryBeforeUpdate) {
                             return false;
                         }
-
                         return true;
                     }
                 )
@@ -146,8 +142,9 @@ final class CreateSectionTest extends TestCase
     public function it_should_persist_section()
     {
         $entry = Mockery::mock(CommonSectionInterface::class);
+        $entry->shouldReceive('getId')->once()->andReturn(null);
+        $this->dispatcher->shouldReceive('dispatch')->once();
         $this->creators[0]->shouldReceive('persist')->once();
-
         $this->createSection->persist($entry);
     }
 
@@ -163,6 +160,12 @@ final class CreateSectionTest extends TestCase
         $entry = Mockery::mock(CommonSectionInterface::class);
         $otherEntry = Mockery::mock(CommonerSectionInterface::class);
         $thirdEntry = Mockery::mock(CommonSectionInterface::class);
+
+        $entry->shouldReceive('getId')->once()->andReturn(null);
+        $otherEntry->shouldReceive('getId')->once()->andReturn(null);
+        $thirdEntry->shouldReceive('getId')->once()->andReturn(null);
+
+        $this->dispatcher->shouldReceive('dispatch')->times(3);
         $this->creators[0]->shouldReceive('persist')->times(3);
         $this->creators[0]->shouldReceive('flush')->once();
         $this->cache->shouldReceive('invalidateForSection')->twice();
