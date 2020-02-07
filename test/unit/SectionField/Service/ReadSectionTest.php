@@ -15,6 +15,7 @@ use Tardigrades\Entity\Section;
 use Tardigrades\Entity\SectionInterface;
 use Tardigrades\SectionField\Event\SectionEntryBeforeRead;
 use Tardigrades\SectionField\Event\SectionDataRead;
+use Tardigrades\SectionField\Event\SectionEntryDataRead;
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
 use Tardigrades\SectionField\ValueObject\ApplicationConfig;
 use Tardigrades\SectionField\ValueObject\Before;
@@ -103,6 +104,21 @@ final class ReadSectionTest extends TestCase
                         $this->assertEquals($sectionData, $sectionDataRead->getData());
                         $this->assertEquals($sectionOptionsData, $sectionDataRead->getReadOptions());
                         $this->assertEquals($section->getConfig(), $sectionDataRead->getSectionConfig());
+                        return true;
+                    }
+                )
+            ])
+        ;
+
+        $this->dispatcher
+            ->shouldReceive('dispatch')
+            ->once()
+            ->withArgs([
+                Mockery::on(
+                    function ($sectionEntryDataRead) use ($sectionData, $sectionOptionsBefore, $sectionConfig) {
+                        if (!$sectionEntryDataRead instanceof SectionEntryDataRead) {
+                            return false;
+                        }
                         return true;
                     }
                 )
