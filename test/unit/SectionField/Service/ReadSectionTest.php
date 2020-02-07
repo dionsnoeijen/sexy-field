@@ -97,28 +97,13 @@ final class ReadSectionTest extends TestCase
             ->withArgs([
                 Mockery::on(
                     function ($sectionDataRead) use ($sectionData, $sectionOptionsData, $section) {
-                        if (!$sectionDataRead instanceof SectionDataRead) {
+                        if (!$sectionDataRead instanceof SectionEntryDataRead) {
                             return false;
                         }
 
                         $this->assertEquals($sectionData, $sectionDataRead->getData());
                         $this->assertEquals($sectionOptionsData, $sectionDataRead->getReadOptions());
                         $this->assertEquals($section->getConfig(), $sectionDataRead->getSectionConfig());
-                        return true;
-                    }
-                )
-            ])
-        ;
-
-        $this->dispatcher
-            ->shouldReceive('dispatch')
-            ->once()
-            ->withArgs([
-                Mockery::on(
-                    function ($sectionEntryDataRead) use ($sectionData, $sectionOptionsBefore, $sectionConfig) {
-                        if (!$sectionEntryDataRead instanceof SectionEntryDataRead) {
-                            return false;
-                        }
                         return true;
                     }
                 )
