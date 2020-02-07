@@ -401,7 +401,7 @@ class ReadOptions implements ReadOptionsInterface
         return $this->options[ReadOptions::QUERY_PARAMETERS];
     }
 
-    public function getMetadata(): array
+    public function getMetadata(): ?array
     {
         try {
             Assertion::keyIsset($this->options, ReadOptions::METADATA, 'No metadata');
