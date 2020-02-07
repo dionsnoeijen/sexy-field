@@ -11,6 +11,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Tardigrades\Entity\Application;
 use Tardigrades\Entity\Language;
+use Tardigrades\SectionField\Event\SectionEntryBeforeDelete;
 use Tardigrades\SectionField\Event\SectionEntryDeleted;
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
 use Tardigrades\SectionField\ValueObject\ApplicationConfig;
@@ -53,6 +54,21 @@ final class DeleteSectionTest extends TestCase
     {
         $entry = Mockery::mock(CommonSectionInterface::class);
         $this->deleters[0]->shouldReceive('delete')->once()->andReturn(true);
+
+        $this->dispatcher
+            ->shouldReceive('dispatch')
+            ->once()
+            ->withArgs([
+                Mockery::on(
+                    function ($sectionEntryBeforeDelete) {
+                        if (!$sectionEntryBeforeDelete instanceof SectionEntryBeforeDelete) {
+                            return false;
+                        }
+                        return true;
+                    }
+                )
+            ]);
+
         $this->dispatcher
             ->shouldReceive('dispatch')
             ->once()
@@ -66,8 +82,7 @@ final class DeleteSectionTest extends TestCase
                         $this->assertTrue($sectionEntryDeleted->getSuccess());
                         return true;
                     }
-                ),
-                'section.entry.deleted'
+                )
             ]);
 
         $result = $this->deleteSection->delete($entry);
@@ -82,6 +97,21 @@ final class DeleteSectionTest extends TestCase
     {
         $entry = Mockery::mock(CommonSectionInterface::class);
         $this->deleters[0]->shouldReceive('delete')->once()->andReturn(false);
+
+        $this->dispatcher
+            ->shouldReceive('dispatch')
+            ->once()
+            ->withArgs([
+                Mockery::on(
+                    function ($sectionEntryBeforeDelete) {
+                        if (!$sectionEntryBeforeDelete instanceof SectionEntryBeforeDelete) {
+                            return false;
+                        }
+                        return true;
+                    }
+                )
+            ]);
+
         $this->dispatcher
             ->shouldReceive('dispatch')
             ->once()
@@ -91,12 +121,10 @@ final class DeleteSectionTest extends TestCase
                         if (!$sectionEntryDeleted instanceof SectionEntryDeleted) {
                             return false;
                         }
-
                         $this->assertFalse($sectionEntryDeleted->getSuccess());
                         return true;
                     }
-                ),
-                'section.entry.deleted'
+                )
             ]);
 
         $result = $this->deleteSection->delete($entry);
@@ -109,6 +137,19 @@ final class DeleteSectionTest extends TestCase
      */
     public function it_should_remove_successfully()
     {
+        $this->dispatcher
+            ->shouldReceive('dispatch')
+            ->once()
+            ->withArgs([
+                Mockery::on(
+                    function ($sectionEntryBeforeDelete) {
+                        if (!$sectionEntryBeforeDelete instanceof SectionEntryBeforeDelete) {
+                            return false;
+                        }
+                        return true;
+                    }
+                )
+            ]);
         $entry = Mockery::mock(CommonSectionInterface::class);
         $this->deleters[0]->shouldReceive('remove')->once()->with($entry);
         $this->deleteSection->remove($entry);

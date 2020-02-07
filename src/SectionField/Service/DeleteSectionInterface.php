@@ -13,6 +13,7 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\Service;
 
+use Tardigrades\SectionField\Event\BeforeDeleteAbortedException;
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
 
 /**
@@ -28,10 +29,17 @@ interface DeleteSectionInterface
      * This delete method loops through all deleters, so this section entry entity is deleted throughout all sources.
      *
      * @param CommonSectionInterface $sectionEntryEntity
+     * @throws BeforeDeleteAbortedException
      * @return bool
      */
     public function delete(CommonSectionInterface $sectionEntryEntity): bool;
 
+    /**
+     * This delete method loops through all deleters, so this section entry entity is deleted throughout all sources.
+     *
+     * @param CommonSectionInterface $sectionEntryEntity
+     * @throws BeforeDeleteAbortedException
+     */
     public function remove(CommonSectionInterface $sectionEntryEntity): void;
 
     public function flush(): void;

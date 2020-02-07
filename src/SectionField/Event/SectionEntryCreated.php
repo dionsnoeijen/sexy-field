@@ -16,17 +16,8 @@ namespace Tardigrades\SectionField\Event;
 use Symfony\Component\EventDispatcher\Event;
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
 
-/**
- * Class SectionEntryCreated
- *
- * Dispatched right after all writers have persisted a section entry entity.
- *
- * @package Tardigrades\SectionField\Event
- */
 class SectionEntryCreated extends Event
 {
-    const NAME = 'section.entry.created';
-
     /** @var CommonSectionInterface */
     protected $entry;
 
@@ -39,19 +30,11 @@ class SectionEntryCreated extends Event
         $this->update = $update;
     }
 
-    /**
-     * The Section Entry Entity that was just persisted
-     */
     public function getEntry(): CommonSectionInterface
     {
         return $this->entry;
     }
 
-    /**
-     * Was it a create or update action?
-     *
-     * @return bool
-     */
     public function getUpdate(): bool
     {
         return $this->update;

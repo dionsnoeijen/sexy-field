@@ -17,20 +17,8 @@ use Symfony\Component\EventDispatcher\Event;
 use Tardigrades\SectionField\Service\ReadOptionsInterface;
 use Tardigrades\SectionField\ValueObject\SectionConfig;
 
-/**
- * Class SectionBeforeRead
- *
- * Before the readers are called this event gives the opportunity to:
- * - prefill the data array iterator
- * - use / manipulate read options
- * - use / manipulate section config
- *
- * @package Tardigrades\SectionField\Event
- */
-class SectionBeforeRead extends Event
+class SectionEntryBeforeRead extends Event
 {
-    const NAME = 'section.before.read';
-
     /** @var \ArrayIterator */
     private $data;
 
@@ -39,6 +27,9 @@ class SectionBeforeRead extends Event
 
     /** @var SectionConfig */
     private $sectionConfig;
+
+    /** @var bool */
+    private $aborted = false;
 
     public function __construct(
         \ArrayIterator $data,
@@ -50,10 +41,7 @@ class SectionBeforeRead extends Event
         $this->sectionConfig = $sectionConfig;
     }
 
-    /**
-     * @return \ArrayIterator
-     */
-    public function getData()
+    public function getData(): \ArrayIterator
     {
         return $this->data;
     }
@@ -66,5 +54,15 @@ class SectionBeforeRead extends Event
     public function getSectionConfig(): ?SectionConfig
     {
         return $this->sectionConfig;
+    }
+
+    public function abort(): void
+    {
+        $this->aborted = true;
+    }
+
+    public function aborted(): bool
+    {
+        return $this->aborted;
     }
 }
