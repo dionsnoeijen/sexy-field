@@ -15,6 +15,7 @@ use Tardigrades\Entity\Section;
 use Tardigrades\Entity\SectionInterface;
 use Tardigrades\SectionField\Event\SectionEntryBeforeRead;
 use Tardigrades\SectionField\Event\SectionDataRead;
+use Tardigrades\SectionField\Event\SectionEntryDataRead;
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
 use Tardigrades\SectionField\ValueObject\ApplicationConfig;
 use Tardigrades\SectionField\ValueObject\Before;
@@ -96,7 +97,7 @@ final class ReadSectionTest extends TestCase
             ->withArgs([
                 Mockery::on(
                     function ($sectionDataRead) use ($sectionData, $sectionOptionsData, $section) {
-                        if (!$sectionDataRead instanceof SectionDataRead) {
+                        if (!$sectionDataRead instanceof SectionEntryDataRead) {
                             return false;
                         }
 

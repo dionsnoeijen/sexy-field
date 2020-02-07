@@ -27,7 +27,7 @@ use Tardigrades\SectionField\ValueObject\SectionConfig;
  *
  * @package Tardigrades\SectionField\Event
  */
-class SectionDataRead extends Event
+class SectionEntryDataRead extends Event
 {
     /** @var \ArrayIterator */
     private $data;
@@ -37,6 +37,9 @@ class SectionDataRead extends Event
 
     /** @var ?SectionConfig */
     private $sectionConfig;
+
+    /** @var bool */
+    private $aborted = false;
 
     /**
      * SectionDataRead constructor.
@@ -82,5 +85,15 @@ class SectionDataRead extends Event
     public function getSectionConfig(): ?SectionConfig
     {
         return $this->sectionConfig;
+    }
+
+    public function abort(): void
+    {
+        $this->aborted = true;
+    }
+
+    public function aborted(): bool
+    {
+        return $this->aborted;
     }
 }

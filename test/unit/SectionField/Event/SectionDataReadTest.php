@@ -10,14 +10,14 @@ use Tardigrades\SectionField\Service\ReadOptionsInterface;
 use Tardigrades\SectionField\ValueObject\SectionConfig;
 
 /**
- * @coversDefaultClass Tardigrades\SectionField\Event\SectionDataRead
+ * @coversDefaultClass Tardigrades\SectionField\Event\SectionEntryDataRead
  * @covers ::__construct
  */
 final class SectionDataReadTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
-    /** @var SectionDataRead */
+    /** @var SectionEntryDataRead */
     private $sectionDataRead;
 
     /** @var \ArrayIterator|Mockery\MockInterface */
@@ -44,7 +44,7 @@ final class SectionDataReadTest extends TestCase
         $this->data = Mockery::mock(\ArrayIterator::class);
         $this->readOptions = Mockery::mock(ReadOptionsInterface::class);
         $this->sectionConfig = SectionConfig::fromArray($sectionConfigArray);
-        $this->sectionDataRead = new SectionDataRead(
+        $this->sectionDataRead = new SectionEntryDataRead(
             $this->data,
             $this->readOptions,
             $this->sectionConfig
