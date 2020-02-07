@@ -14,6 +14,8 @@ declare (strict_types = 1);
 namespace Tardigrades\SectionField\Service;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Tardigrades\SectionField\Event\BeforeDeleteAbortedException;
+use Tardigrades\SectionField\Event\SectionEntryBeforeDelete;
 use Tardigrades\SectionField\Event\SectionEntryDeleted;
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
 
@@ -35,10 +37,18 @@ class DeleteSection implements DeleteSectionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function delete(CommonSectionInterface $sectionEntryEntity): bool
     {
+        $sectionEntryBeforeDelete = new SectionEntryBeforeDelete(
+            $sectionEntryEntity
+        );
+        $this->dispatcher->dispatch($sectionEntryBeforeDelete);
+        if ($sectionEntryBeforeDelete->aborted()) {
+            throw new BeforeDeleteAbortedException();
+        }
+
         $success = true;
         /** @var DeleteSectionInterface $deleter */
         foreach ($this->deleters as $deleter) {
@@ -48,8 +58,7 @@ class DeleteSection implements DeleteSectionInterface
         }
 
         $this->dispatcher->dispatch(
-            new SectionEntryDeleted($sectionEntryEntity, $success),
-            SectionEntryDeleted::NAME
+            new SectionEntryDeleted($sectionEntryEntity, $success)
         );
 
         return $success;
@@ -57,6 +66,14 @@ class DeleteSection implements DeleteSectionInterface
 
     public function remove(CommonSectionInterface $sectionEntryEntity): void
     {
+        $sectionEntryBeforeDelete = new SectionEntryBeforeDelete(
+            $sectionEntryEntity
+        );
+        $this->dispatcher->dispatch($sectionEntryBeforeDelete);
+        if ($sectionEntryBeforeDelete->aborted()) {
+            throw new BeforeDeleteAbortedException();
+        }
+
         foreach ($this->deleters as $deleter) {
             $deleter->remove($sectionEntryEntity);
         }

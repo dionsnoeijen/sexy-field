@@ -16,18 +16,9 @@ namespace Tardigrades\SectionField\Event;
 use Symfony\Component\EventDispatcher\Event;
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
 
-/**
- * Class SectionEntryDeleted
- *
- * Right after the section entry entity is deleted from it's data sources, this event is dispatched.
- *
- * @package Tardigrades\SectionField\Event
- */
 class SectionEntryDeleted extends Event
 {
-    const NAME = 'section.entry.deleted';
-
-    /** @var  CommonSectionInterface */
+    /** @var CommonSectionInterface */
     protected $entry;
 
     /** @var bool */
@@ -39,21 +30,11 @@ class SectionEntryDeleted extends Event
         $this->success = $success;
     }
 
-    /**
-     * This entry was deleted.
-     *
-     * @return CommonSectionInterface
-     */
     public function getEntry(): CommonSectionInterface
     {
         return $this->entry;
     }
 
-    /**
-     * Has it been successful?
-     *
-     * @return bool
-     */
     public function getSuccess(): bool
     {
         return $this->success;

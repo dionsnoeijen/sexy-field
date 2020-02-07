@@ -16,30 +16,19 @@ namespace Tardigrades\SectionField\Event;
 use Symfony\Component\EventDispatcher\Event;
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
 
-/**
- * Class SectionEntryBeforeCreate
- *
- * This event is dispatched right before the persistance of a section entry.
- * It contains the entity so you can use or manipulate it.
- *
- * @package Tardigrades\SectionField\Event
- */
-class SectionEntryBeforeCreate extends Event
+class SectionEntryBeforeUpdate extends Event
 {
     /** @var CommonSectionInterface */
     protected $entry;
 
     /** @var bool */
-    private $aborted;
+    private $aborted = false;
 
     public function __construct(CommonSectionInterface $entry)
     {
         $this->entry = $entry;
     }
 
-    /**
-     * The entity that is about to be persisted.
-     */
     public function getEntry(): CommonSectionInterface
     {
         return $this->entry;

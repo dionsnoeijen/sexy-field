@@ -14,8 +14,10 @@ declare (strict_types = 1);
 namespace Tardigrades\SectionField\Service;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Tardigrades\SectionField\Event\SectionBeforeRead;
+use Tardigrades\SectionField\Event\BeforeReadAbortedException;
+use Tardigrades\SectionField\Event\SectionEntryBeforeRead;
 use Tardigrades\SectionField\Event\SectionDataRead;
+use Tardigrades\SectionField\ValueObject\FullyQualifiedClassName;
 use Tardigrades\SectionField\ValueObject\SectionConfig;
 
 class ReadSection implements ReadSectionInterface
@@ -40,46 +42,48 @@ class ReadSection implements ReadSectionInterface
     }
 
     /**
-     * Read from one or more data-sources
-     *
-     * @param ReadOptionsInterface $options
-     * @param SectionConfig|null $sectionConfig
-     * @return \ArrayIterator
+     * @inheritDoc
      */
     public function read(
-        ReadOptionsInterface $options,
+        ReadOptionsInterface $readOptions,
         SectionConfig $sectionConfig = null
     ): \ArrayIterator {
         $sectionData = new \ArrayIterator();
 
-        $this->dispatcher->dispatch(
-            new SectionBeforeRead($sectionData, $options, $sectionConfig),
-            SectionBeforeRead::NAME
+        $beforeReadEvent = new SectionEntryBeforeRead(
+            $sectionData,
+            $readOptions,
+            $sectionConfig
         );
+        $this->dispatcher->dispatch($beforeReadEvent);
+        if ($beforeReadEvent->aborted()) {
+            throw new BeforeReadAbortedException();
+        }
 
-        if ($sectionConfig === null && count($options->getSection()) > 0) {
+        if ($sectionConfig === null && count($readOptions->getSection()) > 0) {
+            /** @var FullyQualifiedClassName $section */
+            $section = $readOptions->getSection()[0];
             $sectionConfig = $this->sectionManager->readByHandle(
-                $options->getSection()[0]->toHandle()
+                $section->toHandle()
             )->getConfig();
         }
 
         // Make sure we are passing the fully qualified class name as the section
-        if (count($options->getSection()) > 0) {
-            $optionsArray = $options->toArray();
+        if (count($readOptions->getSection()) > 0) {
+            $optionsArray = $readOptions->toArray();
             $optionsArray[ReadOptions::SECTION] = (string)$sectionConfig->getFullyQualifiedClassName();
-            $options = ReadOptions::fromArray($optionsArray);
+            $readOptions = ReadOptions::fromArray($optionsArray);
         }
 
         /** @var ReadSectionInterface $reader */
         foreach ($this->readers as $reader) {
-            foreach ($reader->read($options, $sectionConfig) as $entry) {
+            foreach ($reader->read($readOptions, $sectionConfig) as $entry) {
                 $sectionData->append($entry);
             }
         }
 
         $this->dispatcher->dispatch(
-            new SectionDataRead($sectionData, $options, $sectionConfig),
-            SectionDataRead::NAME
+            new SectionDataRead($sectionData, $readOptions, $sectionConfig)
         );
 
         return $sectionData;

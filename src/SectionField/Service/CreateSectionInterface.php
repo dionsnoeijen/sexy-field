@@ -13,6 +13,8 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\Service;
 
+use Tardigrades\SectionField\Event\BeforeCreateAbortedException;
+use Tardigrades\SectionField\Event\BeforeUpdateAbortedException;
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
 
 /**
@@ -35,6 +37,8 @@ interface CreateSectionInterface
      * There is a success true, boolean. This will be enhanced later on.
      *
      * @param CommonSectionInterface $sectionEntryEntity
+     * @throws BeforeCreateAbortedException
+     * @throws BeforeUpdateAbortedException
      */
     public function save(CommonSectionInterface $sectionEntryEntity);
 
@@ -46,6 +50,8 @@ interface CreateSectionInterface
      * No events are dispatched.
      *
      * @param CommonSectionInterface $sectionEntryEntity
+     * @throws BeforeCreateAbortedException
+     * @throws BeforeUpdateAbortedException
      */
     public function persist(CommonSectionInterface $sectionEntryEntity);
 

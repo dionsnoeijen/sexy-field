@@ -13,14 +13,18 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\Service;
 
+use Tardigrades\SectionField\Event\BeforeReadAbortedException;
 use Tardigrades\SectionField\ValueObject\SectionConfig;
 
 interface ReadSectionInterface
 {
     /**
+     * Read from one or more data-sources
+     *
      * @param ReadOptionsInterface $readOptions
      * @param SectionConfig|null $sectionConfig
      * @return \ArrayIterator
+     * @throws BeforeReadAbortedException
      * @throws EntryNotFoundException
      */
     public function read(ReadOptionsInterface $readOptions, SectionConfig $sectionConfig = null): \ArrayIterator;

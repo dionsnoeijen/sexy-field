@@ -29,8 +29,6 @@ use Tardigrades\SectionField\ValueObject\SectionConfig;
  */
 class SectionDataRead extends Event
 {
-    const NAME = 'section.data.read';
-
     /** @var \ArrayIterator */
     private $data;
 
