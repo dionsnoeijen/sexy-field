@@ -114,19 +114,25 @@ class CreateSection implements CreateSectionInterface
         $this->invalidatedCaches = [];
     }
 
+    /**
+     * @param CommonSectionInterface $sectionEntryEntity
+     * @param bool $update
+     * @throws BeforeCreateAbortedException
+     * @throws BeforeUpdateAbortedException
+     */
     private function beforeEvent(CommonSectionInterface $sectionEntryEntity, bool $update): void
     {
         if ($update) {
-            $sectionEntryBeforeCreate = new SectionEntryBeforeCreate($sectionEntryEntity);
-            $this->dispatcher->dispatch($sectionEntryBeforeCreate);
-            if ($sectionEntryBeforeCreate->aborted()) {
-                throw new BeforeCreateAbortedException();
-            }
-        } else {
             $sectionEntryBeforeUpdate = new SectionEntryBeforeUpdate($sectionEntryEntity);
             $this->dispatcher->dispatch($sectionEntryBeforeUpdate);
             if ($sectionEntryBeforeUpdate->aborted()) {
                 throw new BeforeUpdateAbortedException();
+            }
+        } else {
+            $sectionEntryBeforeCreate = new SectionEntryBeforeCreate($sectionEntryEntity);
+            $this->dispatcher->dispatch($sectionEntryBeforeCreate);
+            if ($sectionEntryBeforeCreate->aborted()) {
+                throw new BeforeCreateAbortedException();
             }
         }
     }
