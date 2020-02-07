@@ -49,6 +49,7 @@ class ReadOptions implements ReadOptionsInterface
     const JOIN = 'join';
     const QUERY = 'query';
     const QUERY_PARAMETERS = 'queryParameters';
+    const METADATA = 'metadata';
 
     /**
      * @var string If you know in advance what fields you are going to need
@@ -398,6 +399,22 @@ class ReadOptions implements ReadOptionsInterface
         }
 
         return $this->options[ReadOptions::QUERY_PARAMETERS];
+    }
+
+    public function getMetadata(): array
+    {
+        try {
+            Assertion::keyIsset($this->options, ReadOptions::METADATA, 'No metadata');
+            Assertion::notEmpty(
+                $this->options[ReadOptions::METADATA],
+                'Metadata is empty.'
+            );
+            Assertion::isArray($this->options[ReadOptions::METADATA]);
+        } catch (AssertionFailedException $exception) {
+            return null;
+        }
+
+        return $this->options[ReadOptions::METADATA];
     }
 
     public static function fromArray(array $options): ReadOptionsInterface
