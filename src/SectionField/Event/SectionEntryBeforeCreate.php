@@ -30,16 +30,13 @@ class SectionEntryBeforeCreate extends Event
     protected $entry;
 
     /** @var bool */
-    private $aborted;
+    private $aborted = false;
 
     public function __construct(CommonSectionInterface $entry)
     {
         $this->entry = $entry;
     }
 
-    /**
-     * The entity that is about to be persisted.
-     */
     public function getEntry(): CommonSectionInterface
     {
         return $this->entry;
