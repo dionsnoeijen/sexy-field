@@ -97,6 +97,21 @@ final class DeleteSectionTest extends TestCase
     {
         $entry = Mockery::mock(CommonSectionInterface::class);
         $this->deleters[0]->shouldReceive('delete')->once()->andReturn(false);
+
+        $this->dispatcher
+            ->shouldReceive('dispatch')
+            ->once()
+            ->withArgs([
+                Mockery::on(
+                    function ($sectionEntryBeforeDelete) {
+                        if (!$sectionEntryBeforeDelete instanceof SectionEntryBeforeDelete) {
+                            return false;
+                        }
+                        return true;
+                    }
+                )
+            ]);
+
         $this->dispatcher
             ->shouldReceive('dispatch')
             ->once()

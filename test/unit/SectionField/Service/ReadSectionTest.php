@@ -86,8 +86,7 @@ final class ReadSectionTest extends TestCase
                         $this->assertEquals($sectionConfig, $sectionBeforeRead->getSectionConfig());
                         return true;
                     }
-                ),
-                'section.before.read'
+                )
             ])
         ;
 
@@ -106,8 +105,7 @@ final class ReadSectionTest extends TestCase
                         $this->assertEquals($section->getConfig(), $sectionDataRead->getSectionConfig());
                         return true;
                     }
-                ),
-                'section.data.read'
+                )
             ])
         ;
 
