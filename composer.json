@@ -22,7 +22,7 @@
     "symfony/yaml": "^4",
     "symfony/config": "^4",
     "symfony/event-dispatcher": "^4",
-    "beberlei/assert": "2.6.5",
+    "beberlei/assert": "^3.2",
     "twig/twig": "^2.0",
     "twig/extensions": "^1.5.1",
     "php-coveralls/php-coveralls": "^1.0",
