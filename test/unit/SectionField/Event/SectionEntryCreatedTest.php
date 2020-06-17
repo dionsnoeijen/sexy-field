@@ -7,6 +7,7 @@ use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
+use Tardigrades\SectionField\Service\OptionsInterface;
 
 /**
  * @coversDefaultClass Tardigrades\SectionField\Event\SectionEntryCreated
@@ -22,10 +23,19 @@ final class SectionEntryCreatedTest extends TestCase
     /** @var CommonSectionInterface */
     private $entry;
 
+    /** @var OptionsInterface */
+    private $event;
+
     public function setUp()
     {
         $this->entry = Mockery::mock(CommonSectionInterface::class);
-        $this->sectionEntryCreated = new SectionEntryCreated($this->entry, true);
+        $this->event = Mockery::mock(OptionsInterface::class);
+
+        $this->sectionEntryCreated = new SectionEntryCreated(
+            $this->entry,
+            true,
+            $this->event
+        );
     }
 
     /**

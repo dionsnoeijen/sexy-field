@@ -31,7 +31,7 @@ class SectionEntryCreated extends Event
     public function __construct(
         CommonSectionInterface $entry,
         bool $update,
-        OptionsInterface $createOptions
+        ?OptionsInterface $createOptions = null
     ) {
         $this->entry = $entry;
         $this->update = $update;
@@ -48,7 +48,7 @@ class SectionEntryCreated extends Event
         return $this->update;
     }
 
-    public function getCreateOptions(): OptionsInterface
+    public function getCreateOptions(): ?OptionsInterface
     {
         return $this->createOptions;
     }

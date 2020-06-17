@@ -142,7 +142,7 @@ class CreateSection implements CreateSectionInterface
     private function beforeEvent(
         CommonSectionInterface $sectionEntryEntity,
         bool $update,
-        OptionsInterface $createOptions
+        ?OptionsInterface $createOptions = null
     ): void {
         if ($update) {
             $sectionEntryBeforeUpdate = new SectionEntryBeforeUpdate(

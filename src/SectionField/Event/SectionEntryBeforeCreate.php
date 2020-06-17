@@ -38,7 +38,7 @@ class SectionEntryBeforeCreate extends Event
 
     public function __construct(
         CommonSectionInterface $entry,
-        OptionsInterface $createOptions
+        ?OptionsInterface $createOptions = null
     ) {
         $this->entry = $entry;
         $this->createOptions = $createOptions;
@@ -59,7 +59,7 @@ class SectionEntryBeforeCreate extends Event
         return $this->aborted;
     }
 
-    public function getCreateOptions(): OptionsInterface
+    public function getCreateOptions(): ?OptionsInterface
     {
         return $this->createOptions;
     }

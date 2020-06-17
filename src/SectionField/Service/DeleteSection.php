@@ -47,7 +47,8 @@ class DeleteSection implements DeleteSectionInterface
     ): bool
     {
         $sectionEntryBeforeDelete = new SectionEntryBeforeDelete(
-            $sectionEntryEntity
+            $sectionEntryEntity,
+            $deleteOptions
         );
         $this->dispatcher->dispatch($sectionEntryBeforeDelete);
         if ($sectionEntryBeforeDelete->aborted()) {
@@ -81,7 +82,8 @@ class DeleteSection implements DeleteSectionInterface
         ?OptionsInterface $deleteOptions = null
     ): void {
         $sectionEntryBeforeDelete = new SectionEntryBeforeDelete(
-            $sectionEntryEntity
+            $sectionEntryEntity,
+            $deleteOptions
         );
         $this->dispatcher->dispatch($sectionEntryBeforeDelete);
         if ($sectionEntryBeforeDelete->aborted()) {

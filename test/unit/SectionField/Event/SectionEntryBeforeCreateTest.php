@@ -7,6 +7,7 @@ use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
+use Tardigrades\SectionField\Service\OptionsInterface;
 
 /**
  * @coversDefaultClass Tardigrades\SectionField\Event\SectionEntryBeforeCreate
@@ -23,8 +24,12 @@ final class SectionEntryBeforeCreateTest extends TestCase
     public function it_should_get_the_entry()
     {
         $entry = Mockery::mock(CommonSectionInterface::class);
+        $event = Mockery::mock(OptionsInterface::class);
 
-        $sectionEntryBeforeCreate = new SectionEntryBeforeCreate($entry);
+        $sectionEntryBeforeCreate = new SectionEntryBeforeCreate(
+            $entry,
+            $event
+        );
         $result = $sectionEntryBeforeCreate->getEntry();
 
         $this->assertEquals($entry, $result);

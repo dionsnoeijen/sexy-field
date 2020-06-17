@@ -31,7 +31,7 @@ class SectionEntryDeleted extends Event
     public function __construct(
         CommonSectionInterface $entry,
         bool $success,
-        OptionsInterface $deleteOptions
+        ?OptionsInterface $deleteOptions = null
     ) {
         $this->entry = $entry;
         $this->success = $success;
@@ -48,7 +48,7 @@ class SectionEntryDeleted extends Event
         return $this->success;
     }
 
-    public function getDeleteOptions(): OptionsInterface
+    public function getDeleteOptions(): ?OptionsInterface
     {
         return $this->deleteOptions;
     }
