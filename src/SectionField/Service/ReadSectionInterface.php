@@ -22,14 +22,14 @@ interface ReadSectionInterface
     /**
      * Read from one or more data-sources
      *
-     * @param ReadOptionsInterface $readOptions
+     * @param OptionsInterface $readOptions
      * @param SectionConfig|null $sectionConfig
      * @return \ArrayIterator
      * @throws BeforeReadAbortedException
      * @throws EntryNotFoundException
      * @throws ReadAbortedException
      */
-    public function read(ReadOptionsInterface $readOptions, SectionConfig $sectionConfig = null): \ArrayIterator;
+    public function read(OptionsInterface $readOptions, SectionConfig $sectionConfig = null): \ArrayIterator;
 
     public function flush(): void;
 }

@@ -52,14 +52,16 @@ class CreateSection implements CreateSectionInterface
     /**
      * @inheritDoc
      */
-    public function save(CommonSectionInterface $sectionEntryEntity)
-    {
+    public function save(
+        CommonSectionInterface $sectionEntryEntity,
+        ?CreateOptions $createOptions = null
+    ) {
         $update = !empty($sectionEntryEntity->getId());
         $this->beforeEvent($sectionEntryEntity, $update);
 
-        /** @var CreateSectionInterface $writer */
-        foreach ($this->creators as $writer) {
-            $writer->save($sectionEntryEntity);
+        /** @var CreateSectionInterface $creator */
+        foreach ($this->creators as $creator) {
+            $creator->save($sectionEntryEntity, $createOptions);
         }
 
         try {

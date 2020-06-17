@@ -6,7 +6,7 @@ namespace Tardigrades\SectionField\Event;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
-use Tardigrades\SectionField\Service\ReadOptionsInterface;
+use Tardigrades\SectionField\Service\OptionsInterface;
 use Tardigrades\SectionField\ValueObject\SectionConfig;
 
 /**
@@ -24,7 +24,7 @@ final class SectionEntryBeforeReadTest extends TestCase
     /** @var \ArrayIterator|Mockery\MockInterface */
     private $data;
 
-    /** @var ReadOptionsInterface|Mockery\MockInterface */
+    /** @var OptionsInterface|Mockery\MockInterface */
     private $readOptions;
 
     /** @var SectionConfig|Mockery\MockInterface */
@@ -43,7 +43,7 @@ final class SectionEntryBeforeReadTest extends TestCase
         ];
 
         $this->data = Mockery::mock(\ArrayIterator::class);
-        $this->readOptions = Mockery::mock(ReadOptionsInterface::class);
+        $this->readOptions = Mockery::mock(OptionsInterface::class);
         $this->sectionConfig = SectionConfig::fromArray($sectionConfigArray);
         $this->sectionBeforeRead = new SectionEntryBeforeRead(
             $this->data,

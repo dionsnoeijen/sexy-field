@@ -28,7 +28,7 @@ use Tardigrades\SectionField\ValueObject\OrderBy;
 use Tardigrades\SectionField\ValueObject\Search;
 use Tardigrades\SectionField\ValueObject\Sort;
 
-class ReadOptions implements ReadOptionsInterface
+class ReadOptions implements OptionsInterface
 {
     /** Read options that are relevant for all readers */
     const ID = 'id';
@@ -417,7 +417,7 @@ class ReadOptions implements ReadOptionsInterface
         return $this->options[ReadOptions::METADATA];
     }
 
-    public static function fromArray(array $options): ReadOptionsInterface
+    public static function fromArray(array $options): OptionsInterface
     {
         return new static($options);
     }

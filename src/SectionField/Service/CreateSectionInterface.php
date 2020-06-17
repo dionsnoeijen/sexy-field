@@ -37,10 +37,12 @@ interface CreateSectionInterface
      * There is a success true, boolean. This will be enhanced later on.
      *
      * @param CommonSectionInterface $sectionEntryEntity
-     * @throws BeforeCreateAbortedException
-     * @throws BeforeUpdateAbortedException
+     * @param CreateOptions|null $createOptions
      */
-    public function save(CommonSectionInterface $sectionEntryEntity);
+    public function save(
+        CommonSectionInterface $sectionEntryEntity,
+        ?CreateOptions $createOptions = null
+    );
 
     /**
      * This method goes through all writers to persist a record, like save, but doesn't flush them.

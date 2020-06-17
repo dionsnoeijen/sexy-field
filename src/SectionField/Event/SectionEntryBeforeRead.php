@@ -14,7 +14,7 @@ declare (strict_types = 1);
 namespace Tardigrades\SectionField\Event;
 
 use Symfony\Component\EventDispatcher\Event;
-use Tardigrades\SectionField\Service\ReadOptionsInterface;
+use Tardigrades\SectionField\Service\OptionsInterface;
 use Tardigrades\SectionField\ValueObject\SectionConfig;
 
 class SectionEntryBeforeRead extends Event
@@ -22,7 +22,7 @@ class SectionEntryBeforeRead extends Event
     /** @var \ArrayIterator */
     private $data;
 
-    /** @var ReadOptionsInterface */
+    /** @var OptionsInterface */
     private $readOptions;
 
     /** @var SectionConfig */
@@ -33,7 +33,7 @@ class SectionEntryBeforeRead extends Event
 
     public function __construct(
         \ArrayIterator $data,
-        ReadOptionsInterface $readOptions,
+        OptionsInterface $readOptions,
         SectionConfig $sectionConfig = null
     ) {
         $this->data = $data;
@@ -46,7 +46,7 @@ class SectionEntryBeforeRead extends Event
         return $this->data;
     }
 
-    public function getReadOptions(): ReadOptionsInterface
+    public function getReadOptions(): OptionsInterface
     {
         return $this->readOptions;
     }

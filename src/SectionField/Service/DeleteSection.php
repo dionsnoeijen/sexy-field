@@ -39,7 +39,10 @@ class DeleteSection implements DeleteSectionInterface
     /**
      * @inheritdoc
      */
-    public function delete(CommonSectionInterface $sectionEntryEntity): bool
+    public function delete(
+        CommonSectionInterface $sectionEntryEntity,
+        ?OptionsInterface $deleteOptions = null
+    ): bool
     {
         $sectionEntryBeforeDelete = new SectionEntryBeforeDelete(
             $sectionEntryEntity
@@ -52,7 +55,7 @@ class DeleteSection implements DeleteSectionInterface
         $success = true;
         /** @var DeleteSectionInterface $deleter */
         foreach ($this->deleters as $deleter) {
-            if (!$deleter->delete($sectionEntryEntity) && $success) {
+            if (!$deleter->delete($sectionEntryEntity, $deleteOptions) && $success) {
                 $success = false;
             }
         }

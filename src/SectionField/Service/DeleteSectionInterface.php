@@ -29,10 +29,13 @@ interface DeleteSectionInterface
      * This delete method loops through all deleters, so this section entry entity is deleted throughout all sources.
      *
      * @param CommonSectionInterface $sectionEntryEntity
-     * @throws BeforeDeleteAbortedException
+     * @param OptionsInterface|null $deleteOptions
      * @return bool
      */
-    public function delete(CommonSectionInterface $sectionEntryEntity): bool;
+    public function delete(
+        CommonSectionInterface $sectionEntryEntity,
+        ?OptionsInterface $deleteOptions = null
+    ): bool;
 
     /**
      * This delete method loops through all deleters, so this section entry entity is deleted throughout all sources.
