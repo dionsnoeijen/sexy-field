@@ -54,10 +54,14 @@ class CreateSection implements CreateSectionInterface
      */
     public function save(
         CommonSectionInterface $sectionEntryEntity,
-        ?CreateOptions $createOptions = null
+        ?OptionsInterface $createOptions = null
     ) {
         $update = !empty($sectionEntryEntity->getId());
-        $this->beforeEvent($sectionEntryEntity, $update);
+        $this->beforeEvent(
+            $sectionEntryEntity,
+            $update,
+            $createOptions
+        );
 
         /** @var CreateSectionInterface $creator */
         foreach ($this->creators as $creator) {
@@ -72,16 +76,28 @@ class CreateSection implements CreateSectionInterface
             //
         }
 
-        $this->dispatcher->dispatch(new SectionEntryCreated($sectionEntryEntity, $update));
+        $this->dispatcher->dispatch(
+            new SectionEntryCreated(
+                $sectionEntryEntity,
+                $update,
+                $createOptions
+            )
+        );
     }
 
     /**
      * {@inheritdoc}
      */
-    public function persist(CommonSectionInterface $sectionEntryEntity)
-    {
+    public function persist(
+        CommonSectionInterface $sectionEntryEntity,
+        ?OptionsInterface $createOptions = null
+    ) {
         $update = !empty($sectionEntryEntity->getId());
-        $this->beforeEvent($sectionEntryEntity, $update);
+        $this->beforeEvent(
+            $sectionEntryEntity,
+            $update,
+            $createOptions
+        );
 
         /** @var CreateSectionInterface $writer */
         foreach ($this->creators as $writer) {
@@ -119,19 +135,29 @@ class CreateSection implements CreateSectionInterface
     /**
      * @param CommonSectionInterface $sectionEntryEntity
      * @param bool $update
+     * @param OptionsInterface $createOptions
      * @throws BeforeCreateAbortedException
      * @throws BeforeUpdateAbortedException
      */
-    private function beforeEvent(CommonSectionInterface $sectionEntryEntity, bool $update): void
-    {
+    private function beforeEvent(
+        CommonSectionInterface $sectionEntryEntity,
+        bool $update,
+        OptionsInterface $createOptions
+    ): void {
         if ($update) {
-            $sectionEntryBeforeUpdate = new SectionEntryBeforeUpdate($sectionEntryEntity);
+            $sectionEntryBeforeUpdate = new SectionEntryBeforeUpdate(
+                $sectionEntryEntity,
+                $createOptions
+            );
             $this->dispatcher->dispatch($sectionEntryBeforeUpdate);
             if ($sectionEntryBeforeUpdate->aborted()) {
                 throw new BeforeUpdateAbortedException();
             }
         } else {
-            $sectionEntryBeforeCreate = new SectionEntryBeforeCreate($sectionEntryEntity);
+            $sectionEntryBeforeCreate = new SectionEntryBeforeCreate(
+                $sectionEntryEntity,
+                $createOptions
+            );
             $this->dispatcher->dispatch($sectionEntryBeforeCreate);
             if ($sectionEntryBeforeCreate->aborted()) {
                 throw new BeforeCreateAbortedException();

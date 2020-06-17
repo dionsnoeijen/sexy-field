@@ -46,7 +46,7 @@ class ReadSection implements ReadSectionInterface
      * @inheritDoc
      */
     public function read(
-        ReadOptionsInterface $readOptions,
+        OptionsInterface $readOptions,
         SectionConfig $sectionConfig = null
     ): \ArrayIterator {
         $sectionData = new \ArrayIterator();

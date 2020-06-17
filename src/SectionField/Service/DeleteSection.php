@@ -63,7 +63,11 @@ class DeleteSection implements DeleteSectionInterface
         }
 
         $this->dispatcher->dispatch(
-            new SectionEntryDeleted($sectionEntryEntity, $success)
+            new SectionEntryDeleted(
+                $sectionEntryEntity,
+                $success,
+                $deleteOptions
+            )
         );
 
         return $success;
@@ -72,8 +76,10 @@ class DeleteSection implements DeleteSectionInterface
     /**
      * @inheritDoc
      */
-    public function remove(CommonSectionInterface $sectionEntryEntity): void
-    {
+    public function remove(
+        CommonSectionInterface $sectionEntryEntity,
+        ?OptionsInterface $deleteOptions = null
+    ): void {
         $sectionEntryBeforeDelete = new SectionEntryBeforeDelete(
             $sectionEntryEntity
         );

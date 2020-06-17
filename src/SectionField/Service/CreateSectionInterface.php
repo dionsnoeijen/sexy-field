@@ -13,8 +13,6 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\Service;
 
-use Tardigrades\SectionField\Event\BeforeCreateAbortedException;
-use Tardigrades\SectionField\Event\BeforeUpdateAbortedException;
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
 
 /**
@@ -52,10 +50,12 @@ interface CreateSectionInterface
      * No events are dispatched.
      *
      * @param CommonSectionInterface $sectionEntryEntity
-     * @throws BeforeCreateAbortedException
-     * @throws BeforeUpdateAbortedException
+     * @param OptionsInterface $createOptions
      */
-    public function persist(CommonSectionInterface $sectionEntryEntity);
+    public function persist(
+        CommonSectionInterface $sectionEntryEntity,
+        ?OptionsInterface $createOptions = null
+    );
 
     /**
      * This method flushes all writers to store records that have been persisted.
