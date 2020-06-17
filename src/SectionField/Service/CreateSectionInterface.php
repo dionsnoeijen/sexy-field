@@ -37,11 +37,11 @@ interface CreateSectionInterface
      * There is a success true, boolean. This will be enhanced later on.
      *
      * @param CommonSectionInterface $sectionEntryEntity
-     * @param CreateOptions|null $createOptions
+     * @param OptionsInterface|null $createOptions
      */
     public function save(
         CommonSectionInterface $sectionEntryEntity,
-        ?CreateOptions $createOptions = null
+        ?OptionsInterface $createOptions = null
     );
 
     /**

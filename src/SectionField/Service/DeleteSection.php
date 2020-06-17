@@ -30,8 +30,10 @@ class DeleteSection implements DeleteSectionInterface
     /** @var EventDispatcherInterface */
     private $dispatcher;
 
-    public function __construct(array $deleters, EventDispatcherInterface $dispatcher)
-    {
+    public function __construct(
+        array $deleters,
+        EventDispatcherInterface $dispatcher
+    ) {
         $this->deleters = $deleters;
         $this->dispatcher = $dispatcher;
     }
