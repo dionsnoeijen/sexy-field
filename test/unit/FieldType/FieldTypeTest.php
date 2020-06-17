@@ -68,20 +68,23 @@ final class FieldTypeTest extends TestCase
         $this->assertFalse($otherFieldType->hasEntityEvent('delta'));
     }
 
-    /**
-     * @test
-     * @covers ::directory
-     */
-    public function it_should_return_its_directory()
-    {
-        $fieldType = $this->givenAFieldType();
-        $this->assertRegExp('/phpunit-mock-objects/', $fieldType->directory());
-    }
+//    /**
+//     * @test
+//     * @covers ::directory
+//     */
+//    public function it_should_return_its_directory()
+//    {
+//        $fieldType = $this->givenAFieldType();
+//        $this->assertRegExp('/phpunit-mock-objects/', $fieldType->directory());
+//    }
 
     private function givenAFieldType()
     {
-        return $this->getMockForAbstractClass(FieldType::class)
-            ->setConfig($this->givenAFieldConfig());
+        return $this
+            ->getMockForAbstractClass(FieldType::class)
+            ->setConfig(
+                $this->givenAFieldConfig()
+            );
     }
 
     private function givenAFieldConfig()
