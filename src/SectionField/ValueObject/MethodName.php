@@ -13,7 +13,7 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\ValueObject;
 
-use Doctrine\Inflector\Inflector;
+use Doctrine\Inflector\InflectorFactory;
 
 final class MethodName
 {
@@ -34,7 +34,9 @@ final class MethodName
 
     public static function fromString(string $methodName): self
     {
-        $methodName = Inflector::camelize($methodName);
+        $factory = InflectorFactory::create();
+        $inflector = $factory->build();
+        $methodName = $inflector->camelize($methodName);
 
         return new self(ucfirst($methodName));
     }

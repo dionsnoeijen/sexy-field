@@ -14,7 +14,8 @@ declare (strict_types = 1);
 namespace Tardigrades\SectionField\ValueObject;
 
 use Assert\Assertion;
-use Doctrine\Inflector\Inflector;
+use Doctrine\Common\Inflector\Inflector;
+use Doctrine\Inflector\InflectorFactory;
 
 final class ClassName
 {
@@ -24,8 +25,9 @@ final class ClassName
     private function __construct(string $className)
     {
         Assertion::string($className, 'ClassName must be a string');
-
-        $this->className = Inflector::classify($className);
+        $factory = InflectorFactory::create();
+        $inflector = $factory->build();
+        $this->className = $inflector->classify($className);
     }
 
     public function __toString(): string
