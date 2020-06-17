@@ -14,7 +14,7 @@ declare (strict_types = 1);
 namespace Tardigrades\SectionField\ValueObject;
 
 use Assert\Assertion;
-use Doctrine\Common\Util\Inflector;
+use Doctrine\Inflector\Inflector;
 
 final class ClassName
 {

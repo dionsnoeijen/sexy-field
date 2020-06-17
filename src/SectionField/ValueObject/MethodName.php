@@ -13,7 +13,7 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\ValueObject;
 
-use Doctrine\Common\Util\Inflector;
+use Doctrine\Inflector\Inflector;
 
 final class MethodName
 {
