@@ -141,7 +141,7 @@ class InstallDirectoryCommand extends Command
                 $fieldTypes[] = $fieldType;
             }
         }
-        // All custom fieldtypes are public services, therefore we can find its namespace through its classname.
+        // All custom field types are public services, therefore we can find its namespace through its classname.
         $debugString =  `bin/console debug:container`;
         foreach ($fieldTypes as $fieldType) {
             try {
