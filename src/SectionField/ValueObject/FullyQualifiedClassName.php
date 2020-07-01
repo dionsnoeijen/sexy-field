@@ -29,9 +29,8 @@ final class FullyQualifiedClassName
     public function getClassName()
     {
         $type = explode('\\', $this->fullyQualifiedClassName);
-        $className = $type[count($type) - 1];
 
-        return $className;
+        return $type[count($type) - 1];
     }
 
     public function __toString(): string
