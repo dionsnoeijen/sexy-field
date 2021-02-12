@@ -1,9 +1,8 @@
 vendor
 docker/data
 build
-!./build/clover.xml
-log
 .notes
 report/
 .idea
 .phpunit.result.cache
+!/build/clover.xml
