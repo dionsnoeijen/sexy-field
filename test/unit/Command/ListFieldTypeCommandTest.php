@@ -34,7 +34,7 @@ final class ListFieldTypeCommandTest extends TestCase
      */
     private $application;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->fieldTypeManager = Mockery::mock(FieldTypeManagerInterface::class);
         $this->listFieldTypeCommand = new ListFieldTypeCommand($this->fieldTypeManager);

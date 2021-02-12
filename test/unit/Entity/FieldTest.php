@@ -29,7 +29,7 @@ final class FieldTest extends TestCase
     /** @var Collection|Mockery\MockInterface */
     private $sections;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->sections = Mockery::mock(Collection::class);
 

@@ -29,7 +29,7 @@ final class ListLanguageCommandTest extends TestCase
     /** @var Application */
     private $application;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->languageManager = Mockery::mock(LanguageManagerInterface::class);
         $this->listLanguageCommand = new ListLanguageCommand($this->languageManager);

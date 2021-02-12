@@ -30,7 +30,7 @@ final class UpdateFieldTypeCommandTest extends TestCase
     /** @var Application */
     private $application;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->fieldTypeManager = Mockery::mock(FieldTypeManagerInterface::class);
         $this->updateFieldTypeCommand = new UpdateFieldTypeCommand($this->fieldTypeManager);

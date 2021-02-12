@@ -23,7 +23,7 @@ final class GeneratorsTest extends TestCase
     /** @var Generators */
     private $fixture;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->generators = [Mockery::mock(GeneratorInterface::class)];
         $this->fixture = new Generators($this->generators);

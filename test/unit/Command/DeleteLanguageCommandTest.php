@@ -31,7 +31,7 @@ final class DeleteLanguageCommandTest extends TestCase
     /** @var Application */
     private $application;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->languageManager = Mockery::mock(DoctrineLanguageManager::class);
         $this->deleteLanguageCommand = new DeleteLanguageCommand($this->languageManager);

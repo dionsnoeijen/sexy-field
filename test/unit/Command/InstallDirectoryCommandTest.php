@@ -49,7 +49,7 @@ final class InstallDirectoryCommandTest extends TestCase
 
     private $application;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->applicationManager = \Mockery::mock(ApplicationManagerInterface::class);
         $this->languageManager = \Mockery::mock(LanguageManagerInterface::class);

@@ -19,7 +19,7 @@ final class LanguageTest extends TestCase
     /** @var Language */
     private $language;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->language = new Language();
     }

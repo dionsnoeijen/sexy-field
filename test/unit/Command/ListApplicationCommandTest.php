@@ -33,7 +33,7 @@ final class ListApplicationCommandTest extends TestCase
     /** @var Application */
     private $application;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->applicationManager = Mockery::mock(ApplicationManagerInterface::class);
         $this->listApplicationCommand = new ListApplicationCommand($this->applicationManager);

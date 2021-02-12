@@ -38,7 +38,7 @@ final class SectionHistoryTest extends TestCase
     /** @var Section */
     private $sectionHistory;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->fields = Mockery::mock(Collection::class);
         $this->applications = Mockery::mock(Collection::class);

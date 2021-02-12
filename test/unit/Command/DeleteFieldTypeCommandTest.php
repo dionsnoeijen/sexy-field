@@ -28,7 +28,7 @@ final class DeleteFieldTypeCommandTest extends TestCase
     /** @var Application */
     private $application;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->fieldTypeManager = Mockery::mock(FieldTypeManagerInterface::class);
         $this->deleteFieldTypeCommand = new DeleteFieldTypeCommand($this->fieldTypeManager);

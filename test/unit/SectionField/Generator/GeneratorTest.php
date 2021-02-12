@@ -45,7 +45,7 @@ final class GeneratorTest extends TestCase
     private $container;
 
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->fieldManager = Mockery::mock(FieldManagerInterface::class);
         $this->fieldTypeManager = Mockery::mock(FieldTypeManagerInterface::class);

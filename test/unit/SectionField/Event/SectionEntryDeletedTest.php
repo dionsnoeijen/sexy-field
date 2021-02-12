@@ -26,7 +26,7 @@ final class SectionEntryDeletedTest extends TestCase
     /** @var OptionsInterface */
     private $options;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->entry = Mockery::mock(CommonSectionInterface::class);
         $this->options = Mockery::mock(OptionsInterface::class);

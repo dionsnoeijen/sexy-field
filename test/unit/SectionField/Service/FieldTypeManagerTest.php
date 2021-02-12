@@ -32,7 +32,7 @@ final class FieldTypeManagerTest extends TestCase
      */
     private $entityManager;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->entityManager = Mockery::mock(EntityManagerInterface::class);
         $this->fieldTypeManager = new DoctrineFieldTypeManager($this->entityManager);
