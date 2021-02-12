@@ -13,20 +13,18 @@
   "require": {
     "php": "^7.2",
     "doctrine/orm": "^2.5.6",
-    "symfony/console": "^4",
-    "symfony/form": "^4",
-    "symfony/validator": "^4",
-    "symfony/security": "^4",
-    "symfony/dependency-injection": "^4",
-    "symfony/inflector": "^4",
-    "symfony/yaml": "^4",
-    "symfony/config": "^4",
-    "symfony/event-dispatcher": "^4",
+    "symfony/console": "^5",
+    "symfony/form": "^5",
+    "symfony/validator": "^5",
+    "symfony/dependency-injection": "^5",
+    "symfony/inflector": "^5",
+    "symfony/yaml": "^5",
+    "symfony/config": "^5",
+    "symfony/event-dispatcher": "^5",
     "beberlei/assert": "^3",
-    "twig/twig": "^2.0",
-    "twig/extensions": "^1.5.1",
-    "php-coveralls/php-coveralls": "^1.0",
-    "symfony/cache": "^4"
+    "twig/twig": "^2.12|^3.0",
+    "php-coveralls/php-coveralls": "^2.0",
+    "symfony/cache": "^5"
   },
   "autoload": {
     "psr-4": {
