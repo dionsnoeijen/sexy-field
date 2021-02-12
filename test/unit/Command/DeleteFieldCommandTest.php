@@ -86,7 +86,7 @@ YML;
             'command' => $command->getName()
         ]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Removed!/',
             $commandTester->getDisplay()
         );
@@ -113,7 +113,7 @@ YML;
             ->shouldNotReceive('delete');
         $commandTester->setInputs([1, 'n']);
         $commandTester->execute(['command' => $command->getName()]);
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Cancelled/',
             $commandTester->getDisplay()
         );
@@ -138,7 +138,7 @@ YML;
             ->andThrow(FieldNotFoundException::class);
         $commandTester->setInputs([9]);
         $commandTester->execute(['command' => $command->getName()]);
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Field not found/',
             $commandTester->getDisplay()
         );
