@@ -96,7 +96,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Section updated!/',
             $commandTester->getDisplay()
         );
@@ -146,12 +146,12 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Do you want to update the section with id: 1/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Section updated!/',
             $commandTester->getDisplay()
         );
@@ -197,7 +197,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Section updated! Nothing stored in history./',
             $commandTester->getDisplay()
         );
@@ -243,7 +243,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Section updated! Old version stored in history./',
             $commandTester->getDisplay()
         );
@@ -289,7 +289,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Invalid configuration/',
             $commandTester->getDisplay()
         );
@@ -339,7 +339,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Section not found/',
             $commandTester->getDisplay()
         );

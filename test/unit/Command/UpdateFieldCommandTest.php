@@ -93,7 +93,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Field updated!/',
             $commandTester->getDisplay()
         );
@@ -144,7 +144,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Cancelled, nothing updated/',
             $commandTester->getDisplay()
         );
@@ -192,12 +192,12 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Do you want to update the field with id: 1/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Field updated!/',
             $commandTester->getDisplay()
         );
@@ -245,12 +245,12 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Do you want to update the field with id: 1/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Cancelled, nothing updated/',
             $commandTester->getDisplay()
         );
@@ -293,7 +293,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Field updated!/',
             $commandTester->getDisplay()
         );
@@ -337,7 +337,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Invalid configuration/',
             $commandTester->getDisplay()
         );
@@ -385,7 +385,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Field not found/',
             $commandTester->getDisplay()
         );

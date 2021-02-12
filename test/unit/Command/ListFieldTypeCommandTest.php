@@ -79,27 +79,27 @@ final class ListFieldTypeCommandTest extends TestCase
 
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/TextArea/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/TextInput/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Super\\\\Qualified/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Amazing\\\\Input/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/All installed FieldTypes/',
             $commandTester->getDisplay()
         );
@@ -122,7 +122,7 @@ final class ListFieldTypeCommandTest extends TestCase
 
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/No FieldType found/',
             $commandTester->getDisplay()
         );

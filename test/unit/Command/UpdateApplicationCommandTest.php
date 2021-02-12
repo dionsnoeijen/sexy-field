@@ -89,7 +89,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Application updated!/',
             $commandTester->getDisplay()
         );
@@ -123,7 +123,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Invalid configuration/',
             $commandTester->getDisplay()
         );
@@ -157,7 +157,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Section not found/',
             $commandTester->getDisplay()
         );

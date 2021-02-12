@@ -79,7 +79,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Field created!/',
             $commandTester->getDisplay()
         );
@@ -108,7 +108,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Invalid field config./',
             $commandTester->getDisplay()
         );
@@ -132,7 +132,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Invalid field config./',
             $commandTester->getDisplay()
         );

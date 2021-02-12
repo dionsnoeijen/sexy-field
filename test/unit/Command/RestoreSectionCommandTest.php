@@ -97,7 +97,7 @@ YML;
 
         $commandTester->setInputs([1, 1, 'y']);
         $commandTester->execute(['command' => $command->getName()]);
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Config Restored!/',
             $commandTester->getDisplay()
         );
@@ -146,22 +146,22 @@ YML;
 
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Record with id #1 will be restored/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Config Restored/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Record with id #3 will be restored/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Cancelled, nothing restored/',
             $commandTester->getDisplay()
         );
@@ -214,22 +214,22 @@ YML;
 
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Record with id #1 will be restored/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Config Restored/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Record with id #3 will be restored/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Skipped, no records can be found in history/',
             $commandTester->getDisplay()
         );
@@ -276,7 +276,7 @@ YML;
         $commandTester->setInputs([5]);
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Section not found/',
             $commandTester->getDisplay()
         );
@@ -325,7 +325,7 @@ YML;
         $commandTester->setInputs([1, 1]);
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Section history not found/',
             $commandTester->getDisplay()
         );
@@ -372,7 +372,7 @@ YML;
 
         $commandTester->setInputs([1, 1, 'n']);
         $commandTester->execute(['command' => $command->getName()]);
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Cancelled/',
             $commandTester->getDisplay()
         );

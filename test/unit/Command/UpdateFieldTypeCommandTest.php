@@ -87,7 +87,7 @@ final class UpdateFieldTypeCommandTest extends TestCase
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/FieldTypeInterface Updated!/',
             $commandTester->getDisplay()
         );
@@ -120,7 +120,7 @@ final class UpdateFieldTypeCommandTest extends TestCase
         $commandTester->setInputs([1, 'Totally\\New\\Fully\\Qualified\\Class\\Name', 'n']);
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Cancelled/',
             $commandTester->getDisplay()
         );
@@ -149,7 +149,7 @@ final class UpdateFieldTypeCommandTest extends TestCase
         $commandTester->setInputs([10]);
         $commandTester->execute(['command' => $command->getName(),]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Field type not found/',
             $commandTester->getDisplay()
         );

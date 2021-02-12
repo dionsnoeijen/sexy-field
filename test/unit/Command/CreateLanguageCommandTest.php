@@ -69,7 +69,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Languages created!/',
             $commandTester->getDisplay()
         );
@@ -98,7 +98,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Invalid config./',
             $commandTester->getDisplay()
         );

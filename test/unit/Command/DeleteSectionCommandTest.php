@@ -87,7 +87,7 @@ YML;
         $commandTester->setInputs([1, 'y']);
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Removed!/',
             $commandTester->getDisplay()
         );

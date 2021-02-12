@@ -95,7 +95,7 @@ final class DeleteApplicationCommandTest extends TestCase
         $commandTester->setInputs([1, 'y']);
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Removed!/',
             $commandTester->getDisplay()
         );
@@ -128,7 +128,7 @@ final class DeleteApplicationCommandTest extends TestCase
         $commandTester->setInputs([3]);
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Application not found/',
             $commandTester->getDisplay()
         );
@@ -162,7 +162,7 @@ final class DeleteApplicationCommandTest extends TestCase
         $commandTester->setInputs([1, 'n']);
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Cancelled/',
             $commandTester->getDisplay()
         );
