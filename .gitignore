@@ -1,6 +1,7 @@
 vendor
 docker/data
-build/logs/coverage
+build
+!./build/clover.xml
 log
 .notes
 report/

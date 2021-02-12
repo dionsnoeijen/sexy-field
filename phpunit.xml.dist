@@ -17,10 +17,8 @@
         <exclude>
             <directory suffix=".php">./src/FieldType/Relationship/GeneratorTemplate</directory>
         </exclude>
+        <report>
+            <clover outputFile="./build/clover.xml" />
+        </report>
     </coverage>
-
-    <logging>
-        <testdoxXml outputFile="./build/logs/clover.xml"/>
-    </logging>
-
 </phpunit>
