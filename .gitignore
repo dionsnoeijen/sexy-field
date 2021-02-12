@@ -1,6 +1,6 @@
 vendor
 docker/data
-build
+build/coverage-cache
 .notes
 report/
 .idea
