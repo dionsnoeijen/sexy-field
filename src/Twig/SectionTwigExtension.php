@@ -17,9 +17,14 @@ use Symfony\Bundle\TwigBundle\DependencyInjection\TwigExtension;
 use Tardigrades\SectionField\Service\EntryNotFoundException;
 use Tardigrades\SectionField\Service\ReadOptions;
 use Tardigrades\SectionField\Service\ReadSectionInterface;
+use Twig\Extension\ExtensionInterface;
+use Twig\NodeVisitor\NodeVisitorInterface;
+use Twig\TokenParser\TokenParserInterface;
+use Twig\TwigFilter;
 use Twig\TwigFunction;
+use Twig\TwigTest;
 
-class SectionTwigExtension extends TwigExtension
+class SectionTwigExtension extends TwigExtension implements ExtensionInterface
 {
     /** @var ReadSectionInterface */
     private $readSection;
@@ -244,5 +249,30 @@ class SectionTwigExtension extends TwigExtension
         }
 
         return $entries;
+    }
+
+    public function getTokenParsers()
+    {
+        // TODO: Implement getTokenParsers() method.
+    }
+
+    public function getNodeVisitors()
+    {
+        // TODO: Implement getNodeVisitors() method.
+    }
+
+    public function getFilters()
+    {
+        // TODO: Implement getFilters() method.
+    }
+
+    public function getTests()
+    {
+        // TODO: Implement getTests() method.
+    }
+
+    public function getOperators()
+    {
+        // TODO: Implement getOperators() method.
     }
 }
