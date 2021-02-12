@@ -23,6 +23,7 @@
     "symfony/event-dispatcher": "^5",
     "beberlei/assert": "^3",
     "twig/twig": "^2.12|^3.0",
+    "twig/extra-bundle": "^2.12|^3.0",
     "php-coveralls/php-coveralls": "^2.0",
     "symfony/cache": "^5"
   },
