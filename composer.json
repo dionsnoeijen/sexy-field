@@ -13,6 +13,7 @@
   "require": {
     "php": "^7.2",
     "ext-pdo": "*",
+    "ext-dom": "*",
     "doctrine/orm": "^2.8",
     "symfony/console": "^5",
     "symfony/form": "^5",
