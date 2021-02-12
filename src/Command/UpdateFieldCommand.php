@@ -129,7 +129,7 @@ class UpdateFieldCommand extends FieldCommand
                 );
 
                 if (!$this->getHelper('question')->ask($input, $output, $sure)) {
-                    $output->writeln('<comment>Cancelled, nothing updated.</comment>', false);
+                    $output->writeln('<comment>Cancelled, nothing updated.</comment>', OutputInterface::OUTPUT_NORMAL);
                     return;
                 }
             }

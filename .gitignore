@@ -4,6 +4,5 @@ build/logs/coverage
 log
 .notes
 report/
-build
 .idea
 .phpunit.result.cache

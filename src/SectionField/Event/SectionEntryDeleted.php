@@ -13,20 +13,15 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\Event;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
 use Tardigrades\SectionField\Service\OptionsInterface;
 
 class SectionEntryDeleted extends Event
 {
-    /** @var CommonSectionInterface */
-    protected $entry;
-
-    /** @var bool */
-    protected $success;
-
-    /** @var OptionsInterface */
-    protected $deleteOptions;
+    protected CommonSectionInterface $entry;
+    protected bool $success;
+    protected ?OptionsInterface $deleteOptions;
 
     public function __construct(
         CommonSectionInterface $entry,

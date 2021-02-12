@@ -54,6 +54,7 @@ class UpdateApplicationCommand extends ApplicationCommand
         try {
             $this->questionHelper = $this->getHelper('question');
             $this->showInstalledApplications($input, $output);
+            return 0;
         } catch (ApplicationNotFoundException $exception) {
             $output->writeln("Section not found");
         }

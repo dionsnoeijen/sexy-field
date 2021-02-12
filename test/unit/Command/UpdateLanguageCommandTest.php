@@ -92,11 +92,13 @@ YML;
         $yml = <<<YML
 wrong: yml
 YML;
-
         file_put_contents($this->file, $yml);
 
         $command = $this->application->find('sf:update-language');
         $commandTester = new CommandTester($command);
+
+        $this->languageManager->shouldReceive('readAll')
+            ->once();
 
         $commandTester->execute(
             [

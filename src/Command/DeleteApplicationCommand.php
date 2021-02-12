@@ -51,13 +51,14 @@ class DeleteApplicationCommand extends ApplicationCommand
         $this->questionHelper = $this->getHelper('question');
         try {
             $this->showInstalledApplications($input, $output);
+            return 0;
         } catch (ApplicationNotFoundException $exception) {
             $output->writeln("Application not found.");
+            return 1;
         }
-        return 0;
     }
 
-    private function showInstalledApplications(InputInterface $input, OutputInterface $output): int
+    private function showInstalledApplications(InputInterface $input, OutputInterface $output): void
     {
         $applications = $this->applicationManager->readAll();
 
