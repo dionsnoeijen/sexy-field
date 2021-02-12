@@ -59,14 +59,16 @@ class GenerateSectionCommand extends SectionCommand
         // @codingStandardsIgnoreEnd
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $sections = $this->sectionManager->readAll();
             $this->renderTable($output, $sections, 'Available sections.');
             $this->generateWhatSection($input, $output);
+            return 0;
         } catch (SectionNotFoundException $exception) {
             $output->writeln("Section not found.");
+            return 1;
         }
     }
 

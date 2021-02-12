@@ -27,11 +27,8 @@ use Tardigrades\SectionField\ValueObject\Id;
 
 class UpdateFieldTypeCommand extends FieldTypeCommand
 {
-    /** @var QuestionHelper */
-    private $questionHelper;
-
-    /** @var FieldTypeManagerInterface */
-    private $fieldTypeManager;
+    private QuestionHelper $questionHelper;
+    private FieldTypeManagerInterface $fieldTypeManager;
 
     public function __construct(
         FieldTypeManagerInterface $fieldTypeManager
@@ -49,18 +46,23 @@ class UpdateFieldTypeCommand extends FieldTypeCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $this->questionHelper = $this->getHelper('question');
-
             $this->showInstalledFieldTypes($input, $output);
         } catch (FieldTypeNotFoundException $exception) {
             $output->writeln("Field type not found");
         }
+        return 0;
     }
 
-    private function showInstalledFieldTypes(InputInterface $input, OutputInterface $output)
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @throws FieldTypeNotFoundException
+     */
+    private function showInstalledFieldTypes(InputInterface $input, OutputInterface $output): void
     {
         $fieldTypes = $this->fieldTypeManager->readAll();
 
@@ -68,6 +70,12 @@ class UpdateFieldTypeCommand extends FieldTypeCommand
         $this->updateWhatRecord($input, $output);
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return FieldType
+     * @throws FieldTypeNotFoundException
+     */
     private function getFieldType(InputInterface $input, OutputInterface $output): FieldType
     {
         $question = new Question('<question>What record do you want to update?</question> (#id): ');

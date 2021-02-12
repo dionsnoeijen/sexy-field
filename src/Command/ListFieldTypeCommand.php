@@ -20,8 +20,7 @@ use Tardigrades\SectionField\Service\FieldTypeNotFoundException;
 
 class ListFieldTypeCommand extends FieldTypeCommand
 {
-    /** @var FieldTypeManagerInterface */
-    private $fieldTypeManager;
+    private FieldTypeManagerInterface $fieldTypeManager;
 
     public function __construct(
         FieldTypeManagerInterface $fieldTypeManager
@@ -39,13 +38,15 @@ class ListFieldTypeCommand extends FieldTypeCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $fieldTypes = $this->fieldTypeManager->readAll();
             $this->renderTable($output, $fieldTypes, 'All installed FieldTypes');
+            return 0;
         } catch (FieldTypeNotFoundException $exception) {
             $output->writeln('No FieldType found');
+            return 1;
         }
     }
 }

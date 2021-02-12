@@ -20,7 +20,7 @@ use Tardigrades\SectionField\Service\LanguageNotFoundException;
 
 class ListLanguageCommand extends LanguageCommand
 {
-    private $languageManager;
+    private LanguageManagerInterface $languageManager;
 
     public function __construct(
         LanguageManagerInterface $languageManager
@@ -37,13 +37,15 @@ class ListLanguageCommand extends LanguageCommand
             ->setHelp('List all installed languages');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $languages = $this->languageManager->readAll();
             $this->renderTable($output, $languages, 'All installed languages');
+            return 0;
         } catch (LanguageNotFoundException $exception) {
             $output->writeln('No language found');
+            return 1;
         }
     }
 }

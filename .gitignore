@@ -6,3 +6,4 @@ log
 report/
 build
 .idea
+.phpunit.result.cache

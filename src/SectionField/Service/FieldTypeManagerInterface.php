@@ -22,6 +22,10 @@ interface FieldTypeManagerInterface
 {
     public function create(FieldTypeInterface $entity): FieldTypeInterface;
     public function read(Id $id): FieldTypeInterface;
+    /**
+     * @return array
+     * @throws FieldTypeNotFoundException
+     */
     public function readAll(): array;
     public function update(): void;
     public function delete(FieldTypeInterface $entity): void;

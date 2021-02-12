@@ -41,7 +41,7 @@ class InstallFieldTypeCommand extends FieldTypeCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $namespace = $input->getArgument('namespace');
         $fullyQualifiedClassName = FullyQualifiedClassName::fromString($namespace);
@@ -49,9 +49,11 @@ class InstallFieldTypeCommand extends FieldTypeCommand
         try {
             $this->fieldTypeManager->readByFullyQualifiedClassName($fullyQualifiedClassName);
             $output->writeln('<info>FieldType already installed</info>');
+            return 1;
         } catch (FieldTypeNotFoundException $exception) {
             $fieldType = $this->fieldTypeManager->createWithFullyQualifiedClassName($fullyQualifiedClassName);
             $this->renderTable($output, [$fieldType], 'FieldTypeInterface installed!');
+            return 0;
         }
     }
 }

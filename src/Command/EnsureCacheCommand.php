@@ -25,14 +25,16 @@ class EnsureCacheCommand extends Command
         $this->setDescription("Create the caching table in the database, if it doesn't exist");
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $this->adapter->createTable();
             $output->writeln("<info>Caching table created!</info>");
-        } catch (\PDOException | DBALException $exception) {
+            return 0;
+        } catch (\PDOException | \Exception $exception) {
             $output->writeln($exception->getMessage(), OutputInterface::VERBOSITY_VERBOSE);
             $output->writeln("<info>Got database error, assuming caching table already exists</info>");
+            return 1;
         }
     }
 }

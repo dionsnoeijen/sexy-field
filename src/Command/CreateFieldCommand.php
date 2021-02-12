@@ -44,7 +44,7 @@ class CreateFieldCommand extends FieldCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $config = $input->getArgument('config');
 
@@ -60,12 +60,13 @@ class CreateFieldCommand extends FieldCommand
                         $this->fieldManager->createByConfig($fieldConfig);
                         $output->writeln('<info>Field created!</info>');
                     }
-                    return;
+                    return 0;
                 }
             }
             throw new Exception('No valid config found.');
         } catch (\Exception $exception) {
             $output->writeln("<error>Invalid field config. {$exception->getMessage()}</error>");
+            return 1;
         }
     }
 }

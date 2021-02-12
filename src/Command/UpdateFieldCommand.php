@@ -29,11 +29,9 @@ use Tardigrades\SectionField\ValueObject\Id;
 
 class UpdateFieldCommand extends FieldCommand
 {
-    /** @var QuestionHelper */
-    private $questionHelper;
+    private QuestionHelper $questionHelper;
 
-    /** @var FieldManagerInterface */
-    private $fieldManager;
+    private FieldManagerInterface $fieldManager;
 
     public function __construct(
         FieldManagerInterface $fieldManager
@@ -58,17 +56,22 @@ class UpdateFieldCommand extends FieldCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $this->questionHelper = $this->getHelper('question');
-
             $this->showInstalledFields($input, $output);
         } catch (FieldNotFoundException $exception) {
             $output->writeln("Field not found");
         }
+        return 0;
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @throws FieldNotFoundException
+     */
     private function showInstalledFields(InputInterface $input, OutputInterface $output): void
     {
         if (!$input->getOption('yes-mode')) {
@@ -77,6 +80,12 @@ class UpdateFieldCommand extends FieldCommand
         $this->updateWhatRecord($input, $output);
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return Field
+     * @throws FieldNotFoundException
+     */
     private function getField(InputInterface $input, OutputInterface $output): Field
     {
         $question = new Question('<question>What record do you want to update?</question> (#id): ');

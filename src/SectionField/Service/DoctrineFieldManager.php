@@ -59,6 +59,9 @@ class DoctrineFieldManager implements FieldManagerInterface
         return $field;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function readAll(): array
     {
         $fieldRepository = $this->entityManager->getRepository(Field::class);

@@ -22,6 +22,10 @@ interface LanguageManagerInterface
 {
     public function create(LanguageInterface $entity): LanguageInterface;
     public function read(Id $id): LanguageInterface;
+    /**
+     * @return array
+     * @throws LanguageNotFoundException
+     */
     public function readAll(): array;
     public function update(): void;
     public function delete(LanguageInterface $entity): void;
