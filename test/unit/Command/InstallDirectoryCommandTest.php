@@ -249,6 +249,7 @@ EOF;
     private function runWithFilesystem(vfsStreamDirectory $fileSystem): CommandTester
     {
         $commandTester = new CommandTester($this->installDirectoryCommand);
+
         $commandTester->execute(
             [
                 'command' => $this->installDirectoryCommand->getName(),

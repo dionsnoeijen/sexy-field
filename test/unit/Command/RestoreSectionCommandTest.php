@@ -24,7 +24,7 @@ use Tardigrades\SectionField\Service\SectionNotFoundException;
  * @covers ::__construct
  * @covers Tardigrades\Command\SectionCommand::__construct
  */
-final class RestoreSectionCommandTest extends TestCase
+final class RestoreSectionCommandTest  extends TestCase
 {
     use MockeryPHPUnitIntegration;
 

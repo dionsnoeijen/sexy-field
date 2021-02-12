@@ -20,7 +20,7 @@ use Tardigrades\SectionField\Service\SectionNotFoundException;
  * @covers ::__construct
  * @covers Tardigrades\Command\SectionCommand::__construct
  */
-final class ListSectionCommandTest extends TestCase
+final class ListSectionCommandTest  extends TestCase
 {
     /** @var SectionManagerInterface */
     private $sectionManager;

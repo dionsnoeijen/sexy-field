@@ -20,7 +20,7 @@ use Tardigrades\SectionField\Service\ApplicationNotFoundException;
  * @covers ::<protected>
  * @covers ::__construct
  */
-final class ListApplicationCommandTest extends TestCase
+final class ListApplicationCommandTest  extends TestCase
 {
     use MockeryPHPUnitIntegration;
 

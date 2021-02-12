@@ -18,7 +18,7 @@ use Tardigrades\SectionField\Service\LanguageNotFoundException;
  * @covers ::<protected>
  * @covers ::__construct
  */
-final class ListLanguageCommandTest extends TestCase
+final class ListLanguageCommandTest  extends TestCase
 {
     /** @var LanguageManagerInterface */
     private $languageManager;

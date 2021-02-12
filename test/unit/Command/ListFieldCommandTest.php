@@ -21,7 +21,7 @@ use Tardigrades\SectionField\Service\FieldNotFoundException;
  * @covers ::<protected>
  * @covers ::__construct
  */
-final class ListFieldCommandTest extends TestCase
+final class ListFieldCommandTest  extends TestCase
 {
     use MockeryPHPUnitIntegration;
 

@@ -17,7 +17,7 @@ use Tardigrades\SectionField\Service\FieldTypeNotFoundException;
  * @covers ::<protected>
  * @covers ::__construct
  */
-final class ListFieldTypeCommandTest extends TestCase
+final class ListFieldTypeCommandTest  extends TestCase
 {
     /**
      * @var FieldTypeManagerInterface

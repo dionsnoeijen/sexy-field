@@ -20,7 +20,7 @@ use Tardigrades\SectionField\Service\FieldNotFoundException;
  * @covers ::<private>
  * @covers ::__construct
  */
-final class UpdateFieldCommandTest extends TestCase
+final class UpdateFieldCommandTest  extends TestCase
 {
     use MockeryPHPUnitIntegration;
 

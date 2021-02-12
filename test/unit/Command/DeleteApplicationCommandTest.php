@@ -26,11 +26,9 @@ final class DeleteApplicationCommandTest extends TestCase
     /** @var ApplicationManagerInterface|Mockery\MockInterface */
     private $applicationManager;
 
-    /** @var DeleteApplicationCommand */
-    private $deleteApplicationCommand;
+    private DeleteApplicationCommand $deleteApplicationCommand;
 
-    /** @var Application */
-    private $application;
+    private Application $application;
 
     public function setUp(): void
     {

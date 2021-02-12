@@ -17,7 +17,7 @@ use Tardigrades\SectionField\Service\FieldTypeNotFoundException;
  * @covers ::<private>
  * @covers ::__construct
  */
-final class InstallFieldTypeCommandTest extends TestCase
+final class InstallFieldTypeCommandTest  extends TestCase
 {
     use MockeryPHPUnitIntegration;
 

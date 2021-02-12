@@ -18,7 +18,7 @@ use Tardigrades\SectionField\Service\LanguageManagerInterface;
  * @covers ::<private>
  * @covers ::__construct
  */
-final class UpdateLanguageCommandTest extends TestCase
+final class UpdateLanguageCommandTest  extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
