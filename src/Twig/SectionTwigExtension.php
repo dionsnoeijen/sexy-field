@@ -13,13 +13,13 @@ declare (strict_types = 1);
 
 namespace Tardigrades\Twig;
 
+use Symfony\Bundle\TwigBundle\DependencyInjection\TwigExtension;
 use Tardigrades\SectionField\Service\EntryNotFoundException;
 use Tardigrades\SectionField\Service\ReadOptions;
 use Tardigrades\SectionField\Service\ReadSectionInterface;
-use Twig_Extension;
-use Twig_Function;
+use Twig\TwigFunction;
 
-class SectionTwigExtension extends Twig_Extension
+class SectionTwigExtension extends TwigExtension
 {
     /** @var ReadSectionInterface */
     private $readSection;
@@ -38,7 +38,7 @@ class SectionTwigExtension extends Twig_Extension
     public function getFunctions(): array
     {
         return array(
-            new Twig_Function('section', array($this, 'section'))
+            new TwigFunction('section', [$this, 'section'])
         );
     }
 
