@@ -11,7 +11,7 @@
     }
   ],
   "require": {
-    "php": "^7.2",
+    "php": "8.*",
     "ext-pdo": "*",
     "ext-dom": "*",
     "doctrine/orm": "^2.8",
