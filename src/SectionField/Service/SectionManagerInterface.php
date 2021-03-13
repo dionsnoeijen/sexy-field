@@ -23,6 +23,10 @@ interface SectionManagerInterface
     public function create(SectionInterface $entity): SectionInterface;
     public function read(Id $id): SectionInterface;
     public function readByIds(array $ids): array;
+    /**
+     * @return array
+     * @throws SectionNotFoundException
+     */
     public function readAll(): array;
     public function update(SectionInterface $entity): void;
     public function delete(SectionInterface $entity): void;
@@ -34,6 +38,11 @@ interface SectionManagerInterface
     ): SectionInterface;
     public function restoreFromHistory(SectionInterface $sectionFromHistory): SectionInterface;
     public function getRelationshipsOfAll(): array;
+    /**
+     * @param Handle $handle
+     * @return SectionInterface
+     * @throws SectionNotFoundException
+     */
     public function readByHandle(Handle $handle): SectionInterface;
     public function readByHandles(array $handles): array;
 }

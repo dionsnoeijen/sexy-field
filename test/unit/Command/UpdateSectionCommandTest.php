@@ -21,7 +21,7 @@ use Tardigrades\SectionField\Service\SectionNotFoundException;
  * @covers ::__construct
  * @covers Tardigrades\Command\SectionCommand::__construct
  */
-final class UpdateSectionCommandTest extends TestCase
+final class UpdateSectionCommandTest  extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
@@ -37,7 +37,7 @@ final class UpdateSectionCommandTest extends TestCase
     /** @var vfsStream */
     private $file;
 
-    public function setUp()
+    public function setUp(): void
     {
         vfsStream::setup('home');
         $this->file = vfsStream::url('home/some-config-file.yml');
@@ -96,7 +96,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Section updated!/',
             $commandTester->getDisplay()
         );
@@ -146,12 +146,12 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Do you want to update the section with id: 1/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Section updated!/',
             $commandTester->getDisplay()
         );
@@ -197,7 +197,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Section updated! Nothing stored in history./',
             $commandTester->getDisplay()
         );
@@ -243,7 +243,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Section updated! Old version stored in history./',
             $commandTester->getDisplay()
         );
@@ -289,7 +289,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Invalid configuration/',
             $commandTester->getDisplay()
         );
@@ -339,7 +339,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Section not found/',
             $commandTester->getDisplay()
         );

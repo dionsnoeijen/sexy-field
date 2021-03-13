@@ -36,7 +36,7 @@ final class FieldManagerTest extends TestCase
     /** @var LanguageManagerInterface */
     private $languageManager;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->entityManager = Mockery::mock(EntityManagerInterface::class);
         $this->fieldTypeManager = Mockery::mock(FieldTypeManagerInterface::class);

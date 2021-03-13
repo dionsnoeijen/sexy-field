@@ -20,8 +20,7 @@ use Tardigrades\SectionField\Service\FieldNotFoundException;
 
 class ListFieldCommand extends FieldCommand
 {
-    /** @var FieldManagerInterface */
-    private $fieldManager;
+    private FieldManagerInterface $fieldManager;
 
     public function __construct(
         FieldManagerInterface $fieldManager
@@ -39,13 +38,15 @@ class ListFieldCommand extends FieldCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $fields = $this->fieldManager->readAll();
             $this->renderTable($output, $fields, 'All installed Fields');
+            return 0;
         } catch (FieldNotFoundException $exception) {
             $output->writeln('No fields found');
+            return 1;
         }
     }
 }

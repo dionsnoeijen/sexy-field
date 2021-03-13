@@ -23,6 +23,10 @@ interface ApplicationManagerInterface
     public function create(ApplicationInterface $entity): ApplicationInterface;
     public function read(Id $id): ApplicationInterface;
     public function readByHandle(Handle $handle): ApplicationInterface;
+    /**
+     * @return array
+     * @throws ApplicationNotFoundException
+     */
     public function readAll(): array;
     public function update(): void;
     public function delete(ApplicationInterface $entity): void;

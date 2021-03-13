@@ -30,7 +30,7 @@ final class SectionEntryBeforeReadTest extends TestCase
     /** @var SectionConfig|Mockery\MockInterface */
     private $sectionConfig;
 
-    public function setUp()
+    public function setUp(): void
     {
         $sectionConfigArray = [
             'section' => [

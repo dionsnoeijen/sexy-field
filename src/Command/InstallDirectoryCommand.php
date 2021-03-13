@@ -36,31 +36,20 @@ use Tardigrades\SectionField\ValueObject\Type;
 class InstallDirectoryCommand extends Command
 {
     /** @var ApplicationConfig[] */
-    private $applications = [];
-
-    /** @var ?LanguageConfig */
-    private $languages = null;
+    private array $applications = [];
 
     /** @var SectionConfig[] */
-    private $sections = [];
+    private array $sections = [];
 
     /** @var FieldConfig[] */
-    private $fields = [];
+    private array $fields = [];
 
-    /** @var ApplicationManagerInterface */
-    private $applicationManager;
-
-    /** @var LanguageManagerInterface */
-    private $languageManager;
-
-    /** @var SectionManagerInterface */
-    private $sectionManager;
-
-    /** @var FieldManagerInterface */
-    private $fieldManager;
-
-    /** @var FieldTypeManagerInterface */
-    private $fieldTypeManager;
+    private ?LanguageConfig $languages = null;
+    private ApplicationManagerInterface $applicationManager;
+    private LanguageManagerInterface $languageManager;
+    private SectionManagerInterface $sectionManager;
+    private FieldManagerInterface $fieldManager;
+    private FieldTypeManagerInterface $fieldTypeManager;
 
     public function __construct(
         ApplicationManagerInterface $applicationManager,
@@ -69,12 +58,13 @@ class InstallDirectoryCommand extends Command
         FieldManagerInterface $fieldManager,
         FieldTypeManagerInterface $fieldTypeManager
     ) {
-        parent::__construct('sf:install-directory');
         $this->applicationManager = $applicationManager;
         $this->languageManager = $languageManager;
         $this->sectionManager = $sectionManager;
         $this->fieldManager = $fieldManager;
         $this->fieldTypeManager = $fieldTypeManager;
+
+        parent::__construct('sf:install-directory');
     }
 
     protected function configure(): void
@@ -86,12 +76,7 @@ class InstallDirectoryCommand extends Command
             ->addArgument('directory', InputArgument::REQUIRED, 'The config directory');
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @throws \Exception
-     */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         foreach (static::getAllYamls($input->getArgument('directory')) as $fileName => $config) {
             $this->classifyFile($fileName, $config);
@@ -113,6 +98,8 @@ class InstallDirectoryCommand extends Command
 
         $sectionCount = $this->createSections($this->sections);
         $output->writeln("<info>$sectionCount sections created!</info>");
+
+        return 0;
     }
 
     /**

@@ -55,6 +55,9 @@ class DoctrineLanguageManager implements LanguageManagerInterface
         return $language;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function readAll(): array
     {
         $languageRepository = $this->entityManager->getRepository(Language::class);

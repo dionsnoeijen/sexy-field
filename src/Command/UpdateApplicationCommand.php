@@ -27,11 +27,8 @@ use Tardigrades\SectionField\ValueObject\Id;
 
 class UpdateApplicationCommand extends ApplicationCommand
 {
-    /** @var QuestionHelper */
-    private $questionHelper;
-
-    /** @var ApplicationManagerInterface */
-    private $applicationManager;
+    private QuestionHelper $questionHelper;
+    private ApplicationManagerInterface $applicationManager;
 
     public function __construct(
         ApplicationManagerInterface $applicationManager
@@ -52,14 +49,16 @@ class UpdateApplicationCommand extends ApplicationCommand
         // @codingStandardsIgnoreEnd
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $this->questionHelper = $this->getHelper('question');
             $this->showInstalledApplications($input, $output);
+            return 0;
         } catch (ApplicationNotFoundException $exception) {
             $output->writeln("Section not found");
         }
+        return 0;
     }
 
     private function showInstalledApplications(InputInterface $input, OutputInterface $output): void

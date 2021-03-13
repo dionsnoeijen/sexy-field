@@ -30,7 +30,7 @@ final class FieldTypeTest extends TestCase
     /** @var FieldType */
     private $fieldType;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->fields = Mockery::mock(Collection::class);
         $this->fieldType = new FieldType($this->fields);

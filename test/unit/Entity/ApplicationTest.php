@@ -26,7 +26,7 @@ final class ApplicationTest extends TestCase
     /** @var Collection|Mockery\MockInterface */
     private $languages;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->languages = Mockery::mock(Collection::class);
 

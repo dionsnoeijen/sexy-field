@@ -41,7 +41,7 @@ final class GenerateSectionCommandTest extends TestCase
     /** @var vfsStream */
     private $file;
 
-    public function setUp()
+    public function setUp(): void
     {
         vfsStream::setup('home');
         $this->file = vfsStream::url('home/some-config-file.yml');
@@ -98,52 +98,52 @@ YML;
         $commandTester->setInputs([1, 'y']);
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Some name/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Some other name/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/someHandle/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/someOtherHandle/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/name:foo/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/handle:bar/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/fields:/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/default:Default/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/namespace:My\\\\Namespace/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Available sections/',
             $commandTester->getDisplay()
         );
@@ -399,7 +399,7 @@ YML;
         $commandTester->setInputs([1]);
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Section not found/',
             $commandTester->getDisplay()
         );
@@ -449,7 +449,7 @@ YML;
         $commandTester->setInputs([1, 'n']);
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Cancelled/',
             $commandTester->getDisplay()
         );

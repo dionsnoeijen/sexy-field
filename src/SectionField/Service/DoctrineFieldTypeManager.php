@@ -49,6 +49,9 @@ class DoctrineFieldTypeManager implements FieldTypeManagerInterface
         return $fieldType;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function readAll(): array
     {
         $fieldTypeRepository = $this->entityManager->getRepository(FieldType::class);

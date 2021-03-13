@@ -17,8 +17,8 @@ final class GeneratorFileWriterTest extends TestCase
     public function it_should_get_autoload_directory()
     {
         $this->assertStringEndsWith(
-            str_replace('/', DIRECTORY_SEPARATOR, '/php-coveralls/php-coveralls/src/Satooshi'),
-            GeneratorFileWriter::getPsr4AutoloadDirectoryForNamespace("Satooshi")
+            str_replace('/', DIRECTORY_SEPARATOR, '/sexy-field/src'),
+            GeneratorFileWriter::getPsr4AutoloadDirectoryForNamespace("Tardigrades")
         );
     }
 

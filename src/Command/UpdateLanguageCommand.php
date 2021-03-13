@@ -22,8 +22,7 @@ use Tardigrades\SectionField\ValueObject\LanguageConfig;
 
 class UpdateLanguageCommand extends LanguageCommand
 {
-    /** @var LanguageManagerInterface */
-    private $languageManager;
+    private LanguageManagerInterface $languageManager;
 
     public function __construct(
         LanguageManagerInterface $languageManager
@@ -44,7 +43,7 @@ class UpdateLanguageCommand extends LanguageCommand
         // @codingStandardsIgnoreEnd
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $languageConfig = LanguageConfig::fromArray(
@@ -55,9 +54,10 @@ class UpdateLanguageCommand extends LanguageCommand
             $this->languageManager->updateByConfig($languageConfig);
         } catch (\Exception $exception) {
             $output->writeln("<error>Invalid configuration file.  {$exception->getMessage()}</error>");
-            return;
         }
 
         $this->renderTable($output, $this->languageManager->readAll(), 'Languages updated!');
+
+        return 0;
     }
 }

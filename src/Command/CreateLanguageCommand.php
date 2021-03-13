@@ -41,7 +41,7 @@ class CreateLanguageCommand extends LanguageCommand
             ->addArgument('config', InputArgument::REQUIRED, 'The language configuration yml');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $config = $input->getArgument('config');
 
@@ -53,6 +53,8 @@ class CreateLanguageCommand extends LanguageCommand
             $output->writeln('<info>Languages created!</info>');
         } catch (\Exception $exception) {
             $output->writeln("<error>Invalid config. {$exception->getMessage()}</error>");
+            return 1;
         }
+        return 0;
     }
 }

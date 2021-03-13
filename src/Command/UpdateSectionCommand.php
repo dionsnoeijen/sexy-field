@@ -26,8 +26,7 @@ use Tardigrades\SectionField\ValueObject\SectionConfig;
 
 class UpdateSectionCommand extends SectionCommand
 {
-    /** @var QuestionHelper */
-    private $questionHelper;
+    private QuestionHelper $questionHelper;
 
     public function __construct(
         SectionManagerInterface $sectionManager
@@ -78,7 +77,7 @@ EOF
         // @codingStandardsIgnoreEnd
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $this->questionHelper = $this->getHelper('question');
@@ -86,8 +85,14 @@ EOF
         } catch (SectionNotFoundException $exception) {
             $output->writeln("Section not found");
         }
+        return 0;
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @throws SectionNotFoundException
+     */
     private function showInstalledSections(InputInterface $input, OutputInterface $output): void
     {
         if (!$input->getOption('yes-mode')) {

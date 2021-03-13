@@ -37,7 +37,7 @@ final class DeleteSectionCommandTest extends TestCase
     /** @var vfsStream */
     private $file;
 
-    public function setUp()
+    public function setUp(): void
     {
         vfsStream::setup('home');
         $this->file = vfsStream::url('home/some-config-file.yml');
@@ -87,7 +87,7 @@ YML;
         $commandTester->setInputs([1, 'y']);
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Removed!/',
             $commandTester->getDisplay()
         );
@@ -132,22 +132,22 @@ YML;
         $commandTester->setInputs(['all', 'y', 'y', 'y']);
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Record with id #1 will be deleted/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Record with id #2 will be deleted/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Record with id #3 will be deleted/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Removed!/',
             $commandTester->getDisplay()
         );
@@ -193,17 +193,17 @@ YML;
         $commandTester->setInputs(['1,3', 'y', 'y']);
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Record with id #1 will be deleted/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Record with id #3 will be deleted/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Removed!/',
             $commandTester->getDisplay()
         );
@@ -249,7 +249,7 @@ YML;
         $commandTester->setInputs([1]);
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Section not found/',
             $commandTester->getDisplay()
         );
@@ -294,7 +294,7 @@ YML;
         $commandTester->setInputs([1, 'n']);
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Cancelled/',
             $commandTester->getDisplay()
         );

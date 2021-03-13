@@ -76,6 +76,9 @@ class DoctrineApplicationManager implements ApplicationManagerInterface
         return $application;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function readAll(): array
     {
         $applicationRepository = $this->entityManager->getRepository(Application::class);

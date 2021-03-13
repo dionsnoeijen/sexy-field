@@ -40,7 +40,7 @@ final class SectionManagerTest extends TestCase
     /** @var SectionHistoryManagerInterface */
     private $sectionHistoryManager;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->entityManager = Mockery::mock(EntityManagerInterface::class);
         $this->fieldManager = Mockery::mock(FieldManagerInterface::class);

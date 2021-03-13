@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class TemplateLoaderTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         vfsStream::setup('home');
     }

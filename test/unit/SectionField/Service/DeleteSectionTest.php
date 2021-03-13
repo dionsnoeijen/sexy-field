@@ -36,7 +36,7 @@ final class DeleteSectionTest extends TestCase
     /** @var DeleteSection */
     private $deleteSection;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->deleters = [Mockery::mock(DeleteSectionInterface::class)];
         $this->dispatcher = Mockery::mock(EventDispatcherInterface::class);

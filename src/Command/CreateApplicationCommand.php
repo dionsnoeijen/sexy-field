@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of the SexyField package.
  *
@@ -22,8 +21,7 @@ use Tardigrades\SectionField\ValueObject\ApplicationConfig;
 
 class CreateApplicationCommand extends ApplicationCommand
 {
-    /** @var ApplicationManagerInterface */
-    private $applicationManager;
+    private ApplicationManagerInterface $applicationManager;
 
     public function __construct(
         ApplicationManagerInterface $applicationManager
@@ -43,7 +41,7 @@ class CreateApplicationCommand extends ApplicationCommand
         // @codingStandardsIgnoreEnd
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $config = $input->getArgument('config');
 
@@ -55,6 +53,9 @@ class CreateApplicationCommand extends ApplicationCommand
             $output->writeln('<info>Application created!</info>');
         } catch (\Exception $exception) {
             $output->writeln("<error>Invalid config. {$exception->getMessage()}</error>");
+            return 1;
         }
+
+        return 0;
     }
 }

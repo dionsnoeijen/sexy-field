@@ -32,7 +32,7 @@ final class CreateLanguageCommandTest extends TestCase
     /** @var vfsStream */
     private $file;
 
-    public function setUp()
+    public function setUp(): void
     {
         vfsStream::setup('home');
         $this->file = vfsStream::url('home/some-config-file.yml');
@@ -69,7 +69,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Languages created!/',
             $commandTester->getDisplay()
         );
@@ -98,7 +98,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Invalid config./',
             $commandTester->getDisplay()
         );

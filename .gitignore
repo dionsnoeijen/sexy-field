@@ -1,8 +1,8 @@
 vendor
 docker/data
-build/logs/coverage
-log
+build/coverage-cache
 .notes
 report/
-build
 .idea
+.phpunit.result.cache
+!/build/clover.xml

@@ -34,7 +34,7 @@ final class ApplicationManagerTest extends TestCase
     /** @var Mock|LanguageManagerInterface */
     private $languageManager;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->entityManager = Mockery::mock(EntityManagerInterface::class);
         $this->languageManager = Mockery::mock(LanguageManagerInterface::class);

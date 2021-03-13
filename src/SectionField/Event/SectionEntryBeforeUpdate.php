@@ -13,20 +13,15 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\Event;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 use Tardigrades\SectionField\Generator\CommonSectionInterface;
 use Tardigrades\SectionField\Service\OptionsInterface;
 
 class SectionEntryBeforeUpdate extends Event
 {
-    /** @var CommonSectionInterface */
-    protected $entry;
-
-    /** @var bool */
-    private $aborted = false;
-
-    /** @var OptionsInterface */
-    private $createOptions;
+    protected CommonSectionInterface $entry;
+    private bool $aborted = false;
+    private ?OptionsInterface $createOptions;
 
     public function __construct(
         CommonSectionInterface $entry,

@@ -26,7 +26,7 @@ final class EnsureCacheCommandTest extends TestCase
     /** @var EnsureCacheCommand */
     private $command;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->adapter = \Mockery::mock(PdoAdapter::class);
         $this->command = new EnsureCacheCommand($this->adapter);

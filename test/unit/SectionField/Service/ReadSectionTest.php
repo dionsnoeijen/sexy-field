@@ -45,7 +45,7 @@ final class ReadSectionTest extends TestCase
     /** @var ReadSection */
     private $readSection;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->readers = [Mockery::mock(ReadSectionInterface::class)];
         $this->sectionManager = Mockery::mock(SectionManagerInterface::class);

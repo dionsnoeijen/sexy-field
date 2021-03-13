@@ -18,7 +18,7 @@ use Tardigrades\SectionField\Service\LanguageManagerInterface;
  * @covers ::<private>
  * @covers ::__construct
  */
-final class UpdateLanguageCommandTest extends TestCase
+final class UpdateLanguageCommandTest  extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
@@ -34,7 +34,7 @@ final class UpdateLanguageCommandTest extends TestCase
     /** @var vfsStream */
     private $file;
 
-    public function setUp()
+    public function setUp(): void
     {
         vfsStream::setup('home');
         $this->file = vfsStream::url('home/some-config-file.yml');
@@ -76,7 +76,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Languages updated!/',
             $commandTester->getDisplay()
         );
@@ -92,11 +92,13 @@ YML;
         $yml = <<<YML
 wrong: yml
 YML;
-
         file_put_contents($this->file, $yml);
 
         $command = $this->application->find('sf:update-language');
         $commandTester = new CommandTester($command);
+
+        $this->languageManager->shouldReceive('readAll')
+            ->once();
 
         $commandTester->execute(
             [
@@ -105,7 +107,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Invalid configuration/',
             $commandTester->getDisplay()
         );
