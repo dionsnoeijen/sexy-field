@@ -117,6 +117,9 @@ class DoctrineFieldManager implements FieldManagerInterface
         return $field;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function readByHandle(Handle $handle): FieldInterface
     {
         $fieldRepository = $this->entityManager->getRepository(Field::class);
@@ -130,6 +133,9 @@ class DoctrineFieldManager implements FieldManagerInterface
         return $field[0];
     }
 
+    /**
+     * @inheritDoc
+     */
     public function readByHandles(array $handles): array
     {
         $fieldHandles = [];

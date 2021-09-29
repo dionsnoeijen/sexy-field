@@ -26,6 +26,12 @@ class StringConverter
         return $string;
     }
 
+    public static function toSnakeCase(string $string): string
+    {
+        return strtolower(preg_replace(
+            '/(?<=\d)(?=[A-Za-z])|(?<=[A-Za-z])(?=\d)|(?<=[a-z])(?=[A-Z])/', '_', $string));
+    }
+
     public static function toSlug(string $string): string
     {
         $string = preg_replace('~[^\pL\d]+~u', '-', $string);

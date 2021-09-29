@@ -30,6 +30,9 @@ class DoctrineFieldTypeManager implements FieldTypeManagerInterface
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function create(FieldTypeInterface $entity): FieldTypeInterface
     {
         $this->entityManager->persist($entity);
@@ -38,6 +41,9 @@ class DoctrineFieldTypeManager implements FieldTypeManagerInterface
         return $entity;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function read(Id $id): FieldTypeInterface
     {
         $fieldTypeRepo = $this->entityManager->getRepository(FieldType::class);
@@ -62,17 +68,26 @@ class DoctrineFieldTypeManager implements FieldTypeManagerInterface
         return $fieldTypes;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function update(): void
     {
         $this->entityManager->flush();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function delete(FieldTypeInterface $entity): void
     {
         $this->entityManager->remove($entity);
         $this->entityManager->flush();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function createWithFullyQualifiedClassName(
         FullyQualifiedClassName $fullyQualifiedClassName
     ): FieldTypeInterface {
