@@ -59,9 +59,9 @@ class DeleteApplicationCommand extends ApplicationCommand
 
     private function showInstalledApplications(InputInterface $input, OutputInterface $output): void
     {
-        $appliactions = $this->applicationManager->readAll();
+        $applications = $this->applicationManager->readAll();
 
-        $this->renderTable($output, $appliactions, 'All installed Applications');
+        $this->renderTable($output, $applications, 'All installed Applications');
         $this->deleteWhatRecord($input, $output);
     }
 

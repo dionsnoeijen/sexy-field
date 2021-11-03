@@ -20,7 +20,7 @@ use Tardigrades\SectionField\Service\OptionsInterface;
 /**
  * Class SectionEntryBeforeCreate
  *
- * This event is dispatched right before the persistance of a section entry.
+ * This event is dispatched right before the persistence of a section entry.
  * It contains the entity so you can use or manipulate it.
  *
  * @package Tardigrades\SectionField\Event

@@ -44,7 +44,7 @@ class DoctrineSectionManager implements SectionManagerInterface
     ];
 
     /** @var array */
-    private $opposingRealtionshipTypes = [
+    private $opposingRelationshipTypes = [
         'bidirectional' => 'unidirectional',
         'unidirectional' => 'bidirectional'
     ];
@@ -388,7 +388,7 @@ class DoctrineSectionManager implements SectionManagerInterface
                         ];
                         if (!empty($kindToFieldType['relationship-type'])) {
                             $relationships[$kindToFieldType['to']][$fieldHandle . '-opposite']['relationship-type'] =
-                                $this->opposingRealtionshipTypes[$kindToFieldType['relationship-type']];
+                                $this->opposingRelationshipTypes[$kindToFieldType['relationship-type']];
                         }
                     }
                 }
