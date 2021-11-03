@@ -42,6 +42,9 @@ class ReadSection implements ReadSectionInterface
         $this->dispatcher = $dispatcher;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function readMaybe(OptionsInterface $readOptions, SectionConfig $sectionConfig = null): \ArrayIterator
     {
         $sectionData = new \ArrayIterator();
