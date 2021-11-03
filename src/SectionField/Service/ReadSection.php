@@ -42,6 +42,51 @@ class ReadSection implements ReadSectionInterface
         $this->dispatcher = $dispatcher;
     }
 
+    public function readMaybe(OptionsInterface $readOptions, SectionConfig $sectionConfig = null): \ArrayIterator
+    {
+        $sectionData = new \ArrayIterator();
+
+        $beforeReadEvent = new SectionEntryBeforeRead(
+            $sectionData,
+            $readOptions,
+            $sectionConfig
+        );
+        $this->dispatcher->dispatch($beforeReadEvent);
+        if ($beforeReadEvent->aborted()) {
+            throw new BeforeReadAbortedException();
+        }
+
+        if ($sectionConfig === null && count($readOptions->getSection()) > 0) {
+            /** @var FullyQualifiedClassName $section */
+            $section = $readOptions->getSection()[0];
+            $sectionConfig = $this->sectionManager->readByHandle(
+                $section->toHandle()
+            )->getConfig();
+        }
+
+        // Make sure we are passing the fully qualified class name as the section
+        if (count($readOptions->getSection()) > 0) {
+            $optionsArray = $readOptions->toArray();
+            $optionsArray[ReadOptions::SECTION] = (string) $sectionConfig->getFullyQualifiedClassName();
+            $readOptions = ReadOptions::fromArray($optionsArray);
+        }
+
+        /** @var ReadSectionInterface $reader */
+        foreach ($this->readers as $reader) {
+            foreach ($reader->readMaybe($readOptions, $sectionConfig) as $entry) {
+                $sectionData->append($entry);
+            }
+        }
+
+        $sectionDataRead = new SectionEntryDataRead($sectionData, $readOptions, $sectionConfig);
+        $this->dispatcher->dispatch($sectionDataRead);
+        if ($sectionDataRead->aborted()) {
+            throw new ReadAbortedException();
+        }
+
+        return $sectionData;
+    }
+
     /**
      * @inheritDoc
      */
