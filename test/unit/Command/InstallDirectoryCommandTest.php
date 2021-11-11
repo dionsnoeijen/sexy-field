@@ -49,7 +49,7 @@ final class InstallDirectoryCommandTest extends TestCase
 
     private $application;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->applicationManager = \Mockery::mock(ApplicationManagerInterface::class);
         $this->languageManager = \Mockery::mock(LanguageManagerInterface::class);
@@ -157,11 +157,11 @@ EOF;
     /**
      * @test
      * @covers ::verifyConfig
-     * @expectedException \Exception
-     * @expectedExceptionMessage Could not find any application config files
      */
     public function it_fails_without_an_application()
     {
+        $this->expectException(\Exception::class);
+
         $fileSystem = $this->setupFilesystem();
         $fileSystem->removeChild('application.yml');
 
@@ -171,11 +171,11 @@ EOF;
     /**
      * @test
      * @covers ::verifyConfig
-     * @expectedException \Exception
-     * @expectedExceptionMessage Could not find a language config file
      */
     public function it_fails_without_languages()
     {
+        $this->expectException(\Exception::class);
+
         $fileSystem = $this->setupFilesystem();
         $fileSystem->removeChild('language.yml');
 
@@ -185,11 +185,11 @@ EOF;
     /**
      * @test
      * @covers ::classifyFile
-     * @expectedException \Exception
-     * @expectedExceptionMessage Found multiple language config files
      */
     public function it_fails_with_multiple_language_files()
     {
+        $this->expectException(\Exception::class);
+
         $fileSystem = $this->setupFilesystem();
         $extraFile = new vfsStreamFile("extra.yml");
         $extraFile->setContent("language: ~");
@@ -201,11 +201,11 @@ EOF;
     /**
      * @test
      * @covers ::classifyFile
-     * @expectedException \Exception
-     * @expectedExceptionMessage Malformed file vfs://config/extra.yml
      */
     public function it_fails_with_a_non_array_file()
     {
+        $this->expectException(\Exception::class);
+
         $fileSystem = $this->setupFilesystem();
         $extraFile = new vfsStreamFile("extra.yml");
         $extraFile->setContent("~");
@@ -217,11 +217,11 @@ EOF;
     /**
      * @test
      * @covers ::classifyFile
-     * @expectedException \Exception
-     * @expectedExceptionMessage Malformed file vfs://config/extra.yml
      */
     public function it_fails_with_a_file_with_multiple_keys()
     {
+        $this->expectException(\Exception::class);
+
         $fileSystem = $this->setupFilesystem();
         $extraFile = new vfsStreamFile("extra.yml");
         $extraFile->setContent("language: ~\nfoo: ~");
@@ -233,11 +233,11 @@ EOF;
     /**
      * @test
      * @covers ::classifyFile
-     * @expectedException \Exception
-     * @expectedExceptionMessage Could not identify file vfs://config/extra.yml with key foo
      */
     public function it_fails_with_a_file_with_an_unknown_type()
     {
+        $this->expectException(\Exception::class);
+
         $fileSystem = $this->setupFilesystem();
         $extraFile = new vfsStreamFile("extra.yml");
         $extraFile->setContent("foo: ~");
@@ -249,6 +249,7 @@ EOF;
     private function runWithFilesystem(vfsStreamDirectory $fileSystem): CommandTester
     {
         $commandTester = new CommandTester($this->installDirectoryCommand);
+
         $commandTester->execute(
             [
                 'command' => $this->installDirectoryCommand->getName(),

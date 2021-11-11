@@ -26,8 +26,7 @@ use Tardigrades\SectionField\ValueObject\Id;
 
 class RestoreSectionCommand extends SectionCommand
 {
-    /** @var SectionHistoryManagerInterface */
-    private $sectionHistoryManager;
+    private SectionHistoryManagerInterface $sectionHistoryManager;
 
     public function __construct(
         SectionManagerInterface $sectionManager,
@@ -46,7 +45,7 @@ class RestoreSectionCommand extends SectionCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $sections = $this->sectionManager->readAll();
@@ -57,6 +56,7 @@ class RestoreSectionCommand extends SectionCommand
         } catch (SectionHistoryNotFoundException $exception) {
             $output->writeln('Section history not found.');
         }
+        return 0;
     }
 
     private function restoreWhatRecord(InputInterface $input, OutputInterface $output): void

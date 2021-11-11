@@ -19,18 +19,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 use Tardigrades\Entity\FieldType;
-use Tardigrades\SectionField\SectionFieldInterface\FieldTypeManager;
 use Tardigrades\SectionField\Service\FieldTypeManagerInterface;
 use Tardigrades\SectionField\Service\FieldTypeNotFoundException;
 use Tardigrades\SectionField\ValueObject\Id;
 
 class DeleteFieldTypeCommand extends FieldTypeCommand
 {
-    /** @var QuestionHelper */
-    private $questionHelper;
-
-    /** @var FieldTypeManagerInterface */
-    private $fieldTypeManager;
+    private QuestionHelper $questionHelper;
+    private FieldTypeManagerInterface $fieldTypeManager;
 
     public function __construct(
         FieldTypeManagerInterface $fieldTypeManager
@@ -48,15 +44,15 @@ class DeleteFieldTypeCommand extends FieldTypeCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $this->questionHelper = $this->getHelper('question');
-
             $this->showInstalledFieldTypes($input, $output);
         } catch (FieldTypeNotFoundException $exception) {
             $output->writeln("Field type not found");
         }
+        return 0;
     }
 
     private function showInstalledFieldTypes(InputInterface $input, OutputInterface $output): void

@@ -29,8 +29,7 @@ abstract class SectionCommand extends Command
 {
     const ALL = 'all';
 
-    /** @var SectionManagerInterface */
-    protected $sectionManager;
+    protected SectionManagerInterface $sectionManager;
 
     public function __construct(
         SectionManagerInterface $sectionManager,

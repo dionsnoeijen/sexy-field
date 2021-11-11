@@ -26,11 +26,18 @@ final class FullyQualifiedClassName
         $this->fullyQualifiedClassName = str_replace('Proxies\\__CG__\\', '', $this->fullyQualifiedClassName);
     }
 
-    public function getClassName()
+    public function getClassName(): string
     {
         $type = explode('\\', $this->fullyQualifiedClassName);
 
         return $type[count($type) - 1];
+    }
+
+    public function getNamespace(): string
+    {
+        $type = explode('\\', $this->fullyQualifiedClassName);
+        array_pop($type);
+        return implode('\\', $type);
     }
 
     public function __toString(): string
@@ -45,7 +52,12 @@ final class FullyQualifiedClassName
         return Handle::fromString(lcfirst($handle));
     }
 
-    public static function fromNamespaceAndClassName(SectionNamespace $namespace, ClassName $className)
+    public static function fromObject(object $object): self
+    {
+        return new self(get_class($object));
+    }
+
+    public static function fromNamespaceAndClassName(SectionNamespace $namespace, ClassName $className): self
     {
         return new self((string) $namespace . '\\Entity\\' . (string) $className);
     }

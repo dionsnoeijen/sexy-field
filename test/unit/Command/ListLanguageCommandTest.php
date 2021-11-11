@@ -18,7 +18,7 @@ use Tardigrades\SectionField\Service\LanguageNotFoundException;
  * @covers ::<protected>
  * @covers ::__construct
  */
-final class ListLanguageCommandTest extends TestCase
+final class ListLanguageCommandTest  extends TestCase
 {
     /** @var LanguageManagerInterface */
     private $languageManager;
@@ -29,7 +29,7 @@ final class ListLanguageCommandTest extends TestCase
     /** @var Application */
     private $application;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->languageManager = Mockery::mock(LanguageManagerInterface::class);
         $this->listLanguageCommand = new ListLanguageCommand($this->languageManager);
@@ -92,37 +92,37 @@ final class ListLanguageCommandTest extends TestCase
 
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/All installed languages/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/nl_NL/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/en_EN/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Application name/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Another application name/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Again, a name/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Fffff, name/',
             $commandTester->getDisplay()
         );
@@ -145,7 +145,7 @@ final class ListLanguageCommandTest extends TestCase
 
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/No language found/',
             $commandTester->getDisplay()
         );

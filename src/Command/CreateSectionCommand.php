@@ -39,7 +39,7 @@ class CreateSectionCommand extends SectionCommand
         // @codingStandardsIgnoreEnd
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $config = $input->getArgument('config');
 
@@ -50,12 +50,13 @@ class CreateSectionCommand extends SectionCommand
                     $sectionConfig = SectionConfig::fromArray($parsed);
                     $this->sectionManager->createByConfig($sectionConfig);
                     $output->writeln('<info>Section created!</info>');
-                    return;
+                    return 0;
                 }
             }
             throw new \Exception('No valid config found.');
         } catch (\Exception $exception) {
             $output->writeln("<error>Invalid configuration file.  {$exception->getMessage()}</error>");
         }
+        return 1;
     }
 }

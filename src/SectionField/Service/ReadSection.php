@@ -13,7 +13,7 @@ declare (strict_types = 1);
 
 namespace Tardigrades\SectionField\Service;
 
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Tardigrades\SectionField\Event\BeforeReadAbortedException;
 use Tardigrades\SectionField\Event\ReadAbortedException;
 use Tardigrades\SectionField\Event\SectionEntryBeforeRead;

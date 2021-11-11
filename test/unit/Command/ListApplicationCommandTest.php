@@ -20,7 +20,7 @@ use Tardigrades\SectionField\Service\ApplicationNotFoundException;
  * @covers ::<protected>
  * @covers ::__construct
  */
-final class ListApplicationCommandTest extends TestCase
+final class ListApplicationCommandTest  extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
@@ -33,7 +33,7 @@ final class ListApplicationCommandTest extends TestCase
     /** @var Application */
     private $application;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->applicationManager = Mockery::mock(ApplicationManagerInterface::class);
         $this->listApplicationCommand = new ListApplicationCommand($this->applicationManager);
@@ -84,57 +84,57 @@ final class ListApplicationCommandTest extends TestCase
 
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/All installed Applications/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/someName/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Some Name/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Section Name/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Another section name/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/nl_NL/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/en_EN/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/someOtherName/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Some Other Name/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Section Super Name/',
             $commandTester->getDisplay()
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Another Super section name/',
             $commandTester->getDisplay()
         );
@@ -157,7 +157,7 @@ final class ListApplicationCommandTest extends TestCase
 
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/No applications found/',
             $commandTester->getDisplay()
         );

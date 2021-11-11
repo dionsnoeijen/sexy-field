@@ -19,18 +19,15 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 use Tardigrades\Entity\Field;
-use Tardigrades\SectionField\SectionFieldInterface\FieldManager;
 use Tardigrades\SectionField\Service\FieldManagerInterface;
 use Tardigrades\SectionField\Service\FieldNotFoundException;
 use Tardigrades\SectionField\ValueObject\Id;
 
 class DeleteFieldCommand extends FieldCommand
 {
-    /** @var QuestionHelper */
-    private $questionHelper;
+    private QuestionHelper $questionHelper;
 
-    /** @var FieldManagerInterface */
-    private $fieldManager;
+    private FieldManagerInterface $fieldManager;
 
     public function __construct(
         FieldManagerInterface $fieldManager
@@ -47,15 +44,15 @@ class DeleteFieldCommand extends FieldCommand
             ->setHelp('Shows a list of installed fields, choose the field you would like to delete.');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->questionHelper = $this->getHelper('question');
-
         try {
             $this->showInstalledFields($input, $output);
         } catch (FieldNotFoundException $exception) {
             $output->writeln("Field not found.");
         }
+        return 0;
     }
 
     private function showInstalledFields(InputInterface $input, OutputInterface $output): void

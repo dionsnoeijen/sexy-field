@@ -41,7 +41,7 @@ class UpdateSectionsCommand extends SectionCommand
         // @codingStandardsIgnoreEnd
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $sections = $this->sectionManager->readAll();
@@ -50,6 +50,7 @@ class UpdateSectionsCommand extends SectionCommand
         } catch (SectionNotFoundException $exception) {
             $output->writeln("Section not found.");
         }
+        return 0;
     }
 
     private function updateWhatRecord(InputInterface $input, OutputInterface $output): void

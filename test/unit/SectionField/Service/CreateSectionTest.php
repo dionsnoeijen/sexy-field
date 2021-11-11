@@ -33,7 +33,7 @@ final class CreateSectionTest extends TestCase
     /** @var CacheInterface|Mockery\MockInterface */
     private $cache;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->creators = [Mockery::mock(CreateSectionInterface::class)];
         $this->dispatcher = Mockery::mock(EventDispatcherInterface::class);

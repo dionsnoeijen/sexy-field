@@ -17,7 +17,7 @@ use Tardigrades\SectionField\Service\FieldTypeNotFoundException;
  * @covers ::<private>
  * @covers ::__construct
  */
-final class InstallFieldTypeCommandTest extends TestCase
+final class InstallFieldTypeCommandTest  extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
@@ -30,7 +30,7 @@ final class InstallFieldTypeCommandTest extends TestCase
     /** @var Application */
     private $application;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->fieldTypeManager = Mockery::mock(FieldTypeManagerInterface::class);
         $this->installFieldTypeCommand = new InstallFieldTypeCommand($this->fieldTypeManager);
@@ -71,7 +71,7 @@ final class InstallFieldTypeCommandTest extends TestCase
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/FieldTypeInterface installed!/',
             $commandTester->getDisplay()
         );

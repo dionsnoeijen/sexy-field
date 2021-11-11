@@ -26,13 +26,11 @@ final class DeleteApplicationCommandTest extends TestCase
     /** @var ApplicationManagerInterface|Mockery\MockInterface */
     private $applicationManager;
 
-    /** @var DeleteApplicationCommand */
-    private $deleteApplicationCommand;
+    private DeleteApplicationCommand $deleteApplicationCommand;
 
-    /** @var Application */
-    private $application;
+    private Application $application;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->applicationManager = Mockery::mock(ApplicationManagerInterface::class);
         $this->deleteApplicationCommand = new DeleteApplicationCommand($this->applicationManager);
@@ -95,7 +93,7 @@ final class DeleteApplicationCommandTest extends TestCase
         $commandTester->setInputs([1, 'y']);
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Removed!/',
             $commandTester->getDisplay()
         );
@@ -128,7 +126,7 @@ final class DeleteApplicationCommandTest extends TestCase
         $commandTester->setInputs([3]);
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Application not found/',
             $commandTester->getDisplay()
         );
@@ -162,7 +160,7 @@ final class DeleteApplicationCommandTest extends TestCase
         $commandTester->setInputs([1, 'n']);
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Cancelled/',
             $commandTester->getDisplay()
         );

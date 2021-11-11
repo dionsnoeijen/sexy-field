@@ -22,11 +22,23 @@ interface FieldManagerInterface
 {
     public function create(FieldInterface $entity): FieldInterface;
     public function read(Id $id): FieldInterface;
+    /**
+     * @return array
+     * @throws FieldNotFoundException
+     */
     public function readAll(): array;
     public function update(): void;
     public function delete(FieldInterface $entity): void;
     public function createByConfig(FieldConfig $fieldConfig): FieldInterface;
     public function updateByConfig(FieldConfig $fieldConfig, FieldInterface $field): FieldInterface;
+    /**
+     * @return array
+     * @throws FieldNotFoundException
+     */
     public function readByHandle(Handle $handle): FieldInterface;
+    /**
+     * @return array
+     * @throws FieldNotFoundException
+     */
     public function readByHandles(array $fields): array;
 }

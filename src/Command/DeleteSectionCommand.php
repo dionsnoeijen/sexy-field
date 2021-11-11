@@ -36,7 +36,7 @@ class DeleteSectionCommand extends SectionCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $sections = $this->sectionManager->readAll();
@@ -45,6 +45,8 @@ class DeleteSectionCommand extends SectionCommand
         } catch (SectionNotFoundException $exception) {
             $output->writeln("Section not found.");
         }
+
+        return 0;
     }
 
     private function deleteWhatRecord(InputInterface $input, OutputInterface $output): void

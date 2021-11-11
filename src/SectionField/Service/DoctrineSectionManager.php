@@ -262,6 +262,9 @@ class DoctrineSectionManager implements SectionManagerInterface
         return Version::fromInt((int) $results[0][1]);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function readByHandle(Handle $handle): SectionInterface
     {
         $sectionRepository = $this->entityManager->getRepository(SectionEntity::class);

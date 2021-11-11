@@ -28,7 +28,7 @@ final class DeleteFieldTypeCommandTest extends TestCase
     /** @var Application */
     private $application;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->fieldTypeManager = Mockery::mock(FieldTypeManagerInterface::class);
         $this->deleteFieldTypeCommand = new DeleteFieldTypeCommand($this->fieldTypeManager);
@@ -65,7 +65,7 @@ final class DeleteFieldTypeCommandTest extends TestCase
         $commandTester->setInputs([1, 'y']);
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Removed!/',
             $commandTester->getDisplay()
         );
@@ -100,7 +100,7 @@ final class DeleteFieldTypeCommandTest extends TestCase
         $commandTester->setInputs([1, 'n']);
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Cancelled, nothing deleted./',
             $commandTester->getDisplay()
         );
@@ -135,7 +135,7 @@ final class DeleteFieldTypeCommandTest extends TestCase
         $commandTester->setInputs([1, 'n']);
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/This FieldType has fields that use this type, delete them first./',
             $commandTester->getDisplay()
         );
@@ -167,7 +167,7 @@ final class DeleteFieldTypeCommandTest extends TestCase
         $commandTester->setInputs([10]);
         $commandTester->execute(['command' => $command->getName()]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Field type not found/',
             $commandTester->getDisplay()
         );

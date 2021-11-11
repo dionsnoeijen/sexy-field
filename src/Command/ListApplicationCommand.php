@@ -37,13 +37,15 @@ class ListApplicationCommand extends ApplicationCommand
             ->setHelp('Show applications');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $applications = $this->applicationManager->readAll();
             $this->renderTable($output, $applications, 'All installed Applications');
+            return 0;
         } catch (ApplicationNotFoundException $exception) {
             $output->writeln('No applications found');
+            return 1;
         }
     }
 }

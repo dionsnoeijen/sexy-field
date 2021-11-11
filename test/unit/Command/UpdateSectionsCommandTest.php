@@ -21,7 +21,7 @@ use Tardigrades\SectionField\Service\SectionNotFoundException;
  * @covers ::__construct
  * @covers Tardigrades\Command\SectionCommand::__construct
  */
-final class UpdateSectionsCommandTest extends TestCase
+final class UpdateSectionsCommandTest  extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
@@ -37,7 +37,7 @@ final class UpdateSectionsCommandTest extends TestCase
     /** @var vfsStream */
     private $file;
 
-    public function setUp()
+    public function setUp(): void
     {
         vfsStream::setup('home');
         $this->file = vfsStream::url('home/some-config-file.yml');
@@ -92,7 +92,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Section updated!/',
             $commandTester->getDisplay()
         );
@@ -143,7 +143,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/You cannot update multiple sections at once/',
             $commandTester->getDisplay()
         );
@@ -194,7 +194,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Invalid configuration/',
             $commandTester->getDisplay()
         );
@@ -239,7 +239,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Section not found/',
             $commandTester->getDisplay()
         );

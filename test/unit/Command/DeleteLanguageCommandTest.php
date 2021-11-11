@@ -31,7 +31,7 @@ final class DeleteLanguageCommandTest extends TestCase
     /** @var Application */
     private $application;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->languageManager = Mockery::mock(DoctrineLanguageManager::class);
         $this->deleteLanguageCommand = new DeleteLanguageCommand($this->languageManager);
@@ -106,7 +106,7 @@ final class DeleteLanguageCommandTest extends TestCase
             'command' => $command->getName()
         ]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Removed!/',
             $commandTester->getDisplay()
         );
@@ -149,7 +149,7 @@ final class DeleteLanguageCommandTest extends TestCase
             'command' => $command->getName()
         ]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/No languages left/',
             $commandTester->getDisplay()
         );
@@ -178,7 +178,7 @@ final class DeleteLanguageCommandTest extends TestCase
             ->shouldNotReceive('delete');
         $commandTester->setInputs([1, 'n']);
         $commandTester->execute(['command' => $command->getName()]);
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Cancelled/',
             $commandTester->getDisplay()
         );
@@ -204,7 +204,7 @@ final class DeleteLanguageCommandTest extends TestCase
             ->andThrow(LanguageNotFoundException::class);
         $commandTester->setInputs([9]);
         $commandTester->execute(['command' => $command->getName()]);
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Language not found/',
             $commandTester->getDisplay()
         );

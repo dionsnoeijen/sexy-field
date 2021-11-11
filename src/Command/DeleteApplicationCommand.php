@@ -46,14 +46,15 @@ class DeleteApplicationCommand extends ApplicationCommand
             ->setHelp('Shows a list of installed applications, choose the application you would like to delete.');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->questionHelper = $this->getHelper('question');
-
         try {
             $this->showInstalledApplications($input, $output);
+            return 0;
         } catch (ApplicationNotFoundException $exception) {
             $output->writeln("Application not found.");
+            return 1;
         }
     }
 

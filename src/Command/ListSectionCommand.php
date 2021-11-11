@@ -34,13 +34,15 @@ class ListSectionCommand extends SectionCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
             $sections = $this->sectionManager->readAll();
             $this->renderTable($output, $sections, 'All installed Sections');
+            return 0;
         } catch (SectionNotFoundException $exception) {
             $output->writeln('No section found');
+            return 1;
         }
     }
 }

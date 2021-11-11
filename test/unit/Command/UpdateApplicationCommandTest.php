@@ -21,7 +21,7 @@ use Tardigrades\SectionField\Service\SectionNotFoundException;
  * @covers ::<private>
  * @covers ::__construct
  */
-final class UpdateApplicationCommandTest extends TestCase
+final class UpdateApplicationCommandTest  extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
@@ -37,7 +37,7 @@ final class UpdateApplicationCommandTest extends TestCase
     /** @var vfsStream */
     private $file;
 
-    public function setUp()
+    public function setUp(): void
     {
         vfsStream::setup('home');
         $this->file = vfsStream::url('home/some-config-file.yml');
@@ -89,7 +89,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Application updated!/',
             $commandTester->getDisplay()
         );
@@ -123,7 +123,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Invalid configuration/',
             $commandTester->getDisplay()
         );
@@ -157,7 +157,7 @@ YML;
             ]
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/Section not found/',
             $commandTester->getDisplay()
         );

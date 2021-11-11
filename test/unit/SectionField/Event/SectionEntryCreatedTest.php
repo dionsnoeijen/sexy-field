@@ -26,7 +26,7 @@ final class SectionEntryCreatedTest extends TestCase
     /** @var OptionsInterface */
     private $event;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->entry = Mockery::mock(CommonSectionInterface::class);
         $this->event = Mockery::mock(OptionsInterface::class);

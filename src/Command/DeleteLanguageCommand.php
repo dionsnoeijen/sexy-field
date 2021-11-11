@@ -25,11 +25,8 @@ use Tardigrades\SectionField\ValueObject\Id;
 
 class DeleteLanguageCommand extends LanguageCommand
 {
-    /** @var LanguageManagerInterface */
-    private $languageManager;
-
-    /** @var QuestionHelper */
-    private $questionHelper;
+    private LanguageManagerInterface $languageManager;
+    private QuestionHelper $questionHelper;
 
     public function __construct(
         LanguageManagerInterface $languageManager
@@ -46,11 +43,13 @@ class DeleteLanguageCommand extends LanguageCommand
             ->setHelp('Shows a list of installed languages, choose the language you would like to delete.');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->questionHelper = $this->getHelper('question');
 
         $this->showInstalledLanguages($input, $output);
+
+        return 0;
     }
 
     private function showInstalledLanguages(InputInterface $input, OutputInterface $output): void
