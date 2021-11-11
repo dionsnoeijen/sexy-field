@@ -26,6 +26,17 @@ interface ReadSectionInterface
      * @param SectionConfig|null $sectionConfig
      * @return \ArrayIterator
      * @throws BeforeReadAbortedException
+     * @throws ReadAbortedException
+     */
+    public function readMaybe(OptionsInterface $readOptions, SectionConfig $sectionConfig = null): \ArrayIterator;
+
+    /**
+     * Read from one or more data-sources
+     *
+     * @param OptionsInterface $readOptions
+     * @param SectionConfig|null $sectionConfig
+     * @return \ArrayIterator
+     * @throws BeforeReadAbortedException
      * @throws EntryNotFoundException
      * @throws ReadAbortedException
      */
